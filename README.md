@@ -7,6 +7,9 @@ This integration provides various sensors and controls for vehicles linked throu
 
 **Note:** This integration relies on the Smartcar service. Availability of specific features depends on your vehicle's make, model, year, your Smartcar account plan (especially API rate limits), and the permissions granted during authentication.
 
+<img src="images/device_page.png" alt="Example Device Page Screenshot" width="600"/>
+*(Example showing entities for a Volkswagen ID.4)*
+
 ## Features
 
 Provides the following entities for each connected vehicle (subject to vehicle compatibility and granted permissions):
