@@ -75,11 +75,11 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
             if required_scope and required_scope in self.granted_scopes:
                 final_paths.append(path)
             elif not required_scope:
-                 # Path not mapped to a scope, include cautiously or log warning
-                 _LOGGER.warning("Path %s not mapped to a known scope, requesting anyway.", path)
-                 final_paths.append(path) # Or maybe exclude?
+                # Path not mapped to a scope, include cautiously or log warning
+                _LOGGER.warning("Path %s not mapped to a known scope, requesting anyway.", path)
+                final_paths.append(path) # Or maybe exclude?
             else:
-                 _LOGGER.debug("Skipping path %s as required scope '%s' was not granted.", path, required_scope)
+                _LOGGER.debug("Skipping path %s as required scope '%s' was not granted.", path, required_scope)
 
         return sorted(final_paths)
 
@@ -143,8 +143,8 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
                 new_interval = INTERVAL_CHARGING
 
             if new_interval != self.update_interval:
-                 _LOGGER.info("Coordinator %s: Setting update interval to %s", self.name, new_interval)
-                 self.async_set_update_interval(new_interval)
+                _LOGGER.info("Coordinator %s: Setting update interval to %s", self.name, new_interval)
+                self.async_set_update_interval(new_interval)
 
             _LOGGER.debug("Coordinator %s: Batch update processed", self.name)
             return processed_data

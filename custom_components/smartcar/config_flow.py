@@ -89,8 +89,8 @@ class SmartcarOAuth2FlowHandler(
                     # --- End Correction ---
 
                 except AbortFlow as err:
-                     _LOGGER.debug("Aborting flow: %s", err.reason)
-                     return self.async_abort(reason=err.reason, description_placeholders=err.description_placeholders)
+                    _LOGGER.debug("Aborting flow: %s", err.reason)
+                    return self.async_abort(reason=err.reason, description_placeholders=err.description_placeholders)
                 except Exception as err:
                     _LOGGER.exception("Unexpected error preparing external step: %s", err)
                     return self.async_abort(reason="unknown")
@@ -100,9 +100,9 @@ class SmartcarOAuth2FlowHandler(
         sorted_scopes = dict(sorted(ALL_SCOPES.items()))
         schema_dict = {}
         for scope, description in sorted_scopes.items():
-             is_default = scope in DEFAULT_SCOPES
-             current_value = user_input.get(scope, is_default) if user_input else is_default
-             schema_dict[vol.Optional(scope, default=current_value)] = bool
+            is_default = scope in DEFAULT_SCOPES
+            current_value = user_input.get(scope, is_default) if user_input else is_default
+            schema_dict[vol.Optional(scope, default=current_value)] = bool
         return self.async_show_form(
             step_id="scopes", data_schema=vol.Schema(schema_dict),
             description_placeholders={"app_name": "Smartcar", "scope_info": "..."},
@@ -112,11 +112,12 @@ class SmartcarOAuth2FlowHandler(
     @property
     def extra_authorize_data(self) -> dict[str, Any]:
         """Extra parameters for authorize url."""
+        _LOGGER.debug("Generating extra authorize data...")
         # Read selected scopes stored by async_step_scopes
         scopes_to_request = getattr(self, "_selected_scopes", None)
         if not scopes_to_request:
-             _LOGGER.error("extra_authorize_data called but _selected_scopes is not set!")
-             scopes_to_request = "" # Should not happen in correct flow
+            _LOGGER.error("extra_authorize_data called but _selected_scopes is not set!")
+            scopes_to_request = "" # Should not happen in correct flow
         _LOGGER.debug("Generating extra authorize data with selected scopes: %s", scopes_to_request)
         return { "scope": scopes_to_request, "response_type": "code", "mode": SMARTCAR_MODE }
 
