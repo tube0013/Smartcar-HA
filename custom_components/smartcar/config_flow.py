@@ -1,16 +1,17 @@
 # custom_components/smartcar/config_flow.py
-# --- Should correctly handle scope selection and URL generation ---
+# --- Manually append selected scope & mode to authorize URL ---
 
 import logging
 from typing import Any, Mapping
 import voluptuous as vol
+# Need urlencode and quote from urllib.parse
+from urllib.parse import urlencode, quote
 
 from homeassistant import config_entries
 from homeassistant.data_entry_flow import AbortFlow, FlowResult
 from homeassistant.helpers import config_entry_oauth2_flow
-# Import the correct AbortFlow location
-# Removed OAuth2AuthorizeError import
 
+# Import constants
 from .const import DOMAIN, SMARTCAR_MODE, DEFAULT_NAME
 
 _LOGGER = logging.getLogger(__name__)
@@ -62,7 +63,7 @@ class SmartcarOAuth2FlowHandler(
     async def async_step_scopes(
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
-        """Handle scope selection from the user."""
+        """Handle scope selection and manually construct redirect URL."""
         _LOGGER.debug("Handler %s: Starting step_scopes, input: %s", self.flow_id, user_input)
         errors: dict[str, str] = {}
 
@@ -80,13 +81,26 @@ class SmartcarOAuth2FlowHandler(
                     self.flow_impl = list(implementations.values())[0]
                     _LOGGER.debug("Handler %s: Found OAuth implementation", self.flow_id)
 
-                    # --- Generate URL and return external step (Corrected call) ---
-                    _LOGGER.debug("Handler %s: Generating authorize URL", self.flow_id)
-                    # Pass flow_id, NO self argument
-                    authorize_url = await self.flow_impl.async_generate_authorize_url(self.flow_id)
-                    _LOGGER.info("Handler %s: Redirecting user", self.flow_id)
-                    return self.async_external_step(step_id="auth", url=authorize_url)
-                    # --- End Correction ---
+                    # --- Generate BASE URL ---
+                    _LOGGER.debug("Handler %s: Generating base authorize URL", self.flow_id)
+                    base_authorize_url = await self.flow_impl.async_generate_authorize_url(self.flow_id)
+
+                    # --- Manually Add Scope and Mode Params ---
+                    _LOGGER.debug("Handler %s: Manually adding scope and mode parameters", self.flow_id)
+                    params_to_add = {
+                        "scope": self._selected_scopes, # Use the scopes selected by user
+                        "mode": SMARTCAR_MODE,          # Use the mode from const.py
+                    }
+                    # Filter out None/empty values (scope should ideally not be empty here)
+                    params_to_add = {k: v for k, v in params_to_add.items() if v}
+
+                    separator = "&" if "?" in base_authorize_url else "?"
+                    encoded_extra_params = urlencode(params_to_add, quote_via=quote)
+                    final_authorize_url = f"{base_authorize_url}{separator}{encoded_extra_params}"
+                    # --- End Manual Addition ---
+
+                    _LOGGER.info("Handler %s: Redirecting user (manual URL)", self.flow_id)
+                    return self.async_external_step(step_id="auth", url=final_authorize_url)
 
                 except AbortFlow as err:
                     _LOGGER.debug("Aborting flow: %s", err.reason)
@@ -95,7 +109,7 @@ class SmartcarOAuth2FlowHandler(
                     _LOGGER.exception("Unexpected error preparing external step: %s", err)
                     return self.async_abort(reason="unknown")
 
-        # Show Form Logic
+        # --- Show Form Logic (remains the same) ---
         _LOGGER.debug("Handler %s: Showing scopes form", self.flow_id)
         sorted_scopes = dict(sorted(ALL_SCOPES.items()))
         schema_dict = {}
@@ -108,24 +122,13 @@ class SmartcarOAuth2FlowHandler(
             description_placeholders={"app_name": "Smartcar", "scope_info": "..."},
             errors=errors, last_step=False
         )
+        # --- End Show Form ---
 
-    @property
-    def extra_authorize_data(self) -> dict[str, Any]:
-        """Extra parameters for authorize url."""
-        _LOGGER.debug("Generating extra authorize data...")
-        # Read selected scopes stored by async_step_scopes
-        scopes_to_request = getattr(self, "_selected_scopes", None)
-        if not scopes_to_request:
-            _LOGGER.error("extra_authorize_data called but _selected_scopes is not set!")
-            scopes_to_request = "" # Should not happen in correct flow
-        _LOGGER.debug("Generating extra authorize data with selected scopes: %s", scopes_to_request)
-        return { "scope": scopes_to_request, "response_type": "code", "mode": SMARTCAR_MODE }
-
+    # Inject selected scopes into stored token data
     async def async_oauth_create_entry(self, data: dict) -> FlowResult:
-        # Inject selected scopes into stored token data
         _LOGGER.info("OAuth authentication successful, processing token data")
         scopes_requested_in_flow = getattr(self, "_selected_scopes", None)
-        if "token" in data:
+        if "token" in data and scopes_requested_in_flow:
             if "scope" not in data["token"] or data["token"].get("scope") != scopes_requested_in_flow:
                 _LOGGER.warning("Injecting scopes requested in flow: %s", scopes_requested_in_flow)
                 data["token"]["scope"] = scopes_requested_in_flow
@@ -134,9 +137,10 @@ class SmartcarOAuth2FlowHandler(
         _LOGGER.debug("Creating config entry with final data.")
         return self.async_create_entry(title=title, data=data)
 
+    # Reauth step
     async def async_step_reauth(self, entry_data: Mapping[str, Any]) -> FlowResult:
-        # ... (remains the same) ...
         _LOGGER.info("Starting Smartcar re-authentication flow for %s", entry_data.get("title", "entry"))
         self._selected_scopes = entry_data.get("token", {}).get("scope")
         _LOGGER.debug("Re-using stored scopes for re-auth: %s", self._selected_scopes)
-        return await self.async_step_user() # Still shows scope selection on reauth
+        # This still shows scope selection on re-auth - needs refinement if that's undesired
+        return await self.async_step_user()
