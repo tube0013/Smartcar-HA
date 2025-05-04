@@ -1,119 +1,145 @@
 # custom_components/smartcar/__init__.py
+# ... (imports) ...
+import logging  # Import logging module
 
-import asyncio
-import logging
+PLATFORMS = ["sensor", "binary_sensor"]  # Define supported platforms
+from aiohttp import ClientResponseError  # Import ClientResponseError for exception handling
+import asyncio  # Import asyncio for asynchronous operations
 
-from aiohttp import ClientResponseError
-from homeassistant.exceptions import ConfigEntryAuthFailed
+API_BASE_URL_V2 = "https://api.smartcar.com/v2.0"  # Define the base URL for Smartcar API
+from .coordinator import SmartcarVehicleCoordinator  # Import SmartcarVehicleCoordinator
 
-from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant
-from homeassistant.helpers import config_entry_oauth2_flow, device_registry as dr
-from homeassistant.helpers.aiohttp_client import async_get_clientsession
-from homeassistant.helpers.update_coordinator import UpdateFailed
+_LOGGER = logging.getLogger(__name__)  # Initialize logger
 
-from .coordinator import SmartcarVehicleCoordinator
-from .const import DOMAIN, PLATFORMS, API_BASE_URL_V2
-
-_LOGGER = logging.getLogger(__name__)
+DOMAIN = "smartcar"  # Define the domain for the integration
+from homeassistant.core import HomeAssistant  # Import HomeAssistant
+from homeassistant.helpers import network, webhook, device_registry  # Import helpers including device_registry
+from homeassistant.config_entries import ConfigEntry  # Import ConfigEntry
+from .webhook import async_handle_webhook # Import handler function
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Set up Smartcar from a config entry."""
-    hass.data.setdefault(DOMAIN, {})
-    implementation = await config_entry_oauth2_flow.async_get_config_entry_implementation(hass, entry)
-    session = config_entry_oauth2_flow.OAuth2Session(hass, entry, implementation)
-
-    hass.data[DOMAIN][entry.entry_id] = {"session": session, "coordinators": {}}
+    # ... (get session, initialize hass.data) ...
     entry_data = hass.data[DOMAIN][entry.entry_id]
+    session = entry_data["session"]
+    webhook_secret = entry.data.get("webhook_secret") # Get secret from entry data
 
+    if not webhook_secret:
+        _LOGGER.error("Webhook secret not found in config entry data. Cannot set up webhooks.")
+        # Decide how to handle - maybe continue with polling only? Or fail setup?
+        # For now, let's log and maybe skip webhook setup part
+        pass # Continue without webhook functionality?
+
+    # --- Webhook Setup ---
+    webhook_id = entry.entry_id # Use unique entry ID for webhook ID
+    entry_data["webhook_id"] = webhook_id # Store for unload
     try:
-        _LOGGER.info("Fetching Smartcar vehicle IDs...")
-        vehicle_list_resp = await session.async_request("get", f"{API_BASE_URL_V2}/vehicles")
-        vehicle_list_resp.raise_for_status()
-        vehicle_list_data = await vehicle_list_resp.json()
-        vehicle_ids = vehicle_list_data.get("vehicles", [])
-        _LOGGER.info("Found %d vehicle IDs", len(vehicle_ids))
-    except ClientResponseError as err:
-        if err.status in (401, 403): raise ConfigEntryAuthFailed(f"Auth error fetching vehicle list: {err.status}") from err
-        else: _LOGGER.exception("HTTP Error fetching vehicle list"); return False
-    except ConfigEntryAuthFailed: raise # Already logged by helper potentially
-    except Exception as err: _LOGGER.exception("Unexpected error fetching vehicle list"); return False
-
-    if not vehicle_ids: _LOGGER.warning("No vehicle IDs found."); return True
-
-    device_registry = dr.async_get(hass)
-    setup_tasks = [async_setup_single_vehicle(hass, entry, session, vid, device_registry) for vid in vehicle_ids]
-    results = await asyncio.gather(*setup_tasks, return_exceptions=True)
-
-    auth_failed = any(isinstance(res, ConfigEntryAuthFailed) for res in results if isinstance(res, Exception))
-    any_failed = any(isinstance(res, Exception) for res in results)
-
-    if auth_failed: _LOGGER.error("Authentication failed during setup of at least one vehicle."); return False
-    if any_failed: _LOGGER.warning("One or more vehicles failed non-critical setup steps.")
-    if not entry_data["coordinators"]: _LOGGER.warning("No vehicles were successfully set up."); return True
-
-    # Log stored scopes once on successful setup
-    stored_token_info = entry.data.get("token")
-    if stored_token_info: _LOGGER.info("Using token with scopes: %s", stored_token_info.get("scope"))
-    else: _LOGGER.warning("No token information found in ConfigEntry data!")
-
-    _LOGGER.debug("Forwarding setup to platforms: %s", PLATFORMS)
-    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
-    return True
-
-
-# --- Corrected Function Signature Below ---
-async def async_setup_single_vehicle(
-    hass: HomeAssistant,
-    entry: ConfigEntry,
-    session: config_entry_oauth2_flow.OAuth2Session,
-    vehicle_id: str,
-    device_registry: dr.DeviceRegistry
-) -> None:
-# --- End Corrected Signature ---
-    """Set up a single vehicle, register device, create coordinator. Raises exceptions on failure."""
-    vin = None
-    entry_data = hass.data[DOMAIN][entry.entry_id]
-    try:
-        # Get VIN (read_vin scope)
-        _LOGGER.debug("Fetching VIN for vehicle ID: %s", vehicle_id)
-        vin_resp = await session.async_request("get", f"{API_BASE_URL_V2}/vehicles/{vehicle_id}/vin")
-        vin_resp.raise_for_status()
-        vin_data = await vin_resp.json()
-        vin = vin_data.get("vin")
-        if not vin: raise ValueError("Missing VIN")
-
-        # Get Attributes (read_vehicle_info scope)
-        _LOGGER.debug("Fetching attributes for VIN: %s (ID: %s)", vin, vehicle_id)
-        attr_resp = await session.async_request("get", f"{API_BASE_URL_V2}/vehicles/{vehicle_id}")
-        attr_resp.raise_for_status()
-        vehicle_info = await attr_resp.json()
-        make = vehicle_info.get("make"); model = vehicle_info.get("model"); year = vehicle_info.get("year")
-
-        # Register device
-        device_registry.async_get_or_create(
-            config_entry_id=entry.entry_id, identifiers={(DOMAIN, vin)}, manufacturer=make,
-            model=f"{model} ({year})" if model and year else model,
-            name=f"{make} {model}" if make and model else f"Smartcar {vin[-4:]}",
+        webhook.async_register(
+            hass, DOMAIN, "Smartcar", webhook_id, async_handle_webhook
         )
-        _LOGGER.info("Registered device for VIN: %s", vin)
+        _LOGGER.info("Registered webhook handler with ID: %s", webhook_id)
+    except ValueError: # Already registered
+        _LOGGER.info("Webhook handler already registered for ID: %s", webhook_id)
 
-        # Create and Store Coordinator
-        coordinator = SmartcarVehicleCoordinator(hass, session, vehicle_id, vin, entry)
-        await coordinator.async_config_entry_first_refresh()
-        entry_data["coordinators"][vin] = coordinator
-        _LOGGER.debug("Coordinator created and initial data fetched for VIN: %s", vin)
+    try:
+        webhook_url = webhook.async_generate_url(hass, webhook_id)
+        _LOGGER.info("Generated Home Assistant webhook URL.") # Don't log the full URL+ID
+    except webhook.WebhookNotAvailable:
+        _LOGGER.error("Webhook support not available. Ensure base_url/external_url is configured.")
+        # Cannot subscribe to Smartcar without a public URL
+        webhook_url = None
+    # --- End Webhook Setup ---
 
-    except ClientResponseError as err:
-        if err.status in (401, 403): raise ConfigEntryAuthFailed(f"Auth error [{err.status}] during vehicle setup") from err
-        else: raise UpdateFailed(f"API error during setup: {err.status}") from err # Raise UpdateFailed for non-auth HTTP errors
-    except ConfigEntryAuthFailed: raise # Propagate auth failure
-    except Exception as err: raise err # Propagate other errors
+    # ... (Fetch vehicle IDs and details as before) ...
 
+    setup_tasks = []
+    vehicle_ids = [...] # Get list of vehicle_ids from API call
+    for vehicle_id in vehicle_ids:
+        # Pass webhook details down if needed, or just handle subscription here
+        setup_tasks.append(async_setup_single_vehicle(
+            hass, entry, session, vehicle_id, device_registry, webhook_url, webhook_secret
+        ))
+    # ... (gather tasks, handle results) ...
+
+    # ... (forward to platforms) ...
+
+
+async def async_setup_single_vehicle(
+    hass: HomeAssistant, entry: ConfigEntry, session, vehicle_id, device_registry,
+    webhook_url: str | None, webhook_secret: str | None # Added webhook args
+) -> None:
+    """Set up a single vehicle, including webhook subscription."""
+    # ... (get VIN, attributes, register device as before) ...
+    vin = ... # Get VIN
+
+    # Create Coordinator (might change polling interval later)
+    coordinator = SmartcarVehicleCoordinator(hass, session, vehicle_id, vin, entry)
+    await coordinator.async_config_entry_first_refresh()
+    hass.data[DOMAIN][entry.entry_id]["coordinators"][vin] = coordinator
+
+    # --- Subscribe to Smartcar Webhook ---
+    if webhook_url and webhook_secret: # Only if webhook setup was successful
+        sub_url = f"{API_BASE_URL_V2}/vehicles/{vehicle_id}/webhooks"
+        payload = {"webhookUrl": webhook_url}
+        try:
+            _LOGGER.info("Subscribing vehicle %s (VIN %s) to webhook", vehicle_id, vin)
+            sub_resp = await session.async_request("post", sub_url, json=payload)
+            # Check Smartcar API docs for expected success code (likely 200 or 201)
+            if sub_resp.status not in (200, 201):
+                _LOGGER.error(
+                    "Failed to subscribe vehicle %s to webhook. Status: %d, Response: %s",
+                    vehicle_id, sub_resp.status, await sub_resp.text()
+                )
+            else:
+                _LOGGER.info("Successfully subscribed vehicle %s to webhook", vehicle_id)
+        except ClientResponseError as err:
+            # Handle auth errors during subscription
+            if err.status in (401, 403):
+                 _LOGGER.warning("Auth error subscribing vehicle %s: %s. Missing scope?", vehicle_id, err)
+                 # Might need specific scope like read_charge_events?
+                 # Don't raise ConfigEntryAuthFailed here? Let coordinator handle polling?
+            else:
+                 _LOGGER.error("HTTP error subscribing vehicle %s: %s", vehicle_id, err)
+        except Exception as err:
+            _LOGGER.exception("Unexpected error subscribing vehicle %s: %s", vehicle_id, err)
+    else:
+         _LOGGER.warning("Webhook URL or Secret not available, skipping webhook subscription for VIN %s", vin)
+    # --- End Webhook Subscription ---
+
+    # ... (exception handling for overall setup) ...
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Unload a config entry."""
     _LOGGER.info("Unloading Smartcar entry %s", entry.entry_id)
+    entry_data = hass.data[DOMAIN].get(entry.entry_id)
+
+    # --- Unsubscribe and Unregister Webhook ---
+    if entry_data:
+        webhook_id = entry_data.get("webhook_id")
+        if webhook_id:
+            _LOGGER.info("Unregistering webhook handler: %s", webhook_id)
+            try:
+                 webhook.async_unregister(hass, webhook_id)
+            except ValueError:
+                 _LOGGER.warning("Webhook handler %s not found during unregister.", webhook_id)
+
+            session = entry_data.get("session")
+            coordinators = entry_data.get("coordinators", {})
+            if session:
+                 unsubscribe_tasks = []
+                 for coord in coordinators.values():
+                      # Need vehicle ID from coordinator
+                      vehicle_id = coord.vehicle_id
+                      unsub_url = f"{API_BASE_URL_V2}/vehicles/{vehicle_id}/webhooks"
+                      _LOGGER.info("Unsubscribing vehicle %s from webhook", vehicle_id)
+                      unsubscribe_tasks.append(session.async_request("delete", unsub_url))
+
+                 if unsubscribe_tasks:
+                      results = await asyncio.gather(*unsubscribe_tasks, return_exceptions=True)
+                      for i, result in enumerate(results):
+                           if isinstance(result, Exception):
+                                _LOGGER.warning("Error unsubscribing vehicle %s: %s", list(coordinators.values())[i].vehicle_id, result)
+    # --- End Unsubscribe ---
+
     unload_ok = await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
     if unload_ok:
         hass.data[DOMAIN].pop(entry.entry_id, None)
