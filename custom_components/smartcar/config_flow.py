@@ -114,7 +114,6 @@ class SmartcarOAuth2FlowHandler(
             schema_dict[vol.Optional(scope, default=current_value)] = bool
         return self.async_show_form(
             step_id="scopes", data_schema=vol.Schema(schema_dict),
-            description_placeholders={"app_name": "Smartcar", "scope_info": "..."},
             errors=errors, last_step=False
         )
         # --- End Show Form ---

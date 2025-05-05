@@ -1,0 +1,38 @@
+{
+    "config": {
+        "step": {
+            "scopes": {
+                "data": {
+                    "read_odometer": "Retrieve total distance traveled",
+                    "read_location": "Access the vehicle's location",
+                    "read_battery": "Read EV battery data",
+                    "read_charge": "Read charging data",
+                    "read_security": "Read lock status",
+                    "read_engine_oil": "Read engine oil health",
+                    "read_tires": "Read tire status",
+                    "read_fuel": "Read fuel tank level",
+                    "read_climate": "Read climate settings",
+                    "read_alerts": "Read vehicle alerts",
+                    "read_charge_events": "Receive charging event notifications",
+                    "read_charge_locations": "Access previous charging locations",
+                    "read_charge_records": "Read charge records",
+                    "read_compass": "Read compass direction",
+                    "read_diagnostics": "Read vehicle diagnostics",
+                    "read_extended_vehicle_info": "Read vehicle configuration",
+                    "read_service_history": "Read service records",
+                    "read_speedometer": "Read vehicle speed",
+                    "read_thermometer": "Read temperatures",
+                    "read_user_profile": "Read user profile",
+                    "control_charge": "Control charging (Start/Stop, Set Limit)",
+                    "control_security": "Lock or unlock vehicle",
+                    "control_climate": "Control climate system",
+                    "control_navigation": "Send navigation destinations",
+                    "control_pin": "Modify PIN / PIN to Drive",
+                    "control_trunk": "Control trunk/frunk"
+                },
+                "title": "Scope selection",
+                "description": "Select the scopes you would like to enable"
+            }
+        }
+    }
+}
