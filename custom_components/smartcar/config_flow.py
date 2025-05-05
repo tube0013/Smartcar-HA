@@ -4,8 +4,7 @@
 import logging
 from typing import Any, Mapping
 import voluptuous as vol
-# Need urlencode and quote from urllib.parse
-from urllib.parse import urlencode, quote
+from urllib.parse import urlencode, urlparse, parse_qs
 
 from homeassistant import config_entries
 from homeassistant.data_entry_flow import AbortFlow, FlowResult
@@ -16,23 +15,25 @@ from .const import DOMAIN, SMARTCAR_MODE, DEFAULT_NAME
 
 _LOGGER = logging.getLogger(__name__)
 
-# --- ALL_SCOPES and DEFAULT_SCOPES definitions remain the same ---
-ALL_SCOPES = {
-    "read_vehicle_info": "Know make, model, and year (Recommended)", "read_vin": "Read VIN (Recommended)",
-    "read_odometer": "Retrieve total distance traveled", "read_location": "Access the vehicle's location",
-    "read_battery": "Read EV battery data", "read_charge": "Read charging data",
-    "read_security": "Read lock status", "read_engine_oil": "Read engine oil health",
-    "read_tires": "Read tire status", "read_fuel": "Read fuel tank level",
-    "read_climate": "Read climate settings", "read_alerts": "Read vehicle alerts",
-    "read_charge_events": "Receive charging event notifications", "read_charge_locations": "Access previous charging locations",
-    "read_charge_records": "Read charge records", "read_compass": "Read compass direction",
-    "read_diagnostics": "Read vehicle diagnostics", "read_extended_vehicle_info": "Read vehicle configuration",
-    "read_service_history": "Read service records", "read_speedometer": "Read vehicle speed",
-    "read_thermometer": "Read temperatures", "read_user_profile": "Read user profile",
-    "control_charge": "Control charging (Start/Stop, Set Limit)", "control_security": "Lock or unlock vehicle",
-    "control_climate": "Control climate system", "control_navigation": "Send navigation destinations",
-    "control_pin": "Modify PIN / PIN to Drive", "control_trunk": "Control trunk/frunk",
-}
+# --- Scopes definitions ---
+REQUIRED_SCOPES = [
+    "read_vehicle_info", "read_vin",
+]
+CONFIGURABLE_SCOPES = [
+    "read_odometer", "read_location",
+    "read_battery", "read_charge",
+    "read_security", "read_engine_oil",
+    "read_tires", "read_fuel",
+    "read_climate", "read_alerts",
+    "read_charge_events", "read_charge_locations",
+    "read_charge_records", "read_compass",
+    "read_diagnostics", "read_extended_vehicle_info",
+    "read_service_history", "read_speedometer",
+    "read_thermometer", "read_user_profile",
+    "control_charge", "control_security",
+    "control_climate", "control_navigation",
+    "control_pin", "control_trunk",
+]
 DEFAULT_SCOPES = [
     "read_vehicle_info", "read_vin", "read_odometer", "read_location",
     "read_battery", "read_charge", "read_security",
@@ -72,7 +73,7 @@ class SmartcarOAuth2FlowHandler(
             if not selected_scopes_list:
                 errors["base"] = "no_scopes"
             else:
-                self._selected_scopes = " ".join(sorted(selected_scopes_list))
+                self._selected_scopes = " ".join(sorted(set(selected_scopes_list + REQUIRED_SCOPES)))
                 _LOGGER.info("Handler %s: User selected scopes: %s", self.flow_id, self._selected_scopes)
                 _LOGGER.debug("Handler %s: Scopes selected, checking implementation/credentials", self.flow_id)
                 try:
@@ -87,16 +88,11 @@ class SmartcarOAuth2FlowHandler(
 
                     # --- Manually Add Scope and Mode Params ---
                     _LOGGER.debug("Handler %s: Manually adding scope and mode parameters", self.flow_id)
-                    params_to_add = {
-                        "scope": self._selected_scopes, # Use the scopes selected by user
-                        "mode": SMARTCAR_MODE,          # Use the mode from const.py
-                    }
-                    # Filter out None/empty values (scope should ideally not be empty here)
-                    params_to_add = {k: v for k, v in params_to_add.items() if v}
-
-                    separator = "&" if "?" in base_authorize_url else "?"
-                    encoded_extra_params = urlencode(params_to_add, quote_via=quote)
-                    final_authorize_url = f"{base_authorize_url}{separator}{encoded_extra_params}"
+                    url_obj = urlparse(base_authorize_url)
+                    params = parse_qs(url_obj.query)
+                    params['mode'] = SMARTCAR_MODE
+                    params['scope'] = self._selected_scopes
+                    final_authorize_url = url_obj._replace(query=urlencode(params, doseq=True)).geturl()
                     # --- End Manual Addition ---
 
                     _LOGGER.info("Handler %s: Redirecting user (manual URL)", self.flow_id)
@@ -111,9 +107,8 @@ class SmartcarOAuth2FlowHandler(
 
         # --- Show Form Logic (remains the same) ---
         _LOGGER.debug("Handler %s: Showing scopes form", self.flow_id)
-        sorted_scopes = dict(sorted(ALL_SCOPES.items()))
         schema_dict = {}
-        for scope, description in sorted_scopes.items():
+        for scope in sorted(CONFIGURABLE_SCOPES):
             is_default = scope in DEFAULT_SCOPES
             current_value = user_input.get(scope, is_default) if user_input else is_default
             schema_dict[vol.Optional(scope, default=current_value)] = bool
