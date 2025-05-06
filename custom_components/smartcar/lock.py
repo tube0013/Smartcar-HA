@@ -1,15 +1,14 @@
-# custom_components/smartcar/lock.py
+from __future__ import annotations
 
-import logging  # Shorten imports
+import logging
 from aiohttp import ClientResponseError
 from homeassistant.exceptions import ConfigEntryAuthFailed, HomeAssistantError
 from homeassistant.components.lock import LockEntity, LockEntityDescription
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from .const import DOMAIN, API_BASE_URL_V1  # Uses V1 for POST
-from .coordinator import SmartcarVehicleCoordinator
+from .coordinator import SmartcarVehicleCoordinator, SmartcarCoordinatorEntity
 
 _LOGGER = logging.getLogger(__name__)
 ENTITY_DESCRIPTIONS: tuple[LockEntityDescription, ...] = (
@@ -20,35 +19,26 @@ ENTITY_DESCRIPTIONS: tuple[LockEntityDescription, ...] = (
 async def async_setup_entry(
     hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
 ) -> None:
-    entry_data = hass.data[DOMAIN][entry.entry_id]
-    coordinators: dict[str, SmartcarVehicleCoordinator] = entry_data.get(
-        "coordinators", {}
+    coordinators: dict[str, SmartcarVehicleCoordinator] = (
+        entry.runtime_data.coordinators
     )
-    session = entry_data["session"]
+    session = entry.runtime_data.session
     entities = []
-    token_scopes = entry.data.get("token", {}).get("scope", "").split()
-    if not ("read_security" in token_scopes and "control_security" in token_scopes):
-        _LOGGER.warning("Missing security scopes.")
-        return
     for vin, coordinator in coordinators.items():
-        if coordinator.last_update_success and coordinator.data:
-            for description in ENTITY_DESCRIPTIONS:
-                if description.key == "door_lock":
-                    lock_data = coordinator.data.get("lock_status")
-                    if lock_data is not None and "isLocked" in lock_data:
-                        entities.append(
-                            SmartcarDoorLock(coordinator, session, entry, description)
-                        )
+        for description in ENTITY_DESCRIPTIONS:
+            if coordinator.is_scope_enabled(description.key, verbose=True):
+                entities.append(
+                    SmartcarDoorLock(coordinator, session, entry, description)
+                )
     _LOGGER.info("Adding %d Smartcar lock entities", len(entities))
     async_add_entities(entities)
 
 
-class SmartcarDoorLock(CoordinatorEntity[SmartcarVehicleCoordinator], LockEntity):
-    # ... (__init__, is_locked, available as before) ...
+class SmartcarDoorLock(SmartcarCoordinatorEntity, LockEntity):
     _attr_has_entity_name = True
 
     def __init__(self, coord, session, entry, desc):
-        super().__init__(coord)
+        super().__init__(coord, desc)
         self.vin = coord.vin
         self.vehicle_id = coord.vehicle_id
         self.session = session

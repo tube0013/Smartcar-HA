@@ -1,4 +1,4 @@
-# custom_components/smartcar/coordinator.py
+from __future__ import annotations
 
 import logging
 from datetime import timedelta
@@ -11,7 +11,10 @@ from homeassistant.helpers.update_coordinator import (
     DataUpdateCoordinator,
     UpdateFailed,
 )
+from homeassistant.helpers.entity import EntityDescription
+from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers.config_entry_oauth2_flow import OAuth2Session
+from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DOMAIN, API_BASE_URL_V2
 
@@ -20,15 +23,54 @@ _LOGGER = logging.getLogger(__name__)
 INTERVAL_CHARGING = timedelta(minutes=15)  # Poll more often when charging
 INTERVAL_IDLE = timedelta(hours=4)  # Poll less often when idle
 
-# Define path sets based on context and importance
+# Define request sets based on context and importance
 # Always get charge status to determine state/interval and battery for range/soc
-BASE_PATHS = ["/charge", "/battery"]
+BASE_REQUESTS = ["charging", "battery_level", "plug_status", "range"]
 # Paths useful primarily when charging
-CHARGING_PATHS = ["/charge/limit"]
+CHARGING_REQUESTS = ["charge_limit"]
 # Paths useful when idle/driving (less frequent updates needed maybe?)
-IDLE_PATHS = ["/odometer", "/location", "/security"]  # Security likely fails anyway
+IDLE_REQUESTS = ["odometer", "location", "door_lock"]  # Security likely fails anyway
 # Paths for potentially static or infrequently changing data (or unsupported)
-INFREQUENT_PATHS = ["/battery/capacity", "/engine/oil", "/fuel", "/tires/pressure"]
+INFREQUENT_REQUESTS = [
+    "battery_capacity",
+    "engine_oil",
+    "fuel",
+    "tire_pressure_back_left",
+    "tire_pressure_back_right",
+    "tire_pressure_front_left",
+    "tire_pressure_front_right",
+]
+
+
+class EntityConfig:
+    endpoint: str  # the read (and batch) endpoint
+    required_scopes: list[str]
+
+    def __init__(self, endpoint, required_scopes):
+        self.endpoint = endpoint
+        self.required_scopes = required_scopes
+
+
+ENTITY_CONFIG_MAP = {
+    "battery_capacity": EntityConfig("/battery/capacity", ["read_battery"]),
+    "battery_level": EntityConfig("/battery", ["read_battery"]),
+    "charge_limit": EntityConfig("/charge/limit", ["read_charge", "control_charge"]),
+    "charging": EntityConfig(  # for the switch
+        "/charge", ["read_charge", "control_charge"]
+    ),
+    "charging_state": EntityConfig("/charge", ["read_charge"]),
+    "door_lock": EntityConfig("/security", ["read_security", "control_security"]),
+    "engine_oil": EntityConfig("/engine/oil", ["read_engine_oil"]),
+    "fuel": EntityConfig("/fuel", ["read_fuel"]),
+    "location": EntityConfig("/location", ["read_location"]),
+    "odometer": EntityConfig("/odometer", ["read_odometer"]),
+    "plug_status": EntityConfig("/charge", ["read_charge"]),
+    "range": EntityConfig("/battery", ["read_battery"]),
+    "tire_pressure_back_left": EntityConfig("/tires/pressure", ["read_tires"]),
+    "tire_pressure_back_right": EntityConfig("/tires/pressure", ["read_tires"]),
+    "tire_pressure_front_left": EntityConfig("/tires/pressure", ["read_tires"]),
+    "tire_pressure_front_right": EntityConfig("/tires/pressure", ["read_tires"]),
+}
 
 
 class SmartcarVehicleCoordinator(DataUpdateCoordinator):
@@ -48,8 +90,7 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
         self.vin = vin
         self.entry = entry
         self.units = "metric"
-        # Store granted scopes for smarter path selection
-        self.granted_scopes = entry.data.get("token", {}).get("scope", "").split()
+        self.batch_requests = set()
 
         super().__init__(
             hass,
@@ -74,36 +115,55 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
             "/charge/limit": "read_charge",  # Uses same scope as charge status
         }
 
-    def _get_paths_for_context(self, is_charging: bool) -> list[str]:
-        """Determine which paths to request based on state and granted scopes."""
-        paths_to_request = list(BASE_PATHS)
+    def is_scope_enabled(self, sensor_key: str, verbose=False):
+        token_scopes = self.config_entry.data.get("token", {}).get("scope", "").split()
+        required_scopes = ENTITY_CONFIG_MAP[sensor_key].required_scopes
+        enabled = all([scope in token_scopes for scope in required_scopes])
+
+        if not enabled and verbose:
+            _LOGGER.warning(
+                f"Skipping `{sensor_key}` because not all required scopes {repr(required_scopes)} were enabled."
+            )
+
+        return enabled
+
+    def batch_sensor(self, sensor: SmartcarCoordinatorEntity):
+        """Mark a sensor to be included in the next update batch."""
+        self._batch_add(sensor.entity_description.key)
+
+    def _batch_add(self, key: str):
+        """Mark data as needing to be fetched in the next update batch."""
+
+        if self.is_scope_enabled(key):
+            self.batch_requests.add(key)
+
+    def _batch_add_defaults(self, is_charging: bool) -> list[str]:
+        """
+        Determine which paths to request based on whether the entity is
+        enabled and granted scopes.
+        """
+        requests = list(BASE_REQUESTS)
+
         if is_charging:
-            paths_to_request.extend(CHARGING_PATHS)
+            requests.extend(CHARGING_REQUESTS)
         else:
-            paths_to_request.extend(IDLE_PATHS)
+            requests.extend(IDLE_REQUESTS)
             # Maybe include infrequent paths less often when idle? For now, always include if charging=False
-            paths_to_request.extend(INFREQUENT_PATHS)
+            requests.extend(INFREQUENT_REQUESTS)
 
-        # Filter paths based on scopes the user actually granted
-        final_paths = []
-        for path in set(paths_to_request):  # Use set to remove duplicates
-            required_scope = self._path_to_scope.get(path)
-            if required_scope and required_scope in self.granted_scopes:
-                final_paths.append(path)
-            elif not required_scope:
-                # Path not mapped to a scope, include cautiously or log warning
-                _LOGGER.warning(
-                    "Path %s not mapped to a known scope, requesting anyway.", path
-                )
-                final_paths.append(path)  # Or maybe exclude?
-            else:
-                _LOGGER.debug(
-                    "Skipping path %s as required scope '%s' was not granted.",
-                    path,
-                    required_scope,
-                )
+        enabled_keys: set[str] = set()
+        entities: list[er.RegistryEntry] = er.async_entries_for_config_entry(
+            er.async_get(self.hass), self.config_entry.entry_id
+        )
+        for entity in entities:
+            vin, key = entity.unique_id.split("_", 1)
 
-        return sorted(final_paths)
+            if not entity.disabled:
+                enabled_keys.add(key)
+
+        for key in requests:
+            if key in enabled_keys:
+                self._batch_add(key)
 
     async def _async_update_data(self):
         """Fetch data from API using selective batch endpoint and adjust interval."""
@@ -113,8 +173,13 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
         if self.data and (charge_data := self.data.get("charge")):
             is_charging = charge_data.get("state") == "CHARGING"
 
-        # Select paths for this update
-        paths_to_request = self._get_paths_for_context(is_charging)
+        # Ensure batch requests have been populated for this update
+        if not self.batch_requests:
+            self._batch_add_defaults(is_charging)
+
+        paths_to_request = sorted(
+            {ENTITY_CONFIG_MAP[key].endpoint for key in self.batch_requests}
+        )
 
         if not paths_to_request:
             _LOGGER.warning(
@@ -199,10 +264,28 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
             _LOGGER.debug("Coordinator %s: Batch update processed", self.name)
             return processed_data
 
-        # ... (Exception handling remains the same) ...
         except ConfigEntryAuthFailed:
             ...
         except ClientResponseError:
             ...
         except Exception:
             ...
+        finally:
+            self.batch_requests.clear()
+
+
+class SmartcarCoordinatorEntity(CoordinatorEntity[SmartcarVehicleCoordinator]):
+    def __init__(
+        self, coordinator: SmartcarVehicleCoordinator, description: EntityDescription
+    ):
+        super().__init__(coordinator)
+        self.vin = coordinator.vin
+        self.entity_description = description
+
+    async def async_update(self) -> None:
+        if not self.enabled:
+            return
+
+        self.coordinator.batch_sensor(self)
+
+        await super().async_update()

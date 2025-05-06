@@ -1,6 +1,6 @@
-# custom_components/smartcar/number.py
+from __future__ import annotations
 
-import logging  # Shorten imports
+import logging
 from aiohttp import ClientResponseError
 from homeassistant.exceptions import ConfigEntryAuthFailed, HomeAssistantError
 from homeassistant.components.number import (
@@ -12,9 +12,8 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import PERCENTAGE
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from .const import DOMAIN, API_BASE_URL_V2
-from .coordinator import SmartcarVehicleCoordinator
+from .coordinator import SmartcarVehicleCoordinator, SmartcarCoordinatorEntity
 
 _LOGGER = logging.getLogger(__name__)
 ENTITY_DESCRIPTIONS: tuple[NumberEntityDescription, ...] = (
@@ -34,39 +33,26 @@ ENTITY_DESCRIPTIONS: tuple[NumberEntityDescription, ...] = (
 async def async_setup_entry(
     hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
 ) -> None:
-    entry_data = hass.data[DOMAIN][entry.entry_id]
-    coordinators: dict[str, SmartcarVehicleCoordinator] = entry_data.get(
-        "coordinators", {}
+    coordinators: dict[str, SmartcarVehicleCoordinator] = (
+        entry.runtime_data.coordinators
     )
-    session = entry_data["session"]
+    session = entry.runtime_data.session
     entities = []
-    token_scopes = entry.data.get("token", {}).get("scope", "").split()
-    if "control_charge" not in token_scopes:
-        _LOGGER.warning("Missing 'control_charge' scope.")
-        return
     for vin, coordinator in coordinators.items():
-        if coordinator.last_update_success and coordinator.data:
-            for description in ENTITY_DESCRIPTIONS:
-                if description.key == "charge_limit":
-                    limit_data = coordinator.data.get("charge_limit")
-                    if limit_data is not None and "limit" in limit_data:
-                        entities.append(
-                            SmartcarChargeLimitNumber(
-                                coordinator, session, entry, description
-                            )
-                        )
+        for description in ENTITY_DESCRIPTIONS:
+            if coordinator.is_scope_enabled(description.key, verbose=True):
+                entities.append(
+                    SmartcarChargeLimitNumber(coordinator, session, entry, description)
+                )
     _LOGGER.info("Adding %d Smartcar number entities", len(entities))
     async_add_entities(entities)
 
 
-class SmartcarChargeLimitNumber(
-    CoordinatorEntity[SmartcarVehicleCoordinator], NumberEntity
-):
-    # ... (__init__, native_value, async_set_native_value, available as before) ...
+class SmartcarChargeLimitNumber(SmartcarCoordinatorEntity, NumberEntity):
     _attr_has_entity_name = True
 
     def __init__(self, coord, session, entry, desc):
-        super().__init__(coord)
+        super().__init__(coord, desc)
         self.vin = coord.vin
         self.vehicle_id = coord.vehicle_id
         self.session = session

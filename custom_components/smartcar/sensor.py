@@ -1,4 +1,4 @@
-# custom_components/smartcar/sensor.py
+from __future__ import annotations
 
 import logging
 from datetime import date, datetime
@@ -21,10 +21,9 @@ from homeassistant.const import (
 )
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DOMAIN
-from .coordinator import SmartcarVehicleCoordinator
+from .coordinator import SmartcarVehicleCoordinator, SmartcarCoordinatorEntity
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -103,7 +102,6 @@ def _get_value_from_coordinator(
     coordinator_data: dict | None, entity_key: str
 ) -> Any | None:
     """Extract the specific value for an entity key from coordinator data."""
-    # ... (Keep implementation from previous version) ...
     if not coordinator_data:
         return None
     try:
@@ -149,24 +147,20 @@ async def async_setup_entry(
     hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
 ) -> None:
     """Set up sensors from coordinator."""
-    entry_data = hass.data[DOMAIN][entry.entry_id]
-    coordinators: dict[str, SmartcarVehicleCoordinator] = entry_data.get(
-        "coordinators", {}
+    coordinators: dict[str, SmartcarVehicleCoordinator] = (
+        entry.runtime_data.coordinators
     )
     _LOGGER.debug("Setting up sensors for VINs: %s", list(coordinators.keys()))
     entities = []
     for vin, coordinator in coordinators.items():
-        if not coordinator.last_update_success or not coordinator.data:
-            continue
         for description in SENSOR_TYPES:
-            value = _get_value_from_coordinator(coordinator.data, description.key)
-            if value is not None:
+            if coordinator.is_scope_enabled(description.key, verbose=True):
                 entities.append(SmartcarSensor(coordinator, description))
     _LOGGER.info("Adding %d Smartcar sensor entities", len(entities))
     async_add_entities(entities)
 
 
-class SmartcarSensor(CoordinatorEntity[SmartcarVehicleCoordinator], SensorEntity):
+class SmartcarSensor(SmartcarCoordinatorEntity, SensorEntity):
     """Implementation of a Smartcar sensor."""
 
     _attr_has_entity_name = True
@@ -177,9 +171,7 @@ class SmartcarSensor(CoordinatorEntity[SmartcarVehicleCoordinator], SensorEntity
         description: SensorEntityDescription,
     ):
         """Initialize the sensor."""
-        super().__init__(coordinator)
-        self.vin = coordinator.vin
-        self.entity_description = description
+        super().__init__(coordinator, description)
         self._attr_native_unit_of_measurement = getattr(
             description, "native_unit_of_measurement", None
         )
@@ -188,14 +180,12 @@ class SmartcarSensor(CoordinatorEntity[SmartcarVehicleCoordinator], SensorEntity
         self._update_unit_from_coordinator()  # Set initial unit
 
     def _get_coordinator_units(self) -> str | None:
-        # ... (same as before) ...
         if self.coordinator and self.coordinator.data:
             return self.coordinator.data.get("units")
         return None
 
     def _update_unit_from_coordinator(self):  # Removed log_details flag
         """Update unit based on coordinator data, only if needed."""
-        # ... (same logic as before to determine new_unit) ...
         key = self.entity_description.key
         log_id = self.entity_id or self._attr_unique_id
         coordinator_units = self._get_coordinator_units() or "metric"

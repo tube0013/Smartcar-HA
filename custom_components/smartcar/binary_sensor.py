@@ -1,4 +1,4 @@
-# custom_components/smartcar/binary_sensor.py
+from __future__ import annotations
 
 import logging
 from homeassistant.components.binary_sensor import (
@@ -9,9 +9,8 @@ from homeassistant.components.binary_sensor import (
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from .const import DOMAIN
-from .coordinator import SmartcarVehicleCoordinator
+from .coordinator import SmartcarVehicleCoordinator, SmartcarCoordinatorEntity
 
 _LOGGER = logging.getLogger(__name__)
 SENSOR_TYPES: tuple[BinarySensorEntityDescription, ...] = (
@@ -26,30 +25,23 @@ SENSOR_TYPES: tuple[BinarySensorEntityDescription, ...] = (
 async def async_setup_entry(
     hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
 ) -> None:
-    entry_data = hass.data[DOMAIN][entry.entry_id]
-    coordinators: dict[str, SmartcarVehicleCoordinator] = entry_data.get(
-        "coordinators", {}
+    coordinators: dict[str, SmartcarVehicleCoordinator] = (
+        entry.runtime_data.coordinators
     )
     entities = []
     for vin, coordinator in coordinators.items():
-        if coordinator.last_update_success and coordinator.data:
-            for description in SENSOR_TYPES:
-                if description.key == "plug_status":
-                    charge_data = coordinator.data.get("charge")
-                    if charge_data is not None and "isPluggedIn" in charge_data:
-                        entities.append(SmartcarBinarySensor(coordinator, description))
+        for description in SENSOR_TYPES:
+            if coordinator.is_scope_enabled(description.key, verbose=True):
+                entities.append(SmartcarBinarySensor(coordinator, description))
     _LOGGER.info("Adding %d Smartcar binary sensor entities", len(entities))
     async_add_entities(entities)
 
 
-class SmartcarBinarySensor(
-    CoordinatorEntity[SmartcarVehicleCoordinator], BinarySensorEntity
-):
-    # ... (__init__, is_on, available as before) ...
+class SmartcarBinarySensor(SmartcarCoordinatorEntity, BinarySensorEntity):
     _attr_has_entity_name = True
 
     def __init__(self, coord, desc):
-        super().__init__(coord)
+        super().__init__(coord, desc)
         self.vin = coord.vin
         self.entity_description = desc
         self._attr_unique_id = f"{self.vin}_{desc.key}"
@@ -64,5 +56,7 @@ class SmartcarBinarySensor(
     @property
     def available(self):
         data = self.coordinator.data
-        charge = super().available and data is not None and data.get("charge")
+        charge = None
+        if super().available and data is not None:
+            charge = data.get("charge")
         return charge is not None and "isPluggedIn" in charge

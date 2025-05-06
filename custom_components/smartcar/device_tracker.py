@@ -1,51 +1,43 @@
-# custom_components/smartcar/device_tracker.py
+from __future__ import annotations
 
 import logging
 from homeassistant.components.device_tracker.const import SourceType
-from homeassistant.components.device_tracker.config_entry import TrackerEntity
+from homeassistant.components.device_tracker.config_entry import (
+    TrackerEntity,
+    TrackerEntityDescription,
+)
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from .const import DOMAIN
-from .coordinator import SmartcarVehicleCoordinator
+from .coordinator import SmartcarVehicleCoordinator, SmartcarCoordinatorEntity
 
 _LOGGER = logging.getLogger(__name__)
+ENTITY_DESCRIPTIONS: tuple[TrackerEntityDescription, ...] = (
+    TrackerEntityDescription(key="location", name="Location", icon="mdi:car"),
+)
 
 
 async def async_setup_entry(
     hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
 ) -> None:
-    entry_data = hass.data[DOMAIN][entry.entry_id]
-    coordinators: dict[str, SmartcarVehicleCoordinator] = entry_data.get(
-        "coordinators", {}
+    coordinators: dict[str, SmartcarVehicleCoordinator] = (
+        entry.runtime_data.coordinators
     )
     entities = []
-    token_scopes = entry.data.get("token", {}).get("scope", "").split()
-    if "read_location" not in token_scopes:
-        _LOGGER.warning("Missing 'read_location' scope.")
-        return
     for vin, coordinator in coordinators.items():
-        if (
-            coordinator.last_update_success
-            and coordinator.data
-            and coordinator.data.get("location") is not None
-        ):
-            entities.append(SmartcarLocationTracker(coordinator))
+        for description in ENTITY_DESCRIPTIONS:
+            if coordinator.is_scope_enabled(description.key, verbose=True):
+                entities.append(SmartcarLocationTracker(coordinator, description))
     _LOGGER.info("Adding %d Smartcar device tracker entities", len(entities))
     async_add_entities(entities)
 
 
-class SmartcarLocationTracker(
-    CoordinatorEntity[SmartcarVehicleCoordinator], TrackerEntity
-):
-    # ... (__init__, latitude, longitude, source_type, available as before) ...
+class SmartcarLocationTracker(SmartcarCoordinatorEntity, TrackerEntity):
     _attr_has_entity_name = True
-    _attr_name = None
-    _attr_icon = "mdi:car"
 
-    def __init__(self, coord):
-        super().__init__(coord)
+    def __init__(self, coord, desc):
+        super().__init__(coord, desc)
         self.vin = coord.vin
         self._attr_unique_id = f"{self.vin}_location"
         self._attr_device_info = {"identifiers": {(DOMAIN, self.vin)}}
