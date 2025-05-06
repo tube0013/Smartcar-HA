@@ -1,0 +1,15 @@
+alias: Poll Smartcar
+description: ""
+mode: single
+triggers:
+  - trigger: time_pattern
+    hours: "*"
+conditions:
+  - condition: time
+    after: "09:00:00"
+    before: "21:00:00"
+actions:
+  - action: homeassistant.update_entity
+    data:
+      entity_id:
+        - sensor.volkswagen_id_4_battery
