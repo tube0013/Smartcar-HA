@@ -151,18 +151,18 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
             # Maybe include infrequent paths less often when idle? For now, always include if charging=False
             requests.extend(INFREQUENT_REQUESTS)
 
-        enabled_keys: set[str] = set()
+        disabled_keys: set[str] = set()
         entities: list[er.RegistryEntry] = er.async_entries_for_config_entry(
             er.async_get(self.hass), self.config_entry.entry_id
         )
         for entity in entities:
             vin, key = entity.unique_id.split("_", 1)
 
-            if not entity.disabled:
-                enabled_keys.add(key)
+            if entity.disabled:
+                disabled_keys.add(key)
 
         for key in requests:
-            if key in enabled_keys:
+            if key not in disabled_keys:
                 self._batch_add(key)
 
     async def _async_update_data(self):
