@@ -101,19 +101,6 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
         _LOGGER.info(
             "Coordinator %s: Initialized with interval %s", self.name, INTERVAL_IDLE
         )
-        # Store map of path to required read scope
-        self._path_to_scope = {
-            "/odometer": "read_odometer",
-            "/battery": "read_battery",
-            "/charge": "read_charge",
-            "/security": "read_security",
-            "/location": "read_location",
-            "/tires/pressure": "read_tires",
-            "/engine/oil": "read_engine_oil",
-            "/fuel": "read_fuel",
-            "/battery/capacity": "read_battery",  # Uses same scope as battery level
-            "/charge/limit": "read_charge",  # Uses same scope as charge status
-        }
 
     def is_scope_enabled(self, sensor_key: str, verbose=False):
         token_scopes = self.config_entry.data.get("token", {}).get("scope", "").split()
