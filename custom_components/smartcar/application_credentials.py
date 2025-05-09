@@ -9,7 +9,8 @@ from homeassistant.components.application_credentials import (
 from homeassistant.helpers import config_entry_oauth2_flow
 from homeassistant.helpers.config_entry_oauth2_flow import AbstractOAuth2Implementation
 
-from .const import DOMAIN, OAUTH2_AUTHORIZE, OAUTH2_TOKEN
+from .const import OAUTH2_AUTHORIZE, OAUTH2_TOKEN
+
 
 async def async_get_authorization_server(hass: HomeAssistant) -> AuthorizationServer:
     """Return authorization server details."""
@@ -17,6 +18,7 @@ async def async_get_authorization_server(hass: HomeAssistant) -> AuthorizationSe
         authorize_url=OAUTH2_AUTHORIZE,
         token_url=OAUTH2_TOKEN,
     )
+
 
 async def async_get_auth_implementation(
     hass: HomeAssistant,

@@ -112,10 +112,23 @@ Configuration is done via the Home Assistant UI after installation.
 
 * Smartcar's free developer tier typically has a limit of **500 API calls per vehicle per month**. Exceeding this may incur costs or stop the integration from working.
 * This integration uses a **batch endpoint** to retrieve multiple data points in a single API call to minimize usage.
-* It also uses **dynamic polling intervals:**
+* By default, it uses **dynamic polling intervals** and only fetches data required for enabled entities:
     * When the vehicle is detected as **CHARGING**: Updates every **30 minutes** (configurable in `coordinator.py`).
     * When the vehicle is **IDLE/NOT CHARGING**: Updates every **6 hours** (configurable in `coordinator.py`).
+    * Feel free to disable any entities you do not use to reduce API requests as well.
+* Polling can be [customized as well](#customized-polling).
 * This helps significantly reduce API calls while providing more frequent updates during important events (charging).
+
+### Customized Polling
+
+To customize polling, you can disable polling on the integration and write your own automation.
+
+* First, configure the integration as described above.
+* Go to _Settings_ &rarr; _Integartions_ (under _Devices & services_) &rarr; _Smartcar_
+* Click the three dots to the right of the integration.
+* Choose _System options_.
+* Disable _Enable polling for changes_ and then click _Save_.
+* Create an automation using [`homeassistant.update_entity`](https://www.home-assistant.io/integrations/homeassistant/#action-homeassistantupdate_entity) to refresh the desired value(s). An example is provided at [`examples/poll-smartcar-automation.yaml`](examples/poll-smartcar-automation.yaml).
 
 ## Known Issues / Limitations
 
