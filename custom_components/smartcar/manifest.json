@@ -1,14 +1,18 @@
 {
   "domain": "smartcar",
   "name": "Smartcar",
-  "documentation": "https://github.com/tube0013/smartcar-ha",
-  "dependencies": ["application_credentials"],
-  "codeowners": ["@tube0013"],
-  "requirements": [],
+  "codeowners": [
+    "@tube0013",
+    "@wbyoung"
+  ],
   "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/tube0013/smartcar",
+  "homekit": {},
   "iot_class": "cloud_polling",
-  "application_credentials": {
-    "domains": ["oauth2"]
-  },
-  "version": "0.1.1"
+  "issue_tracker": "https://github.com/tube0013/smartcar/issues",
+  "requirements": [],
+  "ssdp": [],
+  "version": "0.1.0",
+  "zeroconf": []
 }

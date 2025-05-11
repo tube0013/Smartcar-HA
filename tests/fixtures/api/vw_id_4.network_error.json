@@ -1,0 +1,9 @@
+[
+    {
+        "method": "post",
+        "vehicle_path": "/batch",
+        "params": {},
+        "side_effect": "aiohttp.ConnectionTimeoutError",
+        "response": null
+    }
+]

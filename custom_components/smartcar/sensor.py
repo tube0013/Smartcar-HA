@@ -1,10 +1,7 @@
-from __future__ import annotations
-
-import logging
+from dataclasses import dataclass
 from datetime import date, datetime
 from decimal import Decimal
-from typing import Any
-from homeassistant.helpers.typing import StateType
+import logging
 
 from homeassistant.components.sensor import (
     SensorDeviceClass,
@@ -18,129 +15,139 @@ from homeassistant.const import (
     UnitOfEnergy,
     UnitOfLength,
     UnitOfPressure,
+    UnitOfVolume,
 )
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.helpers.typing import StateType
+from homeassistant.util.unit_conversion import DistanceConverter, PressureConverter
 
-from .const import DOMAIN
-from .coordinator import SmartcarVehicleCoordinator, SmartcarCoordinatorEntity
+from .coordinator import SmartcarVehicleCoordinator
+from .entity import SmartcarEntity, SmartcarEntityDescription
 
 _LOGGER = logging.getLogger(__name__)
 
-# Sensor Descriptions
-SENSOR_TYPES: tuple[SensorEntityDescription, ...] = (
-    SensorEntityDescription(
-        key="odometer",
-        name="Odometer",
-        device_class=SensorDeviceClass.DISTANCE,
-        state_class=SensorStateClass.TOTAL_INCREASING,
+
+@dataclass(frozen=True, kw_only=True)
+class SmartcarSensorDescription(SensorEntityDescription, SmartcarEntityDescription):
+    """Class describing Smartcar sensor entities."""
+
+
+SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
+    SmartcarSensorDescription(
+        key="battery_capacity",
+        name="Battery Capacity",
+        value_key_path="battery_nominal_capacity.capacity.nominal",
+        device_class=SensorDeviceClass.ENERGY_STORAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
     ),
-    SensorEntityDescription(
+    SmartcarSensorDescription(
         key="battery_level",
         name="Battery",
+        value_key_path="battery.percentRemaining",
+        value_cast=lambda pct: pct and round(pct * 100),
         device_class=SensorDeviceClass.BATTERY,
         state_class=SensorStateClass.MEASUREMENT,
         native_unit_of_measurement=PERCENTAGE,
     ),
-    SensorEntityDescription(
-        key="range",
-        name="Range",
-        icon="mdi:map-marker-distance",
-        device_class=SensorDeviceClass.DISTANCE,
-        state_class=SensorStateClass.MEASUREMENT,
+    SmartcarSensorDescription(
+        key="charging_state",
+        name="Charging Status",
+        value_key_path="charge.state",
+        icon="mdi:ev-station",
     ),
-    SensorEntityDescription(
-        key="charging_state", name="Charging Status", icon="mdi:ev-station"
-    ),
-    SensorEntityDescription(
+    SmartcarSensorDescription(
         key="engine_oil",
         name="Engine Oil Life",
+        value_key_path="engine_oil.lifeRemaining",
         icon="mdi:oil-level",
         state_class=SensorStateClass.MEASUREMENT,
         native_unit_of_measurement=PERCENTAGE,
     ),
-    SensorEntityDescription(
-        key="battery_capacity",
-        name="Battery Capacity",
-        device_class=SensorDeviceClass.ENERGY_STORAGE,
+    SmartcarSensorDescription(
+        key="fuel",
+        name="Fuel",
+        value_key_path="fuel.amountRemaining",
+        icon="mdi:gas-station",
         state_class=SensorStateClass.MEASUREMENT,
-        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
-        entity_registry_enabled_default=False,
+        native_unit_of_measurement=UnitOfVolume.LITERS,
+        imperial_conversion=lambda v: DistanceConverter.convert(
+            v, UnitOfVolume.GALLONS, UnitOfVolume.LITERS
+        ),
     ),
-    SensorEntityDescription(
-        key="tire_pressure_front_left",
-        name="Tire Pressure Front Left",
-        device_class=SensorDeviceClass.PRESSURE,
+    SmartcarSensorDescription(
+        key="odometer",
+        name="Odometer",
+        value_key_path="odometer.distance",
+        device_class=SensorDeviceClass.DISTANCE,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        native_unit_of_measurement=UnitOfLength.KILOMETERS,
+        imperial_conversion=lambda v: DistanceConverter.convert(
+            v, UnitOfLength.MILES, UnitOfLength.KILOMETERS
+        ),
+    ),
+    SmartcarSensorDescription(
+        key="range",
+        name="Range",
+        value_key_path="battery.range",
+        icon="mdi:map-marker-distance",
+        device_class=SensorDeviceClass.DISTANCE,
         state_class=SensorStateClass.MEASUREMENT,
-        suggested_display_precision=1,
+        native_unit_of_measurement=UnitOfLength.KILOMETERS,
+        imperial_conversion=lambda v: DistanceConverter.convert(
+            v, UnitOfLength.MILES, UnitOfLength.KILOMETERS
+        ),
     ),
-    SensorEntityDescription(
-        key="tire_pressure_front_right",
-        name="Tire Pressure Front Right",
-        device_class=SensorDeviceClass.PRESSURE,
-        state_class=SensorStateClass.MEASUREMENT,
-        suggested_display_precision=1,
-    ),
-    SensorEntityDescription(
+    SmartcarSensorDescription(
         key="tire_pressure_back_left",
         name="Tire Pressure Back Left",
+        value_key_path="tires_pressure.backLeft",
         device_class=SensorDeviceClass.PRESSURE,
         state_class=SensorStateClass.MEASUREMENT,
         suggested_display_precision=1,
+        native_unit_of_measurement=UnitOfPressure.PSI,
+        imperial_conversion=lambda v: PressureConverter.convert(
+            v, UnitOfPressure.KPA, UnitOfPressure.PSI
+        ),
     ),
-    SensorEntityDescription(
+    SmartcarSensorDescription(
         key="tire_pressure_back_right",
         name="Tire Pressure Back Right",
+        value_key_path="tires_pressure.backRight",
         device_class=SensorDeviceClass.PRESSURE,
         state_class=SensorStateClass.MEASUREMENT,
         suggested_display_precision=1,
+        native_unit_of_measurement=UnitOfPressure.PSI,
+        imperial_conversion=lambda v: PressureConverter.convert(
+            v, UnitOfPressure.KPA, UnitOfPressure.PSI
+        ),
+    ),
+    SmartcarSensorDescription(
+        key="tire_pressure_front_left",
+        name="Tire Pressure Front Left",
+        value_key_path="tires_pressure.frontLeft",
+        device_class=SensorDeviceClass.PRESSURE,
+        state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=1,
+        native_unit_of_measurement=UnitOfPressure.PSI,
+        imperial_conversion=lambda v: PressureConverter.convert(
+            v, UnitOfPressure.KPA, UnitOfPressure.PSI
+        ),
+    ),
+    SmartcarSensorDescription(
+        key="tire_pressure_front_right",
+        name="Tire Pressure Front Right",
+        value_key_path="tires_pressure.frontRight",
+        device_class=SensorDeviceClass.PRESSURE,
+        state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=1,
+        native_unit_of_measurement=UnitOfPressure.PSI,
+        imperial_conversion=lambda v: PressureConverter.convert(
+            v, UnitOfPressure.KPA, UnitOfPressure.PSI
+        ),
     ),
 )
-
-
-def _get_value_from_coordinator(
-    coordinator_data: dict | None, entity_key: str
-) -> Any | None:
-    """Extract the specific value for an entity key from coordinator data."""
-    if not coordinator_data:
-        return None
-    try:
-        if entity_key == "odometer":
-            data = coordinator_data.get("odometer")
-            return data.get("distance") if data else None
-        if entity_key == "battery_level":
-            data = coordinator_data.get("battery")
-            percent = data.get("percentRemaining") if data else None
-            return round(percent * 100) if percent is not None else None
-        if entity_key == "range":
-            data = coordinator_data.get("battery")
-            return data.get("range") if data else None
-        if entity_key == "charging_state":
-            data = coordinator_data.get("charge")
-            return data.get("state") if data else None  # Use 'charge' key
-        if entity_key == "engine_oil":
-            data = coordinator_data.get("engine_oil")
-            return data.get("lifeRemaining") if data else None
-        if entity_key == "battery_capacity":
-            data = coordinator_data.get("battery_capacity")
-            return data.get("capacity") if data else None
-        if entity_key.startswith("tire_pressure"):
-            data = coordinator_data.get("tires")
-            if not data:
-                return None
-            tire_map = {
-                "tire_pressure_front_left": "frontLeft",
-                "tire_pressure_front_right": "frontRight",
-                "tire_pressure_back_left": "backLeft",
-                "tire_pressure_back_right": "backRight",
-            }
-            api_key = tire_map.get(entity_key)
-            return data.get(api_key) if api_key else None
-    except Exception as e:
-        _LOGGER.warning(
-            "Error extracting value for key %s: %s", entity_key, e
-        )  # Warning level now
-    return None
 
 
 async def async_setup_entry(
@@ -150,87 +157,19 @@ async def async_setup_entry(
     coordinators: dict[str, SmartcarVehicleCoordinator] = (
         entry.runtime_data.coordinators
     )
-    _LOGGER.debug("Setting up sensors for VINs: %s", list(coordinators.keys()))
+    _LOGGER.debug(f"Setting up sensors for VINs: {list(coordinators.keys())}")
     entities = []
     for vin, coordinator in coordinators.items():
         for description in SENSOR_TYPES:
             if coordinator.is_scope_enabled(description.key, verbose=True):
                 entities.append(SmartcarSensor(coordinator, description))
-    _LOGGER.info("Adding %d Smartcar sensor entities", len(entities))
+    _LOGGER.info(f"Adding {len(entities)} Smartcar sensor entities")
     async_add_entities(entities)
 
 
-class SmartcarSensor(SmartcarCoordinatorEntity, SensorEntity):
-    """Implementation of a Smartcar sensor."""
-
+class SmartcarSensor(SmartcarEntity, SensorEntity):
     _attr_has_entity_name = True
-
-    def __init__(
-        self,
-        coordinator: SmartcarVehicleCoordinator,
-        description: SensorEntityDescription,
-    ):
-        """Initialize the sensor."""
-        super().__init__(coordinator, description)
-        self._attr_native_unit_of_measurement = getattr(
-            description, "native_unit_of_measurement", None
-        )
-        self._attr_unique_id = f"{self.vin}_{description.key}"
-        self._attr_device_info = {"identifiers": {(DOMAIN, self.vin)}}
-        self._update_unit_from_coordinator()  # Set initial unit
-
-    def _get_coordinator_units(self) -> str | None:
-        if self.coordinator and self.coordinator.data:
-            return self.coordinator.data.get("units")
-        return None
-
-    def _update_unit_from_coordinator(self):  # Removed log_details flag
-        """Update unit based on coordinator data, only if needed."""
-        key = self.entity_description.key
-        log_id = self.entity_id or self._attr_unique_id
-        coordinator_units = self._get_coordinator_units() or "metric"
-        new_unit = getattr(self.entity_description, "native_unit_of_measurement", None)
-        if key == "odometer" or key == "range":
-            if coordinator_units:
-                new_unit = (
-                    UnitOfLength.KILOMETERS
-                    if coordinator_units == "metric"
-                    else UnitOfLength.MILES
-                )
-            else:
-                new_unit = None
-        elif key.startswith("tire_pressure"):
-            if coordinator_units:
-                new_unit = (
-                    UnitOfPressure.KPA
-                    if coordinator_units == "metric"
-                    else UnitOfPressure.PSI
-                )
-            else:
-                new_unit = None
-        current_unit = getattr(self, "_attr_native_unit_of_measurement", "NOT_SET")
-        if new_unit != current_unit:
-            _LOGGER.debug(
-                "Sensor %s: Updating unit from %s to %s", log_id, current_unit, new_unit
-            )  # Keep this debug maybe
-            self._attr_native_unit_of_measurement = new_unit
 
     @property
     def native_value(self) -> StateType | date | datetime | Decimal:
-        """Return the state of the sensor."""
-        self._update_unit_from_coordinator()
-        value = _get_value_from_coordinator(
-            self.coordinator.data, self.entity_description.key
-        )
-        # Removed verbose logging from here
-        return value
-
-    @property
-    def available(self) -> bool:
-        """Return if entity is available."""
-        value = _get_value_from_coordinator(
-            self.coordinator.data, self.entity_description.key
-        )
-        is_available = super().available and value is not None
-        # Removed verbose logging from here
-        return is_available
+        return self._extract_value()

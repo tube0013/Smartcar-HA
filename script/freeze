@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+pip freeze -r requirements.test.txt | \
+	sed -n '/##/q;p' > requirements.test.txt.tmp && \
+	mv requirements.test.txt.tmp requirements.test.txt

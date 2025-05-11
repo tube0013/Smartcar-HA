@@ -1,0 +1,99 @@
+# serializer version: 1
+# name: test_lock[unknown_make-lock-200-success-locked-NoneType]
+  list([
+    tuple(
+      'post',
+      URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/security'),
+      dict({
+        'action': 'LOCK',
+      }),
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+  ])
+# ---
+# name: test_lock[unknown_make-lock-401-unauthroized-unlocked-NoneType]
+  list([
+    tuple(
+      'post',
+      URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/security'),
+      dict({
+        'action': 'LOCK',
+      }),
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+  ])
+# ---
+# name: test_lock[unknown_make-lock-409-unreachable-unlocked-NoneType]
+  list([
+    tuple(
+      'post',
+      URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/security'),
+      dict({
+        'action': 'LOCK',
+      }),
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+  ])
+# ---
+# name: test_lock[unknown_make-unlock-200-success-unlocked-NoneType]
+  list([
+    tuple(
+      'post',
+      URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/security'),
+      dict({
+        'action': 'UNLOCK',
+      }),
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+  ])
+# ---
+# name: test_lock[unknown_make-unlock-401-unauthroized-unlocked-NoneType]
+  list([
+    tuple(
+      'post',
+      URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/security'),
+      dict({
+        'action': 'UNLOCK',
+      }),
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+  ])
+# ---
+# name: test_lock[unknown_make-unlock-409-unreachable-unlocked-NoneType]
+  list([
+    tuple(
+      'post',
+      URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/security'),
+      dict({
+        'action': 'UNLOCK',
+      }),
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+  ])
+# ---
+# name: test_lock[unknown_make-unlock-500-server-unlocked-ClientResponseError]
+  list([
+    tuple(
+      'post',
+      URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/security'),
+      dict({
+        'action': 'UNLOCK',
+      }),
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+  ])
+# ---

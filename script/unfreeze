@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+cat requirements.test.txt | \
+	sed 's/==.*//' > requirements.test.txt.tmp && \
+	mv requirements.test.txt.tmp requirements.test.txt

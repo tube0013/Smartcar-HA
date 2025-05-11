@@ -1,8 +1,6 @@
-from __future__ import annotations
-
+from dataclasses import dataclass
 import logging
-from aiohttp import ClientResponseError
-from homeassistant.exceptions import ConfigEntryAuthFailed, HomeAssistantError
+
 from homeassistant.components.number import (
     NumberEntity,
     NumberEntityDescription,
@@ -12,14 +10,24 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import PERCENTAGE
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from .const import DOMAIN, API_BASE_URL_V2
-from .coordinator import SmartcarVehicleCoordinator, SmartcarCoordinatorEntity
+
+from .coordinator import SmartcarVehicleCoordinator
+from .entity import SmartcarEntity, SmartcarEntityDescription
 
 _LOGGER = logging.getLogger(__name__)
+
+
+@dataclass(frozen=True, kw_only=True)
+class SmartcarNumberDescription(NumberEntityDescription, SmartcarEntityDescription):
+    """Class describing Smartcar number entities."""
+
+
 ENTITY_DESCRIPTIONS: tuple[NumberEntityDescription, ...] = (
-    NumberEntityDescription(
+    SmartcarNumberDescription(
         key="charge_limit",
         name="Charge Limit",
+        value_key_path="charge_limit.limit",
+        value_cast=lambda pct: pct and round(pct * 100),
         icon="mdi:battery-charging-80",
         mode=NumberMode.BOX,
         native_min_value=50.0,
@@ -36,73 +44,27 @@ async def async_setup_entry(
     coordinators: dict[str, SmartcarVehicleCoordinator] = (
         entry.runtime_data.coordinators
     )
-    session = entry.runtime_data.session
     entities = []
     for vin, coordinator in coordinators.items():
         for description in ENTITY_DESCRIPTIONS:
             if coordinator.is_scope_enabled(description.key, verbose=True):
-                entities.append(
-                    SmartcarChargeLimitNumber(coordinator, session, entry, description)
-                )
-    _LOGGER.info("Adding %d Smartcar number entities", len(entities))
+                entities.append(SmartcarChargeLimitNumber(coordinator, description))
+    _LOGGER.info(f"Adding {len(entities)} Smartcar number entities")
     async_add_entities(entities)
 
 
-class SmartcarChargeLimitNumber(SmartcarCoordinatorEntity, NumberEntity):
+class SmartcarChargeLimitNumber(SmartcarEntity, NumberEntity):
     _attr_has_entity_name = True
-
-    def __init__(self, coord, session, entry, desc):
-        super().__init__(coord, desc)
-        self.vin = coord.vin
-        self.vehicle_id = coord.vehicle_id
-        self.session = session
-        self.entry = entry
-        self.entity_description = desc
-        self._attr_unique_id = f"{self.vin}_{desc.key}"
-        self._attr_device_info = {"identifiers": {(DOMAIN, self.vin)}}
 
     @property
     def native_value(self):
-        data = self.coordinator.data
-        limit_data = data.get("charge_limit") if data else None
-        limit_frac = limit_data.get("limit") if limit_data else None
-        return round(limit_frac * 100.0) if limit_frac is not None else None
+        return self._extract_value()
 
-    async def async_set_native_value(self, value):  # Error handling kept
-        limit_frac = max(0.5, min(1.0, value / 100.0))
-        _LOGGER.info("Attempting to set charge limit to %.2f%% for %s", value, self.vin)
-        url = f"{API_BASE_URL_V2}/vehicles/{self.vehicle_id}/charge/limit"
-        payload = {"limit": limit_frac}
-        try:
-            resp = await self.session.async_request("post", url, json=payload)
-            resp.raise_for_status()
-            _LOGGER.info(
-                "Set charge limit cmd OK for %s", self.vin
-            )  # Removed early refresh
-        except ClientResponseError as e:
-            if e.status in (401, 403):
-                _LOGGER.warning(
-                    "Auth err [%s] setting limit for %s", e.status, self.vin
-                )
-                self.entry.async_start_reauth(self.hass)
-            elif e.status == 409:
-                _LOGGER.warning("Conflict (409) setting limit for %s.", self.vin)
-                raise HomeAssistantError("Conflict setting limit (plugged in?)") from e
-            else:
-                _LOGGER.error("HTTP err setting limit for %s: %s", self.vin, e)
-                raise HomeAssistantError(f"API err {e.status}") from e
-        except ConfigEntryAuthFailed:
-            _LOGGER.warning("AuthFail setting limit for %s", self.vin)
-            self.entry.async_start_reauth(self.hass)
-        except Exception as e:
-            _LOGGER.exception("Unexpected err setting limit for %s", self.vin)
-            raise HomeAssistantError("Unexpected limit err") from e
+    async def async_set_native_value(self, value):
+        assert value >= 50 and value <= 100, "Value must be between 50 and 100"
 
-    @property
-    def available(self):
-        return (
-            super().available
-            and self.coordinator.data is not None
-            and self.coordinator.data.get("charge_limit") is not None
-            and "limit" in self.coordinator.data["charge_limit"]
-        )
+        if await self._async_send_command(
+            "/charge/limit", {"limit": (raw_value := value / 100.0)}
+        ):
+            self._inject_raw_value(raw_value)
+            self.async_write_ha_state()

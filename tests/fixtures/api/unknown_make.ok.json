@@ -1,0 +1,139 @@
+[
+    {
+        "method": "post",
+        "vehicle_path": "/batch",
+        "params": {},
+        "response": {
+            "responses": [
+                {
+                    "path": "/battery",
+                    "code": 200,
+                    "headers": {},
+                    "body": {
+                        "percentRemaining": 0.3,
+                        "range": 40.5
+                    }
+                },
+                {
+                    "path": "/battery/nominal_capacity",
+                    "code": 200,
+                    "headers": {},
+                    "body": {
+                        "availableCapacities": [
+                            {
+                                "capacity": 70.9,
+                                "description": null
+                            }
+                        ],
+                        "capacity": {
+                            "nominal": 70.9,
+                            "source": "SMARTCAR"
+                        },
+                        "url": null
+                    }
+                },
+                {
+                    "path": "/charge",
+                    "code": 200,
+                    "headers": {},
+                    "body": {
+                        "isPluggedIn": true,
+                        "state": "FULLY_CHARGED"
+                    }
+                },
+                {
+                    "path": "/charge/limit",
+                    "code": 200,
+                    "headers": {},
+                    "body": {
+                        "limit": 0.8
+                    }
+                },
+                {
+                    "path": "/engine/oil",
+                    "code": 200,
+                    "headers": {},
+                    "body": {
+                        "lifeRemaining": 0.35
+                    }
+                },
+                {
+                    "path": "/fuel",
+                    "code": 200,
+                    "headers": {},
+                    "body": {
+                        "amountRemaining": 53.2,
+                        "percentRemaining": 0.3,
+                        "range": 40.5
+                    }
+                },
+                {
+                    "path": "/location",
+                    "code": 200,
+                    "headers": {
+                        "sc-data-age": "2019-10-24T00:43:46.000Z"
+                    },
+                    "body": {
+                        "latitude": 37.4292,
+                        "longitude": 122.1381
+                    }
+                },
+                {
+                    "path": "/odometer",
+                    "code": 200,
+                    "headers": {
+                        "sc-data-age": "2019-10-24T00:43:46.000Z",
+                        "sc-unit-system": "metric"
+                    },
+                    "body": {
+                        "distance": 37829
+                    }
+                },
+                {
+                    "path": "/security",
+                    "code": 200,
+                    "headers": {},
+                    "body": {
+                        "isLocked" : false,
+                        "doors" : [
+                            {"type": "frontLeft" , "status" : "CLOSED"},
+                            {"type": "frontRight" , "status" : "OPEN"},
+                            {"type": "backRight" , "status" : "CLOSED"},
+                            {"type": "backLeft" , "status" : "CLOSED"}
+                        ],
+                        "windows" : [
+                            {"type": "frontLeft" , "status" : "CLOSED"},
+                            {"type": "frontRight" , "status" : "CLOSED"},
+                            {"type": "backRight" , "status" : "UNKNOWN"},
+                            {"type": "backLeft" , "status" : "CLOSED"}
+                        ],
+                        "sunroof" : [
+                            {"type": "sunroof" , "status" : "CLOSED"}
+                        ], 	
+                        "storage" : [
+                            {"type": "rear" , "status" : "UNKNOWN"},
+                            {"type": "front" , "status" : "CLOSED"}
+                        ],
+                        "chargingPort" : [ 
+                            {"type" : "chargingPort", "status" : "CLOSED" } 
+                        ]
+                    }
+                },
+                {
+                    "path": "/tires/pressure",
+                    "code": 200,
+                    "headers": {
+                        "sc-data-age": "2019-10-24T00:43:46.000Z",
+                        "sc-unit-system": "metric"
+                    },
+                    "body": {
+                        "backLeft": 219.3,
+                        "backRight": 219.3,
+                        "frontLeft": 219.3,
+                        "frontRight": 219.3
+                    }
+                }
+            ]
+        }
+    }
+]

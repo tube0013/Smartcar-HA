@@ -1,37 +1,30 @@
-from __future__ import annotations
-
-import logging
 from datetime import timedelta
+import logging
 
-from aiohttp import ClientResponseError
-from homeassistant.exceptions import ConfigEntryAuthFailed
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers.update_coordinator import (
+    CoordinatorEntity,
     DataUpdateCoordinator,
     UpdateFailed,
 )
-from homeassistant.helpers.entity import EntityDescription
-from homeassistant.helpers import entity_registry as er
-from homeassistant.helpers.config_entry_oauth2_flow import OAuth2Session
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN, API_BASE_URL_V2
+from .auth import AbstractAuth
+from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
-INTERVAL_CHARGING = timedelta(minutes=15)  # Poll more often when charging
-INTERVAL_IDLE = timedelta(hours=4)  # Poll less often when idle
+INTERVAL_CHARGING = timedelta(minutes=15)  # poll more often when charging
+INTERVAL_IDLE = timedelta(hours=4)  # poll less often when idle
 
-# Define request sets based on context and importance
-# Always get charge status to determine state/interval and battery for range/soc
+# fequests based on context/importance with keys matching entity keys
 BASE_REQUESTS = ["charging", "battery_level", "plug_status", "range"]
-# Paths useful primarily when charging
 CHARGING_REQUESTS = ["charge_limit"]
-# Paths useful when idle/driving (less frequent updates needed maybe?)
-IDLE_REQUESTS = ["odometer", "location", "door_lock"]  # Security likely fails anyway
-# Paths for potentially static or infrequently changing data (or unsupported)
-INFREQUENT_REQUESTS = [
+IDLE_REQUESTS = [
+    "odometer",
+    "location",
+    "door_lock",
     "battery_capacity",
     "engine_oil",
     "fuel",
@@ -52,7 +45,7 @@ class EntityConfig:
 
 
 ENTITY_CONFIG_MAP = {
-    "battery_capacity": EntityConfig("/battery/capacity", ["read_battery"]),
+    "battery_capacity": EntityConfig("/battery/nominal_capacity", ["read_battery"]),
     "battery_level": EntityConfig("/battery", ["read_battery"]),
     "charge_limit": EntityConfig("/charge/limit", ["read_charge", "control_charge"]),
     "charging": EntityConfig(  # for the switch
@@ -76,21 +69,22 @@ ENTITY_CONFIG_MAP = {
 class SmartcarVehicleCoordinator(DataUpdateCoordinator):
     """Coordinates updates with selective batch paths and dynamic interval."""
 
+    update_interval: timedelta
+
     def __init__(
         self,
         hass: HomeAssistant,
-        session: OAuth2Session,
+        auth: AbstractAuth,
         vehicle_id: str,
         vin: str,
         entry: ConfigEntry,
     ):
         """Initialize coordinator."""
-        self.session = session
+        self.auth = auth
         self.vehicle_id = vehicle_id
         self.vin = vin
         self.entry = entry
-        self.units = "metric"
-        self.batch_requests = set()
+        self.batch_requests: set[str] = set()
 
         super().__init__(
             hass,
@@ -98,181 +92,162 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
             name=f"{DOMAIN}_{vin}",
             update_interval=INTERVAL_IDLE,
         )
-        _LOGGER.info(
-            "Coordinator %s: Initialized with interval %s", self.name, INTERVAL_IDLE
+
+        _LOGGER.debug(
+            f"Coordinator {self.name}: Initialized with interval {INTERVAL_IDLE}"
         )
 
     def is_scope_enabled(self, sensor_key: str, verbose=False):
-        token_scopes = self.config_entry.data.get("token", {}).get("scope", "").split()
+        token_scopes = self.config_entry.data.get("token", {}).get("scopes", [])
         required_scopes = ENTITY_CONFIG_MAP[sensor_key].required_scopes
-        enabled = all([scope in token_scopes for scope in required_scopes])
+        missing = [scope for scope in required_scopes if scope not in token_scopes]
+        enabled = len(missing) == 0
 
         if not enabled and verbose:
             _LOGGER.warning(
-                f"Skipping `{sensor_key}` because not all required scopes {repr(required_scopes)} were enabled."
+                f"Skipping `{sensor_key}` which requires {repr(required_scopes)}, but "
+                f"user is missing {repr(missing)} with enabled scopes of {repr(token_scopes)}."
             )
 
         return enabled
 
-    def batch_sensor(self, sensor: SmartcarCoordinatorEntity):
+    def batch_sensor(self, sensor: CoordinatorEntity):
         """Mark a sensor to be included in the next update batch."""
         self._batch_add(sensor.entity_description.key)
 
     def _batch_add(self, key: str):
         """Mark data as needing to be fetched in the next update batch."""
 
-        if self.is_scope_enabled(key):
-            self.batch_requests.add(key)
+        assert self.is_scope_enabled(key)
 
-    def _batch_add_defaults(self, is_charging: bool) -> list[str]:
+        self.batch_requests.add(key)
+
+    def _batch_add_defaults(self):
         """
-        Determine which paths to request based on whether the entity is
-        enabled and granted scopes.
+        Add default batch paths to request when none were explicitly requested.
+
+        Explicit requests are considered to have been made when:
+
+        - There are already requests that have been made (via the
+          `home_assistant.update_entity` action). This method will
+          short-circuit and not add additional items to the batch.
+        - When polling is disabled, no defaults are added to the batch. This
+          prevents requests being made across all endpoints that apply to
+          (enabled) entities when Home Assistant starts or the config entry is
+          reloaded.
+
+        When polling is enabled and there have been no explicit update requests:
+
+        - BASE_REQUESTS will always be added.
+        - CHARGING_REQUESTS will be added when charging
+        - IDLE_REQUESTS will be added when not charging
+
+        The resulting list is filtered to only include keys that are associated
+        with entities that are active (not marked as disabled) in the entity
+        registry. (Note: this means that during config entry setup, platform
+        initialization needs to occur before the first refresh or the entity
+        registry will be empty.)
         """
-        requests = list(BASE_REQUESTS)
+        if self.batch_requests:
+            return
+        if self.config_entry.pref_disable_polling:
+            return
 
-        if is_charging:
-            requests.extend(CHARGING_REQUESTS)
-        else:
-            requests.extend(IDLE_REQUESTS)
-            # Maybe include infrequent paths less often when idle? For now, always include if charging=False
-            requests.extend(INFREQUENT_REQUESTS)
+        requests = []
+        current_data = self.data or {}
+        charge_data = current_data.get("charge", {})
+        is_charging = charge_data.get("state") == "CHARGING"
 
-        disabled_keys: set[str] = set()
+        requests.extend(BASE_REQUESTS)
+        requests.extend(CHARGING_REQUESTS if is_charging else IDLE_REQUESTS)
+
         entities: list[er.RegistryEntry] = er.async_entries_for_config_entry(
             er.async_get(self.hass), self.config_entry.entry_id
         )
+
         for entity in entities:
             vin, key = entity.unique_id.split("_", 1)
-
-            if entity.disabled:
-                disabled_keys.add(key)
-
-        for key in requests:
-            if key not in disabled_keys:
+            if key in requests and not entity.disabled:
                 self._batch_add(key)
+
+    def _batch_proccess(self) -> list[str]:
+        """
+        Process a batch of paths to request.
+        """
+        self._batch_add_defaults()
+
+        result: list[str] = list(self.batch_requests)
+
+        self.batch_requests.clear()
+
+        return result
 
     async def _async_update_data(self):
         """Fetch data from API using selective batch endpoint and adjust interval."""
 
-        # Determine context from previous data
-        is_charging = False
-        if self.data and (charge_data := self.data.get("charge")):
-            is_charging = charge_data.get("state") == "CHARGING"
-
-        # Ensure batch requests have been populated for this update
-        if not self.batch_requests:
-            self._batch_add_defaults(is_charging)
-
-        paths_to_request = sorted(
-            {ENTITY_CONFIG_MAP[key].endpoint for key in self.batch_requests}
+        batch_requests = self._batch_proccess()
+        request_path = f"vehicles/{self.vehicle_id}/batch"
+        request_batch_paths = sorted(
+            {ENTITY_CONFIG_MAP[key].endpoint for key in batch_requests}
         )
+        request_body = {"requests": [{"path": path} for path in request_batch_paths]}
 
-        if not paths_to_request:
+        if not batch_requests:
             _LOGGER.warning(
-                "Coordinator %s: No paths to request based on granted scopes and context.",
-                self.name,
+                f"Coordinator {self.name}: No updates to request based on granted scopes and context.",
             )
-            # Return previous data or empty dict? Or raise UpdateFailed?
-            # Let's return current data to avoid state becoming Unknown if possible
-            return self.data or {}  # Return previous data if available
+            return self.data
 
-        api_batch_url = f"{API_BASE_URL_V2}/vehicles/{self.vehicle_id}/batch"
         _LOGGER.debug(
-            "Coordinator %s: Requesting batch update (Interval: %s) for paths: %s",
-            self.name,
-            self.update_interval,
-            paths_to_request,
+            f"Coordinator {self.name}: Requesting batch update (Interval: {self.update_interval}) for paths: {request_batch_paths}",
         )
-        request_body = {"requests": [{"path": path} for path in paths_to_request]}
 
-        try:
-            response = await self.session.async_request(
-                "post", api_batch_url, json=request_body
+        response = await self.auth.request("post", request_path, json=request_body)
+        response.raise_for_status()
+        response_data = await response.json()
+
+        if "responses" not in response_data:
+            raise UpdateFailed("Invalid batch response format")
+
+        merged_data = self._merge_batch_data(response_data)
+
+        self._adjust_update_interval(merged_data)
+
+        return merged_data
+
+    def _merge_batch_data(self, batch_data):
+        """Fetch data from API using selective batch endpoint and adjust interval."""
+        updated_data = dict(self.data or {})
+
+        for item in batch_data["responses"]:
+            path = item["path"]
+            code = item["code"]
+            body = item["body"]
+            headers = item.get("headers") or {}
+            unit_system = headers.get("sc-unit-system")
+            key = path.strip("/").replace("/", "_")
+            updated_data[key] = body if code == 200 else None
+
+            if code == 200 and unit_system:
+                updated_data[f"{key}:unit_system"] = unit_system
+
+            if code not in (200, 404):
+                _LOGGER.warning(
+                    f"Coordinator {self.name}: Status {code} for path {path}",
+                )
+
+        _LOGGER.debug(f"Coordinator {self.name}: Batch update processed")
+
+        return updated_data
+
+    def _adjust_update_interval(self, updated_data):
+        """Adjust the update interval based on charging state."""
+
+        is_charging = updated_data.get("charge", {}).get("state") == "CHARGING"
+        interval = INTERVAL_CHARGING if is_charging else INTERVAL_IDLE
+
+        if interval != self.update_interval:
+            _LOGGER.info(
+                f"Coordinator {self.name}: Setting update interval to {interval}",
             )
-            if response.status in (401, 403):
-                raise ConfigEntryAuthFailed(
-                    f"Auth error on batch request: {response.status}"
-                )
-            response.raise_for_status()
-            batch_response_data = await response.json()
-
-            # Process results - start with previous data to keep values for paths not requested this time
-            processed_data = (
-                self.data.copy() if self.data else {}
-            )  # Start with old data
-            units_header = None
-            if "responses" not in batch_response_data:
-                raise UpdateFailed("Invalid batch response format")
-
-            for item in batch_response_data["responses"]:
-                path = item.get("path")
-                code = item.get("code")
-                body = item.get("body")
-                headers = item.get("headers", {})
-                data_key = path.strip("/").replace("/", "_") if path else None
-                if not data_key:
-                    continue
-
-                # Only update keys for paths we actually requested this time
-                if path in paths_to_request:
-                    if code == 200:
-                        processed_data[data_key] = body
-                        if data_key == "odometer" and not units_header:
-                            units_header = headers.get("sc-unit-system")
-                    else:
-                        # Store None only if we expected data but failed, otherwise keep old value
-                        processed_data[data_key] = None
-                        if code != 404:
-                            _LOGGER.info(
-                                "Coordinator %s: Status %s for path %s",
-                                self.name,
-                                code,
-                                path,
-                            )
-
-            self.units = units_header if units_header else self.units
-            processed_data["units"] = self.units
-
-            # Adjust interval based on NEW data
-            new_interval = INTERVAL_IDLE
-            new_charge_data = processed_data.get("charge")  # Use updated charge data
-            if new_charge_data and new_charge_data.get("state") == "CHARGING":
-                new_interval = INTERVAL_CHARGING
-
-            if new_interval != self.update_interval:
-                _LOGGER.info(
-                    "Coordinator %s: Setting update interval to %s",
-                    self.name,
-                    new_interval,
-                )
-                self.async_set_update_interval(new_interval)
-
-            _LOGGER.debug("Coordinator %s: Batch update processed", self.name)
-            return processed_data
-
-        except ConfigEntryAuthFailed:
-            ...
-        except ClientResponseError:
-            ...
-        except Exception:
-            ...
-        finally:
-            self.batch_requests.clear()
-
-
-class SmartcarCoordinatorEntity(CoordinatorEntity[SmartcarVehicleCoordinator]):
-    def __init__(
-        self, coordinator: SmartcarVehicleCoordinator, description: EntityDescription
-    ):
-        super().__init__(coordinator)
-        self.vin = coordinator.vin
-        self.entity_description = description
-
-    async def async_update(self) -> None:
-        if not self.enabled:
-            return
-
-        self.coordinator.batch_sensor(self)
-
-        await super().async_update()
+            self.update_interval = interval

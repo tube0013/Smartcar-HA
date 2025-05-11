@@ -1,38 +1,60 @@
 {
+    "application_credentials": {
+        "description": "Follow the [instructions]({more_info_url}) to configure Smartcar for your vehicle:\n\n1. Go to [Applications]({oauth_creds_url}) and your application from the list.\n1. Choose **Configuration** from the side menu.\n1. Copy the **Client ID**.\n1. Regenerate and copy the the **Client Secret**.\n1. Add `{redirect_url}` under *Authorized redirect URI*."
+    },
     "config": {
         "step": {
-            "scopes": {
+            "pick_implementation": {
+                "title": "[%key:common::config_flow::title::oauth2_pick_implementation%]"
+              },
+              "reauth_confirm": {
+                "title": "[%key:common::config_flow::title::reauth%]",
+                "description": "The Smartcar integration needs to re-authenticate your account"
+              },
+              "scopes": {
+                "title": "Permission selection",
+                "description": "Select the permissions you would like to grant",
                 "data": {
-                    "read_odometer": "Retrieve total distance traveled",
-                    "read_location": "Access the vehicle's location",
-                    "read_battery": "Read EV battery data",
-                    "read_charge": "Read charging data",
-                    "read_security": "Read lock status",
-                    "read_engine_oil": "Read engine oil health",
-                    "read_tires": "Read tire status",
-                    "read_fuel": "Read fuel tank level",
-                    "read_climate": "Read climate settings",
-                    "read_alerts": "Read vehicle alerts",
-                    "read_charge_events": "Receive charging event notifications",
-                    "read_charge_locations": "Access previous charging locations",
-                    "read_charge_records": "Read charge records",
-                    "read_compass": "Read compass direction",
-                    "read_diagnostics": "Read vehicle diagnostics",
-                    "read_extended_vehicle_info": "Read vehicle configuration",
-                    "read_service_history": "Read service records",
-                    "read_speedometer": "Read vehicle speed",
-                    "read_thermometer": "Read temperatures",
-                    "read_user_profile": "Read user profile",
-                    "control_charge": "Control charging (Start/Stop, Set Limit)",
-                    "control_security": "Lock or unlock vehicle",
-                    "control_climate": "Control climate system",
-                    "control_navigation": "Send navigation destinations",
-                    "control_pin": "Modify PIN / PIN to Drive",
-                    "control_trunk": "Control trunk/frunk"
-                },
-                "title": "Scope selection",
-                "description": "Select the scopes you would like to enable"
+                    "read_odometer": "Get total distance traveled",
+                    "read_location": "Get the vehicle's location",
+                    "read_battery": "Get EV/PHEV battery level, capacity & current range",
+                    "read_charge": "Get details on whether the car is plugged in and charging",
+                    "read_security": "Get details on whether doors, windows & more are enabled",
+                    "read_engine_oil": "Get engine oil health",
+                    "read_tires": "Get tire pressure details",
+                    "read_fuel": "Get fuel tank level",
+                    "control_charge": "Control charging (start/stop & target charge)",
+                    "control_security": "Lock or unlock vehicle"
+                }
             }
+        },
+        "error": {
+            "no_scopes": "At least one scope needs to be selected"
+        },
+        "abort": {
+          "no_vehicles": "No vehicles were available to setup.",
+          "duplicate_vehicles": "Vehicles may only be set up once. The following VINs {vins} are already configured.",
+          "wrong_vehicles": "The vehicles must match the original selections. Choose the vehicles with VIN(s): {vins}.",
+          "oauth_error": "[%key:common::config_flow::abort::oauth2_error%]",
+          "oauth_timeout": "[%key:common::config_flow::abort::oauth2_timeout%]",
+          "missing_configuration": "[%key:common::config_flow::abort::oauth2_missing_configuration%]",
+          "missing_credentials": "[%key:common::config_flow::abort::oauth2_missing_credentials%]",
+          "authorize_url_timeout": "[%key:common::config_flow::abort::oauth2_authorize_url_timeout%]",
+          "no_url_available": "[%key:common::config_flow::abort::oauth2_no_url_available%]",
+          "user_rejected_authorize": "[%key:common::config_flow::abort::oauth2_user_rejected_authorize%]",
+          "oauth_unauthorized": "[%key:common::config_flow::abort::oauth2_unauthorized%]",
+          "oauth_failed": "[%key:common::config_flow::abort::oauth2_failed%]",
+          "already_configured": "[%key:common::config_flow::abort::already_configured_account%]",
+          "already_in_progress": "[%key:common::config_flow::abort::already_in_progress%]",
+          "reauth_successful": "[%key:common::config_flow::abort::reauth_successful%]",
+          "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
+          "invalid_access_token": "[%key:common::config_flow::error::invalid_access_token%]",
+          "unknown": "[%key:common::config_flow::error::unknown%]"
+        }
+    },
+    "exceptions": {
+        "batch_update_error": {
+          "message": "An error occurred while retrieving vehicle state from the Smartcar API: {error}"
         }
     }
 }

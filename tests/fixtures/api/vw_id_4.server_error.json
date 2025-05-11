@@ -1,0 +1,9 @@
+[
+    {
+        "method": "post",
+        "vehicle_path": "/batch",
+        "params": {},
+        "status": 500,
+        "response": null
+    }
+]

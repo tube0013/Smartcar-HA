@@ -1,0 +1,22 @@
+[
+    {
+        "method": "post",
+        "vehicle_path": "/batch",
+        "params": {},
+        "response": {
+            "responses": [
+                {
+                    "path": "/odometer",
+                    "code": 200,
+                    "headers": {
+                        "sc-data-age": "2019-10-24T00:43:46.000Z",
+                        "sc-unit-system": "imperial"
+                    },
+                    "body": {
+                        "distance": 37829
+                    }
+                }
+            ]
+        }
+    }
+]
