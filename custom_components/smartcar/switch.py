@@ -6,6 +6,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
+from .const import EntityDescriptionKey
 from .coordinator import SmartcarVehicleCoordinator
 from .entity import SmartcarEntity, SmartcarEntityDescription
 
@@ -19,7 +20,7 @@ class SmartcarSwitchDescription(SwitchEntityDescription, SmartcarEntityDescripti
 
 ENTITY_DESCRIPTIONS: tuple[SwitchEntityDescription, ...] = (
     SmartcarSwitchDescription(
-        key="charging",
+        key=EntityDescriptionKey.CHARGING,
         name="Charging",
         value_key_path="charge.state",
         value_cast=lambda value: value == "CHARGING",

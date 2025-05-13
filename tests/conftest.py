@@ -2,7 +2,7 @@
 
 import time
 from typing import Generator
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock, PropertyMock, patch
 
 from homeassistant.components.application_credentials import (
     ClientCredential,
@@ -21,9 +21,17 @@ from pytest_homeassistant_custom_component.test_util.aiohttp import (
 )
 
 from custom_components.smartcar.auth import AbstractAuth
-from custom_components.smartcar.const import DOMAIN, Scope
+from custom_components.smartcar.const import DOMAIN, EntityDescriptionKey, Scope
 
 from . import aioclient_mock_append_vehicle_request, setup_integration
+
+
+class AdvancedPropertyMock(PropertyMock):
+    def __get__(self, obj, obj_type=None):
+        return self(obj)
+
+    def __set__(self, obj, val):
+        self(obj, val)
 
 
 @pytest.fixture(autouse=True)
@@ -139,7 +147,10 @@ def mock_expires_at() -> int:
 
 @pytest.fixture
 def mock_config_entry(
-    expires_at: int, vehicle_attributes: dict, enabled_scopes: list[Scope]
+    expires_at: int,
+    vehicle_attributes: dict,
+    enabled_scopes: list[Scope],
+    enabled_entities: set[EntityDescriptionKey],
 ) -> MockConfigEntry:
     """Return the default mocked config entry for a single vehicle."""
     vehicle = dict(vehicle_attributes)
@@ -164,6 +175,47 @@ def mock_config_entry(
             },
         },
     )
+
+
+@pytest.fixture(name="enabled_entities")
+def mock_enabled_entities() -> set[EntityDescriptionKey]:
+    """Fixture to pre-enable entities.
+
+    To use, pair with the `mock_entity_registry_enabled_default` fixture and
+    extend the list prior to setting up the config entry."""
+    return set()
+
+
+@pytest.fixture(name="enable_all_entities")
+def mock_enable_all_entities(
+    enabled_entities: set[EntityDescriptionKey],
+    mock_entity_registry_enabled_default: AsyncMock,
+) -> None:
+    """Fixture to pre-enable all entity entities."""
+
+    enabled_entities.update(set(EntityDescriptionKey))
+
+
+@pytest.fixture(name="enable_specified_entities")
+def mock_enable_specified_entities(
+    enabled_entities: set[EntityDescriptionKey],
+    mock_entity_registry_enabled_default: AsyncMock,
+) -> None:
+    """Fixture to pre-enable entities specified in `enabled_entities` fixture."""
+
+
+@pytest.fixture
+def mock_entity_registry_enabled_default(
+    enabled_entities: list[str],
+) -> Generator[AsyncMock, None, None]:
+    with patch(
+        "custom_components.smartcar.entity.SmartcarEntityDescription.entity_registry_enabled_default",
+        new_callable=AdvancedPropertyMock,
+    ) as mock:
+        mock.side_effect = lambda entity_description, val=None: (
+            entity_description.key in enabled_entities if entity_description else ...
+        )
+        yield mock
 
 
 @pytest.fixture

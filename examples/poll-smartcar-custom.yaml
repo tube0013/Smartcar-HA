@@ -1,0 +1,70 @@
+alias: Poll Smartcar
+description: >
+  Poll Smartcar for battery state both shortly after arriving at home and also
+  every hour when not at home. Additionally, poll for all data once a day at
+  4pm.
+mode: single
+triggers:
+  - trigger: time_pattern
+    hours: "16"
+    id: update_all
+  - trigger: state
+    entity_id:
+    - person.akio_toyoda
+    to: home
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
+    id: update_battery
+    variables:
+      condition_precheck: is_daytime
+  - trigger: time_pattern
+    hours: "*"
+    id: update_battery
+    variables:
+      condition_precheck: not_home
+conditions:
+  - condition: template
+    value_template: >
+      {% if condition_precheck == 'is_daytime' %}
+        {{ now().hour >= 9 and now().hour < 21 }}
+      {% elif condition_precheck == 'not_home' %}
+        {{ is_state('person.akio_toyoda', 'not_home') }}
+      {% else %}
+        true
+      {% endif %}
+actions:
+  - choose:
+    - conditions:
+        - condition: trigger
+          id: update_battery
+      sequence:
+        - action: homeassistant.update_entity
+          data:
+            entity_id:
+              - sensor.volkswagen_id_4_battery
+              - sensor.volkswagen_id_4_range
+    - conditions:
+        - condition: trigger
+          id: update_all
+      sequence:
+        - action: homeassistant.update_entity
+          data:
+            entity_id:
+              - binary_sensor.volkswagen_id_4_charging_cable_plugged_in
+              - device_tracker.volkswagen_id_4_location
+              - lock.volkswagen_id_4_door_lock
+              - number.volkswagen_id_4_charge_limit
+              - sensor.volkswagen_id_4_battery
+              - sensor.volkswagen_id_4_battery_capacity
+              - sensor.volkswagen_id_4_charging_status
+              - sensor.volkswagen_id_4_engine_oil_life
+              - sensor.volkswagen_id_4_fuel
+              - sensor.volkswagen_id_4_odometer
+              - sensor.volkswagen_id_4_range
+              - sensor.volkswagen_id_4_tire_pressure_back_left
+              - sensor.volkswagen_id_4_tire_pressure_back_right
+              - sensor.volkswagen_id_4_tire_pressure_front_left
+              - sensor.volkswagen_id_4_tire_pressure_front_right
+              - switch.volkswagen_id_4_charging

@@ -22,6 +22,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.typing import StateType
 from homeassistant.util.unit_conversion import DistanceConverter, PressureConverter
 
+from .const import EntityDescriptionKey
 from .coordinator import SmartcarVehicleCoordinator
 from .entity import SmartcarEntity, SmartcarEntityDescription
 
@@ -35,7 +36,7 @@ class SmartcarSensorDescription(SensorEntityDescription, SmartcarEntityDescripti
 
 SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
     SmartcarSensorDescription(
-        key="battery_capacity",
+        key=EntityDescriptionKey.BATTERY_CAPACITY,
         name="Battery Capacity",
         value_key_path="battery_nominal_capacity.capacity.nominal",
         device_class=SensorDeviceClass.ENERGY_STORAGE,
@@ -43,7 +44,7 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
     ),
     SmartcarSensorDescription(
-        key="battery_level",
+        key=EntityDescriptionKey.BATTERY_LEVEL,
         name="Battery",
         value_key_path="battery.percentRemaining",
         value_cast=lambda pct: pct and round(pct * 100),
@@ -52,13 +53,13 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         native_unit_of_measurement=PERCENTAGE,
     ),
     SmartcarSensorDescription(
-        key="charging_state",
+        key=EntityDescriptionKey.CHARGING_STATE,
         name="Charging Status",
         value_key_path="charge.state",
         icon="mdi:ev-station",
     ),
     SmartcarSensorDescription(
-        key="engine_oil",
+        key=EntityDescriptionKey.ENGINE_OIL,
         name="Engine Oil Life",
         value_key_path="engine_oil.lifeRemaining",
         icon="mdi:oil-level",
@@ -66,7 +67,7 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         native_unit_of_measurement=PERCENTAGE,
     ),
     SmartcarSensorDescription(
-        key="fuel",
+        key=EntityDescriptionKey.FUEL,
         name="Fuel",
         value_key_path="fuel.amountRemaining",
         icon="mdi:gas-station",
@@ -77,7 +78,7 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         ),
     ),
     SmartcarSensorDescription(
-        key="odometer",
+        key=EntityDescriptionKey.ODOMETER,
         name="Odometer",
         value_key_path="odometer.distance",
         device_class=SensorDeviceClass.DISTANCE,
@@ -88,7 +89,7 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         ),
     ),
     SmartcarSensorDescription(
-        key="range",
+        key=EntityDescriptionKey.RANGE,
         name="Range",
         value_key_path="battery.range",
         icon="mdi:map-marker-distance",
@@ -100,7 +101,7 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         ),
     ),
     SmartcarSensorDescription(
-        key="tire_pressure_back_left",
+        key=EntityDescriptionKey.TIRE_PRESSURE_BACK_LEFT,
         name="Tire Pressure Back Left",
         value_key_path="tires_pressure.backLeft",
         device_class=SensorDeviceClass.PRESSURE,
@@ -112,7 +113,7 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         ),
     ),
     SmartcarSensorDescription(
-        key="tire_pressure_back_right",
+        key=EntityDescriptionKey.TIRE_PRESSURE_BACK_RIGHT,
         name="Tire Pressure Back Right",
         value_key_path="tires_pressure.backRight",
         device_class=SensorDeviceClass.PRESSURE,
@@ -124,7 +125,7 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         ),
     ),
     SmartcarSensorDescription(
-        key="tire_pressure_front_left",
+        key=EntityDescriptionKey.TIRE_PRESSURE_FRONT_LEFT,
         name="Tire Pressure Front Left",
         value_key_path="tires_pressure.frontLeft",
         device_class=SensorDeviceClass.PRESSURE,
@@ -136,7 +137,7 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         ),
     ),
     SmartcarSensorDescription(
-        key="tire_pressure_front_right",
+        key=EntityDescriptionKey.TIRE_PRESSURE_FRONT_RIGHT,
         name="Tire Pressure Front Right",
         value_key_path="tires_pressure.frontRight",
         device_class=SensorDeviceClass.PRESSURE,

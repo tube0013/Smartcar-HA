@@ -11,28 +11,11 @@ from homeassistant.helpers.update_coordinator import (
 )
 
 from .auth import AbstractAuth
-from .const import DOMAIN
+from .const import DOMAIN, EntityDescriptionKey
 
 _LOGGER = logging.getLogger(__name__)
 
-INTERVAL_CHARGING = timedelta(minutes=15)  # poll more often when charging
-INTERVAL_IDLE = timedelta(hours=4)  # poll less often when idle
-
-# fequests based on context/importance with keys matching entity keys
-BASE_REQUESTS = ["charging", "battery_level", "plug_status", "range"]
-CHARGING_REQUESTS = ["charge_limit"]
-IDLE_REQUESTS = [
-    "odometer",
-    "location",
-    "door_lock",
-    "battery_capacity",
-    "engine_oil",
-    "fuel",
-    "tire_pressure_back_left",
-    "tire_pressure_back_right",
-    "tire_pressure_front_left",
-    "tire_pressure_front_right",
-]
+UPDATE_INTERVAL = timedelta(hours=6)
 
 
 class EntityConfig:
@@ -45,31 +28,43 @@ class EntityConfig:
 
 
 ENTITY_CONFIG_MAP = {
-    "battery_capacity": EntityConfig("/battery/nominal_capacity", ["read_battery"]),
-    "battery_level": EntityConfig("/battery", ["read_battery"]),
-    "charge_limit": EntityConfig("/charge/limit", ["read_charge", "control_charge"]),
-    "charging": EntityConfig(  # for the switch
+    EntityDescriptionKey.BATTERY_CAPACITY: EntityConfig(
+        "/battery/nominal_capacity", ["read_battery"]
+    ),
+    EntityDescriptionKey.BATTERY_LEVEL: EntityConfig("/battery", ["read_battery"]),
+    EntityDescriptionKey.CHARGE_LIMIT: EntityConfig(
+        "/charge/limit", ["read_charge", "control_charge"]
+    ),
+    EntityDescriptionKey.CHARGING: EntityConfig(  # for the switch
         "/charge", ["read_charge", "control_charge"]
     ),
-    "charging_state": EntityConfig("/charge", ["read_charge"]),
-    "door_lock": EntityConfig("/security", ["read_security", "control_security"]),
-    "engine_oil": EntityConfig("/engine/oil", ["read_engine_oil"]),
-    "fuel": EntityConfig("/fuel", ["read_fuel"]),
-    "location": EntityConfig("/location", ["read_location"]),
-    "odometer": EntityConfig("/odometer", ["read_odometer"]),
-    "plug_status": EntityConfig("/charge", ["read_charge"]),
-    "range": EntityConfig("/battery", ["read_battery"]),
-    "tire_pressure_back_left": EntityConfig("/tires/pressure", ["read_tires"]),
-    "tire_pressure_back_right": EntityConfig("/tires/pressure", ["read_tires"]),
-    "tire_pressure_front_left": EntityConfig("/tires/pressure", ["read_tires"]),
-    "tire_pressure_front_right": EntityConfig("/tires/pressure", ["read_tires"]),
+    EntityDescriptionKey.CHARGING_STATE: EntityConfig("/charge", ["read_charge"]),
+    EntityDescriptionKey.DOOR_LOCK: EntityConfig(
+        "/security", ["read_security", "control_security"]
+    ),
+    EntityDescriptionKey.ENGINE_OIL: EntityConfig("/engine/oil", ["read_engine_oil"]),
+    EntityDescriptionKey.FUEL: EntityConfig("/fuel", ["read_fuel"]),
+    EntityDescriptionKey.LOCATION: EntityConfig("/location", ["read_location"]),
+    EntityDescriptionKey.ODOMETER: EntityConfig("/odometer", ["read_odometer"]),
+    EntityDescriptionKey.PLUG_STATUS: EntityConfig("/charge", ["read_charge"]),
+    EntityDescriptionKey.RANGE: EntityConfig("/battery", ["read_battery"]),
+    EntityDescriptionKey.TIRE_PRESSURE_BACK_LEFT: EntityConfig(
+        "/tires/pressure", ["read_tires"]
+    ),
+    EntityDescriptionKey.TIRE_PRESSURE_BACK_RIGHT: EntityConfig(
+        "/tires/pressure", ["read_tires"]
+    ),
+    EntityDescriptionKey.TIRE_PRESSURE_FRONT_LEFT: EntityConfig(
+        "/tires/pressure", ["read_tires"]
+    ),
+    EntityDescriptionKey.TIRE_PRESSURE_FRONT_RIGHT: EntityConfig(
+        "/tires/pressure", ["read_tires"]
+    ),
 }
 
 
 class SmartcarVehicleCoordinator(DataUpdateCoordinator):
     """Coordinates updates with selective batch paths and dynamic interval."""
-
-    update_interval: timedelta
 
     def __init__(
         self,
@@ -84,20 +79,16 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
         self.vehicle_id = vehicle_id
         self.vin = vin
         self.entry = entry
-        self.batch_requests: set[str] = set()
+        self.batch_requests: set[EntityDescriptionKey] = set()
 
         super().__init__(
             hass,
             _LOGGER,
             name=f"{DOMAIN}_{vin}",
-            update_interval=INTERVAL_IDLE,
+            update_interval=UPDATE_INTERVAL,
         )
 
-        _LOGGER.debug(
-            f"Coordinator {self.name}: Initialized with interval {INTERVAL_IDLE}"
-        )
-
-    def is_scope_enabled(self, sensor_key: str, verbose=False):
+    def is_scope_enabled(self, sensor_key: EntityDescriptionKey, verbose=False):
         token_scopes = self.config_entry.data.get("token", {}).get("scopes", [])
         required_scopes = ENTITY_CONFIG_MAP[sensor_key].required_scopes
         missing = [scope for scope in required_scopes if scope not in token_scopes]
@@ -115,7 +106,7 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
         """Mark a sensor to be included in the next update batch."""
         self._batch_add(sensor.entity_description.key)
 
-    def _batch_add(self, key: str):
+    def _batch_add(self, key: EntityDescriptionKey):
         """Mark data as needing to be fetched in the next update batch."""
 
         assert self.is_scope_enabled(key)
@@ -136,30 +127,16 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
           (enabled) entities when Home Assistant starts or the config entry is
           reloaded.
 
-        When polling is enabled and there have been no explicit update requests:
-
-        - BASE_REQUESTS will always be added.
-        - CHARGING_REQUESTS will be added when charging
-        - IDLE_REQUESTS will be added when not charging
-
-        The resulting list is filtered to only include keys that are associated
-        with entities that are active (not marked as disabled) in the entity
-        registry. (Note: this means that during config entry setup, platform
-        initialization needs to occur before the first refresh or the entity
-        registry will be empty.)
+        When polling is enabled and there have been no explicit update
+        requests, requests will be added to the batch for all entities that are
+        active (not marked as disabled) in the entity registry. (Note: this
+        means that during config entry setup, platform initialization needs to
+        occur before the first refresh or the entity registry will be empty.)
         """
         if self.batch_requests:
             return
         if self.config_entry.pref_disable_polling:
             return
-
-        requests = []
-        current_data = self.data or {}
-        charge_data = current_data.get("charge", {})
-        is_charging = charge_data.get("state") == "CHARGING"
-
-        requests.extend(BASE_REQUESTS)
-        requests.extend(CHARGING_REQUESTS if is_charging else IDLE_REQUESTS)
 
         entities: list[er.RegistryEntry] = er.async_entries_for_config_entry(
             er.async_get(self.hass), self.config_entry.entry_id
@@ -167,16 +144,16 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
 
         for entity in entities:
             vin, key = entity.unique_id.split("_", 1)
-            if key in requests and not entity.disabled:
+            if not entity.disabled:
                 self._batch_add(key)
 
-    def _batch_proccess(self) -> list[str]:
+    def _batch_proccess(self) -> list[EntityDescriptionKey]:
         """
         Process a batch of paths to request.
         """
         self._batch_add_defaults()
 
-        result: list[str] = list(self.batch_requests)
+        result: list[EntityDescriptionKey] = list(self.batch_requests)
 
         self.batch_requests.clear()
 
@@ -211,8 +188,6 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
 
         merged_data = self._merge_batch_data(response_data)
 
-        self._adjust_update_interval(merged_data)
-
         return merged_data
 
     def _merge_batch_data(self, batch_data):
@@ -239,15 +214,3 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
         _LOGGER.debug(f"Coordinator {self.name}: Batch update processed")
 
         return updated_data
-
-    def _adjust_update_interval(self, updated_data):
-        """Adjust the update interval based on charging state."""
-
-        is_charging = updated_data.get("charge", {}).get("state") == "CHARGING"
-        interval = INTERVAL_CHARGING if is_charging else INTERVAL_IDLE
-
-        if interval != self.update_interval:
-            _LOGGER.info(
-                f"Coordinator {self.name}: Setting update interval to {interval}",
-            )
-            self.update_interval = interval
