@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+echo "Installing development dependencies..."
+uv pip install -r requirements.test.txt --upgrade

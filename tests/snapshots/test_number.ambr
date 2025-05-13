@@ -1,0 +1,65 @@
+# serializer version: 1
+# name: test_charging_limit[unknown_make-200-success-90-90-NoneType-1]
+  list([
+    tuple(
+      'post',
+      URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/charge/limit'),
+      dict({
+        'limit': 0.9,
+      }),
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+  ])
+# ---
+# name: test_charging_limit[unknown_make-401-unauthroized-90-80-NoneType-1]
+  list([
+    tuple(
+      'post',
+      URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/charge/limit'),
+      dict({
+        'limit': 0.9,
+      }),
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+  ])
+# ---
+# name: test_charging_limit[unknown_make-409-unreachable-90-80-NoneType-1]
+  list([
+    tuple(
+      'post',
+      URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/charge/limit'),
+      dict({
+        'limit': 0.9,
+      }),
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+  ])
+# ---
+# name: test_charging_limit[unknown_make-500-server-90-80-ClientResponseError-1]
+  list([
+    tuple(
+      'post',
+      URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/charge/limit'),
+      dict({
+        'limit': 0.9,
+      }),
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+  ])
+# ---
+# name: test_charging_limit[unknown_make-None-None-110-80-ServiceValidationError-0]
+  list([
+  ])
+# ---
+# name: test_charging_limit[unknown_make-None-None-40-80-ServiceValidationError-0]
+  list([
+  ])
+# ---

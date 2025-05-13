@@ -1,0 +1,10 @@
+[
+    {
+        "method": "post",
+        "vehicle_path": "/batch",
+        "params": {},
+        "response": {
+            "status": "contact the front desk to activate your wifi"
+        }
+    }
+]

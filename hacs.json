@@ -1,7 +1,4 @@
 {
-    "name": "Smartcar",
-    "content_in_root": false,
-    "render_readme": true,
-    "domains": ["sensor", "switch", "lock", "device_tracker", "binary_sensor", "number"],
-    "iot_class": "cloud_polling"
-  }
+  "name": "Smartcar",
+  "render_readme": true
+}

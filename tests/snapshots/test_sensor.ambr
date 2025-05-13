@@ -1,0 +1,415 @@
+# serializer version: 1
+# name: test_limited_scopes[enabled_scopes0-vw_id_4][sensor.vw_id_4_battery-api-battery-request]
+  tuple(
+    'post',
+    URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/batch'),
+    dict({
+      'requests': list([
+        dict({
+          'path': '/battery',
+        }),
+        dict({
+          'path': '/battery/nominal_capacity',
+        }),
+      ]),
+    }),
+    dict({
+      'authorization': 'Bearer mock-token',
+    }),
+  )
+# ---
+# name: test_limited_scopes[enabled_scopes0-vw_id_4][sensor.vw_id_4_battery-registry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.vw_id_4_battery',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <SensorDeviceClass.BATTERY: 'battery'>,
+    'original_icon': None,
+    'original_name': 'Battery',
+    'platform': 'smartcar',
+    'previous_unique_id': None,
+    'supported_features': 0,
+    'translation_key': None,
+    'unique_id': 'VIWP1AB29P15LA85784N_battery_level',
+    'unit_of_measurement': '%',
+  })
+# ---
+# name: test_limited_scopes[enabled_scopes0-vw_id_4][sensor.vw_id_4_battery]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'battery',
+      'friendly_name': 'VW ID.4 Battery',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_battery',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '68',
+  })
+# ---
+# name: test_polling_updates[vw_id_4][sensor.vw_id_4_odometer-api-batch-without-odometer-request-while-charging]
+  tuple(
+    'post',
+    URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/batch'),
+    dict({
+      'requests': list([
+        dict({
+          'path': '/battery',
+        }),
+        dict({
+          'path': '/charge',
+        }),
+        dict({
+          'path': '/charge/limit',
+        }),
+      ]),
+    }),
+    dict({
+      'authorization': 'Bearer mock-token',
+    }),
+  )
+# ---
+# name: test_polling_updates[vw_id_4][sensor.vw_id_4_odometer-api-batch-without-odometer-request]
+  tuple(
+    'post',
+    URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/batch'),
+    dict({
+      'requests': list([
+        dict({
+          'path': '/battery',
+        }),
+        dict({
+          'path': '/battery/nominal_capacity',
+        }),
+        dict({
+          'path': '/charge',
+        }),
+        dict({
+          'path': '/engine/oil',
+        }),
+        dict({
+          'path': '/fuel',
+        }),
+        dict({
+          'path': '/location',
+        }),
+        dict({
+          'path': '/security',
+        }),
+        dict({
+          'path': '/tires/pressure',
+        }),
+      ]),
+    }),
+    dict({
+      'authorization': 'Bearer mock-token',
+    }),
+  )
+# ---
+# name: test_polling_updates[vw_id_4][sensor.vw_id_4_odometer-api-full-batch-request]
+  tuple(
+    'post',
+    URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/batch'),
+    dict({
+      'requests': list([
+        dict({
+          'path': '/battery',
+        }),
+        dict({
+          'path': '/battery/nominal_capacity',
+        }),
+        dict({
+          'path': '/charge',
+        }),
+        dict({
+          'path': '/engine/oil',
+        }),
+        dict({
+          'path': '/fuel',
+        }),
+        dict({
+          'path': '/location',
+        }),
+        dict({
+          'path': '/odometer',
+        }),
+        dict({
+          'path': '/security',
+        }),
+        dict({
+          'path': '/tires/pressure',
+        }),
+      ]),
+    }),
+    dict({
+      'authorization': 'Bearer mock-token',
+    }),
+  )
+# ---
+# name: test_polling_updates[vw_id_4][sensor.vw_id_4_odometer-api-odometer-request]
+  tuple(
+    'post',
+    URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/batch'),
+    dict({
+      'requests': list([
+        dict({
+          'path': '/odometer',
+        }),
+      ]),
+    }),
+    dict({
+      'authorization': 'Bearer mock-token',
+    }),
+  )
+# ---
+# name: test_polling_updates[vw_id_4][sensor.vw_id_4_odometer-registry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.vw_id_4_odometer',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <SensorDeviceClass.DISTANCE: 'distance'>,
+    'original_icon': None,
+    'original_name': 'Odometer',
+    'platform': 'smartcar',
+    'previous_unique_id': None,
+    'supported_features': 0,
+    'translation_key': None,
+    'unique_id': 'VIWP1AB29P15LA85784N_odometer',
+    'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+  })
+# ---
+# name: test_polling_updates[vw_id_4][sensor.vw_id_4_odometer]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'distance',
+      'friendly_name': 'VW ID.4 Odometer',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_odometer',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '21919',
+  })
+# ---
+# name: test_unit_conversion[imperial-vw_id_4][sensor.vw_id_4_odometer-api-full-batch-request]
+  tuple(
+    'post',
+    URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/batch'),
+    dict({
+      'requests': list([
+        dict({
+          'path': '/battery',
+        }),
+        dict({
+          'path': '/battery/nominal_capacity',
+        }),
+        dict({
+          'path': '/charge',
+        }),
+        dict({
+          'path': '/engine/oil',
+        }),
+        dict({
+          'path': '/fuel',
+        }),
+        dict({
+          'path': '/location',
+        }),
+        dict({
+          'path': '/odometer',
+        }),
+        dict({
+          'path': '/security',
+        }),
+        dict({
+          'path': '/tires/pressure',
+        }),
+      ]),
+    }),
+    dict({
+      'authorization': 'Bearer mock-token',
+    }),
+  )
+# ---
+# name: test_unit_conversion[imperial-vw_id_4][sensor.vw_id_4_odometer-api-odometer-request]
+  tuple(
+    'post',
+    URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/batch'),
+    dict({
+      'requests': list([
+        dict({
+          'path': '/odometer',
+        }),
+      ]),
+    }),
+    dict({
+      'authorization': 'Bearer mock-token',
+    }),
+  )
+# ---
+# name: test_unit_conversion[imperial-vw_id_4][sensor.vw_id_4_odometer-registry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.vw_id_4_odometer',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <SensorDeviceClass.DISTANCE: 'distance'>,
+    'original_icon': None,
+    'original_name': 'Odometer',
+    'platform': 'smartcar',
+    'previous_unique_id': None,
+    'supported_features': 0,
+    'translation_key': None,
+    'unique_id': 'VIWP1AB29P15LA85784N_odometer',
+    'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+  })
+# ---
+# name: test_unit_conversion[imperial-vw_id_4][sensor.vw_id_4_odometer]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'distance',
+      'friendly_name': 'VW ID.4 Odometer',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_odometer',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '60879.874176',
+  })
+# ---
+# name: test_update_with_polling_disabled[vw_id_4][sensor.vw_id_4_odometer-api-odometer-request]
+  tuple(
+    'post',
+    URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/batch'),
+    dict({
+      'requests': list([
+        dict({
+          'path': '/odometer',
+        }),
+      ]),
+    }),
+    dict({
+      'authorization': 'Bearer mock-token',
+    }),
+  )
+# ---
+# name: test_update_with_polling_disabled[vw_id_4][sensor.vw_id_4_odometer-registry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.vw_id_4_odometer',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <SensorDeviceClass.DISTANCE: 'distance'>,
+    'original_icon': None,
+    'original_name': 'Odometer',
+    'platform': 'smartcar',
+    'previous_unique_id': None,
+    'supported_features': 0,
+    'translation_key': None,
+    'unique_id': 'VIWP1AB29P15LA85784N_odometer',
+    'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+  })
+# ---
+# name: test_update_with_polling_disabled[vw_id_4][sensor.vw_id_4_odometer]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'distance',
+      'friendly_name': 'VW ID.4 Odometer',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_odometer',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---

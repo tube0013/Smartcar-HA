@@ -1,6 +1,6 @@
 # Smartcar Integration for Home Assistant
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)  
 Connect your compatible vehicle to Home Assistant using the [Smartcar API](https://smartcar.com/).
 
 This integration provides various sensors and controls for vehicles linked through the Smartcar platform, allowing you to monitor and interact with your car directly within Home Assistant.
@@ -8,7 +8,8 @@ This integration provides various sensors and controls for vehicles linked throu
 **Note:** This integration relies on the Smartcar service. Availability of specific features depends on your vehicle's make, model, year, your Smartcar account plan (especially API rate limits), and the permissions granted during authentication.
 
 <img src="images/device_page.png" alt="Example Device Page Screenshot" width="600"/>
-*(Example showing entities for a Volkswagen ID.4)*
+
+_Example showing entities for a Volkswagen ID.4_
 
 ## Features
 
@@ -18,21 +19,21 @@ Provides the following entities for each connected vehicle (subject to vehicle c
     * Location (GPS)
 * **Sensors:**
     * Odometer
-    * Battery Level (%)
+    * Battery Level (percentage)
     * Estimated Range
     * Battery Capacity (kWh)
     * Charging Status (Charging, Not Charging, Fully Charged)
-    * Engine Oil Life (%) (*If supported*)
-    * Tire Pressures (*If supported*)
-    * Fuel Level / Range (*If supported*)
+    * Engine Oil Life (percentage) *(if supported)*
+    * Tire Pressures *(if supported)*
+    * Fuel Level / Range *(if supported)*
 * **Binary Sensors:**
     * Charging Cable Plugged In
 * **Switches:**
     * Start/Stop Charging
-* * **Number:**
-    * Set Charge Limit (%)
+* **Number:**
+    * Set Charge Limit (percentage)
 * **Locks:**
-    * Door Lock/Unlock (*Note: Known compatibility issues with some models, e.g., VW ID.4 2023+ seems unsupported via API*)
+    * Door Lock/Unlock *(note: known compatibility issues with some models, e.g., VW ID.4 2023+ does not have this functionality)*
 
 ## Prerequisites
 
@@ -40,27 +41,9 @@ Provides the following entities for each connected vehicle (subject to vehicle c
 2.  **Smartcar Developer Account:** You need a free developer account from Smartcar.
     * Go to [developer.smartcar.com](https://developer.smartcar.com/) and sign up.
     * Log in to your Developer Dashboard.
-3.  **Create a Smartcar Application:**
-    * In the dashboard, go to "Applications" and click "Register a new application".
-    * Give your application a name (e.g., "Home Assistant Connect").
-    * **Crucially, set the "Redirect URIs".** You need to add **exactly** the URI your Home Assistant instance uses for OAuth callbacks.
-        *  **My Home Assistant will work by default**, the URI is: `https://my.home-assistant.io/redirect/oauth`
-        * Add **only** the correct URI for your setup.
-    * Select the **Permissions (Scopes)** you want Home Assistant to be able to access. To enable all entities in this integration, select all relevant scopes like:
-        * `read_vehicle_info`, `read_vin`
-        * `read_odometer`, `read_location`
-        * `read_battery`, `read_charge`
-        * `control_charge`
-        * `read_security`, `control_security`
-        * `read_tires`, `read_engine_oil`, `read_fuel` (these may not work depending on car support)
-        * *Select any other scopes corresponding to features you want.*
-    * Choose the **Mode** (usually "Live" for real vehicles, "Test" or "Simulated" might work for testing if you don't have a compatible car linked yet).
-    * Save the application.
-4.  **Get Credentials:**
-    * Once the application is created, go to its settings page on the Smartcar dashboard.
-    * Find your **Client ID** and **Client Secret**. You will need these for the Home Assistant configuration.
-    * **Keep your Client Secret secure!**
-5.  **Link Your Vehicle (If needed for testing):** If using Live mode, ensure your actual vehicle's connected services account (e.g., your VW, Ford, Tesla account) is linked or ready to be linked via the Smartcar flow. For Test/Simulated mode, follow Smartcar's instructions.
+3.  **Ensure a Smartcar Application exists:**
+    * In the dashboard, go to "Applications" and ensure an application was automatically created for you.
+    * Rename your application if you want to (e.g., "Home Assistant Connect").
 
 ## Installation
 
@@ -68,7 +51,7 @@ Provides the following entities for each connected vehicle (subject to vehicle c
 
 1.  Ensure [HACS (Home Assistant Community Store)](https://hacs.xyz/) is installed.
 2.  Go to HACS -> Integrations -> Click the three dots (⋮) in the top right -> Custom Repositories.
-3.  Enter the URL of this GitHub repository (`https://github.com/tube0013/Smartcar-HA`) in the "Repository" field.
+3.  Enter the URL of this GitHub repository, `https://github.com/tube0013/Smartcar-HA`, in the "Repository" field.
 4.  Select "Integration" as the category.
 5.  Click "Add".
 6.  The "Smartcar" integration should now appear in the HACS list. Click on it and then click "Download".
@@ -82,47 +65,89 @@ Provides the following entities for each connected vehicle (subject to vehicle c
 3.  Copy the `custom_components/smartcar/` directory into your Home Assistant `<config>/custom_components/` directory. Create `custom_components` if it doesn't exist.
 4.  **Restart Home Assistant** (Settings -> System -> Restart).
 
-## Configuration
+## Setup
 
 Configuration is done via the Home Assistant UI after installation.
 
-1.  **Add Application Credentials:**
-    * Go to **Settings > Devices & Services > Application Credentials** (If you don't see this, ensure "Advanced Mode" is enabled in your Home Assistant User Profile).
-    * Click **+ Add Application Credential**.
-    * Select **Smartcar** from the list.
-    * Enter your **Client ID** and **Client Secret** obtained from the Smartcar Developer Dashboard.
-    * Click **Save**.
+1. Navigate to "Settings" &rarr; "Devices & Services"
+1. Click "+ Add Integration"
+1. Search for and select &rarr; "Smartcar"
 
-2.  **Add Smartcar Integration:**
-    * Go to **Settings > Devices & Services**.
-    * Click **+ Add Integration**.
-    * Search for **Smartcar** and select it.
-    * A configuration window will appear. It should automatically detect your saved Application Credentials. Click **Submit**.
+Or you can use the My Home Assistant Button below.
 
-3.  **Smartcar Authorization:**
-    * You will be redirected to the Smartcar website (or a new tab will open).
-    * Log in using the credentials for your **vehicle's connected services account** (e.g., your Volkswagen ID, FordPass account, Tesla account), **NOT** your Smartcar developer account credentials.
-    * Review the permissions requested by Home Assistant (these should match the scopes you selected when creating the Smartcar application).
-    * **Grant access** to allow Home Assistant to connect to your vehicle(s) via Smartcar.
-    * You should be redirected back to Home Assistant.
+[![Add Integration](https://my.home-assistant.io/badges/config_flow_start.svg)][config-flow-start]
 
-4.  **Success:** If successful, the integration will be added, and Home Assistant will create devices and entities for your connected vehicle(s).
+Follow the instructions to configure the integration.
+
+### Configuration Flow
+
+#### Authorization Data Entry
+
+1. Choose a name for your credentials and enter the **Client ID** and **Client Secret** which can be found in the [Smartcar dashboard](https://dashboard.smartcar.com/team/applications).
+1. **Crucially, set the "Redirect URIs"** in the Smartcar settings for your application. You need to add **exactly** the URI your Home Assistant instance uses for OAuth callbacks.
+    *  Most users will simply use the **My Home Assistant** URI: `https://my.home-assistant.io/redirect/oauth`
+        > Note: This is not a placeholder. It is the URI that must be used unless you’ve disabled or removed the `default_config:` line from your configuration and disabled the [My Home Assistant Integration](https://www.home-assistant.io/integrations/my/).
+    * Add **only** the correct URI for your setup.
+1. Continue to the next step.
+1. Select the **Permissions** you want Home Assistant to be able to access. To enable all entities in this integration, select all relevant permissions:
+
+    * Get total distance traveled
+    * Get the vehicle's location
+    * Get EV/PHEV battery level, capacity & current range
+    * Get details on whether the car is plugged in and charging
+    * Get details on whether doors, windows & more are enabled
+    * Get engine oil health*
+    * Get tire pressure details*
+    * Get fuel tank level*
+    * Control charging (start/stop & target charge)
+    * Lock or unlock vehicle
+
+    \* _These may not work depending on car support_
+
+1. Continue to the [next section](#authorization-via-smartcar-connect) which explains the steps to authorize your vehicle via [Smartcar connect](https://smartcar.com/docs/connect/what-is-connect).
+
+#### Authorization via Smartcar Connect
+
+1. You will be redirected to the Smartcar website (or a new tab will open).
+1. Log in using the credentials for your **vehicle's connected services account** (e.g., your Volkswagen ID, FordPass account, Tesla account), **NOT** your Smartcar developer account credentials.
+1. Review the permissions requested by Home Assistant (these should match the scopes you selected when creating the Smartcar application).
+1. **Grant access** to allow Home Assistant to connect to your vehicle(s) via Smartcar.
+1. You should be redirected back to Home Assistant.
+
+#### Setup Complete
+
+If successful, the integration will be added, and Home Assistant will create devices and entities for your connected vehicle(s).
 
 ## Rate Limits & Polling
 
 * Smartcar's free developer tier typically has a limit of **500 API calls per vehicle per month**. Exceeding this may incur costs or stop the integration from working.
 * This integration uses a **batch endpoint** to retrieve multiple data points in a single API call to minimize usage.
-* It also uses **dynamic polling intervals:**
+* By default, it uses **dynamic polling intervals** and only fetches data required for enabled entities:
     * When the vehicle is detected as **CHARGING**: Updates every **30 minutes** (configurable in `coordinator.py`).
     * When the vehicle is **IDLE/NOT CHARGING**: Updates every **6 hours** (configurable in `coordinator.py`).
+    * Feel free to disable any entities you do not use to reduce API requests as well.
+* Polling can be [customized as well](#customized-polling).
 * This helps significantly reduce API calls while providing more frequent updates during important events (charging).
+
+### Customized Polling
+
+To customize polling, you can disable polling on the integration and write your own automation.
+
+* First, configure the integration as described above.
+* Go to _Settings_ &rarr; _Integartions_ (under _Devices & services_) &rarr; _Smartcar_
+* Click the three dots to the right of the integration.
+* Choose _System options_.
+* Disable _Enable polling for changes_ and then click _Save_.
+* Create an automation using [`homeassistant.update_entity`](https://www.home-assistant.io/integrations/homeassistant/#action-homeassistantupdate_entity) to refresh the desired value(s). An example is provided at [`examples/poll-smartcar-automation.yaml`](examples/poll-smartcar-automation.yaml).
 
 ## Known Issues / Limitations
 
-* **Vehicle Compatibility:** Not all features are supported by all vehicle makes/models/years via the Smartcar API. Entities for unsupported features (e.g., Lock control for VW ID.4 2023+) will not be created. Check the Smartcar compatibility details for your specific vehicle.
+* **Vehicle Compatibility:** Not all features are supported by all vehicle makes/models/years via the Smartcar API. Entities for unsupported features (e.g., Lock control for VW ID.4 2023+) may or may not be created. Check the Smartcar compatibility details for your specific vehicle.
 * **API Latency:** There can be significant delays (seconds to minutes) between sending a command (e.g., start charging) and the vehicle executing/reporting the change back through the API. The state in Home Assistant will update after the next successful data poll.
 * **Rate Limits:** Be mindful of the 500 calls/vehicle/month limit on the free tier.
 
 ## Support / Issues
 
 Please report any issues you find with this integration by opening an issue on the [GitHub Issues page](https://github.com/tube0013/Smartcar-HA/issues).
+
+[config-flow-start]: https://my.home-assistant.io/redirect/config_flow_start/?domain=smartcar

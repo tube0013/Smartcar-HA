@@ -1,0 +1,20 @@
+alias: Poll Smartcar
+description: >
+  Poll Smartcar every hour from 9am to 9pm for just the battery and range.
+
+  These sensors are obtained from the same API endpoint, so this results in 12
+  API requests every day or 360 each month.
+mode: single
+triggers:
+  - trigger: time_pattern
+    hours: "*"
+conditions:
+  - condition: time
+    after: "09:00:00"
+    before: "21:00:00"
+actions:
+  - action: homeassistant.update_entity
+    data:
+      entity_id:
+        - sensor.volkswagen_id_4_battery
+        - sensor.volkswagen_id_4_range

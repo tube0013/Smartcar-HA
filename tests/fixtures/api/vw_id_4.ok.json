@@ -1,0 +1,152 @@
+[
+    {
+        "method": "post",
+        "vehicle_path": "/batch",
+        "params": {},
+        "response": {
+            "responses": [
+                {
+                    "path": "/battery",
+                    "code": 200,
+                    "body": {
+                        "range": 275,
+                        "percentRemaining": 0.68
+                    },
+                    "headers": {
+                        "sc-fetched-at": "2025-05-09T17:27:26.712Z",
+                        "sc-data-age": "2025-05-09T15:40:57.000Z",
+                        "sc-unit-system": "metric"
+                    }
+                },
+                {
+                    "path": "/battery/nominal_capacity",
+                    "code": 200,
+                    "body": {
+                        "availableCapacities": [
+                            {
+                                "capacity": 82,
+                                "description": null
+                            }
+                        ],
+                        "capacity": {
+                            "nominal": 82,
+                            "source": "SMARTCAR"
+                        },
+                        "url": null
+                    },
+                    "headers": {
+                        "sc-fetched-at": "2025-05-09T17:27:25.114Z",
+                        "sc-data-age": "2025-05-09T17:27:25.114Z"
+                    }
+                },
+                {
+                    "path": "/charge",
+                    "code": 200,
+                    "body": {
+                        "state": "NOT_CHARGING",
+                        "isPluggedIn": false
+                    },
+                    "headers": {
+                        "sc-fetched-at": "2025-05-09T17:27:26.712Z",
+                        "sc-data-age": "2025-05-09T15:40:57.000Z"
+                    }
+                },
+                {
+                    "path": "/charge/limit",
+                    "code": 200,
+                    "body": {
+                        "limit": 1
+                    },
+                    "headers": {
+                        "sc-fetched-at": "2025-05-09T17:27:26.712Z",
+                        "sc-data-age": "2025-05-09T15:40:55.000Z"
+                    }
+                },
+                {
+                    "path": "/engine/oil",
+                    "code": 403,
+                    "body": {
+                        "statusCode": 403,
+                        "type": "PERMISSION",
+                        "code": null,
+                        "description": "Your application has insufficient permissions to access the requested resource. Please prompt the user to re-authenticate using Smartcar Connect.",
+                        "docURL": "https://smartcar.com/docs/errors/api-errors/permission-errors#null",
+                        "resolution": {
+                            "type": "REAUTHENTICATE"
+                        },
+                        "requestId": "1ae8a91d-4898-4f4a-ba08-d20aff3759ca"
+                    }
+                },
+                {
+                    "path": "/fuel",
+                    "code": 403,
+                    "body": {
+                        "statusCode": 403,
+                        "type": "PERMISSION",
+                        "code": null,
+                        "description": "Your application has insufficient permissions to access the requested resource. Please prompt the user to re-authenticate using Smartcar Connect.",
+                        "docURL": "https://smartcar.com/docs/errors/api-errors/permission-errors#null",
+                        "resolution": {
+                            "type": "REAUTHENTICATE"
+                        },
+                        "requestId": "1ae8a91d-4898-4f4a-ba08-d20aff3759ca"
+                    }
+                },
+                {
+                    "path": "/location",
+                    "code": 200,
+                    "body": {
+                        "latitude": 37.4292,
+                        "longitude": 122.1381
+                    },
+                    "headers": {
+                        "sc-fetched-at": "2025-05-09T17:27:25.401Z",
+                        "sc-data-age": "2025-05-09T15:40:52.000Z"
+                    }
+                },
+                {
+                    "path": "/odometer",
+                    "code": 200,
+                    "body": {
+                        "distance": 21919
+                    },
+                    "headers": {
+                        "sc-fetched-at": "2025-05-09T17:27:25.401Z",
+                        "sc-data-age": "2025-05-09T15:40:52.000Z",
+                        "sc-unit-system": "metric"
+                    }
+                },
+                {
+                    "path": "/security",
+                    "code": 403,
+                    "body": {
+                        "statusCode": 403,
+                        "type": "PERMISSION",
+                        "code": null,
+                        "description": "Your application has insufficient permissions to access the requested resource. Please prompt the user to re-authenticate using Smartcar Connect.",
+                        "docURL": "https://smartcar.com/docs/errors/api-errors/permission-errors#null",
+                        "resolution": {
+                            "type": "REAUTHENTICATE"
+                        },
+                        "requestId": "1ae8a91d-4898-4f4a-ba08-d20aff3759ca"
+                    }
+                },
+                {
+                    "path": "/tires/pressure",
+                    "code": 403,
+                    "body": {
+                        "statusCode": 403,
+                        "type": "PERMISSION",
+                        "code": null,
+                        "description": "Your application has insufficient permissions to access the requested resource. Please prompt the user to re-authenticate using Smartcar Connect.",
+                        "docURL": "https://smartcar.com/docs/errors/api-errors/permission-errors#null",
+                        "resolution": {
+                            "type": "REAUTHENTICATE"
+                        },
+                        "requestId": "1ae8a91d-4898-4f4a-ba08-d20aff3759ca"
+                    }
+                }
+            ]
+        }
+    }
+]
