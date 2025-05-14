@@ -37,7 +37,7 @@ Provides the following entities for each connected vehicle (subject to vehicle c
 
 ## Prerequisites
 
-1.  **Compatible Vehicle:** Your car must be compatible with Smartcar. Check compatibility [here](https://smartcar.com/product/compatible-vehicles).
+1.  **Compatible Vehicle:** Your car must be [compatible with Smartcar](https://smartcar.com/product/compatible-vehicles) and the API must also be [supported in your country](https://smartcar.com/global).
 2.  **Smartcar Developer Account:** You need a free developer account from Smartcar.
     * Go to [developer.smartcar.com](https://developer.smartcar.com/) and sign up.
     * Log in to your Developer Dashboard.
