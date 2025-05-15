@@ -6,7 +6,7 @@
     "@wbyoung"
   ],
   "config_flow": true,
-  "dependencies": [],
+  "dependencies": ["application_credentials"],
   "documentation": "https://github.com/tube0013/smartcar",
   "homekit": {},
   "iot_class": "cloud_polling",
