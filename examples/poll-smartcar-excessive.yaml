@@ -1,0 +1,65 @@
+alias: Poll Smartcar
+description: >
+  Poll Smartcar from every four hours from 9am to 9pm for most entities and
+  every 15 minutes when charging with a reduced set of entities.
+
+  This results in 9 API requests every 4 hours during a 12 hour window or 27
+  API requests per day minimum or 830 per month if all entities are enabled.
+
+  It could, however, also make 3 API requests every 15 minutes while charging.
+  Assuming your car charges for about 2 hours ever day, this is an additional
+  24 requests per day, buut it could be more.
+
+  To bring this within the free tier limits, you could:
+
+  - Disable entities you do not use
+  - Remove them from the updates being made below
+  - Change the frequency of updates
+mode: single
+triggers:
+  - trigger: time_pattern
+    hours: /4
+    variables:
+      update_if: 'idle'
+      update_entities:
+        - binary_sensor.volkswagen_id_4_charging_cable_plugged_in
+        - device_tracker.volkswagen_id_4_location
+        - lock.volkswagen_id_4_door_lock
+        - sensor.volkswagen_id_4_battery
+        - sensor.volkswagen_id_4_battery_capacity
+        - sensor.volkswagen_id_4_charging_status
+        - sensor.volkswagen_id_4_engine_oil_life
+        - sensor.volkswagen_id_4_fuel
+        - sensor.volkswagen_id_4_odometer
+        - sensor.volkswagen_id_4_range
+        - sensor.volkswagen_id_4_tire_pressure_back_left
+        - sensor.volkswagen_id_4_tire_pressure_back_right
+        - sensor.volkswagen_id_4_tire_pressure_front_left
+        - sensor.volkswagen_id_4_tire_pressure_front_right
+        - switch.volkswagen_id_4_charging
+  - trigger: time_pattern
+    minutes: /15
+    variables:
+      update_if: 'charging'
+      update_entities:
+        - binary_sensor.volkswagen_id_4_charging_cable_plugged_in
+        - number.volkswagen_id_4_charge_limit
+        - sensor.volkswagen_id_4_battery
+        - sensor.volkswagen_id_4_charging_status
+        - sensor.volkswagen_id_4_range
+        - switch.volkswagen_id_4_charging
+conditions:
+  - condition: time
+    after: "09:00:00"
+    before: "21:00:00"
+  - condition: template
+    value_template: >
+      {% set is_charging = is_state('sensor.volkswagen_id_4_charging_status', 'CHARGING') %}
+      {{
+        (update_if == 'charging' and is_charging) or
+        (update_if == 'idle' and not is_charging)
+      }}
+actions:
+  - action: homeassistant.update_entity
+    data:
+      entity_id: "{{ update_entities }}"

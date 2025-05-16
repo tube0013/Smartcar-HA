@@ -1,4 +1,5 @@
 from collections.abc import Callable
+from enum import Enum
 from functools import reduce
 from http import HTTPStatus
 import logging
@@ -14,6 +15,7 @@ from homeassistant.helpers.restore_state import (
 )
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
+from . import const as smartcar_const
 from .const import DOMAIN
 from .coordinator import SmartcarVehicleCoordinator
 
@@ -136,9 +138,46 @@ class SmartcarEntity(CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntit
         return success
 
 
+class IndirectDescriptorDefaultType(Enum):
+    _singleton = False
+
+
+class IndirectDescriptor:
+    """
+    Descriptor to override dataclass field & lookup value from a named
+    collection defined in the `smartcar.const` module.
+    """
+
+    DEFAULT = IndirectDescriptorDefaultType._singleton
+
+    def __init__(self, collection_name):
+        self._collection_name = collection_name
+        self._collection = getattr(smartcar_const, collection_name)
+
+    def __get__(self, entity_desciption, type):
+        if entity_desciption is None:
+            return IndirectDescriptor.DEFAULT
+
+        return entity_desciption.key in self._collection
+
+    def __set__(self, obj, value):
+        # dataclasses will set the value to the default value from the
+        # __init__ method they create, so the default value needs to be a
+        # unique value that we can allow to be set (by being ignored) here
+        # while rasiging for any other value being set.
+        if value == IndirectDescriptor.DEFAULT:
+            return
+        raise AttributeError(
+            f"readonly; configure via smartcar.const.{self._collection_name}"
+        )
+
+
 class SmartcarEntityDescription(EntityDescription):
     """Class describing Smartcar sensor entities."""
 
     value_key_path: str
     value_cast: Callable[[Any], Any] = lambda x: x
     imperial_conversion: Callable[[float], float] | None = None
+    entity_registry_enabled_default = IndirectDescriptor(
+        "DEFAULT_ENABLED_ENTITY_DESCRIPTION_KEYS"
+    )

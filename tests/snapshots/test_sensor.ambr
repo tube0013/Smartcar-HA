@@ -1,5 +1,5 @@
 # serializer version: 1
-# name: test_limited_scopes[enabled_scopes0-vw_id_4][sensor.vw_id_4_battery-api-battery-request]
+# name: test_limited_scopes[enabled_entities0-enabled_scopes0-vw_id_4][sensor.vw_id_4_battery-api-battery-request]
   tuple(
     'post',
     URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/batch'),
@@ -8,9 +8,6 @@
         dict({
           'path': '/battery',
         }),
-        dict({
-          'path': '/battery/nominal_capacity',
-        }),
       ]),
     }),
     dict({
@@ -18,7 +15,7 @@
     }),
   )
 # ---
-# name: test_limited_scopes[enabled_scopes0-vw_id_4][sensor.vw_id_4_battery-registry]
+# name: test_limited_scopes[enabled_entities0-enabled_scopes0-vw_id_4][sensor.vw_id_4_battery-registry]
   EntityRegistryEntrySnapshot({
     'aliases': set({
     }),
@@ -54,7 +51,7 @@
     'unit_of_measurement': '%',
   })
 # ---
-# name: test_limited_scopes[enabled_scopes0-vw_id_4][sensor.vw_id_4_battery]
+# name: test_limited_scopes[enabled_entities0-enabled_scopes0-vw_id_4][sensor.vw_id_4_battery]
   StateSnapshot({
     'attributes': ReadOnlyDict({
       'device_class': 'battery',
@@ -70,28 +67,6 @@
     'state': '68',
   })
 # ---
-# name: test_polling_updates[vw_id_4][sensor.vw_id_4_odometer-api-batch-without-odometer-request-while-charging]
-  tuple(
-    'post',
-    URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/batch'),
-    dict({
-      'requests': list([
-        dict({
-          'path': '/battery',
-        }),
-        dict({
-          'path': '/charge',
-        }),
-        dict({
-          'path': '/charge/limit',
-        }),
-      ]),
-    }),
-    dict({
-      'authorization': 'Bearer mock-token',
-    }),
-  )
-# ---
 # name: test_polling_updates[vw_id_4][sensor.vw_id_4_odometer-api-batch-without-odometer-request]
   tuple(
     'post',
@@ -106,6 +81,9 @@
         }),
         dict({
           'path': '/charge',
+        }),
+        dict({
+          'path': '/charge/limit',
         }),
         dict({
           'path': '/engine/oil',
@@ -143,6 +121,9 @@
         }),
         dict({
           'path': '/charge',
+        }),
+        dict({
+          'path': '/charge/limit',
         }),
         dict({
           'path': '/engine/oil',
@@ -251,6 +232,9 @@
         }),
         dict({
           'path': '/charge',
+        }),
+        dict({
+          'path': '/charge/limit',
         }),
         dict({
           'path': '/engine/oil',

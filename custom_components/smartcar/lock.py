@@ -6,6 +6,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
+from .const import EntityDescriptionKey
 from .coordinator import SmartcarVehicleCoordinator
 from .entity import SmartcarEntity, SmartcarEntityDescription
 
@@ -19,7 +20,7 @@ class SmartcarLockDescription(LockEntityDescription, SmartcarEntityDescription):
 
 ENTITY_DESCRIPTIONS: tuple[LockEntityDescription, ...] = (
     SmartcarLockDescription(
-        key="door_lock",
+        key=EntityDescriptionKey.DOOR_LOCK,
         name="Door Lock",
         value_key_path="security.isLocked",
     ),

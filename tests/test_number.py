@@ -11,6 +11,7 @@ from homeassistant.components.number import (
 from homeassistant.const import ATTR_ENTITY_ID
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ServiceValidationError
+from homeassistant.helpers import device_registry as dr, entity_registry as er
 import pytest
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 from pytest_homeassistant_custom_component.test_util.aiohttp import AiohttpClientMocker
@@ -21,6 +22,7 @@ from . import MOCK_API_ENDPOINT, setup_integration
 NO_ERROR = None.__class__
 
 
+@pytest.mark.usefixtures("enable_all_entities")
 @pytest.mark.parametrize(
     (
         "api_status",
@@ -52,6 +54,8 @@ async def test_charging_limit(
     expected_state: int,
     expected_raises: Exception,
     api_calls: int,
+    device_registry: dr.DeviceRegistry,
+    entity_registry: er.EntityRegistry,
 ) -> None:
     """Test updating charging limit."""
 

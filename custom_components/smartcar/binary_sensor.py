@@ -10,6 +10,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
+from .const import EntityDescriptionKey
 from .coordinator import SmartcarVehicleCoordinator
 from .entity import SmartcarEntity, SmartcarEntityDescription
 
@@ -25,7 +26,7 @@ class SmartcarBinarySensorDescription(
 
 SENSOR_TYPES: tuple[BinarySensorEntityDescription, ...] = (
     SmartcarBinarySensorDescription(
-        key="plug_status",
+        key=EntityDescriptionKey.PLUG_STATUS,
         name="Charging Cable Plugged In",
         value_key_path="charge.isPluggedIn",
         device_class=BinarySensorDeviceClass.PLUG,
