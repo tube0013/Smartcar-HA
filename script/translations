@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+usage() {
+  echo "usage: $(basename "$0") path_to_hass"
+  echo
+  echo "update placeholders in translations/en.json"
+}
+
+INTEGRATION_DIR="$(pwd)"
+INTEGRATION="$(basename "$(ls -d custom_components/*[^__pycache__]/)")"
+INTEGRATION_MODULE="custom_components/$INTEGRATION"
+EN_FILE="$INTEGRATION_MODULE/translations/en.json"
+STRINGS_FILE="$INTEGRATION_MODULE/strings.json"
+HASS_DIR="$(realpath ${1})"
+HASS_PYTHON_ENV_ACTIVATE="${HASS_DIR}/venv/bin/activate"
+
+if [[ -z "${HASS_DIR}" ]]; then
+  usage 1>&2
+  exit 1
+fi
+
+if ! [[ -d "${HASS_DIR}" ]]; then
+  echo "could not find HASS at ${HASS_DIR}"
+  exit 1
+fi
+
+if ! [[ -f "${HASS_DIR}/venv/bin/activate" ]]; then
+  echo "could not find HASS at ${HASS_DIR}"
+  exit 1
+fi
+
+if [[ -e "${HASS_DIR}/homeassistant/components/${INTEGRATION}" ]]; then
+  echo "integration should not be part of HASS before running this script"
+  echo "remove the integration at ${HASS_DIR}/homeassistant/components/${INTEGRATION}"
+  exit 1
+fi
+
+if [[ -f "${STRINGS_FILE}" ]]; then
+  echo "${STRINGS_FILE} should not exist prior to running this script"
+  exit 1
+fi
+
+# copy translations/en.json to translations/strings.json for processing of
+# placeholder strings & symlink integration into standard component location
+cp "${INTEGRATION_DIR}/${EN_FILE}" "${INTEGRATION_DIR}/${STRINGS_FILE}"
+ln -s "${INTEGRATION_DIR}/${INTEGRATION_MODULE}" "${HASS_DIR}/homeassistant/components/${INTEGRATION}"
+
+# invoke translations tool
+cd "${HASS_DIR}"
+source "${HASS_PYTHON_ENV_ACTIVATE}"
+python -m script.translations develop --integration $INTEGRATION
+
+# cleanup
+rm "${HASS_DIR}/homeassistant/components/${INTEGRATION}"
+rm "${INTEGRATION_DIR}/${STRINGS_FILE}"
