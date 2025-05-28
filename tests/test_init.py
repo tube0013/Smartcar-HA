@@ -11,7 +11,12 @@ from pytest_homeassistant_custom_component.common import MockConfigEntry
 from pytest_homeassistant_custom_component.test_util.aiohttp import AiohttpClientMocker
 from syrupy.assertion import SnapshotAssertion
 
-from custom_components.smartcar.const import DOMAIN, REQUIRED_SCOPES
+from custom_components.smartcar.const import (
+    DEFAULT_ENABLED_ENTITY_DESCRIPTION_KEYS,
+    DOMAIN,
+    REQUIRED_SCOPES,
+    EntityDescriptionKey,
+)
 
 from . import MOCK_API_ENDPOINT, setup_integration
 
@@ -30,6 +35,33 @@ async def test_standard_setup(
     entity_registry: er.EntityRegistry,
 ) -> None:
     """Test all devices and entities in a standard setup."""
+
+    await setup_integration(hass, mock_config_entry)
+
+    device_id = vehicle["vin"]
+    device = device_registry.async_get_device({(DOMAIN, device_id)})
+
+    assert device is not None
+    assert device == snapshot(name="device")
+
+    entities = entity_registry.entities.get_entries_for_device_id(device.id)
+    assert entities == snapshot(name="entities")
+
+    for entity in entities:
+        assert hass.states.get(entity.entity_id) == snapshot(name=entity.entity_id)
+
+
+@pytest.mark.usefixtures("enable_all_entities")
+async def test_standard_setup_with_all_entities(
+    hass: HomeAssistant,
+    mock_config_entry: MockConfigEntry,
+    snapshot: SnapshotAssertion,
+    vehicle: AsyncMock,
+    device_registry: dr.DeviceRegistry,
+    entity_registry: er.EntityRegistry,
+) -> None:
+    """Test all devices and entities in a standard setup with all entities."""
+
     await setup_integration(hass, mock_config_entry)
 
     device_id = vehicle["vin"]
@@ -79,8 +111,13 @@ async def test_duplicate_vins_disallowed(
     assert mock_config_entry.state is ConfigEntryState.SETUP_ERROR
 
 
+@pytest.mark.usefixtures("enable_specified_entities")
 @pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
 @pytest.mark.parametrize("enabled_scopes", [REQUIRED_SCOPES + ["read_battery"]])
+@pytest.mark.parametrize(
+    "enabled_entities",
+    [DEFAULT_ENABLED_ENTITY_DESCRIPTION_KEYS | {EntityDescriptionKey.BATTERY_CAPACITY}],
+)
 async def test_limited_scopes(
     hass: HomeAssistant,
     mock_config_entry: MockConfigEntry,
@@ -107,6 +144,7 @@ async def test_limited_scopes(
         assert hass.states.get(entity.entity_id) == snapshot(name=entity.entity_id)
 
 
+@pytest.mark.usefixtures("enable_all_entities")
 @pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
 @pytest.mark.parametrize(
     "api_respone_type",
@@ -126,6 +164,7 @@ async def test_update_errors(
     entity_registry: er.EntityRegistry,
 ) -> None:
     """Test setup with a server error."""
+
     await setup_integration(hass, mock_config_entry)
 
     device_id = vehicle["vin"]

@@ -10,6 +10,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
+from .const import EntityDescriptionKey
 from .coordinator import SmartcarVehicleCoordinator
 from .entity import SmartcarEntity, SmartcarEntityDescription
 
@@ -23,7 +24,7 @@ class SmartcarTrackerDescription(TrackerEntityDescription, SmartcarEntityDescrip
 
 ENTITY_DESCRIPTIONS: tuple[TrackerEntityDescription, ...] = (
     SmartcarTrackerDescription(
-        key="location",
+        key=EntityDescriptionKey.LOCATION,
         name="Location",
         value_key_path="location",
         value_cast=lambda location: location or {},

@@ -11,6 +11,7 @@ from homeassistant.const import PERCENTAGE
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
+from .const import EntityDescriptionKey
 from .coordinator import SmartcarVehicleCoordinator
 from .entity import SmartcarEntity, SmartcarEntityDescription
 
@@ -24,7 +25,7 @@ class SmartcarNumberDescription(NumberEntityDescription, SmartcarEntityDescripti
 
 ENTITY_DESCRIPTIONS: tuple[NumberEntityDescription, ...] = (
     SmartcarNumberDescription(
-        key="charge_limit",
+        key=EntityDescriptionKey.CHARGE_LIMIT,
         name="Charge Limit",
         value_key_path="charge_limit.limit",
         value_cast=lambda pct: pct and round(pct * 100),

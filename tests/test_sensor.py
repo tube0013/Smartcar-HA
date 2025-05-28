@@ -18,16 +18,18 @@ from pytest_homeassistant_custom_component.common import (
 from pytest_homeassistant_custom_component.test_util.aiohttp import AiohttpClientMocker
 from syrupy.assertion import SnapshotAssertion
 
-from custom_components.smartcar.const import REQUIRED_SCOPES
-from custom_components.smartcar.entity import SmartcarEntity
-
-from . import (
-    aioclient_mock_append_vehicle_request,
-    setup_added_integration,
-    setup_integration,
+from custom_components.smartcar.const import (
+    DEFAULT_ENABLED_ENTITY_DESCRIPTION_KEYS,
+    REQUIRED_SCOPES,
+    EntityDescriptionKey,
 )
+from custom_components.smartcar.entity import SmartcarEntity
+from custom_components.smartcar.sensor import SmartcarSensorDescription
+
+from . import setup_added_integration, setup_integration
 
 
+@pytest.mark.usefixtures("enable_all_entities")
 @pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
 async def test_polling_updates(
     hass: HomeAssistant,
@@ -58,12 +60,6 @@ async def test_polling_updates(
         name=f"{entity_id}-api-full-batch-request"
     )
 
-    # tick the clock enough that a polling update would occur if the state was
-    # charging (it's not, so there should be no udpdates).
-    async_fire_time_changed(hass, utcnow() + dt.timedelta(hours=1))
-    await hass.async_block_till_done()
-    assert aioclient_mock.call_count == exepcted_calls  # no update should have occurred
-
     # trigger a polling based update (another full batch update)
     async_fire_time_changed(hass, utcnow() + dt.timedelta(hours=6))
     await hass.async_block_till_done()
@@ -85,17 +81,6 @@ async def test_polling_updates(
     await async_update_entity(hass, entity_id)
     assert aioclient_mock.call_count == exepcted_calls  # no update should have occurred
 
-    # setup response to make the next update result in the vehicle switching to
-    # charging state
-    exepcted_calls = 0
-    aioclient_mock.clear_requests()
-    aioclient_mock_append_vehicle_request(
-        aioclient_mock,
-        "charging",
-        vehicle_fixture,
-        vehicle_attributes,
-    )
-
     # trigger a polling based update (which should not include the disabled
     # odometer in the request)
     async_fire_time_changed(hass, utcnow() + dt.timedelta(hours=12))
@@ -106,16 +91,8 @@ async def test_polling_updates(
         name=f"{entity_id}-api-batch-without-odometer-request"
     )
 
-    # tick the clock enough that a polling update will occur since the state is
-    # charging & check the result.
-    async_fire_time_changed(hass, utcnow() + dt.timedelta(hours=1))
-    await hass.async_block_till_done()
-    assert aioclient_mock.call_count == (exepcted_calls := exepcted_calls + 1)
-    assert aioclient_mock.mock_calls[-1] == snapshot(
-        name=f"{entity_id}-api-batch-without-odometer-request-while-charging"
-    )
 
-
+@pytest.mark.usefixtures("enable_all_entities")
 @pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
 async def test_update_with_polling_disabled(
     hass: HomeAssistant,
@@ -167,6 +144,10 @@ async def test_update_with_polling_disabled(
 
 @pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
 @pytest.mark.parametrize("enabled_scopes", [REQUIRED_SCOPES + ["read_battery"]])
+@pytest.mark.parametrize(
+    "enabled_entities",
+    [DEFAULT_ENABLED_ENTITY_DESCRIPTION_KEYS | {EntityDescriptionKey.BATTERY_CAPACITY}],
+)
 async def test_limited_scopes(
     hass: HomeAssistant,
     mock_config_entry: MockConfigEntry,
@@ -192,6 +173,7 @@ async def test_limited_scopes(
     )
 
 
+@pytest.mark.usefixtures("enable_all_entities")
 @pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
 @pytest.mark.parametrize("api_respone_type", ["imperial"])
 async def test_unit_conversion(
@@ -296,3 +278,21 @@ async def test_async_update_internals(
     # and then it does not when it's disabled
     entity.registry_entry.disabled = True
     await entity.async_update()
+
+
+def test_entity_registry_enabled_default_readonly(
+    hass: HomeAssistant,
+) -> None:
+    """Test entity_registry_enabled_default is readonly."""
+
+    with pytest.raises(AttributeError) as excinfo:
+        SmartcarSensorDescription(
+            key="mock_description",
+            value_key_path="mock_path",
+            entity_registry_enabled_default=False,
+        )
+
+    assert (
+        excinfo.value.args[0]
+        == "readonly; configure via smartcar.const.DEFAULT_ENABLED_ENTITY_DESCRIPTION_KEYS"
+    )

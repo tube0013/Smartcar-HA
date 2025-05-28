@@ -50,3 +50,33 @@ DEFAULT_SCOPES = [
     Scope.READ_VIN,
     Scope.CONTROL_CHARGE,
 ]
+
+
+class EntityDescriptionKey(StrEnum):
+    PLUG_STATUS = auto()
+    LOCATION = auto()
+    DOOR_LOCK = auto()
+    CHARGE_LIMIT = auto()
+    CHARGING = auto()
+    BATTERY_CAPACITY = auto()
+    BATTERY_LEVEL = auto()
+    CHARGING_STATE = auto()
+    ENGINE_OIL = auto()
+    FUEL = auto()
+    ODOMETER = auto()
+    RANGE = auto()
+    TIRE_PRESSURE_BACK_LEFT = auto()
+    TIRE_PRESSURE_BACK_RIGHT = auto()
+    TIRE_PRESSURE_FRONT_LEFT = auto()
+    TIRE_PRESSURE_FRONT_RIGHT = auto()
+
+
+DEFAULT_ENABLED_ENTITY_DESCRIPTION_KEYS = {
+    EntityDescriptionKey.BATTERY_LEVEL,
+    EntityDescriptionKey.CHARGING_STATE,
+    EntityDescriptionKey.CHARGING,
+    EntityDescriptionKey.DOOR_LOCK,
+    EntityDescriptionKey.LOCATION,
+    EntityDescriptionKey.PLUG_STATUS,
+    EntityDescriptionKey.RANGE,
+}
