@@ -8,11 +8,13 @@ from unittest.mock import AsyncMock
 from homeassistant.core import HomeAssistant, State
 from homeassistant.helpers import device_registry as dr, entity_registry as er
 from homeassistant.helpers.entity_component import async_update_entity
+from homeassistant.helpers.restore_state import STORAGE_KEY as RESTORE_STATE_KEY
 from homeassistant.util.dt import utcnow
 import pytest
 from pytest_homeassistant_custom_component.common import (
     MockConfigEntry,
     async_fire_time_changed,
+    async_mock_restore_state_shutdown_restart,
     mock_restore_cache_with_extra_data,
 )
 from pytest_homeassistant_custom_component.test_util.aiohttp import AiohttpClientMocker
@@ -209,12 +211,12 @@ async def test_unit_conversion(
     )
 
 
-@pytest.mark.parametrize(
+RESTORE_STATE_PARAMETRIZE_ARGS = [
     (
         "entity_id",
         "stored_data",
-        "expected_state",
-        "expected_data",
+        "sensor_state",
+        "coordinator_data",
     ),
     [
         (
@@ -244,7 +246,52 @@ async def test_unit_conversion(
             },
         ),
     ],
-    ids=["value_only", "value_and_unit_system", "value_and_timestampes"],
+]
+RESTORE_STATE_PARAMETRIZE_IDS = [
+    "value_only",
+    "value_and_unit_system",
+    "value_and_timestampes",
+]
+
+
+@pytest.mark.parametrize(
+    *RESTORE_STATE_PARAMETRIZE_ARGS,
+    ids=RESTORE_STATE_PARAMETRIZE_IDS,
+)
+@pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
+async def test_restore_sensor_save_state(
+    hass: HomeAssistant,
+    hass_storage: dict[str, Any],
+    mock_config_entry: MockConfigEntry,
+    snapshot: SnapshotAssertion,
+    vehicle_attributes: dict,
+    entity_id: str,
+    stored_data: dict,
+    sensor_state: Any,
+    coordinator_data: dict,
+) -> None:
+    """Test saving sensor/coordinator state."""
+
+    await setup_integration(hass, mock_config_entry)
+
+    coordinator = mock_config_entry.runtime_data.coordinators[vehicle_attributes["vin"]]
+    coordinator.data = coordinator_data
+
+    await async_mock_restore_state_shutdown_restart(hass)  # trigger saving state
+
+    stored_entity_data = [
+        item["extra_data"]
+        for item in hass_storage[RESTORE_STATE_KEY]["data"]
+        if item["state"]["entity_id"] == entity_id
+    ]
+
+    assert stored_entity_data[0] == stored_data
+    assert stored_entity_data == snapshot
+
+
+@pytest.mark.parametrize(
+    *RESTORE_STATE_PARAMETRIZE_ARGS,
+    ids=RESTORE_STATE_PARAMETRIZE_IDS,
 )
 @pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
 async def test_restore_state(
@@ -253,8 +300,8 @@ async def test_restore_state(
     vehicle_attributes: dict,
     entity_id: str,
     stored_data: dict,
-    expected_state: Any,
-    expected_data: dict,
+    sensor_state: Any,
+    coordinator_data: dict,
 ) -> None:
     """Test sensor restore state."""
 
@@ -283,8 +330,8 @@ async def test_restore_state(
     coordinator = mock_config_entry.runtime_data.coordinators[vehicle_attributes["vin"]]
     state = hass.states.get(entity_id)
     assert state
-    assert state.state == expected_state
-    assert coordinator.data == expected_data
+    assert state.state == sensor_state
+    assert coordinator.data == coordinator_data
 
 
 async def test_async_update_internals(

@@ -222,6 +222,30 @@
     'state': '21919',
   })
 # ---
+# name: test_restore_sensor_save_state[vw_id_4-value_and_timestampes]
+  list([
+    dict({
+      'data_age': '2025-05-29T19:47:32',
+      'fetched_at': '2025-05-29T20:09:57',
+      'raw_value': 45.2,
+    }),
+  ])
+# ---
+# name: test_restore_sensor_save_state[vw_id_4-value_and_unit_system]
+  list([
+    dict({
+      'raw_value': 45.2,
+      'unit_system': 'imperial',
+    }),
+  ])
+# ---
+# name: test_restore_sensor_save_state[vw_id_4-value_only]
+  list([
+    dict({
+      'raw_value': 0.34,
+    }),
+  ])
+# ---
 # name: test_unit_conversion[imperial-vw_id_4][sensor.vw_id_4_odometer-api-full-batch-request]
   tuple(
     'post',
