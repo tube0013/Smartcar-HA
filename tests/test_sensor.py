@@ -229,8 +229,22 @@ async def test_unit_conversion(
             "72.7423488",
             {"battery": {"range": 45.2}, "battery:unit_system": "imperial"},
         ),
+        (
+            "sensor.vw_id_4_range",
+            {
+                "raw_value": 45.2,
+                "data_age": dt.datetime(2025, 5, 29, 19, 47, 32),
+                "fetched_at": dt.datetime(2025, 5, 29, 20, 9, 57),
+            },
+            "45.2",
+            {
+                "battery": {"range": 45.2},
+                "battery:data_age": dt.datetime(2025, 5, 29, 19, 47, 32),
+                "battery:fetched_at": dt.datetime(2025, 5, 29, 20, 9, 57),
+            },
+        ),
     ],
-    ids=["value_only", "value_and_unit_system"],
+    ids=["value_only", "value_and_unit_system", "value_and_timestampes"],
 )
 @pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
 async def test_restore_state(
