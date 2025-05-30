@@ -75,7 +75,7 @@ jobs:
         fi
     - name: Test with pytest
       run: |
-        pytest
+        pytest -p no:sugar
     - name: Validate coverage
       run: |
         coverage json -q -o - | python3 .github/validate_coverage.py
