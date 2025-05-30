@@ -14,6 +14,7 @@ from homeassistant.helpers.restore_state import (
     RestoreEntity,
 )
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
+from homeassistant.util import dt as dt_util
 
 from . import const as smartcar_const
 from .const import DOMAIN
@@ -85,10 +86,10 @@ class SmartcarEntity(CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntit
             data["unit_system"] = unit_system
 
         if data_age := self._extract_data_age():
-            data["data_age"] = data_age
+            data["data_age"] = data_age.isoformat()
 
         if fetched_at := self._extract_fetched_at():
-            data["fetched_at"] = fetched_at
+            data["fetched_at"] = fetched_at.isoformat()
 
         return RestoredExtraData(data)
 
@@ -153,10 +154,10 @@ class SmartcarEntity(CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntit
             data[f"{key_path[0]}:unit_system"] = unit_system
 
         if data_age := extra_data.get("data_age"):
-            data[f"{key_path[0]}:data_age"] = data_age
+            data[f"{key_path[0]}:data_age"] = dt_util.parse_datetime(data_age)
 
         if fetched_at := extra_data.get("fetched_at"):
-            data[f"{key_path[0]}:fetched_at"] = fetched_at
+            data[f"{key_path[0]}:fetched_at"] = dt_util.parse_datetime(fetched_at)
 
     async def _async_send_command(
         self, subpath, payload, *, method="post", version="2.0", **kwargs
