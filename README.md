@@ -1,6 +1,11 @@
 # Smartcar Integration for Home Assistant
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)  
+[![Version](https://img.shields.io/github/v/release/tube0013/Smartcar-HA)][releases]
+![Downloads](https://img.shields.io/github/downloads/tube0013/Smartcar-HA/total)
+![Build](https://img.shields.io/github/actions/workflow/status/tube0013/Smartcar-HA/pytest.yml
+)
+
 Connect your compatible vehicle to Home Assistant using the [Smartcar API](https://smartcar.com/).
 
 This integration provides various sensors and controls for vehicles linked through the Smartcar platform, allowing you to monitor and interact with your car directly within Home Assistant.
@@ -152,4 +157,5 @@ To customize polling, you can disable polling on the integration and write your 
 
 Please report any issues you find with this integration by opening an issue on the [GitHub Issues page](https://github.com/tube0013/Smartcar-HA/issues).
 
+[releases]: https://github.com/tube0013/Smartcar-HA/releases
 [config-flow-start]: https://my.home-assistant.io/redirect/config_flow_start/?domain=smartcar
