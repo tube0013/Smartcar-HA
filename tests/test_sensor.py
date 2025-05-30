@@ -233,8 +233,8 @@ async def test_unit_conversion(
             "sensor.vw_id_4_range",
             {
                 "raw_value": 45.2,
-                "data_age": dt.datetime(2025, 5, 29, 19, 47, 32),
-                "fetched_at": dt.datetime(2025, 5, 29, 20, 9, 57),
+                "data_age": "2025-05-29T19:47:32",
+                "fetched_at": "2025-05-29T20:09:57",
             },
             "45.2",
             {
