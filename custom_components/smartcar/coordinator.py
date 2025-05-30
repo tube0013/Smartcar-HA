@@ -9,6 +9,7 @@ from homeassistant.helpers.update_coordinator import (
     DataUpdateCoordinator,
     UpdateFailed,
 )
+from homeassistant.util import dt as dt_util
 
 from .auth import AbstractAuth
 from .const import DOMAIN, EntityDescriptionKey
@@ -200,6 +201,8 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
             body = item["body"]
             headers = item.get("headers") or {}
             unit_system = headers.get("sc-unit-system")
+            data_age = headers.get("sc-data-age")
+            fetched_at = headers.get("sc-fetched-at")
             key = path.strip("/").replace("/", "_")
             updated_data[key] = body if code == 200 else None
 
@@ -207,6 +210,16 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
                 updated_data[f"{key}:unit_system"] = unit_system
             else:
                 updated_data.pop(f"{key}:unit_system", None)
+
+            if code == 200 and data_age:
+                updated_data[f"{key}:data_age"] = dt_util.parse_datetime(data_age)
+            else:
+                updated_data.pop(f"{key}:data_age", None)
+
+            if code == 200 and fetched_at:
+                updated_data[f"{key}:fetched_at"] = dt_util.parse_datetime(fetched_at)
+            else:
+                updated_data.pop(f"{key}:fetched_at", None)
 
             if code not in (200, 404):
                 _LOGGER.warning(

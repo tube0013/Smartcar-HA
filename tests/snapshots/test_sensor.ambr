@@ -54,7 +54,9 @@
 # name: test_limited_scopes[enabled_entities0-enabled_scopes0-vw_id_4][sensor.vw_id_4_battery]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T15:40:57+00:00',
       'device_class': 'battery',
+      'fetched_at': '2025-05-09T17:27:26.712000+00:00',
       'friendly_name': 'VW ID.4 Battery',
       'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
       'unit_of_measurement': '%',
@@ -205,7 +207,9 @@
 # name: test_polling_updates[vw_id_4][sensor.vw_id_4_odometer]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T15:40:52+00:00',
       'device_class': 'distance',
+      'fetched_at': '2025-05-09T17:27:25.401000+00:00',
       'friendly_name': 'VW ID.4 Odometer',
       'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
       'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
@@ -316,6 +320,7 @@
 # name: test_unit_conversion[imperial-vw_id_4][sensor.vw_id_4_odometer]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2019-10-24T00:43:46+00:00',
       'device_class': 'distance',
       'friendly_name': 'VW ID.4 Odometer',
       'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,

@@ -141,7 +141,9 @@
 # name: test_limited_scopes[enabled_entities0-enabled_scopes0-vw_id_4][sensor.vw_id_4_battery]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T15:40:57+00:00',
       'device_class': 'battery',
+      'fetched_at': '2025-05-09T17:27:26.712000+00:00',
       'friendly_name': 'VW ID.4 Battery',
       'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
       'unit_of_measurement': '%',
@@ -157,7 +159,9 @@
 # name: test_limited_scopes[enabled_entities0-enabled_scopes0-vw_id_4][sensor.vw_id_4_battery_capacity]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T17:27:25.114000+00:00',
       'device_class': 'energy_storage',
+      'fetched_at': '2025-05-09T17:27:25.114000+00:00',
       'friendly_name': 'VW ID.4 Battery Capacity',
       'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
       'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
@@ -173,7 +177,9 @@
 # name: test_limited_scopes[enabled_entities0-enabled_scopes0-vw_id_4][sensor.vw_id_4_range]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T15:40:57+00:00',
       'device_class': 'distance',
+      'fetched_at': '2025-05-09T17:27:26.712000+00:00',
       'friendly_name': 'VW ID.4 Range',
       'icon': 'mdi:map-marker-distance',
       'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
@@ -333,6 +339,7 @@
 # name: test_standard_setup[unknown_make][device_tracker.smartcar_784n_location]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2019-10-24T00:43:46+00:00',
       'friendly_name': 'Smartcar 784N Location',
       'gps_accuracy': 0,
       'icon': 'mdi:car',
@@ -658,7 +665,9 @@
 # name: test_standard_setup[vw_id_4][binary_sensor.vw_id_4_charging_cable_plugged_in]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T15:40:57+00:00',
       'device_class': 'plug',
+      'fetched_at': '2025-05-09T17:27:26.712000+00:00',
       'friendly_name': 'VW ID.4 Charging Cable Plugged In',
     }),
     'context': <ANY>,
@@ -705,6 +714,8 @@
 # name: test_standard_setup[vw_id_4][device_tracker.vw_id_4_location]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T15:40:52+00:00',
+      'fetched_at': '2025-05-09T17:27:25.401000+00:00',
       'friendly_name': 'VW ID.4 Location',
       'gps_accuracy': 0,
       'icon': 'mdi:car',
@@ -969,7 +980,9 @@
 # name: test_standard_setup[vw_id_4][sensor.vw_id_4_battery]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T15:40:57+00:00',
       'device_class': 'battery',
+      'fetched_at': '2025-05-09T17:27:26.712000+00:00',
       'friendly_name': 'VW ID.4 Battery',
       'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
       'unit_of_measurement': '%',
@@ -985,6 +998,8 @@
 # name: test_standard_setup[vw_id_4][sensor.vw_id_4_charging_status]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T15:40:57+00:00',
+      'fetched_at': '2025-05-09T17:27:26.712000+00:00',
       'friendly_name': 'VW ID.4 Charging Status',
       'icon': 'mdi:ev-station',
     }),
@@ -999,7 +1014,9 @@
 # name: test_standard_setup[vw_id_4][sensor.vw_id_4_range]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T15:40:57+00:00',
       'device_class': 'distance',
+      'fetched_at': '2025-05-09T17:27:26.712000+00:00',
       'friendly_name': 'VW ID.4 Range',
       'icon': 'mdi:map-marker-distance',
       'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
@@ -1016,6 +1033,8 @@
 # name: test_standard_setup[vw_id_4][switch.vw_id_4_charging]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T15:40:57+00:00',
+      'fetched_at': '2025-05-09T17:27:26.712000+00:00',
       'friendly_name': 'VW ID.4 Charging',
       'icon': 'mdi:ev-plug-type2',
     }),
@@ -1077,6 +1096,7 @@
 # name: test_standard_setup_with_all_entities[unknown_make][device_tracker.smartcar_784n_location]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2019-10-24T00:43:46+00:00',
       'friendly_name': 'Smartcar 784N Location',
       'gps_accuracy': 0,
       'icon': 'mdi:car',
@@ -1771,6 +1791,7 @@
 # name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_odometer]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2019-10-24T00:43:46+00:00',
       'device_class': 'distance',
       'friendly_name': 'Smartcar 784N Odometer',
       'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
@@ -1804,6 +1825,7 @@
 # name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_tire_pressure_back_left]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2019-10-24T00:43:46+00:00',
       'device_class': 'pressure',
       'friendly_name': 'Smartcar 784N Tire Pressure Back Left',
       'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
@@ -1820,6 +1842,7 @@
 # name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_tire_pressure_back_right]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2019-10-24T00:43:46+00:00',
       'device_class': 'pressure',
       'friendly_name': 'Smartcar 784N Tire Pressure Back Right',
       'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
@@ -1836,6 +1859,7 @@
 # name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_tire_pressure_front_left]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2019-10-24T00:43:46+00:00',
       'device_class': 'pressure',
       'friendly_name': 'Smartcar 784N Tire Pressure Front Left',
       'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
@@ -1852,6 +1876,7 @@
 # name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_tire_pressure_front_right]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2019-10-24T00:43:46+00:00',
       'device_class': 'pressure',
       'friendly_name': 'Smartcar 784N Tire Pressure Front Right',
       'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
@@ -1882,7 +1907,9 @@
 # name: test_standard_setup_with_all_entities[vw_id_4][binary_sensor.vw_id_4_charging_cable_plugged_in]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T15:40:57+00:00',
       'device_class': 'plug',
+      'fetched_at': '2025-05-09T17:27:26.712000+00:00',
       'friendly_name': 'VW ID.4 Charging Cable Plugged In',
     }),
     'context': <ANY>,
@@ -1929,6 +1956,8 @@
 # name: test_standard_setup_with_all_entities[vw_id_4][device_tracker.vw_id_4_location]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T15:40:52+00:00',
+      'fetched_at': '2025-05-09T17:27:25.401000+00:00',
       'friendly_name': 'VW ID.4 Location',
       'gps_accuracy': 0,
       'icon': 'mdi:car',
@@ -2526,6 +2555,8 @@
 # name: test_standard_setup_with_all_entities[vw_id_4][number.vw_id_4_charge_limit]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T15:40:55+00:00',
+      'fetched_at': '2025-05-09T17:27:26.712000+00:00',
       'friendly_name': 'VW ID.4 Charge Limit',
       'icon': 'mdi:battery-charging-80',
       'max': 100.0,
@@ -2545,7 +2576,9 @@
 # name: test_standard_setup_with_all_entities[vw_id_4][sensor.vw_id_4_battery]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T15:40:57+00:00',
       'device_class': 'battery',
+      'fetched_at': '2025-05-09T17:27:26.712000+00:00',
       'friendly_name': 'VW ID.4 Battery',
       'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
       'unit_of_measurement': '%',
@@ -2561,7 +2594,9 @@
 # name: test_standard_setup_with_all_entities[vw_id_4][sensor.vw_id_4_battery_capacity]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T17:27:25.114000+00:00',
       'device_class': 'energy_storage',
+      'fetched_at': '2025-05-09T17:27:25.114000+00:00',
       'friendly_name': 'VW ID.4 Battery Capacity',
       'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
       'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
@@ -2577,6 +2612,8 @@
 # name: test_standard_setup_with_all_entities[vw_id_4][sensor.vw_id_4_charging_status]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T15:40:57+00:00',
+      'fetched_at': '2025-05-09T17:27:26.712000+00:00',
       'friendly_name': 'VW ID.4 Charging Status',
       'icon': 'mdi:ev-station',
     }),
@@ -2623,7 +2660,9 @@
 # name: test_standard_setup_with_all_entities[vw_id_4][sensor.vw_id_4_odometer]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T15:40:52+00:00',
       'device_class': 'distance',
+      'fetched_at': '2025-05-09T17:27:25.401000+00:00',
       'friendly_name': 'VW ID.4 Odometer',
       'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
       'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
@@ -2639,7 +2678,9 @@
 # name: test_standard_setup_with_all_entities[vw_id_4][sensor.vw_id_4_range]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T15:40:57+00:00',
       'device_class': 'distance',
+      'fetched_at': '2025-05-09T17:27:26.712000+00:00',
       'friendly_name': 'VW ID.4 Range',
       'icon': 'mdi:map-marker-distance',
       'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
@@ -2720,6 +2761,8 @@
 # name: test_standard_setup_with_all_entities[vw_id_4][switch.vw_id_4_charging]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-05-09T15:40:57+00:00',
+      'fetched_at': '2025-05-09T17:27:26.712000+00:00',
       'friendly_name': 'VW ID.4 Charging',
       'icon': 'mdi:ev-plug-type2',
     }),
