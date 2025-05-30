@@ -1,10 +1,11 @@
 # Smartcar Integration for Home Assistant
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)  
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
 [![Version](https://img.shields.io/github/v/release/tube0013/Smartcar-HA)][releases]
 ![Downloads](https://img.shields.io/github/downloads/tube0013/Smartcar-HA/total)
 ![Build](https://img.shields.io/github/actions/workflow/status/tube0013/Smartcar-HA/pytest.yml
 )
+
 
 Connect your compatible vehicle to Home Assistant using the [Smartcar API](https://smartcar.com/).
 
