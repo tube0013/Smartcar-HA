@@ -55,15 +55,28 @@ class SmartcarEntity(CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntit
             (last_state := await self.async_get_last_state()) is not None
             and last_state.state not in (STATE_UNKNOWN, STATE_UNAVAILABLE)
             and (extra_data := await self.async_get_last_extra_data()) is not None
-            and (extra_data_raw_value := extra_data.as_dict().get("raw_value"))
-            is not None
+            and (extra_data_dict := extra_data.as_dict())
+            and (extra_data_raw_value := extra_data_dict.get("raw_value")) is not None
             and not self.available
         ):
-            self._inject_raw_value(extra_data_raw_value)
+            extra_data_dict.pop("raw_value")
+
+            self._inject_raw_value(extra_data_raw_value, extra_data_dict)
 
     @property
     def extra_restore_state_data(self) -> ExtraStoredData | None:
-        return RestoredExtraData({"raw_value": self._extract_raw_value()})
+        data = {"raw_value": self._extract_raw_value()}
+
+        if unit_system := self._extract_unit_system():
+            data["unit_system"] = unit_system
+
+        return RestoredExtraData(data)
+
+    def _extract_unit_system(self) -> Any:
+        data = self.coordinator.data or {}
+        description = self.entity_description
+        key_path = description.value_key_path.split(".")
+        return data.get(f"{key_path[0]}:unit_system")
 
     def _extract_raw_value(self) -> Any:
         data = self.coordinator.data or {}
@@ -74,18 +87,21 @@ class SmartcarEntity(CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntit
         return value
 
     def _extract_value(self) -> Any:
-        data = self.coordinator.data or {}
         description = self.entity_description
-        unit_system = data.get(f"{description.key}:unit_system")
+        unit_system = self._extract_unit_system()
         value = self._extract_raw_value()
         value = description.value_cast(value)
 
-        if value is not None and unit_system == "imperial":
-            value = self.entity_description.imperial_conversion(value)
+        if (
+            value is not None
+            and unit_system == "imperial"
+            and (imperial_conversion := self.entity_description.imperial_conversion)
+        ):
+            value = imperial_conversion(value)
 
         return value
 
-    def _inject_raw_value(self, value) -> None:
+    def _inject_raw_value(self, value, extra_data: dict = {}) -> None:
         coordinator = self.coordinator
         if coordinator.data is None:
             coordinator.data = {}
@@ -100,6 +116,9 @@ class SmartcarEntity(CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntit
             data,
         )
         obj[key] = value
+
+        if unit_system := extra_data.get("unit_system"):
+            data[f"{key_path[0]}:unit_system"] = unit_system
 
     async def _async_send_command(
         self, subpath, payload, *, method="post", version="2.0", **kwargs

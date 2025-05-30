@@ -227,14 +227,40 @@ async def test_unit_conversion(
     )
 
 
+@pytest.mark.parametrize(
+    (
+        "entity_id",
+        "stored_data",
+        "expected_state",
+        "expected_data",
+    ),
+    [
+        (
+            "sensor.vw_id_4_battery",
+            {"raw_value": 0.34},
+            "34",
+            {"battery": {"percentRemaining": 0.34}},
+        ),
+        (
+            "sensor.vw_id_4_range",
+            {"raw_value": 45.2, "unit_system": "imperial"},
+            "72.7423488",
+            {"battery": {"range": 45.2}, "battery:unit_system": "imperial"},
+        ),
+    ],
+    ids=["value_only", "value_and_unit_system"],
+)
 @pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
 async def test_restore_state(
     hass: HomeAssistant,
     mock_config_entry: MockConfigEntry,
+    vehicle_attributes: dict,
+    entity_id: str,
+    stored_data: dict,
+    expected_state: Any,
+    expected_data: dict,
 ) -> None:
     """Test sensor restore state."""
-
-    entity_id = "sensor.vw_id_4_battery"
 
     mock_restore_cache_with_extra_data(
         hass,
@@ -242,11 +268,9 @@ async def test_restore_state(
             (
                 State(
                     entity_id,
-                    "34",
+                    "does-not-matter-for-this-test",
                 ),
-                {
-                    "raw_value": 0.34,
-                },
+                stored_data,
             ),
         ),
     )
@@ -260,9 +284,11 @@ async def test_restore_state(
 
     await setup_added_integration(hass, mock_config_entry)
 
+    coordinator = mock_config_entry.runtime_data.coordinators[vehicle_attributes["vin"]]
     state = hass.states.get(entity_id)
     assert state
-    assert state.state == "34"
+    assert state.state == expected_state
+    assert coordinator.data == expected_data
 
 
 async def test_async_update_internals(

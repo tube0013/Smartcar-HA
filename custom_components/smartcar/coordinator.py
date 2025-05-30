@@ -230,6 +230,8 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
 
             if code == 200 and unit_system:
                 updated_data[f"{key}:unit_system"] = unit_system
+            else:
+                updated_data.pop(f"{key}:unit_system", None)
 
             if code not in (200, 404):
                 _LOGGER.warning(
