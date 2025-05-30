@@ -40,6 +40,18 @@ class SmartcarEntity(CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntit
     def available(self):
         return super().available and self._extract_value() is not None
 
+    @property
+    def extra_state_attributes(self) -> dict[str, Any] | None:
+        result = {}
+
+        if data_age := self._extract_data_age():
+            result["age"] = data_age.isoformat()
+
+        if fetched_at := self._extract_fetched_at():
+            result["fetched_at"] = fetched_at.isoformat()
+
+        return result or None
+
     async def async_update(self) -> None:
         if not self.enabled:
             return
@@ -70,6 +82,12 @@ class SmartcarEntity(CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntit
         if unit_system := self._extract_unit_system():
             data["unit_system"] = unit_system
 
+        if data_age := self._extract_data_age():
+            data["data_age"] = data_age
+
+        if fetched_at := self._extract_fetched_at():
+            data["fetched_at"] = fetched_at
+
         return RestoredExtraData(data)
 
     def _extract_unit_system(self) -> Any:
@@ -77,6 +95,18 @@ class SmartcarEntity(CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntit
         description = self.entity_description
         key_path = description.value_key_path.split(".")
         return data.get(f"{key_path[0]}:unit_system")
+
+    def _extract_data_age(self) -> Any:
+        data = self.coordinator.data or {}
+        description = self.entity_description
+        key_path = description.value_key_path.split(".")
+        return data.get(f"{key_path[0]}:data_age")
+
+    def _extract_fetched_at(self) -> Any:
+        data = self.coordinator.data or {}
+        description = self.entity_description
+        key_path = description.value_key_path.split(".")
+        return data.get(f"{key_path[0]}:fetched_at")
 
     def _extract_raw_value(self) -> Any:
         data = self.coordinator.data or {}
@@ -119,6 +149,12 @@ class SmartcarEntity(CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntit
 
         if unit_system := extra_data.get("unit_system"):
             data[f"{key_path[0]}:unit_system"] = unit_system
+
+        if data_age := extra_data.get("data_age"):
+            data[f"{key_path[0]}:data_age"] = data_age
+
+        if fetched_at := extra_data.get("fetched_at"):
+            data[f"{key_path[0]}:fetched_at"] = fetched_at
 
     async def _async_send_command(
         self, subpath, payload, *, method="post", version="2.0", **kwargs
