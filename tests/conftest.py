@@ -1,7 +1,7 @@
 """Fixtures for testing."""
 
+from collections.abc import Generator
 import time
-from typing import Generator
 from unittest.mock import AsyncMock, PropertyMock, patch
 
 from homeassistant.components.application_credentials import (
@@ -41,7 +41,7 @@ def auto_enable_custom_integrations(enable_custom_integrations):
 
 
 @pytest.fixture
-def aioclient_mock() -> Generator[AiohttpClientMocker, None, None]:
+def aioclient_mock() -> Generator[AiohttpClientMocker]:
     """Fixture to mock aioclient calls."""
     with mock_aiohttp_client() as mock_session:
         yield mock_session
@@ -50,11 +50,11 @@ def aioclient_mock() -> Generator[AiohttpClientMocker, None, None]:
 @pytest.fixture
 def mock_smartcar_auth(
     aioclient_mock: AiohttpClientMocker,
-) -> Generator[AsyncMock, None, None]:
+) -> Generator[AsyncMock]:
     """Mock a Smartcar auth."""
 
     class MockAuth(AbstractAuth):
-        async def async_get_access_token(self) -> str:
+        async def async_get_access_token(self) -> str:  # noqa: PLR6301
             return "mock-token"
 
     with (
@@ -63,15 +63,15 @@ def mock_smartcar_auth(
         ) as mock_auth,
         patch(
             "custom_components.smartcar.AsyncConfigEntryAuth",
-            new=lambda session, _, host: MockAuth(session, "http://test.local"),
+            new=lambda session, _, _host: MockAuth(session, "http://test.local"),
         ),
         patch(
             "custom_components.smartcar.AccessTokenAuthImpl",
-            new=lambda session, _, host: MockAuth(session, "http://test.local"),
+            new=lambda session, _, _host: MockAuth(session, "http://test.local"),
         ),
         patch(
             "custom_components.smartcar.config_flow.AccessTokenAuthImpl",
-            new=lambda session, _, host: MockAuth(session, "http://test.local"),
+            new=lambda session, _, _host: MockAuth(session, "http://test.local"),
         ),
     ):
         yield mock_auth.return_value
@@ -136,7 +136,7 @@ def vehicle(
         vehicle_attributes,
     )
 
-    return dict(vehicle_attributes, **{"_api": http_calls})
+    return dict(vehicle_attributes, _api=http_calls)
 
 
 @pytest.fixture(name="expires_at")
@@ -182,7 +182,8 @@ def mock_enabled_entities() -> set[EntityDescriptionKey]:
     """Fixture to pre-enable entities.
 
     To use, pair with the `mock_entity_registry_enabled_default` fixture and
-    extend the list prior to setting up the config entry."""
+    extend the list prior to setting up the config entry.
+    """
     return set()
 
 
@@ -207,12 +208,12 @@ def mock_enable_specified_entities(
 @pytest.fixture
 def mock_entity_registry_enabled_default(
     enabled_entities: list[str],
-) -> Generator[AsyncMock, None, None]:
+) -> Generator[AsyncMock]:
     with patch(
         "custom_components.smartcar.entity.SmartcarEntityDescription.entity_registry_enabled_default",
         new_callable=AdvancedPropertyMock,
     ) as mock:
-        mock.side_effect = lambda entity_description, val=None: (
+        mock.side_effect = lambda entity_description, _=None: (
             entity_description.key in enabled_entities if entity_description else ...
         )
         yield mock

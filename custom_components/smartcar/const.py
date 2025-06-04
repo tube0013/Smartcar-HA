@@ -14,11 +14,13 @@ PLATFORMS = [
 ]
 
 OAUTH2_AUTHORIZE = "https://connect.smartcar.com/oauth/authorize"
-OAUTH2_TOKEN = "https://auth.smartcar.com/oauth/token"
+OAUTH2_TOKEN = "https://auth.smartcar.com/oauth/token"  # noqa: S105
 SMARTCAR_MODE = "live"
 
 
 class Scope(StrEnum):
+    """Scope enumeration class."""
+
     READ_VEHICLE_INFO = auto()
     READ_VIN = auto()
     READ_BATTERY = auto()
@@ -53,6 +55,8 @@ DEFAULT_SCOPES = [
 
 
 class EntityDescriptionKey(StrEnum):
+    """EntityDescriptionKey enumeration class."""
+
     PLUG_STATUS = auto()
     LOCATION = auto()
     DOOR_LOCK = auto()

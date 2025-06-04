@@ -1,5 +1,7 @@
+from dataclasses import dataclass
 from datetime import timedelta
 import logging
+from typing import Any
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
@@ -19,13 +21,12 @@ _LOGGER = logging.getLogger(__name__)
 UPDATE_INTERVAL = timedelta(hours=6)
 
 
+@dataclass
 class EntityConfig:
+    """Entity config class."""
+
     endpoint: str  # the read (and batch) endpoint
     required_scopes: list[str]
-
-    def __init__(self, endpoint, required_scopes):
-        self.endpoint = endpoint
-        self.required_scopes = required_scopes
 
 
 ENTITY_CONFIG_MAP = {
@@ -74,13 +75,14 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
         vehicle_id: str,
         vin: str,
         entry: ConfigEntry,
-    ):
+    ) -> None:
         """Initialize coordinator."""
         self.auth = auth
         self.vehicle_id = vehicle_id
         self.vin = vin
         self.entry = entry
         self.batch_requests: set[EntityDescriptionKey] = set()
+        self.data: dict[str, Any] = {}
 
         super().__init__(
             hass,
@@ -89,7 +91,9 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
             update_interval=UPDATE_INTERVAL,
         )
 
-    def is_scope_enabled(self, sensor_key: EntityDescriptionKey, verbose=False):
+    def is_scope_enabled(
+        self, sensor_key: EntityDescriptionKey, *, verbose: bool = False
+    ) -> bool:
         token_scopes = self.config_entry.data.get("token", {}).get("scopes", [])
         required_scopes = ENTITY_CONFIG_MAP[sensor_key].required_scopes
         missing = [scope for scope in required_scopes if scope not in token_scopes]
@@ -97,26 +101,29 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
 
         if not enabled and verbose:
             _LOGGER.warning(
-                f"Skipping `{sensor_key}` which requires {repr(required_scopes)}, but "
-                f"user is missing {repr(missing)} with enabled scopes of {repr(token_scopes)}."
+                "Skipping `%s` which requires %r, but "
+                "user is missing %r with enabled scopes of %r.",
+                sensor_key,
+                required_scopes,
+                missing,
+                token_scopes,
             )
 
         return enabled
 
-    def batch_sensor(self, sensor: CoordinatorEntity):
+    def batch_sensor(self, sensor: CoordinatorEntity) -> None:
         """Mark a sensor to be included in the next update batch."""
         self._batch_add(sensor.entity_description.key)
 
-    def _batch_add(self, key: EntityDescriptionKey):
+    def _batch_add(self, key: EntityDescriptionKey) -> None:
         """Mark data as needing to be fetched in the next update batch."""
 
         assert self.is_scope_enabled(key)
 
         self.batch_requests.add(key)
 
-    def _batch_add_defaults(self):
-        """
-        Add default batch paths to request when none were explicitly requested.
+    def _batch_add_defaults(self) -> None:
+        """Add default batch paths to request when none were explicitly requested.
 
         Explicit requests are considered to have been made when:
 
@@ -144,13 +151,15 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
         )
 
         for entity in entities:
-            vin, key = entity.unique_id.split("_", 1)
+            _, key = entity.unique_id.split("_", 1)
             if not entity.disabled:
                 self._batch_add(key)
 
     def _batch_proccess(self) -> list[EntityDescriptionKey]:
-        """
-        Process a batch of paths to request.
+        """Process a batch of paths to request.
+
+        Returns:
+            The list of entity description keys that need to be processed.
         """
         self._batch_add_defaults()
 
@@ -160,8 +169,15 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
 
         return result
 
-    async def _async_update_data(self):
-        """Fetch data from API using selective batch endpoint and adjust interval."""
+    async def _async_update_data(self) -> dict[str, Any]:
+        """Fetch data from API using selective batch endpoint.
+
+        Returns:
+            The updated data.
+
+        Raises:
+            UpdateFailed: If the update fails for any reason.
+        """
 
         batch_requests = self._batch_proccess()
         request_path = f"vehicles/{self.vehicle_id}/batch"
@@ -172,12 +188,16 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
 
         if not batch_requests:
             _LOGGER.warning(
-                f"Coordinator {self.name}: No updates to request based on granted scopes and context.",
+                "Coordinator %s: No updates to request based on granted scopes and context.",
+                self.name,
             )
             return self.data
 
         _LOGGER.debug(
-            f"Coordinator {self.name}: Requesting batch update (Interval: {self.update_interval}) for paths: {request_batch_paths}",
+            "Coordinator %s: Requesting batch update (Interval: %s) for paths: %s",
+            self.name,
+            self.update_interval,
+            request_batch_paths,
         )
 
         response = await self.auth.request("post", request_path, json=request_body)
@@ -185,14 +205,17 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
         response_data = await response.json()
 
         if "responses" not in response_data:
-            raise UpdateFailed("Invalid batch response format")
+            msg = "Invalid batch response format"
+            raise UpdateFailed(msg)
 
-        merged_data = self._merge_batch_data(response_data)
+        return self._merge_batch_data(response_data)
 
-        return merged_data
+    def _merge_batch_data(self, batch_data: dict[str, Any]) -> dict[str, Any]:
+        """Merge data from the responses from a batch request.
 
-    def _merge_batch_data(self, batch_data):
-        """Fetch data from API using selective batch endpoint and adjust interval."""
+        Returns:
+            The newly merged data.
+        """
         updated_data = dict(self.data or {})
 
         for item in batch_data["responses"]:
@@ -221,11 +244,14 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
             else:
                 updated_data.pop(f"{key}:fetched_at", None)
 
-            if code not in (200, 404):
+            if code not in {200, 404}:
                 _LOGGER.warning(
-                    f"Coordinator {self.name}: Status {code} for path {path}",
+                    "Coordinator %s: Status %s for path %s",
+                    self.name,
+                    code,
+                    path,
                 )
 
-        _LOGGER.debug(f"Coordinator {self.name}: Batch update processed")
+        _LOGGER.debug("Coordinator %s: Batch update processed", self.name)
 
         return updated_data

@@ -1,39 +1,52 @@
 repos:
-  - repo: https://github.com/asottile/pyupgrade
-    rev: v3.15.2
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
     hooks:
-      - id: pyupgrade
-        args: [--py37-plus]
-  - repo: https://github.com/pycqa/isort
-    rev: 5.13.2
-    hooks:
-      - id: isort
-        name: isort (python)
-  - repo: https://github.com/psf/black
-    rev: 24.4.2
-    hooks:
-      - id: black
+      - id: check-added-large-files
+      - id: check-json
+      - id: check-yaml
+        args: [--unsafe]
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        exclude_types: [markdown]
+      - id: check-executables-have-shebangs
+      - id: no-commit-to-branch
         args:
-          - --safe
-          - --quiet
-        files: ^((homeassistant|script|tests)/.+)?[^/]+\.py$
+          - --branch=main
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.12
+    hooks:
+      - id: ruff-check
+        args: [--fix]
+      - id: ruff-format
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.37.1
+    hooks:
+      - id: yamllint
+        args:
+          - >
+            --config-data={
+              extends: default,
+              rules: {
+                anchors: disable,
+                document-start: disable,
+                comments: { min-spaces-from-content: 1 },
+                line-length: { max: 88 },
+                indentation: { indent-sequences: consistent },
+                truthy: { check-keys: false },
+              }
+            }
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.6
+    rev: v2.4.1
     hooks:
       - id: codespell
         args:
-          - --ignore-words-list=hass,alot,datas,dof,dur,farenheit,hist,iff,ines,ist,lightsensor,mut,nd,pres,referer,ser,serie,te,technik,ue,uint,visability,wan,wanna,withing
+          - --ignore-words-list=hass
           - --skip="./.*,*.csv,*.json"
           - --quiet-level=2
         exclude_types: [csv, json]
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.4.8
-    hooks:
-      - id: ruff
-        args: [--fix, --exit-non-zero-on-fix]
-      - id: ruff-format
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.10.0
+    rev: v1.16.0
     hooks:
       - id: mypy
         args:

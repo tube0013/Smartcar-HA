@@ -145,7 +145,7 @@ async def test_update_with_polling_disabled(
 
 
 @pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
-@pytest.mark.parametrize("enabled_scopes", [REQUIRED_SCOPES + ["read_battery"]])
+@pytest.mark.parametrize("enabled_scopes", [[*REQUIRED_SCOPES, "read_battery"]])
 @pytest.mark.parametrize(
     "enabled_entities",
     [DEFAULT_ENABLED_ENTITY_DESCRIPTION_KEYS | {EntityDescriptionKey.BATTERY_CAPACITY}],
@@ -235,14 +235,16 @@ RESTORE_STATE_PARAMETRIZE_ARGS = [
             "sensor.vw_id_4_range",
             {
                 "raw_value": 45.2,
-                "data_age": "2025-05-29T19:47:32",
-                "fetched_at": "2025-05-29T20:09:57",
+                "data_age": "2025-05-29T19:47:32+00:00",
+                "fetched_at": "2025-05-29T20:09:57+00:00",
             },
             "45.2",
             {
                 "battery": {"range": 45.2},
-                "battery:data_age": dt.datetime(2025, 5, 29, 19, 47, 32),
-                "battery:fetched_at": dt.datetime(2025, 5, 29, 20, 9, 57),
+                "battery:data_age": dt.datetime(2025, 5, 29, 19, 47, 32, tzinfo=dt.UTC),
+                "battery:fetched_at": dt.datetime(
+                    2025, 5, 29, 20, 9, 57, tzinfo=dt.UTC
+                ),
             },
         ),
     ],
@@ -318,7 +320,6 @@ async def test_restore_state(
         ),
     )
 
-    # await setup_integration(hass, mock_config_entry)
     mock_config_entry.add_to_hass(hass)
     hass.config_entries.async_update_entry(
         mock_config_entry,
@@ -353,7 +354,7 @@ async def test_async_update_internals(
 
     coordinator = MockCoordinator()
     description = MockEntityDescription()
-    entity = SmartcarEntity(cast(Any, coordinator), description)
+    entity = SmartcarEntity[float, float](cast("Any", coordinator), description)
     entity.registry_entry = MockRegistryEntry()
 
     # prove that the failure occurs when enabled

@@ -54,7 +54,10 @@ conditions:
     before: "21:00:00"
   - condition: template
     value_template: >
-      {% set is_charging = is_state('sensor.volkswagen_id_4_charging_status', 'CHARGING') %}
+      {% set is_charging = is_state(
+        'sensor.volkswagen_id_4_charging_status',
+        'CHARGING'
+      ) %}
       {{
         (update_if == 'charging' and is_charging) or
         (update_if == 'idle' and not is_charging)

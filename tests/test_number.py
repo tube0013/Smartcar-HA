@@ -79,7 +79,7 @@ async def test_charging_limit(
             target={ATTR_ENTITY_ID: "number.smartcar_784n_charge_limit"},
             blocking=True,
         )
-    except Exception as error:
+    except Exception as error:  # noqa: BLE001
         raised_error = error
     else:
         raised_error = None  # type: ignore[assignment]

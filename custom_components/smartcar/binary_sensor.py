@@ -34,24 +34,29 @@ SENSOR_TYPES: tuple[BinarySensorEntityDescription, ...] = (
 )
 
 
-async def async_setup_entry(
-    hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
+async def async_setup_entry(  # noqa: RUF029
+    hass: HomeAssistant,  # noqa: ARG001
+    entry: ConfigEntry,
+    async_add_entities: AddEntitiesCallback,
 ) -> None:
     coordinators: dict[str, SmartcarVehicleCoordinator] = (
         entry.runtime_data.coordinators
     )
-    entities = []
-    for vin, coordinator in coordinators.items():
-        for description in SENSOR_TYPES:
-            if coordinator.is_scope_enabled(description.key, verbose=True):
-                entities.append(SmartcarBinarySensor(coordinator, description))
-    _LOGGER.info(f"Adding {len(entities)} Smartcar binary sensor entities")
+    entities = [
+        SmartcarBinarySensor(coordinator, description)
+        for coordinator in coordinators.values()
+        for description in SENSOR_TYPES
+        if coordinator.is_scope_enabled(description.key, verbose=True)
+    ]
+    _LOGGER.info("Adding %s Smartcar binary sensor entities", len(entities))
     async_add_entities(entities)
 
 
-class SmartcarBinarySensor(SmartcarEntity, BinarySensorEntity):
+class SmartcarBinarySensor(SmartcarEntity[bool, bool], BinarySensorEntity):
+    """Binary sensor entity for plugged in status."""
+
     _attr_has_entity_name = True
 
     @property
-    def is_on(self):
+    def is_on(self) -> bool:
         return self._extract_value()

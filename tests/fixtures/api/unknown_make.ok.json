@@ -109,13 +109,13 @@
                         ],
                         "sunroof" : [
                             {"type": "sunroof" , "status" : "CLOSED"}
-                        ], 	
+                        ],
                         "storage" : [
                             {"type": "rear" , "status" : "UNKNOWN"},
                             {"type": "front" , "status" : "CLOSED"}
                         ],
-                        "chargingPort" : [ 
-                            {"type" : "chargingPort", "status" : "CLOSED" } 
+                        "chargingPort" : [
+                            {"type" : "chargingPort", "status" : "CLOSED" }
                         ]
                     }
                 },

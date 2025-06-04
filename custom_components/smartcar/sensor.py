@@ -151,24 +151,31 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
 )
 
 
-async def async_setup_entry(
-    hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
+async def async_setup_entry(  # noqa: RUF029
+    hass: HomeAssistant,  # noqa: ARG001
+    entry: ConfigEntry,
+    async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up sensors from coordinator."""
     coordinators: dict[str, SmartcarVehicleCoordinator] = (
         entry.runtime_data.coordinators
     )
-    _LOGGER.debug(f"Setting up sensors for VINs: {list(coordinators.keys())}")
-    entities = []
-    for vin, coordinator in coordinators.items():
-        for description in SENSOR_TYPES:
-            if coordinator.is_scope_enabled(description.key, verbose=True):
-                entities.append(SmartcarSensor(coordinator, description))
-    _LOGGER.info(f"Adding {len(entities)} Smartcar sensor entities")
+    _LOGGER.debug("Setting up sensors for VINs: %s", list(coordinators.keys()))
+    entities = [
+        SmartcarSensor(coordinator, description)
+        for coordinator in coordinators.values()
+        for description in SENSOR_TYPES
+        if coordinator.is_scope_enabled(description.key, verbose=True)
+    ]
+    _LOGGER.info("Adding %s Smartcar sensor entities", len(entities))
     async_add_entities(entities)
 
 
-class SmartcarSensor(SmartcarEntity, SensorEntity):
+class SmartcarSensor[ValueT, RawValueT](
+    SmartcarEntity[ValueT, RawValueT], SensorEntity
+):
+    """Sensor entity."""
+
     _attr_has_entity_name = True
 
     @property

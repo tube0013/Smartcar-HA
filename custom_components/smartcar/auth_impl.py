@@ -22,7 +22,7 @@ class AsyncConfigEntryAuth(AbstractAuth):
     async def async_get_access_token(self) -> str:
         """Return a valid access token for Smartcar API."""
         await self._oauth_session.async_ensure_token_valid()
-        return cast(str, self._oauth_session.token["access_token"])
+        return cast("str", self._oauth_session.token["access_token"])
 
 
 class AccessTokenAuthImpl(AbstractAuth):

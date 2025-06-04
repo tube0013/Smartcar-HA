@@ -76,9 +76,9 @@ async def test_full_flow(
     assert resp.status == 200
     assert resp.headers["content-type"] == "text/html; charset=utf-8"
 
-    VEHICLE_ID = "36ab27d0-fd9d-4455-823a-ce30af709ffc"
-    VIN = "5YJSA1CN5DFP00101"
-    SERVER_ACCESS_TOKEN = {
+    vehicle_id = "36ab27d0-fd9d-4455-823a-ce30af709ffc"
+    vin = "5YJSA1CN5DFP00101"
+    server_access_token = {
         "refresh_token": "server-refresh-token",
         "access_token": "server-access-token",
         "type": "Bearer",
@@ -88,18 +88,18 @@ async def test_full_flow(
 
     aioclient_mock.post(
         OAUTH2_TOKEN,
-        json=SERVER_ACCESS_TOKEN,
+        json=server_access_token,
     )
     aioclient_mock.get(
         f"{MOCK_API_ENDPOINT}/v2.0/vehicles",
-        json={"paging": {"count": 25, "offset": 0}, "vehicles": [VEHICLE_ID]},
+        json={"paging": {"count": 25, "offset": 0}, "vehicles": [vehicle_id]},
     )
     aioclient_mock.get(
-        f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{VEHICLE_ID}/vin", json={"vin": VIN}
+        f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{vehicle_id}/vin", json={"vin": vin}
     )
     aioclient_mock.get(
-        f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{VEHICLE_ID}",
-        json={"id": VEHICLE_ID, "make": "TESLA", "model": "Model S", "year": "2014"},
+        f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{vehicle_id}",
+        json={"id": vehicle_id, "make": "TESLA", "model": "Model S", "year": "2014"},
     )
 
     with patch(
@@ -115,7 +115,7 @@ async def test_full_flow(
 
     config_entry = entries[0]
     assert config_entry.title == DEFAULT_NAME
-    assert config_entry.unique_id == VEHICLE_ID
+    assert config_entry.unique_id == vehicle_id
 
     data = dict(config_entry.data)
     assert "token" in data
@@ -123,14 +123,12 @@ async def test_full_flow(
     assert dict(config_entry.data) == {
         "auth_implementation": "smartcar",
         "token": dict(
-            SERVER_ACCESS_TOKEN,
-            **{
-                "scopes": requested_scopes,
-            },
+            server_access_token,
+            scopes=requested_scopes,
         ),
         "vehicles": {
-            VEHICLE_ID: {
-                "vin": VIN,
+            vehicle_id: {
+                "vin": vin,
                 "make": "TESLA",
                 "model": "Model S",
                 "year": "2014",
@@ -140,7 +138,7 @@ async def test_full_flow(
 
     assert result["type"] is FlowResultType.CREATE_ENTRY
     assert result["title"] == DEFAULT_NAME
-    assert result["result"].unique_id == VEHICLE_ID
+    assert result["result"].unique_id == vehicle_id
 
 
 @pytest.mark.usefixtures("current_request_with_host")
@@ -205,7 +203,7 @@ async def test_duplicate_vins_disallowed(
     assert resp.status == 200
     assert resp.headers["content-type"] == "text/html; charset=utf-8"
 
-    SERVER_ACCESS_TOKEN = {
+    server_access_token = {
         "refresh_token": "server-refresh-token",
         "access_token": "server-access-token",
         "type": "Bearer",
@@ -215,18 +213,18 @@ async def test_duplicate_vins_disallowed(
 
     aioclient_mock.post(
         OAUTH2_TOKEN,
-        json=SERVER_ACCESS_TOKEN,
+        json=server_access_token,
     )
     aioclient_mock.get(
         f"{MOCK_API_ENDPOINT}/v2.0/vehicles",
         json={"paging": {"count": 25, "offset": 0}, "vehicles": [vehicle["id"]]},
     )
     aioclient_mock.get(
-        f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{vehicle["id"]}/vin",
+        f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{vehicle['id']}/vin",
         json={"vin": vehicle["vin"]},
     )
     aioclient_mock.get(
-        f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{vehicle["id"]}",
+        f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{vehicle['id']}",
         json={"id": vehicle["id"], "make": "TESLA", "model": "Model S", "year": "2014"},
     )
 
@@ -254,7 +252,7 @@ async def test_no_scopes_entered(
     assert result["step_id"] == "scopes"
 
     result = await hass.config_entries.flow.async_configure(
-        result["flow_id"], {k: False for k in CONFIGURABLE_SCOPES}
+        result["flow_id"], dict.fromkeys(CONFIGURABLE_SCOPES, False)
     )
 
     assert result["type"] is FlowResultType.FORM
@@ -415,9 +413,9 @@ async def test_api_error(
     assert resp.status == 200
     assert resp.headers["content-type"] == "text/html; charset=utf-8"
 
-    VEHICLE_ID = "36ab27d0-fd9d-4455-823a-ce30af709ffc"
-    VIN = "5YJSA1CN5DFP00101"
-    SERVER_ACCESS_TOKEN = {
+    vehicle_id = "36ab27d0-fd9d-4455-823a-ce30af709ffc"
+    vin = "5YJSA1CN5DFP00101"
+    server_access_token = {
         "refresh_token": "server-refresh-token",
         "access_token": "server-access-token",
         "type": "Bearer",
@@ -431,7 +429,7 @@ async def test_api_error(
 
     aioclient_mock.post(
         OAUTH2_TOKEN,
-        json=SERVER_ACCESS_TOKEN,
+        json=server_access_token,
     )
     aioclient_mock.get(
         f"{MOCK_API_ENDPOINT}/v2.0/vehicles",
@@ -439,21 +437,21 @@ async def test_api_error(
         json=(
             json
             if override_vehicles
-            else {"paging": {"count": 25, "offset": 0}, "vehicles": [VEHICLE_ID]}
+            else {"paging": {"count": 25, "offset": 0}, "vehicles": [vehicle_id]}
         ),
     )
     aioclient_mock.get(
-        f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{VEHICLE_ID}/vin",
+        f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{vehicle_id}/vin",
         status=http_status if override_vin else 200,
-        json=json if override_vin else {"vin": VIN},
+        json=json if override_vin else {"vin": vin},
     )
     aioclient_mock.get(
-        f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{VEHICLE_ID}",
+        f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{vehicle_id}",
         status=http_status if override_attributes else 200,
         json=(
             json
             if override_attributes
-            else {"id": VEHICLE_ID, "make": "TESLA", "model": "Model S", "year": "2014"}
+            else {"id": vehicle_id, "make": "TESLA", "model": "Model S", "year": "2014"}
         ),
     )
 
@@ -544,8 +542,8 @@ async def test_reauth(
     assert resp.status == 200
     assert resp.headers["content-type"] == "text/html; charset=utf-8"
 
-    VIN = "5YJSA1CN5DFP00101"
-    SERVER_ACCESS_TOKEN = {
+    vin = "5YJSA1CN5DFP00101"
+    server_access_token = {
         "refresh_token": "mock-refresh-token",
         "access_token": "updated-access-token",
         "type": "Bearer",
@@ -555,14 +553,14 @@ async def test_reauth(
 
     aioclient_mock.post(
         OAUTH2_TOKEN,
-        json=SERVER_ACCESS_TOKEN,
+        json=server_access_token,
     )
     aioclient_mock.get(
         f"{MOCK_API_ENDPOINT}/v2.0/vehicles",
         json={"paging": {"count": 25, "offset": 0}, "vehicles": [new_vehicle_id]},
     )
     aioclient_mock.get(
-        f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{new_vehicle_id}/vin", json={"vin": VIN}
+        f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{new_vehicle_id}/vin", json={"vin": vin}
     )
     aioclient_mock.get(
         f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{new_vehicle_id}",
@@ -592,4 +590,4 @@ async def test_reauth(
 
     # verify access token is refreshed
     assert mock_config_entry.data["token"]["access_token"] == expected_access_token
-    assert mock_config_entry.data["token"]["refresh_token"] == "mock-refresh-token"
+    assert mock_config_entry.data["token"]["refresh_token"] == "mock-refresh-token"  # noqa: S105

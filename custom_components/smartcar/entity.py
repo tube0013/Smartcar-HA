@@ -1,9 +1,10 @@
 from collections.abc import Callable
+import datetime as dt
 from enum import Enum
 from functools import reduce
 from http import HTTPStatus
 import logging
-from typing import Any
+from typing import Any, Literal, Self, cast
 
 from aiohttp import ClientResponseError
 from homeassistant.const import STATE_UNAVAILABLE, STATE_UNKNOWN
@@ -29,10 +30,15 @@ ERROR_STATUS_COMPATIBILITY = 501
 ERROR_STATUS_UPSTREAM = 502
 
 
-class SmartcarEntity(CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntity):
+class SmartcarEntity[ValueT, RawValueT](
+    CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntity
+):
+    """Base Smartcar entity class."""
+
     def __init__(
         self, coordinator: SmartcarVehicleCoordinator, description: EntityDescription
-    ):
+    ) -> None:
+        """Initialize."""
         super().__init__(coordinator)
         self.vin = coordinator.vin
         self.entity_description = description
@@ -40,7 +46,7 @@ class SmartcarEntity(CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntit
         self._attr_device_info = {"identifiers": {(DOMAIN, self.vin)}}
 
     @property
-    def available(self):
+    def available(self) -> bool:
         return super().available and self._extract_value() is not None
 
     @property
@@ -63,12 +69,12 @@ class SmartcarEntity(CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntit
 
         await super().async_update()
 
-    async def async_added_to_hass(self):
+    async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
 
         if (
-            (last_state := await self.async_get_last_state()) is not None
-            and last_state.state not in (STATE_UNKNOWN, STATE_UNAVAILABLE)
+            (last_state := await self.async_get_last_state()) is not None  # noqa: PLR0916
+            and last_state.state not in {STATE_UNKNOWN, STATE_UNAVAILABLE}
             and (extra_data := await self.async_get_last_extra_data()) is not None
             and (extra_data_dict := extra_data.as_dict())
             and (extra_data_raw_value := extra_data_dict.get("raw_value")) is not None
@@ -80,7 +86,7 @@ class SmartcarEntity(CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntit
 
     @property
     def extra_restore_state_data(self) -> ExtraStoredData | None:
-        data = {"raw_value": self._extract_raw_value()}
+        data: dict[str, Any] = {"raw_value": self._extract_raw_value()}
 
         if unit_system := self._extract_unit_system():
             data["unit_system"] = unit_system
@@ -93,37 +99,41 @@ class SmartcarEntity(CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntit
 
         return RestoredExtraData(data)
 
-    def _extract_unit_system(self) -> Any:
+    def _extract_unit_system(self) -> str | None:
         data = self.coordinator.data or {}
         description = self.entity_description
         key_path = description.value_key_path.split(".")
         return data.get(f"{key_path[0]}:unit_system")
 
-    def _extract_data_age(self) -> Any:
+    def _extract_data_age(self) -> dt.datetime | None:
         data = self.coordinator.data or {}
         description = self.entity_description
         key_path = description.value_key_path.split(".")
         return data.get(f"{key_path[0]}:data_age")
 
-    def _extract_fetched_at(self) -> Any:
+    def _extract_fetched_at(self) -> dt.datetime | None:
         data = self.coordinator.data or {}
         description = self.entity_description
         key_path = description.value_key_path.split(".")
         return data.get(f"{key_path[0]}:fetched_at")
 
-    def _extract_raw_value(self) -> Any:
+    def _extract_raw_value(self) -> RawValueT:
         data = self.coordinator.data or {}
         description = self.entity_description
         key_path = description.value_key_path.split(".")
-        value = reduce(lambda v, key: v.get(key) if v else None, key_path, data)
+        value: RawValueT = cast(
+            "RawValueT",
+            reduce(lambda v, key: v.get(key) if v else None, key_path, data),
+        )
 
         return value
 
-    def _extract_value(self) -> Any:
+    def _extract_value(self) -> ValueT:
         description = self.entity_description
         unit_system = self._extract_unit_system()
-        value = self._extract_raw_value()
-        value = description.value_cast(value)
+        raw_value: RawValueT = self._extract_raw_value()
+        value_cast: Callable[[RawValueT], ValueT] = description.value_cast
+        value: ValueT = value_cast(raw_value)
 
         if (
             value is not None
@@ -134,10 +144,14 @@ class SmartcarEntity(CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntit
 
         return value
 
-    def _inject_raw_value(self, value, extra_data: dict = {}) -> None:
+    def _inject_raw_value(
+        self, value: RawValueT, extra_data: dict | None = None
+    ) -> None:
         coordinator = self.coordinator
         if coordinator.data is None:
             coordinator.data = {}
+        if extra_data is None:
+            extra_data = {}
         data = coordinator.data
         description = self.entity_description
         key_path = description.value_key_path.split(".")
@@ -160,9 +174,15 @@ class SmartcarEntity(CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntit
             data[f"{key_path[0]}:fetched_at"] = dt_util.parse_datetime(fetched_at)
 
     async def _async_send_command(
-        self, subpath, payload, *, method="post", version="2.0", **kwargs
-    ):
-        _LOGGER.info(f"Sending {subpath} request for {self.vin}")
+        self,
+        subpath: str,
+        payload: dict[str, Any],
+        *,
+        method: str = "post",
+        version: str = "2.0",
+        **kwargs,  # noqa: ARG002, ANN003
+    ) -> bool:
+        _LOGGER.info("Sending %s request for %s", subpath, self.vin)
         success = False
 
         try:
@@ -175,57 +195,71 @@ class SmartcarEntity(CoordinatorEntity[SmartcarVehicleCoordinator], RestoreEntit
             resp.raise_for_status()
             success = True
         except ClientResponseError as err:
-            if err.status in (HTTPStatus.UNAUTHORIZED,):
+            if err.status == HTTPStatus.UNAUTHORIZED:
                 _LOGGER.warning(
-                    f"Auth error {err.status} sending {subpath} request for {self.vin}"
+                    "Auth error %s sending %s request for %s",
+                    err.status,
+                    subpath,
+                    self.vin,
                 )
                 self.coordinator.config_entry.async_start_reauth(self.hass)
-            elif err.status in (
+            elif err.status in {
                 ERROR_STATUS_VEHICLE_STATE,
                 ERROR_STATUS_RATE_LIMIT,
                 ERROR_STATUS_BILLING,
                 ERROR_STATUS_COMPATIBILITY,
                 ERROR_STATUS_UPSTREAM,
-            ):
+            }:
                 pass
             else:
-                raise err
+                raise
 
         return success
 
 
 class IndirectDescriptorDefaultType(Enum):
+    """IndirectDescriptor DEFAULT singleton."""
+
     _singleton = False
 
 
 class IndirectDescriptor:
-    """
-    Descriptor to override dataclass field & lookup value from a named
-    collection defined in the `smartcar.const` module.
+    """Descriptor to override a dataclass field.
+
+    It will instead lookup a value from a named collection defined in the
+    `smartcar.const` module.
     """
 
-    DEFAULT = IndirectDescriptorDefaultType._singleton
+    DEFAULT = IndirectDescriptorDefaultType._singleton  # noqa: SLF001
 
-    def __init__(self, collection_name):
+    def __init__(self, collection_name: str) -> None:
+        """Initialize."""
         self._collection_name = collection_name
         self._collection = getattr(smartcar_const, collection_name)
 
-    def __get__(self, entity_desciption, type):
+    def __get__(
+        self,
+        entity_desciption: EntityDescription | None,
+        objtype: type[EntityDescription],
+    ) -> bool | Literal[IndirectDescriptorDefaultType._singleton]:
         if entity_desciption is None:
             return IndirectDescriptor.DEFAULT
 
         return entity_desciption.key in self._collection
 
-    def __set__(self, obj, value):
+    def __set__(
+        self,
+        obj: Self,
+        value: Any,  # noqa: ANN401
+    ) -> None:
         # dataclasses will set the value to the default value from the
         # __init__ method they create, so the default value needs to be a
         # unique value that we can allow to be set (by being ignored) here
         # while rasiging for any other value being set.
         if value == IndirectDescriptor.DEFAULT:
             return
-        raise AttributeError(
-            f"readonly; configure via smartcar.const.{self._collection_name}"
-        )
+        msg = f"readonly; configure via smartcar.const.{self._collection_name}"
+        raise AttributeError(msg)
 
 
 class SmartcarEntityDescription(EntityDescription):
