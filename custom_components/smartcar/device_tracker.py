@@ -33,32 +33,39 @@ ENTITY_DESCRIPTIONS: tuple[TrackerEntityDescription, ...] = (
 )
 
 
-async def async_setup_entry(
-    hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
+async def async_setup_entry(  # noqa: RUF029
+    hass: HomeAssistant,  # noqa: ARG001
+    entry: ConfigEntry,
+    async_add_entities: AddEntitiesCallback,
 ) -> None:
     coordinators: dict[str, SmartcarVehicleCoordinator] = (
         entry.runtime_data.coordinators
     )
-    entities = []
-    for vin, coordinator in coordinators.items():
-        for description in ENTITY_DESCRIPTIONS:
-            if coordinator.is_scope_enabled(description.key, verbose=True):
-                entities.append(SmartcarLocationTracker(coordinator, description))
-    _LOGGER.info(f"Adding {len(entities)} Smartcar device tracker entities")
+    entities = [
+        SmartcarLocationTracker(coordinator, description)
+        for coordinator in coordinators.values()
+        for description in ENTITY_DESCRIPTIONS
+        if coordinator.is_scope_enabled(description.key, verbose=True)
+    ]
+    _LOGGER.info("Adding %s Smartcar device tracker entities", len(entities))
     async_add_entities(entities)
 
 
-class SmartcarLocationTracker(SmartcarEntity, TrackerEntity):
+class SmartcarLocationTracker(
+    SmartcarEntity[dict[str, float], dict[str, float]], TrackerEntity
+):
+    """Device tracker entity."""
+
     _attr_has_entity_name = True
 
     @property
-    def latitude(self):
+    def latitude(self) -> float | None:
         return self._extract_value().get("latitude")
 
     @property
-    def longitude(self):
+    def longitude(self) -> float | None:
         return self._extract_value().get("longitude")
 
     @property
-    def source_type(self):
+    def source_type(self) -> SourceType:
         return SourceType.GPS

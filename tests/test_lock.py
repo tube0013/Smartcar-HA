@@ -68,7 +68,7 @@ async def test_lock(
             {ATTR_ENTITY_ID: "lock.smartcar_784n_door_lock"},
             blocking=True,
         )
-    except Exception as error:
+    except Exception as error:  # noqa: BLE001
         raised_error = error
     else:
         raised_error = None  # type: ignore[assignment]

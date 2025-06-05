@@ -225,8 +225,8 @@
 # name: test_restore_sensor_save_state[vw_id_4-value_and_timestampes]
   list([
     dict({
-      'data_age': '2025-05-29T19:47:32',
-      'fetched_at': '2025-05-29T20:09:57',
+      'data_age': '2025-05-29T19:47:32+00:00',
+      'fetched_at': '2025-05-29T20:09:57+00:00',
       'raw_value': 45.2,
     }),
   ])

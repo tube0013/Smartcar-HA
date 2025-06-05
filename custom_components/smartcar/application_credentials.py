@@ -8,7 +8,9 @@ from homeassistant.helpers.config_entry_oauth2_flow import (
 from .const import OAUTH2_AUTHORIZE, OAUTH2_TOKEN
 
 
-async def async_get_authorization_server(hass: HomeAssistant) -> AuthorizationServer:
+async def async_get_authorization_server(  # noqa: RUF029
+    hass: HomeAssistant,  # noqa: ARG001
+) -> AuthorizationServer:
     """Return authorization server details."""
     return AuthorizationServer(
         authorize_url=OAUTH2_AUTHORIZE,
@@ -16,7 +18,9 @@ async def async_get_authorization_server(hass: HomeAssistant) -> AuthorizationSe
     )
 
 
-async def async_get_description_placeholders(hass: HomeAssistant) -> dict[str, str]:
+async def async_get_description_placeholders(  # noqa: RUF029
+    hass: HomeAssistant,
+) -> dict[str, str]:
     """Return description placeholders for the credentials dialog."""
     if "my" in hass.config.components:
         redirect_url = MY_AUTH_CALLBACK_PATH

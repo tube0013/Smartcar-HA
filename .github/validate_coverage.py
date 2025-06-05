@@ -10,7 +10,9 @@ def validate_coverage():
 
     def exit_unless(key, value):
         if totals[key] != value:
-            print(f"Coverage check: totals.{key} is expected to be {value}")
+            sys.stdout.write(
+                f"Coverage check: totals.{key} is expected to be {value}\n"
+            )
             sys.exit(1)
 
     exit_unless("percent_covered", 100.0)
@@ -18,7 +20,7 @@ def validate_coverage():
     exit_unless("num_partial_branches", 0)
     exit_unless("missing_branches", 0)
 
-    print("Coverage check completed")
+    sys.stdout.write("Coverage check completed\n")
 
 
 validate_coverage()

@@ -1,12 +1,13 @@
+# yamllint disable-line rule:line-length
 # see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
 name: Pytest
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
     inputs:
       upgraded:
@@ -50,32 +51,32 @@ jobs:
         python-version: ["3.13"]
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
 
-        if [[ "${{ matrix.dependencies }}" == "upgraded" ]];
-        then
-          echo "unpinning dependencies"
-          ./script/unfreeze
-        fi
+          if [[ "${{ matrix.dependencies }}" == "upgraded" ]];
+          then
+            echo "unpinning dependencies"
+            ./script/unfreeze
+          fi
 
-        pip install -r requirements.test.txt
+          pip install -r requirements.test.txt
 
-        if [[ "${{ matrix.dependencies }}" == "upgraded" ]];
-        then
-          ./script/freeze
-          echo "dependency changes after upgrade:"
-          git diff requirements.test.txt
-        fi
-    - name: Test with pytest
-      run: |
-        pytest -p no:sugar
-    - name: Validate coverage
-      run: |
-        coverage json -q -o - | python3 .github/validate_coverage.py
+          if [[ "${{ matrix.dependencies }}" == "upgraded" ]];
+          then
+            ./script/freeze
+            echo "dependency changes after upgrade:"
+            git diff requirements.test.txt
+          fi
+      - name: Test with pytest
+        run: |
+          pytest -p no:sugar
+      - name: Validate coverage
+        run: |
+          coverage json -q -o - | python3 .github/validate_coverage.py

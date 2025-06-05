@@ -113,7 +113,7 @@ async def test_duplicate_vins_disallowed(
 
 @pytest.mark.usefixtures("enable_specified_entities")
 @pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
-@pytest.mark.parametrize("enabled_scopes", [REQUIRED_SCOPES + ["read_battery"]])
+@pytest.mark.parametrize("enabled_scopes", [[*REQUIRED_SCOPES, "read_battery"]])
 @pytest.mark.parametrize(
     "enabled_entities",
     [DEFAULT_ENABLED_ENTITY_DESCRIPTION_KEYS | {EntityDescriptionKey.BATTERY_CAPACITY}],

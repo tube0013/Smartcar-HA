@@ -34,7 +34,14 @@ class SmartcarData:
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Set up Smartcar from a config entry."""
+    """Set up Smartcar from a config entry.
+
+    Returns:
+        If the setup was successful.
+
+    Raises:
+        ConfigEntryError: For overlapping VIN in config entries.
+    """
     implementation = await async_get_config_entry_implementation(hass, entry)
     websession = async_get_clientsession(hass)
     oauth_session = OAuth2Session(hass, entry, implementation)
@@ -51,9 +58,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         year = details.get("year")
 
         if vin in other_vins:
-            raise ConfigEntryError(
-                "Cannot setup multiple config entries with VIN {vin}"
-            )
+            msg = f"Cannot setup multiple config entries with VIN {vin}"
+            raise ConfigEntryError(msg)
 
         # register device
         device_registry.async_get_or_create(
@@ -63,18 +69,18 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             model=f"{model} ({year})" if model and year else model,
             name=f"{make} {model}" if make and model else f"Smartcar {vin[-4:]}",
         )
-        _LOGGER.info(f"Registered device for VIN: {vin}")
+        _LOGGER.info("Registered device for VIN: %s", vin)
 
         # create and store coordinator
         coordinator = SmartcarVehicleCoordinator(hass, auth, vehicle_id, vin, entry)
         coordinators[vin] = coordinator
-        _LOGGER.debug(f"Coordinator created and initial data fetched for VIN: {vin}")
+        _LOGGER.debug("Coordinator created and initial data fetched for VIN: %s", vin)
 
     # setup platforms before doing first refresh. this gets the entity registry
     # populated with the desired entities & allows the coordinator to determine
     # what to fetch on the first refresh. (some entities, for instance, are
     # disabled by default.)
-    _LOGGER.debug(f"Forwarding setup to platforms: {PLATFORMS}")
+    _LOGGER.debug("Forwarding setup to platforms: %s", PLATFORMS)
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
 
     await asyncio.gather(
@@ -83,28 +89,34 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     # log stored scopes once on successful setup
     _LOGGER.info(
-        f"Using token with scopes: {entry.data.get("token", {}).get("scopes")}"
+        "Using token with scopes: %s", entry.data.get("token", {}).get("scopes")
     )
 
     return True
 
 
-async def async_do_first_refresh(coordinator):
+async def async_do_first_refresh(coordinator: SmartcarVehicleCoordinator) -> None:
     await coordinator.async_config_entry_first_refresh()
     _LOGGER.debug(
-        f"Coordinator created and initial data fetched for VIN: {coordinator.vin}"
+        "Coordinator created and initial data fetched for VIN: %s", coordinator.vin
     )
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Unload a config entry."""
-    _LOGGER.info(f"Unloading Smartcar entry {entry.entry_id}")
+    """Unload a config entry.
+
+    Returns:
+        If the unload was successful.
+    """
+    _LOGGER.info("Unloading Smartcar entry %s", entry.entry_id)
     return bool(await hass.config_entries.async_unload_platforms(entry, PLATFORMS))
 
 
-async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry):
+async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> bool:
     _LOGGER.debug(
-        f"Migrating configuration from version {config_entry.version}.{config_entry.minor_version}"
+        "Migrating configuration from version %s.%s",
+        config_entry.version,
+        config_entry.minor_version,
     )
 
     # prevent rollbacks
@@ -124,7 +136,7 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry):
         new_data[CONF_TOKEN] = {**old_data[CONF_TOKEN]}
         new_data[CONF_TOKEN].pop("scope", None)
 
-        await populate_entry_data(hass, new_data, auth, access_token, scopes)
+        await populate_entry_data(new_data, auth, scopes)
 
         old_vehicle_ids = set(old_data.get("vehicles", {}).keys())
         new_vehicle_ids = set(new_data["vehicles"].keys())
@@ -145,7 +157,8 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry):
 
         if inaccessible_vehicle_ids:
             _LOGGER.error(
-                f"Vehicle(s) are no longer accessible via the API: {inaccessible_vehicle_ids}"
+                "Vehicle(s) are no longer accessible via the API: %s",
+                inaccessible_vehicle_ids,
             )
             return False
 
@@ -158,13 +171,17 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry):
         )
 
     _LOGGER.debug(
-        f"Migration to configuration version {config_entry.version}.{config_entry.minor_version} successful"
+        "Migration to configuration version %s.%s successful",
+        config_entry.version,
+        config_entry.minor_version,
     )
 
     return True
 
 
-def vehicle_vins_in_use(hass: HomeAssistant, config_entry: ConfigEntry = None):
+def vehicle_vins_in_use(
+    hass: HomeAssistant, config_entry: ConfigEntry = None
+) -> set[str]:
     return {
         vehicle["vin"]
         for other_entry in hass.config_entries.async_entries(DOMAIN)
@@ -174,19 +191,17 @@ def vehicle_vins_in_use(hass: HomeAssistant, config_entry: ConfigEntry = None):
 
 
 async def populate_entry_data(
-    hass: HomeAssistant,
     data: dict,
     auth: AbstractAuth,
-    token: str,
     scopes: list[Scope],
-):
+) -> None:
     """Populate config entry data during initial creation or migration."""
     _inject_requested_scopes_into_entry_data(data, scopes)
 
-    await _store_all_vehicles(data, auth, token)
+    await _store_all_vehicles(data, auth)
 
 
-def _inject_requested_scopes_into_entry_data(data: dict, scopes: list[Scope]):
+def _inject_requested_scopes_into_entry_data(data: dict, scopes: list[Scope]) -> None:
     """Inject selected scopes into stored token data."""
     data.setdefault("token", {})["scopes"] = scopes
 
@@ -194,9 +209,14 @@ def _inject_requested_scopes_into_entry_data(data: dict, scopes: list[Scope]):
 async def _store_all_vehicles(
     data: dict,
     auth: AbstractAuth,
-    token: str,
-):
-    """Fetch and store data for all vehicles in config entry data."""
+) -> None:
+    """Fetch and store data for all vehicles in config entry data.
+
+    Raises:
+        EmptyVehicleListError: If no vehicles are found.
+        InvalidAuthError: If the request cannot be authorized.
+        ClientResponseError: If there is a request error.
+    """
 
     _LOGGER.info("Fetching Smartcar vehicle IDs...")
 
@@ -211,33 +231,36 @@ async def _store_all_vehicles(
         vehicle_list_data = await vehicle_list_resp.json()
         vehicle_ids = vehicle_list_data.get("vehicles", [])
     except ClientResponseError as err:
-        if err.status in (HTTPStatus.UNAUTHORIZED,):
-            raise InvalidAuthError(
-                f"Auth error fetching vehicle list: {err.status}"
-            ) from err
-        else:
-            raise err
+        if err.status == HTTPStatus.UNAUTHORIZED:
+            msg = f"Auth error fetching vehicle list: {err.status}"
+            raise InvalidAuthError(msg) from err
+        raise
 
-    _LOGGER.info(f"Found {len(vehicle_ids)} vehicle IDs")
+    _LOGGER.info("Found %s vehicle IDs", len(vehicle_ids))
 
     if not vehicle_ids:
         raise EmptyVehicleListError
 
     await asyncio.gather(
-        *[_store_vehicle_details(data, auth, token, vid) for vid in vehicle_ids]
+        *[_store_vehicle_details(data, auth, vid) for vid in vehicle_ids]
     )
 
 
 async def _store_vehicle_details(
     data: dict,
     auth: AbstractAuth,
-    token: str,
     vehicle_id: str,
 ) -> None:
-    """Fetch and store data for a single vehicle."""
+    """Fetch and store data for a single vehicle.
+
+    Raises:
+        MissingVINError: If the VIN is not available.
+        InvalidAuthError: If the request cannot be authorized.
+        ClientResponseError: If there is a request error.
+    """
 
     try:
-        _LOGGER.debug(f"Fetching VIN for vehicle ID: {vehicle_id}")
+        _LOGGER.debug("Fetching VIN for vehicle ID: %s", vehicle_id)
         vin_resp = await auth.request(
             "get",
             f"vehicles/{vehicle_id}/vin",
@@ -247,13 +270,14 @@ async def _store_vehicle_details(
         vin = vin_data.get("vin")
 
         if not vin:
-            raise MissingVINError(f"No VIN for vehicle {vehicle_id}")
+            msg = f"No VIN for vehicle {vehicle_id}"
+            raise MissingVINError(msg)
 
         data["vehicles"][vehicle_id] = {
             "vin": vin,
         }
 
-        _LOGGER.debug(f"Fetching attributes for vehicle ID: {vehicle_id}")
+        _LOGGER.debug("Fetching attributes for vehicle ID: %s", vehicle_id)
         attr_resp = await auth.request(
             "get",
             f"vehicles/{vehicle_id}",
@@ -272,9 +296,7 @@ async def _store_vehicle_details(
             }
         )
     except ClientResponseError as err:
-        if err.status in (HTTPStatus.UNAUTHORIZED,):
-            raise InvalidAuthError(
-                f"Auth error [{err.status}] during vehicle setup"
-            ) from err
-        else:
-            raise err
+        if err.status == HTTPStatus.UNAUTHORIZED:
+            msg = f"Auth error [{err.status}] during vehicle setup"
+            raise InvalidAuthError(msg) from err
+        raise

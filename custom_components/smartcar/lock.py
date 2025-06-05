@@ -27,34 +27,47 @@ ENTITY_DESCRIPTIONS: tuple[LockEntityDescription, ...] = (
 )
 
 
-async def async_setup_entry(
-    hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
+async def async_setup_entry(  # noqa: RUF029
+    hass: HomeAssistant,  # noqa: ARG001
+    entry: ConfigEntry,
+    async_add_entities: AddEntitiesCallback,
 ) -> None:
     coordinators: dict[str, SmartcarVehicleCoordinator] = (
         entry.runtime_data.coordinators
     )
-    entities = []
-    for vin, coordinator in coordinators.items():
-        for description in ENTITY_DESCRIPTIONS:
-            if coordinator.is_scope_enabled(description.key, verbose=True):
-                entities.append(SmartcarDoorLock(coordinator, description))
-    _LOGGER.info(f"Adding {len(entities)} Smartcar lock entities")
+    entities = [
+        SmartcarDoorLock(coordinator, description)
+        for coordinator in coordinators.values()
+        for description in ENTITY_DESCRIPTIONS
+        if coordinator.is_scope_enabled(description.key, verbose=True)
+    ]
+    _LOGGER.info("Adding %s Smartcar lock entities", len(entities))
     async_add_entities(entities)
 
 
-class SmartcarDoorLock(SmartcarEntity, LockEntity):
+class SmartcarDoorLock(SmartcarEntity[bool, bool], LockEntity):
+    """Lock entity for doors/windows."""
+
     _attr_has_entity_name = True
 
     @property
-    def is_locked(self):
+    def is_locked(self) -> bool:
         return self._extract_value()
 
-    async def async_lock(self, **kwargs):
+    async def async_lock(
+        self,
+        **kwargs,  # noqa: ARG002, ANN003
+    ) -> None:
         if await self._async_send_command("/security", {"action": "LOCK"}):
-            self._inject_raw_value(True)
+            value = True
+            self._inject_raw_value(value)
             self.async_write_ha_state()
 
-    async def async_unlock(self, **kwargs):
+    async def async_unlock(
+        self,
+        **kwargs,  # noqa: ARG002, ANN003
+    ) -> None:
         if await self._async_send_command("/security", {"action": "UNLOCK"}):
-            self._inject_raw_value(False)
+            value = False
+            self._inject_raw_value(value)
             self.async_write_ha_state()

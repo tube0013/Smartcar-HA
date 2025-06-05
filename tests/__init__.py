@@ -46,12 +46,12 @@ def aioclient_mock_append_vehicle_request(
         json = http_call.get("response")
         path = http_call.get("path")
         vehicle_path = http_call.get("vehicle_path")
-        assert (
-            path or vehicle_path
-        ), f"{fixture_name} fixture should provide one of `path` or `vehicle_path`"
-        assert (
-            json or side_effect or status != 200
-        ), f"{fixture_name} fixture should provide `response`"
+        assert path or vehicle_path, (
+            f"{fixture_name} fixture should provide one of `path` or `vehicle_path`"
+        )
+        assert json or side_effect or status != 200, (
+            f"{fixture_name} fixture should provide `response`"
+        )
 
         if not path:
             path = f"/vehicles/{vehicle_id}{vehicle_path}"
@@ -61,7 +61,10 @@ def aioclient_mock_append_vehicle_request(
             module = importlib.import_module(module_path)
             side_effect_class = getattr(module, class_name)
 
-            async def side_effect(*args):
+            def side_effect(
+                *args,  # noqa: ANN002
+                side_effect_class=side_effect_class,
+            ):
                 raise side_effect_class()
 
         getattr(aioclient_mock, method)(

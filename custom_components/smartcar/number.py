@@ -39,30 +39,36 @@ ENTITY_DESCRIPTIONS: tuple[NumberEntityDescription, ...] = (
 )
 
 
-async def async_setup_entry(
-    hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
+async def async_setup_entry(  # noqa: RUF029
+    hass: HomeAssistant,  # noqa: ARG001
+    entry: ConfigEntry,
+    async_add_entities: AddEntitiesCallback,
 ) -> None:
     coordinators: dict[str, SmartcarVehicleCoordinator] = (
         entry.runtime_data.coordinators
     )
-    entities = []
-    for vin, coordinator in coordinators.items():
-        for description in ENTITY_DESCRIPTIONS:
-            if coordinator.is_scope_enabled(description.key, verbose=True):
-                entities.append(SmartcarChargeLimitNumber(coordinator, description))
-    _LOGGER.info(f"Adding {len(entities)} Smartcar number entities")
+    entities = [
+        SmartcarChargeLimitNumber(coordinator, description)
+        for coordinator in coordinators.values()
+        for description in ENTITY_DESCRIPTIONS
+        if coordinator.is_scope_enabled(description.key, verbose=True)
+    ]
+    _LOGGER.info("Adding %s Smartcar number entities", len(entities))
     async_add_entities(entities)
 
 
-class SmartcarChargeLimitNumber(SmartcarEntity, NumberEntity):
+class SmartcarChargeLimitNumber(SmartcarEntity[float, float], NumberEntity):
+    """Number entity for charge limit."""
+
     _attr_has_entity_name = True
 
     @property
-    def native_value(self):
+    def native_value(self) -> float | None:
         return self._extract_value()
 
-    async def async_set_native_value(self, value):
-        assert value >= 50 and value <= 100, "Value must be between 50 and 100"
+    async def async_set_native_value(self, value: float) -> None:
+        assert value >= 50, "Value must be between 50 and 100"
+        assert value <= 100, "Value must be between 50 and 100"
 
         if await self._async_send_command(
             "/charge/limit", {"limit": (raw_value := value / 100.0)}

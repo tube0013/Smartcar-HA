@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 import logging
+from typing import Literal
 
 from homeassistant.components.switch import SwitchEntity, SwitchEntityDescription
 from homeassistant.config_entries import ConfigEntry
@@ -29,35 +30,48 @@ ENTITY_DESCRIPTIONS: tuple[SwitchEntityDescription, ...] = (
 )
 
 
-async def async_setup_entry(
-    hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
+async def async_setup_entry(  # noqa: RUF029
+    hass: HomeAssistant,  # noqa: ARG001
+    entry: ConfigEntry,
+    async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up switches from coordinator."""
     coordinators: dict[str, SmartcarVehicleCoordinator] = (
         entry.runtime_data.coordinators
     )
-    entities = []
-    for vin, coordinator in coordinators.items():
-        for description in ENTITY_DESCRIPTIONS:
-            if coordinator.is_scope_enabled(description.key, verbose=True):
-                entities.append(SmartcarChargingSwitch(coordinator, description))
-    _LOGGER.info(f"Adding {len(entities)} Smartcar switch entities")
+    entities = [
+        SmartcarChargingSwitch(coordinator, description)
+        for coordinator in coordinators.values()
+        for description in ENTITY_DESCRIPTIONS
+        if coordinator.is_scope_enabled(description.key, verbose=True)
+    ]
+    _LOGGER.info("Adding %s Smartcar switch entities", len(entities))
     async_add_entities(entities)
 
 
-class SmartcarChargingSwitch(SmartcarEntity, SwitchEntity):
+class SmartcarChargingSwitch(
+    SmartcarEntity[bool, Literal["CHARGING", "NOT_CHARGING"]], SwitchEntity
+):
+    """Switch entity."""
+
     _attr_has_entity_name = True
 
     @property
-    def is_on(self):
+    def is_on(self) -> bool:
         return self._extract_value()
 
-    async def async_turn_on(self, **kwargs):
+    async def async_turn_on(
+        self,
+        **kwargs,  # noqa: ARG002, ANN003
+    ) -> None:
         if await self._async_send_command("/charge", {"action": "START"}):
             self._inject_raw_value("CHARGING")
             self.async_write_ha_state()
 
-    async def async_turn_off(self, **kwargs):
+    async def async_turn_off(
+        self,
+        **kwargs,  # noqa: ARG002, ANN003
+    ) -> None:
         if await self._async_send_command("/charge", {"action": "STOP"}):
             self._inject_raw_value("NOT_CHARGING")
             self.async_write_ha_state()
