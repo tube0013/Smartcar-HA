@@ -158,5 +158,6 @@ To customize polling, you can disable polling on the integration and write your 
 
 Please report any issues you find with this integration by opening an issue on the [GitHub Issues page](https://github.com/tube0013/Smartcar-HA/issues).
 
+[hacs]: https://hacs.xyz/
 [releases]: https://github.com/tube0013/Smartcar-HA/releases
 [config-flow-start]: https://my.home-assistant.io/redirect/config_flow_start/?domain=smartcar
