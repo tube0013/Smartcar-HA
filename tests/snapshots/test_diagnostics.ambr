@@ -1,0 +1,244 @@
+# serializer version: 1
+# name: test_entry_diagnostics[unknown_make]
+  dict({
+    'data': dict({
+      'VIWP1AB29P15LA85784N': dict({
+        'battery': dict({
+          'percentRemaining': 0.3,
+          'range': 40.5,
+        }),
+        'battery_nominal_capacity': dict({
+          'availableCapacities': list([
+            dict({
+              'capacity': 70.9,
+              'description': None,
+            }),
+          ]),
+          'capacity': dict({
+            'nominal': 70.9,
+            'source': 'SMARTCAR',
+          }),
+          'url': None,
+        }),
+        'charge': dict({
+          'isPluggedIn': True,
+          'state': 'FULLY_CHARGED',
+        }),
+        'charge_limit': dict({
+          'limit': 0.8,
+        }),
+        'engine_oil': dict({
+          'lifeRemaining': 0.35,
+        }),
+        'fuel': dict({
+          'amountRemaining': 53.2,
+          'percentRemaining': 0.3,
+          'range': 40.5,
+        }),
+        'location': dict({
+          'latitude': '**REDACTED**',
+          'longitude': '**REDACTED**',
+        }),
+        'location:data_age': '2019-10-24T00:43:46+00:00',
+        'odometer': dict({
+          'distance': 37829,
+        }),
+        'odometer:data_age': '2019-10-24T00:43:46+00:00',
+        'odometer:unit_system': 'metric',
+        'security': dict({
+          'chargingPort': list([
+            dict({
+              'status': 'CLOSED',
+              'type': 'chargingPort',
+            }),
+          ]),
+          'doors': list([
+            dict({
+              'status': 'CLOSED',
+              'type': 'frontLeft',
+            }),
+            dict({
+              'status': 'OPEN',
+              'type': 'frontRight',
+            }),
+            dict({
+              'status': 'CLOSED',
+              'type': 'backRight',
+            }),
+            dict({
+              'status': 'CLOSED',
+              'type': 'backLeft',
+            }),
+          ]),
+          'isLocked': False,
+          'storage': list([
+            dict({
+              'status': 'UNKNOWN',
+              'type': 'rear',
+            }),
+            dict({
+              'status': 'CLOSED',
+              'type': 'front',
+            }),
+          ]),
+          'sunroof': list([
+            dict({
+              'status': 'CLOSED',
+              'type': 'sunroof',
+            }),
+          ]),
+          'windows': list([
+            dict({
+              'status': 'CLOSED',
+              'type': 'frontLeft',
+            }),
+            dict({
+              'status': 'CLOSED',
+              'type': 'frontRight',
+            }),
+            dict({
+              'status': 'UNKNOWN',
+              'type': 'backRight',
+            }),
+            dict({
+              'status': 'CLOSED',
+              'type': 'backLeft',
+            }),
+          ]),
+        }),
+        'tires_pressure': dict({
+          'backLeft': 219.3,
+          'backRight': 219.3,
+          'frontLeft': 219.3,
+          'frontRight': 219.3,
+        }),
+        'tires_pressure:data_age': '2019-10-24T00:43:46+00:00',
+        'tires_pressure:unit_system': 'metric',
+      }),
+    }),
+    'entry': dict({
+      'data': dict({
+        'auth_implementation': 'smartcar',
+        'token': dict({
+          'access_tier': 0,
+          'access_token': '**REDACTED**',
+          'installed_app_id': '2d474f47-bab5-4438-9d37-478148b9d073',
+          'refresh_token': '**REDACTED**',
+          'scopes': 'read_vehicle_info read_vin read_battery read_charge read_engine_oil read_fuel read_location read_odometer read_security read_tires control_charge control_security',
+        }),
+        'vehicles': dict({
+          'a1d50709-3502-4faa-ba43-a5c7565e6a09': dict({
+            'vin': '**REDACTED**',
+          }),
+        }),
+      }),
+      'disabled_by': None,
+      'discovery_keys': dict({
+      }),
+      'domain': 'smartcar',
+      'minor_version': 0,
+      'options': dict({
+      }),
+      'pref_disable_new_entities': False,
+      'pref_disable_polling': False,
+      'source': 'user',
+      'subentries': list([
+      ]),
+      'title': 'Mock Title',
+      'unique_id': 'a1d50709-3502-4faa-ba43-a5c7565e6a09',
+      'version': 2,
+    }),
+  })
+# ---
+# name: test_entry_diagnostics[vw_id_4]
+  dict({
+    'data': dict({
+      'VIWP1AB29P15LA85784N': dict({
+        'battery': dict({
+          'percentRemaining': 0.68,
+          'range': 275,
+        }),
+        'battery:data_age': '2025-05-09T15:40:57+00:00',
+        'battery:fetched_at': '2025-05-09T17:27:26.712000+00:00',
+        'battery:unit_system': 'metric',
+        'battery_nominal_capacity': dict({
+          'availableCapacities': list([
+            dict({
+              'capacity': 82,
+              'description': None,
+            }),
+          ]),
+          'capacity': dict({
+            'nominal': 82,
+            'source': 'SMARTCAR',
+          }),
+          'url': None,
+        }),
+        'battery_nominal_capacity:data_age': '2025-05-09T17:27:25.114000+00:00',
+        'battery_nominal_capacity:fetched_at': '2025-05-09T17:27:25.114000+00:00',
+        'charge': dict({
+          'isPluggedIn': False,
+          'state': 'NOT_CHARGING',
+        }),
+        'charge:data_age': '2025-05-09T15:40:57+00:00',
+        'charge:fetched_at': '2025-05-09T17:27:26.712000+00:00',
+        'charge_limit': dict({
+          'limit': 1,
+        }),
+        'charge_limit:data_age': '2025-05-09T15:40:55+00:00',
+        'charge_limit:fetched_at': '2025-05-09T17:27:26.712000+00:00',
+        'engine_oil': None,
+        'fuel': None,
+        'location': dict({
+          'latitude': '**REDACTED**',
+          'longitude': '**REDACTED**',
+        }),
+        'location:data_age': '2025-05-09T15:40:52+00:00',
+        'location:fetched_at': '2025-05-09T17:27:25.401000+00:00',
+        'odometer': dict({
+          'distance': 21919,
+        }),
+        'odometer:data_age': '2025-05-09T15:40:52+00:00',
+        'odometer:fetched_at': '2025-05-09T17:27:25.401000+00:00',
+        'odometer:unit_system': 'metric',
+        'security': None,
+        'tires_pressure': None,
+      }),
+    }),
+    'entry': dict({
+      'data': dict({
+        'auth_implementation': 'smartcar',
+        'token': dict({
+          'access_tier': 0,
+          'access_token': '**REDACTED**',
+          'installed_app_id': '2d474f47-bab5-4438-9d37-478148b9d073',
+          'refresh_token': '**REDACTED**',
+          'scopes': 'read_vehicle_info read_vin read_battery read_charge read_engine_oil read_fuel read_location read_odometer read_security read_tires control_charge control_security',
+        }),
+        'vehicles': dict({
+          'a1d50709-3502-4faa-ba43-a5c7565e6a09': dict({
+            'make': 'VW',
+            'model': 'ID.4',
+            'vin': '**REDACTED**',
+            'year': '2021',
+          }),
+        }),
+      }),
+      'disabled_by': None,
+      'discovery_keys': dict({
+      }),
+      'domain': 'smartcar',
+      'minor_version': 0,
+      'options': dict({
+      }),
+      'pref_disable_new_entities': False,
+      'pref_disable_polling': False,
+      'source': 'user',
+      'subentries': list([
+      ]),
+      'title': 'Mock Title',
+      'unique_id': 'a1d50709-3502-4faa-ba43-a5c7565e6a09',
+      'version': 2,
+    }),
+  })
+# ---
