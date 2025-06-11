@@ -17,30 +17,6 @@ This integration provides various sensors and controls for vehicles linked throu
 
 _Example showing entities for a Volkswagen ID.4_
 
-## Features
-
-Provides the following entities for each connected vehicle (subject to vehicle compatibility and granted permissions):
-
-* **Device Tracker:**
-    * Location (GPS)
-* **Sensors:**
-    * Odometer
-    * Battery Level (percentage)
-    * Estimated Range
-    * Battery Capacity (kWh)
-    * Charging Status (Charging, Not Charging, Fully Charged)
-    * Engine Oil Life (percentage) *(if supported)*
-    * Tire Pressures *(if supported)*
-    * Fuel Level / Range *(if supported)*
-* **Binary Sensors:**
-    * Charging Cable Plugged In
-* **Switches:**
-    * Start/Stop Charging
-* **Number:**
-    * Set Charge Limit (percentage)
-* **Locks:**
-    * Door Lock/Unlock *(note: known compatibility issues with some models, e.g., VW ID.4 2023+ does not have this functionality)*
-
 ## Prerequisites
 
 1.  **Compatible Vehicle:** Your car must be [compatible with Smartcar](https://smartcar.com/product/compatible-vehicles) and the API must also be [supported in your country](https://smartcar.com/global).
@@ -102,13 +78,13 @@ Follow the instructions to configure the integration.
     * Get EV/PHEV battery level, capacity & current range
     * Get details on whether the car is plugged in and charging
     * Get details on whether doors, windows & more are enabled
-    * Get engine oil health*
-    * Get tire pressure details*
-    * Get fuel tank level*
+    * Get engine oil health
+    * Get tire pressure details
+    * Get fuel tank level
     * Control charging (start/stop & target charge)
     * Lock or unlock vehicle
 
-    \* _These may not work depending on car support_
+    \* _Functionality for all permissions depends on car support_
 
 1. Continue to the [next section](#authorization-via-smartcar-connect) which explains the steps to authorize your vehicle via [Smartcar connect](https://smartcar.com/docs/connect/what-is-connect).
 
@@ -127,6 +103,167 @@ If successful, the integration will be added, and Home Assistant will create dev
 - Enable entities you want access after understanding [the impact on rate limits](#rate-limits--polling).
 - Consider creating a [customized polling setup](#customized-polling) via automations.
 
+## Entities
+
+Several entities are created for for each connected vehicle (subject to vehicle compatibility and granted permissions) across the *device tracker*, *sensor*, *binary sensor*, *number*, *switch*, and *lock* platforms:
+
+- [`device_tracker.<make_model>_location`](#device_trackermake_model_location)
+- [`sensor.<make_model>_battery_capacity`](#sensormake_model_battery_capacity)
+- [`sensor.<make_model>_battery`](#sensormake_model_battery)
+- [`sensor.<make_model>_charging_status`](#sensormake_model_charging_status)
+- [`sensor.<make_model>_engine_oil_life`](#sensormake_model_engine_oil_life)
+- [`sensor.<make_model>_fuel`](#sensormake_model_fuel)
+- [`sensor.<make_model>_odometer`](#sensormake_model_odometer)
+- [`sensor.<make_model>_range`](#sensormake_model_range)
+- [`sensor.<make_model>_tire_pressure_back_left`](#sensormake_model_tire_pressure_back_left)
+- [`sensor.<make_model>_tire_pressure_back_right`](#sensormake_model_tire_pressure_back_right)
+- [`sensor.<make_model>_tire_pressure_front_left`](#sensormake_model_tire_pressure_front_left)
+- [`sensor.<make_model>_tire_pressure_front_right`](#sensormake_model_tire_pressure_front_right)
+- [`binary_sensor.<make_model>_charging_cable_plugged_in`](#binary_sensormake_model_charging_cable_plugged_in)
+- [`number.<make_model>_charge_limit`](#numbermake_model_charge_limit)
+- [`switch.<make_model>_charging`](#switchmake_model_charging)
+- [`lock.<make_model>_door_lock`](#lockmake_model_door_lock)
+
+All entities have the following attributes:
+
+* `age` The date at which the data was recorded by the vehicle*; _corresponds to [`sc-data-age`](https://smartcar.com/docs/api-reference/headers#param-sc-data-age)_
+* `fetched_at` The date at which Smartcar fetched the data*; _corresponds to [`sc-data-fetched-at`](https://smartcar.com/docs/api-reference/headers#param-sc-fetched-at)_
+
+\* _These will only be present when included in the API response._
+
+Links to relevant API documentation are provided for each entity described below as well as the [permissions each entity requires](https://smartcar.com/docs/api-reference/permissions). When the required permissions are [not requested during setup](#authorization-data-entry), those entities will not be created.
+
+### `device_tracker.<make_model>_location`
+
+The GPS [location](https://smartcar.com/docs/api-reference/get-location) of the vehicle.
+
+Enabled by default: :white_check_mark:  
+Requires permissions: `read_location`  
+
+### `sensor.<make_model>_battery_capacity`
+
+The [battery capacity](https://smartcar.com/docs/api-reference/get-nominal-capacity) of this vehicle in kWh.
+
+Enabled by default: :x:  
+Requires permissions: `read_battery`  
+
+### `sensor.<make_model>_battery`
+
+The [state of charge](https://smartcar.com/docs/api-reference/evs/get-battery-level#param-percent-remaining) of the vehicle as a percentage.
+
+Enabled by default: :white_check_mark:  
+Requires permissions: `read_battery`  
+Obtained concurrently with: [`sensor.<make_model>_range`](#sensormake_model_range)  
+
+### `sensor.<make_model>_charging_status`
+
+The [charging status](https://smartcar.com/docs/api-reference/evs/get-charge-status) of the vehicle.
+
+Possible values:
+
+- `​CHARGING`
+- `FULLY_CHARGED`
+- `NOT_CHARGING`
+
+Enabled by default: :white_check_mark:  
+Requires permissions: `read_charge`  
+Obtained concurrently with: [`binary_sensor.<make_model>_charging_cable_plugged_in`](#binary_sensormake_model_charging_cable_plugged_in), [`switch.<make_model>_charging`](#switchmake_model_charging)  
+
+
+### `sensor.<make_model>_engine_oil_life`
+
+The [estimated engine oil life](https://smartcar.com/docs/api-reference/get-engine-oil-life) remaining for the vehicle.
+
+Enabled by default: :x:  
+Requires permissions: `read_engine_oil`  
+
+### `sensor.<make_model>_fuel`
+
+The [amount of fuel](https://smartcar.com/docs/api-reference/get-fuel-tank) remaining for the vehicle.
+
+Enabled by default: :x:  
+Requires permissions: `read_fuel`  
+
+### `sensor.<make_model>_odometer`
+
+The [odometer reading](https://smartcar.com/docs/api-reference/get-odometer) of the vehicle.
+
+Enabled by default: :x:  
+Requires permissions: `read_odometer`  
+
+### `sensor.<make_model>_range`
+
+The [estimated range remaining](https://smartcar.com/docs/api-reference/evs/get-battery-level#param-range) for the vehicle.
+
+Enabled by default: :white_check_mark:  
+Requires permissions: `read_battery`  
+Obtained concurrently with: [`sensor.<make_model>_battery`](#sensormake_model_battery)  
+
+### `sensor.<make_model>_tire_pressure_back_left`
+
+The [back left tire pressure](https://smartcar.com/docs/api-reference/get-tire-pressure#param-back-left) of the vehicle.
+
+Enabled by default: :x:  
+Requires permissions: `read_tires`  
+Obtained concurrently with: [`sensor.<make_model>_tire_pressure_back_right`](#sensormake_model_tire_pressure_back_right), [`sensor.<make_model>_tire_pressure_front_left`](#sensormake_model_tire_pressure_front_left), [`sensor.<make_model>_tire_pressure_front_right`](#sensormake_model_tire_pressure_front_right)  
+
+### `sensor.<make_model>_tire_pressure_back_right`
+
+The [back right tire pressure](https://smartcar.com/docs/api-reference/get-tire-pressure#param-back-right) of the vehicle.
+
+Enabled by default: :x:  
+Requires permissions: `read_tires`  
+Obtained concurrently with: [`sensor.<make_model>_tire_pressure_back_left`](#sensormake_model_tire_pressure_back_left), [`sensor.<make_model>_tire_pressure_front_left`](#sensormake_model_tire_pressure_front_left), [`sensor.<make_model>_tire_pressure_front_right`](#sensormake_model_tire_pressure_front_right)  
+
+### `sensor.<make_model>_tire_pressure_front_left`
+
+The [front left tire pressure](https://smartcar.com/docs/api-reference/get-tire-pressure#param-front-left) of the vehicle.
+
+Enabled by default: :x:  
+Requires permissions: `read_tires`  
+Obtained concurrently with: [`sensor.<make_model>_tire_pressure_back_left`](#sensormake_model_tire_pressure_back_left), [`sensor.<make_model>_tire_pressure_back_right`](#sensormake_model_tire_pressure_back_right), [`sensor.<make_model>_tire_pressure_front_right`](#sensormake_model_tire_pressure_front_right)  
+
+### `sensor.<make_model>_tire_pressure_front_right`
+
+The [front right tire pressure](https://smartcar.com/docs/api-reference/get-tire-pressure#param-front-right) of the vehicle.
+
+Enabled by default: :x:  
+Requires permissions: `read_tires`  
+Obtained concurrently with: [`sensor.<make_model>_tire_pressure_back_left`](#sensormake_model_tire_pressure_back_left), [`sensor.<make_model>_tire_pressure_back_right`](#sensormake_model_tire_pressure_back_right), [`sensor.<make_model>_tire_pressure_front_left`](#sensormake_model_tire_pressure_front_left)  
+
+### `binary_sensor.<make_model>_charging_cable_plugged_in`
+
+Whether the vehicle [is currently plugged in](https://smartcar.com/docs/api-reference/evs/get-charge-status#param-is-plugged-in).
+
+Enabled by default: :white_check_mark:  
+Requires permissions: `read_charge`  
+Obtained concurrently with: [`sensor.<make_model>_charging_status`](#sensormake_model_charging_status), [`switch.<make_model>_charging`](#switchmake_model_charging)  
+
+### `number.<make_model>_charge_limit`
+
+Change the [charge limit](https://smartcar.com/docs/api-reference/evs/get-charge-limit) by [setting it to a specific value](https://smartcar.com/docs/api-reference/evs/set-charge-limit).
+
+Enabled by default: :x:  
+Requires permissions: `read_charge`, `control_charge`  
+
+### `switch.<make_model>_charging`
+
+Change whether the vehicle is [currently charging](https://smartcar.com/docs/api-reference/evs/get-charge-status#param-state) by [starting or stopping charging](https://smartcar.com/docs/api-reference/evs/control-charge).
+
+Enabled by default: :white_check_mark:  
+Requires permissions: `read_charge`, `control_charge`  
+Obtained concurrently with: [`sensor.<make_model>_charging_status`](#sensormake_model_charging_status), [`binary_sensor.<make_model>_charging_cable_plugged_in`](#binary_sensormake_model_charging_cable_plugged_in)  
+
+### `lock.<make_model>_door_lock`
+
+Change whether the vehicle is [currently locked](https://smartcar.com/docs/api-reference/get-lock-status) by [locking or unlocking](https://smartcar.com/docs/api-reference/control-lock-unlock).
+
+Enabled by default: :white_check_mark:  
+Requires permissions: `read_security`, `control_security`  
+
+_Note: some models, e.g., VW ID.4 2023+ do not have this functionality._
+
+
 ## Rate Limits & Polling
 
 * Smartcar's free developer tier typically has a limit of **500 API calls per vehicle per month**. Exceeding this may incur costs or stop the integration from working.
@@ -142,15 +279,27 @@ To customize polling, you can disable polling on the integration and write your 
 * Click the three dots to the right of the integration.
 * Choose _System options_.
 * Disable _Enable polling for changes_ and then click _Save_.
-* Create an automation using [`homeassistant.update_entity`](https://www.home-assistant.io/integrations/homeassistant/#action-homeassistantupdate_entity) to refresh the desired value(s). Examples are provided:
+* Create an automation using [`homeassistant.update_entity`](https://www.home-assistant.io/integrations/homeassistant/#action-homeassistantupdate_entity) to refresh the desired value(s).
 
-- [`examples/poll-smartcar-simple.yaml`](examples/poll-smartcar-simple.yaml)
-- [`examples/poll-smartcar-custom.yaml`](examples/poll-smartcar-custom.yaml)
-- [`examples/poll-smartcar-excessive.yaml`](examples/poll-smartcar-excessive.yaml)
+Examples are provided:
+
+  - [`examples/poll-smartcar-simple.yaml`](examples/poll-smartcar-simple.yaml)
+  - [`examples/poll-smartcar-custom.yaml`](examples/poll-smartcar-custom.yaml)
+  - [`examples/poll-smartcar-excessive.yaml`](examples/poll-smartcar-excessive.yaml)
+
+When updating an entity via `homeassistant.update_entity`:
+
+  - A request to update an entity will also update related entities (see the _Obtained concurrently with_ notes on each entity above).
+  - Requests to update several entities at once will be [batched](https://smartcar.com/docs/api-reference/batch), reducing excessive network requests and potentially limiting the number of API calls counted against your account.
+
+For instance:
+
+  - `homeassistant.update_entity` on [`sensor.<make_model>_battery`](#sensormake_model_battery) and [`sensor.<make_model>_range`](#sensormake_model_range) will make a single batch request that counts as **one** API call because the entities are related.
+  - `homeassistant.update_entity` on [`sensor.<make_model>_battery`](#sensormake_model_battery) and [`sensor.<make_model>_odometer`](#sensormake_model_odometer) will make a single batch request that counts as **two** API calls since they are unrelated.
 
 ## Known Issues / Limitations
 
-* **Vehicle Compatibility:** Not all features are supported by all vehicle makes/models/years via the Smartcar API. Entities for unsupported features (e.g., Lock control for VW ID.4 2023+) may or may not be created. Check the Smartcar compatibility details for your specific vehicle.
+* **Vehicle Compatibility:** Not all features are supported by all vehicle makes/models/years via the Smartcar API. Entities for unsupported features (e.g., [fuel status](#sensormake_model_fuel) for EVs or [lock control](#lockmake_model_door_lock) for VW ID.4 2023+) may or may still be created, but not function. Check the Smartcar compatibility details for your specific vehicle.
 * **API Latency:** There can be significant delays (seconds to minutes) between sending a command (e.g., start charging) and the vehicle executing/reporting the change back through the API. The state in Home Assistant will update after the next successful data poll.
 * **Rate Limits:** Be mindful of the 500 calls/vehicle/month limit on the free tier.
 
