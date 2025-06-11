@@ -1,0 +1,104 @@
+name: 🐞 Bug Report
+description: Create a report to help us improve
+body:
+  - type: markdown
+    attributes:
+      value: >
+        This issue form is for reporting bugs only!
+
+
+        If you have a feature or enhancement request, please use the
+        [feature request][fr] template.
+
+
+        [fr]: /tube0013/Smartcar-HA/issues/new?template=feature_request.yml
+  - type: checkboxes
+    attributes:
+      label: Requirements
+      options:
+        - label: >
+            I have updated Smart to the latest available version.
+          required: true
+        - label: >
+            I read the [_Known Issues and Limitations_][known] section in the
+            README.
+
+
+            [known]: /tube0013/Smartcar-HA?tab=readme-ov-file#known-issues--limitations
+          required: true
+        - label: >
+            I have verified that my car is [compatible with Smartcar][compat]
+            and the API is [supported in my country][global].
+
+
+            [compat]: https://smartcar.com/product/compatible-vehicles
+
+            [global]: https://smartcar.com/global
+          required: true
+        - label: >
+            I did a search to see if there is a similar issue or if a pull
+            request is open.
+          required: true
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: The problem
+      description: >-
+        Describe the issue you are experiencing here, to communicate to the
+        maintainers. Tell us what you were trying to do and what happened.
+
+        Provide a clear and concise description of what the problem is.
+  - type: markdown
+    attributes:
+      value: |
+        ## Environment
+  - type: input
+    id: version
+    validations:
+      required: true
+    attributes:
+      label: What version of Smartcar has the issue?
+      placeholder: v
+      # yamllint disable rule:line-length
+      description: >
+        Can be found in: [Settings ⇒ Integrations ⇒ Smartcar](https://my.home-assistant.io/redirect/integration/?domain=smartcar).
+
+
+        [![Open your Home Assistant instance and show the Smartcar integration.](https://my.home-assistant.io/badges/integration.svg)](https://my.home-assistant.io/redirect/integration/?domain=smartcar)
+      # yamllint enable rule:line-length
+  - type: input
+    attributes:
+      label: What was the last working version of Smartcar?
+      placeholder: v
+      description: >
+        If known, otherwise leave blank.
+  - type: markdown
+    attributes:
+      value: |
+        # Details
+  - type: textarea
+    attributes:
+      label: Diagnostics information
+      # yamllint disable rule:line-length
+      placeholder: "drag-and-drop the diagnostics data file here (do not copy-and-paste the content)"
+      description: >-
+        Smartcar provides the ability to [download diagnostic data](https://www.home-assistant.io/docs/configuration/troubleshooting/#debug-logs-and-diagnostics).
+
+        **It would really help if you could download the diagnostics data for
+        the vehicle you are having issues with, and <ins>drag-and-drop that file
+        into the textbox below.</ins>**
+
+        It generally allows pinpointing defects and thus resolving issues
+        faster.
+      # yamllint enable rule:line-length
+  - type: textarea
+    attributes:
+      label: Anything in the logs that might be useful for us?
+      description: For example, error message, or stack traces.
+      render: txt
+  - type: textarea
+    attributes:
+      label: Additional information
+      description: >
+        If you have any additional information for us, use the field below.

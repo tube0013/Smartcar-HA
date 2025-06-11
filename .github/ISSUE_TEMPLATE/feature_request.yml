@@ -1,0 +1,70 @@
+name: 🚀 Feature request
+description: Suggest an idea for this project
+body:
+  - type: markdown
+    attributes:
+      value: >
+        This issue form is for feature or enhancement requests only!
+
+
+        If you have a bug to report, please use the [bug report][br] template.
+
+
+        [br]: /tube0013/Smartcar-HA/issues/new?template=bug_report.yml
+  - type: checkboxes
+    attributes:
+      label: Requirements
+      options:
+        - label: >
+            I have updated Smart to the latest available version.
+          required: true
+        - label: >
+            I read the [_Known Issues and Limitations_][known] section in the
+            README.
+
+
+            [known]: /tube0013/Smartcar-HA?tab=readme-ov-file#known-issues--limitations
+          required: true
+        - label: >
+            I have verified that my car is [compatible with Smartcar][compat]
+            and the API is [supported in my country][global].
+
+
+            [compat]: https://smartcar.com/product/compatible-vehicles
+
+            [global]: https://smartcar.com/global
+          required: true
+        - label: >
+            I did a search to see if there is a similar issue or if a pull
+            request is open.
+          required: true
+  - type: textarea
+    attributes:
+      label: Is your feature request related to a problem?
+      description: >
+        A clear and concise description of what the problem is. Ex. I'm always
+        frustrated when [...]
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Describe the solution you'd like
+      description: >
+        A clear and concise description of what you want to happen.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Describe alternatives you've considered
+      description: >
+        A clear and concise description of any alternative solutions or features
+        you've considered.
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: >
+        Add any other context or screenshots about the feature request.
+  - type: markdown
+    attributes:
+      value: >
+        Thanks for contributing! :tada:
