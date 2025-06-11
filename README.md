@@ -53,23 +53,23 @@ Provides the following entities for each connected vehicle (subject to vehicle c
 
 ## Installation
 
-**Recommended: HACS**
+### HACS
 
-1.  Ensure [HACS (Home Assistant Community Store)](https://hacs.xyz/) is installed.
-2.  Go to HACS -> Integrations -> Click the three dots (⋮) in the top right -> Custom Repositories.
-3.  Enter the URL of this GitHub repository, `https://github.com/tube0013/Smartcar-HA`, in the "Repository" field.
-4.  Select "Integration" as the category.
-5.  Click "Add".
-6.  The "Smartcar" integration should now appear in the HACS list. Click on it and then click "Download".
-7.  Confirm the download.
-8.  **Restart Home Assistant** (Settings -> System -> Restart).
+Installation through [HACS][hacs] is the preferred installation method.
 
-**Manual Installation**
+1. Go to HACS
+1. Click on Integrations
+1. Search for "Smartcar" &rarr; select it &rarr; press _DOWNLOAD_.
+1. Select the version (it will auto select the latest) &rarr; press _DOWNLOAD_.
+1. Restart Home Assistant then continue to [the setup section](#setup).
 
-1.  Download the latest release source code archive (`.zip` or `.tar.gz`).
-2.  Unpack the archive.
-3.  Copy the `custom_components/smartcar/` directory into your Home Assistant `<config>/custom_components/` directory. Create `custom_components` if it doesn't exist.
-4.  **Restart Home Assistant** (Settings -> System -> Restart).
+### Manual Download
+
+1. Go to the [release page][releases] and download the `smartcar.zip` attached
+   to the latest release.
+1. Unpack the zip file and move `custom_components/smartcar` to the following
+   directory of your Home Assistant configuration: `/config/custom_components/`.
+1. Restart Home Assistant then continue to [the setup section](#setup).
 
 ## Setup
 
