@@ -17,7 +17,6 @@ from . import setup_integration
 
 
 @pytest.mark.usefixtures("enable_all_entities")
-# @pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
 async def test_entry_diagnostics(
     hass: HomeAssistant,
     mock_config_entry: MockConfigEntry,
