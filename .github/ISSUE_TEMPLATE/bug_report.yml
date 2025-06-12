@@ -17,7 +17,7 @@ body:
       label: Requirements
       options:
         - label: >
-            I have updated Smart to the latest available version.
+            I have updated Smartcar to the latest available version.
           required: true
         - label: >
             I read the [_Known Issues and Limitations_][known] section in the
