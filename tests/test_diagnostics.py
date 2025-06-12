@@ -3,7 +3,6 @@
 from unittest.mock import AsyncMock
 
 from homeassistant.core import HomeAssistant
-from homeassistant.setup import async_setup_component
 import pytest
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 from pytest_homeassistant_custom_component.components.diagnostics import (
@@ -25,7 +24,6 @@ async def test_entry_diagnostics(
     vehicle: AsyncMock,
 ) -> None:
     """Test config entry diagnostics."""
-    await async_setup_component(hass, "homeassistant", {})
     await setup_integration(hass, mock_config_entry)
     assert await get_diagnostics_for_config_entry(
         hass, hass_client, mock_config_entry
