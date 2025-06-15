@@ -1,6 +1,7 @@
 # Smartcar Integration for Home Assistant
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
+[![HACS](https://img.shields.io/badge/default-grey?logo=homeassistantcommunitystore&logoColor=white)][hacs-repo]
+[![HACS installs](https://img.shields.io/github/downloads/tube0013/Smartcar-HA/latest/total?label=installs&color=blue)][hacs-repo]
 [![Version](https://img.shields.io/github/v/release/tube0013/Smartcar-HA)][releases]
 ![Downloads](https://img.shields.io/github/downloads/tube0013/Smartcar-HA/total)
 ![Build](https://img.shields.io/github/actions/workflow/status/tube0013/Smartcar-HA/pytest.yml
@@ -308,5 +309,6 @@ For instance:
 Please report any issues you find with this integration by opening an issue on the [GitHub Issues page](https://github.com/tube0013/Smartcar-HA/issues).
 
 [hacs]: https://hacs.xyz/
+[hacs-repo]: https://github.com/hacs/integration
 [releases]: https://github.com/tube0013/Smartcar-HA/releases
 [config-flow-start]: https://my.home-assistant.io/redirect/config_flow_start/?domain=smartcar
