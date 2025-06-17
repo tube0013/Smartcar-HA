@@ -34,9 +34,11 @@ _Example showing entities for a Volkswagen ID.4_
 
 Installation through [HACS][hacs] is the preferred installation method.
 
-1. Go to HACS
-1. Click on Integrations
-1. Search for "Smartcar" &rarr; select it &rarr; press _DOWNLOAD_.
+[![Open the Smartcar integration in HACS][hacs-badge]][hacs-open]
+
+1. Click the button above or go to HACS &rarr; Integrations &rarr; search for
+   "Smartcar" &rarr; select it.
+1. Press _DOWNLOAD_.
 1. Select the version (it will auto select the latest) &rarr; press _DOWNLOAD_.
 1. Restart Home Assistant then continue to [the setup section](#setup).
 
@@ -310,5 +312,7 @@ Please report any issues you find with this integration by opening an issue on t
 
 [hacs]: https://hacs.xyz/
 [hacs-repo]: https://github.com/hacs/integration
+[hacs-badge]: https://my.home-assistant.io/badges/hacs_repository.svg
+[hacs-open]: https://my.home-assistant.io/redirect/hacs_repository/?owner=tube0013&repository=smartcar&category=integration
 [releases]: https://github.com/tube0013/Smartcar-HA/releases
 [config-flow-start]: https://my.home-assistant.io/redirect/config_flow_start/?domain=smartcar
