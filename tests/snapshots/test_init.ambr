@@ -1421,9 +1421,6 @@
         'sensor': dict({
           'suggested_display_precision': 1,
         }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
-        }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
       'original_icon': None,
@@ -1461,9 +1458,6 @@
       'options': dict({
         'sensor': dict({
           'suggested_display_precision': 1,
-        }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
         }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
@@ -1503,9 +1497,6 @@
         'sensor': dict({
           'suggested_display_precision': 1,
         }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
-        }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
       'original_icon': None,
@@ -1543,9 +1534,6 @@
       'options': dict({
         'sensor': dict({
           'suggested_display_precision': 1,
-        }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
         }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
@@ -1890,7 +1878,7 @@
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
-    'state': '1512.0202101',
+    'state': '219.3',
   })
 # ---
 # name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_tire_pressure_back_right]
@@ -1907,7 +1895,7 @@
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
-    'state': '1512.0202101',
+    'state': '219.3',
   })
 # ---
 # name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_tire_pressure_front_left]
@@ -1924,7 +1912,7 @@
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
-    'state': '1512.0202101',
+    'state': '219.3',
   })
 # ---
 # name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_tire_pressure_front_right]
@@ -1941,7 +1929,7 @@
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
-    'state': '1512.0202101',
+    'state': '219.3',
   })
 # ---
 # name: test_standard_setup_with_all_entities[unknown_make][switch.smartcar_784n_charging]
@@ -2307,9 +2295,6 @@
         'sensor': dict({
           'suggested_display_precision': 1,
         }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
-        }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
       'original_icon': None,
@@ -2347,9 +2332,6 @@
       'options': dict({
         'sensor': dict({
           'suggested_display_precision': 1,
-        }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
         }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
@@ -2389,9 +2371,6 @@
         'sensor': dict({
           'suggested_display_precision': 1,
         }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
-        }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
       'original_icon': None,
@@ -2429,9 +2408,6 @@
       'options': dict({
         'sensor': dict({
           'suggested_display_precision': 1,
-        }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
         }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
@@ -3194,9 +3170,6 @@
         'sensor': dict({
           'suggested_display_precision': 1,
         }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
-        }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
       'original_icon': None,
@@ -3234,9 +3207,6 @@
       'options': dict({
         'sensor': dict({
           'suggested_display_precision': 1,
-        }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
         }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
@@ -3276,9 +3246,6 @@
         'sensor': dict({
           'suggested_display_precision': 1,
         }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
-        }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
       'original_icon': None,
@@ -3316,9 +3283,6 @@
       'options': dict({
         'sensor': dict({
           'suggested_display_precision': 1,
-        }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
         }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
@@ -4067,9 +4031,6 @@
         'sensor': dict({
           'suggested_display_precision': 1,
         }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
-        }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
       'original_icon': None,
@@ -4107,9 +4068,6 @@
       'options': dict({
         'sensor': dict({
           'suggested_display_precision': 1,
-        }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
         }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
@@ -4149,9 +4107,6 @@
         'sensor': dict({
           'suggested_display_precision': 1,
         }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
-        }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
       'original_icon': None,
@@ -4189,9 +4144,6 @@
       'options': dict({
         'sensor': dict({
           'suggested_display_precision': 1,
-        }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
         }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
@@ -4940,9 +4892,6 @@
         'sensor': dict({
           'suggested_display_precision': 1,
         }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
-        }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
       'original_icon': None,
@@ -4980,9 +4929,6 @@
       'options': dict({
         'sensor': dict({
           'suggested_display_precision': 1,
-        }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
         }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
@@ -5022,9 +4968,6 @@
         'sensor': dict({
           'suggested_display_precision': 1,
         }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
-        }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
       'original_icon': None,
@@ -5062,9 +5005,6 @@
       'options': dict({
         'sensor': dict({
           'suggested_display_precision': 1,
-        }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
         }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
@@ -5813,9 +5753,6 @@
         'sensor': dict({
           'suggested_display_precision': 1,
         }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
-        }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
       'original_icon': None,
@@ -5853,9 +5790,6 @@
       'options': dict({
         'sensor': dict({
           'suggested_display_precision': 1,
-        }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
         }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
@@ -5895,9 +5829,6 @@
         'sensor': dict({
           'suggested_display_precision': 1,
         }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
-        }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,
       'original_icon': None,
@@ -5935,9 +5866,6 @@
       'options': dict({
         'sensor': dict({
           'suggested_display_precision': 1,
-        }),
-        'sensor.private': dict({
-          'suggested_unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
         }),
       }),
       'original_device_class': <SensorDeviceClass.PRESSURE: 'pressure'>,

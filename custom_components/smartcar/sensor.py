@@ -107,9 +107,9 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         device_class=SensorDeviceClass.PRESSURE,
         state_class=SensorStateClass.MEASUREMENT,
         suggested_display_precision=1,
-        native_unit_of_measurement=UnitOfPressure.PSI,
+        native_unit_of_measurement=UnitOfPressure.KPA,
         imperial_conversion=lambda v: PressureConverter.convert(
-            v, UnitOfPressure.KPA, UnitOfPressure.PSI
+            v, UnitOfPressure.PSI, UnitOfPressure.KPA
         ),
     ),
     SmartcarSensorDescription(
@@ -119,9 +119,9 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         device_class=SensorDeviceClass.PRESSURE,
         state_class=SensorStateClass.MEASUREMENT,
         suggested_display_precision=1,
-        native_unit_of_measurement=UnitOfPressure.PSI,
+        native_unit_of_measurement=UnitOfPressure.KPA,
         imperial_conversion=lambda v: PressureConverter.convert(
-            v, UnitOfPressure.KPA, UnitOfPressure.PSI
+            v, UnitOfPressure.PSI, UnitOfPressure.KPA
         ),
     ),
     SmartcarSensorDescription(
@@ -131,9 +131,9 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         device_class=SensorDeviceClass.PRESSURE,
         state_class=SensorStateClass.MEASUREMENT,
         suggested_display_precision=1,
-        native_unit_of_measurement=UnitOfPressure.PSI,
+        native_unit_of_measurement=UnitOfPressure.KPA,
         imperial_conversion=lambda v: PressureConverter.convert(
-            v, UnitOfPressure.KPA, UnitOfPressure.PSI
+            v, UnitOfPressure.PSI, UnitOfPressure.KPA
         ),
     ),
     SmartcarSensorDescription(
@@ -143,9 +143,9 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         device_class=SensorDeviceClass.PRESSURE,
         state_class=SensorStateClass.MEASUREMENT,
         suggested_display_precision=1,
-        native_unit_of_measurement=UnitOfPressure.PSI,
+        native_unit_of_measurement=UnitOfPressure.KPA,
         imperial_conversion=lambda v: PressureConverter.convert(
-            v, UnitOfPressure.KPA, UnitOfPressure.PSI
+            v, UnitOfPressure.PSI, UnitOfPressure.KPA
         ),
     ),
 )
