@@ -45,7 +45,7 @@ async def test_standard_setup(
     assert device == snapshot(name="device")
 
     entities = entity_registry.entities.get_entries_for_device_id(device.id)
-    assert entities == snapshot(name="entities")
+    assert sorted(entities, key=snapshot_order) == snapshot(name="entities")
 
     for entity in entities:
         assert hass.states.get(entity.entity_id) == snapshot(name=entity.entity_id)
@@ -71,7 +71,7 @@ async def test_standard_setup_with_all_entities(
     assert device == snapshot(name="device")
 
     entities = entity_registry.entities.get_entries_for_device_id(device.id)
-    assert entities == snapshot(name="entities")
+    assert sorted(entities, key=snapshot_order) == snapshot(name="entities")
 
     for entity in entities:
         assert hass.states.get(entity.entity_id) == snapshot(name=entity.entity_id)
@@ -138,7 +138,7 @@ async def test_limited_scopes(
     # few entities should be created (only if they derive their value from the
     # /battery endpoint)
     entities = entity_registry.entities.get_entries_for_device_id(device.id)
-    assert entities == snapshot(name="entities")
+    assert sorted(entities, key=snapshot_order) == snapshot(name="entities")
 
     for entity in entities:
         assert hass.states.get(entity.entity_id) == snapshot(name=entity.entity_id)
@@ -175,7 +175,7 @@ async def test_update_errors(
 
     # all entities should still be created
     entities = entity_registry.entities.get_entries_for_device_id(device.id)
-    assert entities == snapshot(name="entities")
+    assert sorted(entities, key=snapshot_order) == snapshot(name="entities")
 
     for entity in entities:
         assert hass.states.get(entity.entity_id) == snapshot(name=entity.entity_id)
@@ -369,3 +369,34 @@ async def test_migration(
         assert config_entry.data == snapshot(name="config_entry_data")
 
     assert config_entry.unique_id == expected_unique_id
+
+
+_SNAPSHOT_ORDER = {
+    key: idx
+    for idx, key in enumerate(
+        [
+            "battery_capacity",
+            "battery_level",
+            "charging_state",
+            "engine_oil",
+            "fuel",
+            "odometer",
+            "range",
+            "tire_pressure_back_left",
+            "tire_pressure_back_right",
+            "tire_pressure_front_left",
+            "tire_pressure_front_right",
+            "charging",
+            "door_lock",
+            "plug_status",
+            "charge_limit",
+            "location",
+        ]
+    )
+}
+
+
+def snapshot_order(entity):
+    _, key = entity.unique_id.split("_", 1)
+
+    return _SNAPSHOT_ORDER[key]
