@@ -94,6 +94,24 @@ body:
       # yamllint enable rule:line-length
   - type: textarea
     attributes:
+      label: >
+        Example request & response for the related resource
+      placeholder: >
+        curl "https://api.smartcar.com/v2.0/vehicles/{id}/battery" \
+            -H "Authorization: Bearer {token}" \
+            -X "GET"
+
+        {
+            "percentRemaining": 0.3,
+            "range": 40.5
+        }
+      # yamllint disable rule:line-length
+      description: >
+        [Smartcar _Playground_](https://smartcar.com/docs/getting-started/dashboard/playground) or `curl` request & response
+      # yamllint enable rule:line-length
+      render: txt
+  - type: textarea
+    attributes:
       label: Anything in the logs that might be useful for us?
       description: For example, error message, or stack traces.
       render: txt
