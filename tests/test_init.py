@@ -10,6 +10,7 @@ import pytest
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 from pytest_homeassistant_custom_component.test_util.aiohttp import AiohttpClientMocker
 from syrupy.assertion import SnapshotAssertion
+from syrupy.filters import props
 
 from custom_components.smartcar.const import (
     DEFAULT_ENABLED_ENTITY_DESCRIPTION_KEYS,
@@ -42,7 +43,13 @@ async def test_standard_setup(
     device = device_registry.async_get_device({(DOMAIN, device_id)})
 
     assert device is not None
-    assert device == snapshot(name="device")
+    assert device == snapshot(
+        name="device",
+        exclude=props(
+            # compat for HA DeviceRegistryEntrySnapshot <2025.8.0 and >=2025.8.0
+            "suggested_area",
+        ),
+    )
 
     entities = entity_registry.entities.get_entries_for_device_id(device.id)
     assert sorted(entities, key=snapshot_order) == snapshot(name="entities")
@@ -68,7 +75,13 @@ async def test_standard_setup_with_all_entities(
     device = device_registry.async_get_device({(DOMAIN, device_id)})
 
     assert device is not None
-    assert device == snapshot(name="device")
+    assert device == snapshot(
+        name="device",
+        exclude=props(
+            # compat for HA DeviceRegistryEntrySnapshot <2025.8.0 and >=2025.8.0
+            "suggested_area",
+        ),
+    )
 
     entities = entity_registry.entities.get_entries_for_device_id(device.id)
     assert sorted(entities, key=snapshot_order) == snapshot(name="entities")
@@ -133,7 +146,13 @@ async def test_limited_scopes(
     device = device_registry.async_get_device({(DOMAIN, device_id)})
 
     assert device is not None
-    assert device == snapshot(name="device")
+    assert device == snapshot(
+        name="device",
+        exclude=props(
+            # compat for HA DeviceRegistryEntrySnapshot <2025.8.0 and >=2025.8.0
+            "suggested_area",
+        ),
+    )
 
     # few entities should be created (only if they derive their value from the
     # /battery endpoint)
@@ -171,7 +190,13 @@ async def test_update_errors(
     device = device_registry.async_get_device({(DOMAIN, device_id)})
 
     assert device is not None
-    assert device == snapshot(name="device")
+    assert device == snapshot(
+        name="device",
+        exclude=props(
+            # compat for HA DeviceRegistryEntrySnapshot <2025.8.0 and >=2025.8.0
+            "suggested_area",
+        ),
+    )
 
     # all entities should still be created
     entities = entity_registry.entities.get_entries_for_device_id(device.id)
