@@ -46,8 +46,10 @@ async def test_standard_setup(
     assert device == snapshot(
         name="device",
         exclude=props(
-            # compat for HA DeviceRegistryEntrySnapshot <2025.8.0 and >=2025.8.0
+            # compat for HA DeviceRegistryEntrySnapshot <2025.8.0 and >=2025.6.1
             "suggested_area",
+            # compat for HA DeviceRegistryEntrySnapshot <2025.9.0 and >=2025.6.1
+            "is_new",
         ),
     )
 
@@ -78,8 +80,10 @@ async def test_standard_setup_with_all_entities(
     assert device == snapshot(
         name="device",
         exclude=props(
-            # compat for HA DeviceRegistryEntrySnapshot <2025.8.0 and >=2025.8.0
+            # compat for HA DeviceRegistryEntrySnapshot <2025.8.0 and >=2025.6.1
             "suggested_area",
+            # compat for HA DeviceRegistryEntrySnapshot <2025.9.0 and >=2025.6.1
+            "is_new",
         ),
     )
 
@@ -149,8 +153,10 @@ async def test_limited_scopes(
     assert device == snapshot(
         name="device",
         exclude=props(
-            # compat for HA DeviceRegistryEntrySnapshot <2025.8.0 and >=2025.8.0
+            # compat for HA DeviceRegistryEntrySnapshot <2025.8.0 and >=2025.6.1
             "suggested_area",
+            # compat for HA DeviceRegistryEntrySnapshot <2025.9.0 and >=2025.6.1
+            "is_new",
         ),
     )
 
@@ -193,8 +199,10 @@ async def test_update_errors(
     assert device == snapshot(
         name="device",
         exclude=props(
-            # compat for HA DeviceRegistryEntrySnapshot <2025.8.0 and >=2025.8.0
+            # compat for HA DeviceRegistryEntrySnapshot <2025.8.0 and >=2025.6.1
             "suggested_area",
+            # compat for HA DeviceRegistryEntrySnapshot <2025.9.0 and >=2025.6.1
+            "is_new",
         ),
     )
 

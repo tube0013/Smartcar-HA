@@ -17,7 +17,6 @@
         'VIWP1AB29P15LA85784N',
       ),
     }),
-    'is_new': False,
     'labels': set({
     }),
     'manufacturer': 'VW',
@@ -329,7 +328,6 @@
         'VIWP1AB29P15LA85784N',
       ),
     }),
-    'is_new': False,
     'labels': set({
     }),
     'manufacturer': None,
@@ -713,7 +711,6 @@
         'VIWP1AB29P15LA85784N',
       ),
     }),
-    'is_new': False,
     'labels': set({
     }),
     'manufacturer': 'VW',
@@ -1104,7 +1101,6 @@
         'VIWP1AB29P15LA85784N',
       ),
     }),
-    'is_new': False,
     'labels': set({
     }),
     'manufacturer': None,
@@ -1976,7 +1972,6 @@
         'VIWP1AB29P15LA85784N',
       ),
     }),
-    'is_new': False,
     'labels': set({
     }),
     'manufacturer': 'VW',
@@ -2856,7 +2851,6 @@
         'VIWP1AB29P15LA85784N',
       ),
     }),
-    'is_new': False,
     'labels': set({
     }),
     'manufacturer': 'VW',
@@ -3716,7 +3710,6 @@
         'VIWP1AB29P15LA85784N',
       ),
     }),
-    'is_new': False,
     'labels': set({
     }),
     'manufacturer': 'VW',
@@ -4576,7 +4569,6 @@
         'VIWP1AB29P15LA85784N',
       ),
     }),
-    'is_new': False,
     'labels': set({
     }),
     'manufacturer': 'VW',
@@ -5436,7 +5428,6 @@
         'VIWP1AB29P15LA85784N',
       ),
     }),
-    'is_new': False,
     'labels': set({
     }),
     'manufacturer': 'VW',
