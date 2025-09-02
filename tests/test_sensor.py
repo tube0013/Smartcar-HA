@@ -22,6 +22,7 @@ from syrupy.assertion import SnapshotAssertion
 
 from custom_components.smartcar.const import (
     DEFAULT_ENABLED_ENTITY_DESCRIPTION_KEYS,
+    OAUTH2_TOKEN,
     REQUIRED_SCOPES,
     EntityDescriptionKey,
 )
@@ -209,6 +210,86 @@ async def test_unit_conversion(
     assert aioclient_mock.mock_calls[-1] == snapshot(
         name=f"{entity_id}-api-odometer-request"
     )
+
+
+@pytest.mark.usefixtures("enable_all_entities")
+@pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
+@pytest.mark.parametrize("expires_at", [1756764425])
+@pytest.mark.parametrize("api_respone_type", ["unauthorized"])
+async def test_expired_token_update_with_polling_disabled(
+    hass: HomeAssistant,
+    mock_config_entry: MockConfigEntry,
+    aioclient_mock: AiohttpClientMocker,
+    snapshot: SnapshotAssertion,
+    vehicle: AsyncMock,
+    device_registry: dr.DeviceRegistry,
+    entity_registry: er.EntityRegistry,
+) -> None:
+    """Test update for expired token when polling is disabled."""
+
+    mock_config_entry.add_to_hass(hass)
+    hass.config_entries.async_update_entry(
+        mock_config_entry,
+        pref_disable_polling=True,
+    )
+
+    aioclient_mock.post(
+        OAUTH2_TOKEN,
+        status=400,
+        json={
+            "error": "invalid_grant",
+            "error_description": "Invalid or expired refresh token.",
+        },
+    )
+
+    await setup_added_integration(hass, mock_config_entry)
+
+    assert len(hass.config_entries.flow.async_progress()) == 0
+    await async_update_entity(hass, "sensor.vw_id_4_battery")
+    await hass.async_block_till_done()
+
+    flows = hass.config_entries.flow.async_progress()
+    assert len(flows) == 1
+    assert flows[0]["step_id"] == "reauth_confirm"
+    assert flows[0]["context"]["source"] == "reauth"
+
+
+@pytest.mark.usefixtures("enable_all_entities")
+@pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
+@pytest.mark.parametrize("expires_at", [1756764425])
+@pytest.mark.parametrize("api_respone_type", ["unauthorized"])
+async def test_expired_token_invalid_update_with_polling_disabled(
+    hass: HomeAssistant,
+    mock_config_entry: MockConfigEntry,
+    aioclient_mock: AiohttpClientMocker,
+    snapshot: SnapshotAssertion,
+    vehicle: AsyncMock,
+    device_registry: dr.DeviceRegistry,
+    entity_registry: er.EntityRegistry,
+) -> None:
+    """Test update for expired token when polling is disabled."""
+
+    mock_config_entry.add_to_hass(hass)
+    hass.config_entries.async_update_entry(
+        mock_config_entry,
+        pref_disable_polling=True,
+    )
+
+    aioclient_mock.post(
+        OAUTH2_TOKEN,
+        status=500,
+        json={
+            "error": "server_error",
+            "error_description": "A server error occurred.",
+        },
+    )
+
+    await setup_added_integration(hass, mock_config_entry)
+
+    assert len(hass.config_entries.flow.async_progress()) == 0
+    await async_update_entity(hass, "sensor.vw_id_4_battery")
+    await hass.async_block_till_done()
+    assert len(hass.config_entries.flow.async_progress()) == 0
 
 
 RESTORE_STATE_PARAMETRIZE_ARGS = [
