@@ -170,7 +170,7 @@ class SmartcarOAuth2FlowHandler(AbstractOAuth2FlowHandler, domain=DOMAIN):  # ty
         if duplicate_vins:
             return self.async_abort(
                 reason="duplicate_vehicles",
-                description_placeholders={"duplicate_vins": duplicate_vins},
+                description_placeholders={"vins": duplicate_vins},
             )
 
         if self.source == SOURCE_REAUTH:

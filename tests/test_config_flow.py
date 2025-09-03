@@ -232,7 +232,7 @@ async def test_duplicate_vins_disallowed(
 
     assert result["type"] is FlowResultType.ABORT
     assert result["reason"] == "duplicate_vehicles"
-    assert result["description_placeholders"] == {"duplicate_vins": [vehicle["vin"]]}
+    assert result["description_placeholders"] == {"vins": [vehicle["vin"]]}
 
 
 @pytest.mark.usefixtures("current_request_with_host")
