@@ -4,11 +4,13 @@ from collections.abc import Generator
 import time
 from unittest.mock import AsyncMock, PropertyMock, patch
 
+from aiohttp import ClientSession
 from homeassistant.components.application_credentials import (
     ClientCredential,
     async_import_client_credential,
 )
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers.config_entry_oauth2_flow import OAuth2Session
 from homeassistant.setup import async_setup_component
 import pytest
 from pytest_homeassistant_custom_component.common import (
@@ -23,7 +25,11 @@ from pytest_homeassistant_custom_component.test_util.aiohttp import (
 from custom_components.smartcar.auth import AbstractAuth
 from custom_components.smartcar.const import DOMAIN, EntityDescriptionKey, Scope
 
-from . import aioclient_mock_append_vehicle_request, setup_integration
+from . import (
+    MOCK_API_ENDPOINT,
+    aioclient_mock_append_vehicle_request,
+    setup_integration,
+)
 
 
 class AdvancedPropertyMock(PropertyMock):
@@ -54,7 +60,18 @@ def mock_smartcar_auth(
     """Mock a Smartcar auth."""
 
     class MockAuth(AbstractAuth):
-        async def async_get_access_token(self) -> str:  # noqa: PLR6301
+        def __init__(
+            self,
+            websession: ClientSession,
+            oauth_session: OAuth2Session,
+            host: str,
+        ) -> None:
+            super().__init__(websession, host)
+            self._oauth_session = oauth_session
+
+        async def async_get_access_token(self) -> str:
+            if self._oauth_session:
+                await self._oauth_session.async_ensure_token_valid()
             return "mock-token"
 
     with (
@@ -63,15 +80,21 @@ def mock_smartcar_auth(
         ) as mock_auth,
         patch(
             "custom_components.smartcar.AsyncConfigEntryAuth",
-            new=lambda session, _, _host: MockAuth(session, "http://test.local"),
+            new=lambda session, oauth, _host: MockAuth(
+                session, oauth, MOCK_API_ENDPOINT
+            ),
         ),
         patch(
             "custom_components.smartcar.AccessTokenAuthImpl",
-            new=lambda session, _, _host: MockAuth(session, "http://test.local"),
+            new=lambda session, _token, _host: MockAuth(
+                session, None, MOCK_API_ENDPOINT
+            ),
         ),
         patch(
             "custom_components.smartcar.config_flow.AccessTokenAuthImpl",
-            new=lambda session, _, _host: MockAuth(session, "http://test.local"),
+            new=lambda session, _token, _host: MockAuth(
+                session, None, MOCK_API_ENDPOINT
+            ),
         ),
     ):
         yield mock_auth.return_value

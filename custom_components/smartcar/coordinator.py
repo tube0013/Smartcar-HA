@@ -1,10 +1,13 @@
 from dataclasses import dataclass
 from datetime import timedelta
+from http import HTTPStatus
 import logging
 from typing import Any
 
+from aiohttp import ClientResponseError
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
+from homeassistant.exceptions import ConfigEntryAuthFailed
 from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
@@ -176,7 +179,9 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
             The updated data.
 
         Raises:
-            UpdateFailed: If the update fails for any reason.
+            ConfigEntryAuthFailed: If an authentication failure occurs.
+            ClientResponseError: If the update fails for any reason.
+            UpdateFailed: If the update fails to provide the proper response.
         """
 
         batch_requests = self._batch_proccess()
@@ -200,7 +205,24 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
             request_batch_paths,
         )
 
-        response = await self.auth.request("post", request_path, json=request_body)
+        try:
+            response = await self.auth.request("post", request_path, json=request_body)
+
+        # response errors here for responses that have actually completed, i.e.
+        # 4xx responses are for errors related to requests made in the
+        # underlying oauth handler. for instance, the implementation will raise
+        # for invalid an invalid status while negotiating a new token if there's
+        # an issue. unfortunately, it consumes the JSON response to log about
+        # the error, so we can only match on the status code.
+        except ClientResponseError as exception:
+            if exception.status in {
+                HTTPStatus.BAD_REQUEST,
+                HTTPStatus.UNAUTHORIZED,
+                HTTPStatus.FORBIDDEN,
+            }:
+                raise ConfigEntryAuthFailed from exception
+            raise
+
         response.raise_for_status()
         response_data = await response.json()
 

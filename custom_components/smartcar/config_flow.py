@@ -117,6 +117,13 @@ class SmartcarOAuth2FlowHandler(AbstractOAuth2FlowHandler, domain=DOMAIN):  # ty
                 return await self.async_step_auth()
             errors["base"] = "no_scopes"
 
+        # pre-populate prior selections for re-auth
+        if user_input is None and self.source == SOURCE_REAUTH:
+            user_input = dict.fromkeys(
+                self._get_reauth_entry().data.get(CONF_TOKEN, {}).get("scopes", []),
+                True,
+            )
+
         def default(scope: str) -> bool:
             if user_input is None:
                 return scope in DEFAULT_SCOPES
@@ -160,7 +167,10 @@ class SmartcarOAuth2FlowHandler(AbstractOAuth2FlowHandler, domain=DOMAIN):  # ty
 
         await self.async_set_unique_id(unique_id_from_entry_data(data))
 
-        other_vins = vehicle_vins_in_use(self.hass)
+        other_vins = vehicle_vins_in_use(
+            self.hass,
+            self._get_reauth_entry() if self.source == SOURCE_REAUTH else None,
+        )
         duplicate_vins = [
             details["vin"]
             for details in data.get("vehicles", {}).values()
@@ -170,7 +180,7 @@ class SmartcarOAuth2FlowHandler(AbstractOAuth2FlowHandler, domain=DOMAIN):  # ty
         if duplicate_vins:
             return self.async_abort(
                 reason="duplicate_vehicles",
-                description_placeholders={"duplicate_vins": duplicate_vins},
+                description_placeholders={"vins": duplicate_vins},
             )
 
         if self.source == SOURCE_REAUTH:
