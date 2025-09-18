@@ -1,8 +1,9 @@
 """Fixtures for testing."""
 
 from collections.abc import Generator
+import logging
 import time
-from unittest.mock import AsyncMock, PropertyMock, patch
+from unittest.mock import AsyncMock, Mock, PropertyMock, patch
 
 from aiohttp import ClientSession
 from homeassistant.components.application_credentials import (
@@ -40,10 +41,51 @@ class AdvancedPropertyMock(PropertyMock):
         self(obj, val)
 
 
+_LOGGER = logging.getLogger(__name__)
+
+
+def pytest_configure(config) -> None:
+    is_capturing = config.getoption("capture") != "no"
+
+    if not is_capturing and config.pluginmanager.hasplugin("logging"):
+        _LOGGER.warning(
+            "pytest run with `-s/--capture=no` and the logging plugin enabled "
+            "run with `-p no:logging` to disable all sources of log capturing.",
+        )
+
+    # `pytest_homeassistant_custom_component` calls `logging.basicConfig` which
+    # creates the `stderr` stream handler. in most cases that will result in
+    # logs being duplicated, reported in the "stderr" and "logging" capture
+    # sections. force reconfiguration, removing handlers when not running with
+    # the `-s/--capture=no` flag.
+    if is_capturing:
+        logging.basicConfig(level=logging.INFO, handlers=[], force=True)
+
+    logging.getLogger("custom_components.smartcar").setLevel(logging.DEBUG)
+    logging.getLogger("homeassistant").setLevel(logging.INFO)
+    logging.getLogger("pytest_homeassistant_custom_component").setLevel(logging.INFO)
+    logging.getLogger("asyncio").setLevel(logging.ERROR)
+
+
 @pytest.fixture(autouse=True)
 def auto_enable_custom_integrations(enable_custom_integrations):
     """Enable custom integrations."""
     return
+
+
+@pytest.fixture
+def mock_hmac_sha256_hexdigest_value() -> str:
+    return "1234"
+
+
+@pytest.fixture
+def mock_hmac_sha256_hexdigest(
+    mock_hmac_sha256_hexdigest_value: str,
+) -> Generator[Mock]:
+    """Fixture to mock HMAC digests."""
+    with patch("custom_components.smartcar.util.hmac_sha256_hexdigest") as mock_hmac:
+        mock_hmac.return_value = mock_hmac_sha256_hexdigest_value
+        yield mock_hmac
 
 
 @pytest.fixture
@@ -118,8 +160,8 @@ async def setup_credentials(
         )
 
 
-@pytest.fixture(name="api_respone_type")
-def mock_api_respone_type() -> str:
+@pytest.fixture(name="api_response_type")
+def mock_api_response_type() -> str:
     """Fixture to define the API response fixture to use."""
     return "ok"
 
@@ -146,7 +188,7 @@ def vehicle_attributes(vehicle_fixture: str) -> dict:
 def vehicle(
     mock_smartcar_auth: AsyncMock,
     aioclient_mock: AiohttpClientMocker,
-    api_respone_type: str,
+    api_response_type: str,
     vehicle_fixture: str,
     vehicle_attributes: dict,
 ) -> dict:
@@ -154,7 +196,7 @@ def vehicle(
 
     http_calls = aioclient_mock_append_vehicle_request(
         aioclient_mock,
-        api_respone_type,
+        api_response_type,
         vehicle_fixture,
         vehicle_attributes,
     )

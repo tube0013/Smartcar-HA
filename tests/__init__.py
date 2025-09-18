@@ -29,12 +29,12 @@ async def setup_added_integration(
 
 def aioclient_mock_append_vehicle_request(
     aioclient_mock: AiohttpClientMocker,
-    api_respone_type: str,
+    api_response_type: str,
     vehicle_fixture: str,
     vehicle_attributes: dict,
 ):
     vehicle_id = vehicle_attributes["id"]
-    fixture_name = f"api/{vehicle_fixture}.{api_respone_type}.json"
+    fixture_name = f"api/{vehicle_fixture}.{api_response_type}.json"
     http_calls = load_json_array_fixture(fixture_name, DOMAIN)
 
     for http_call in http_calls:

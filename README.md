@@ -64,9 +64,11 @@ Follow the instructions to configure the integration.
 
 ### Configuration Flow
 
+Initially, you will have the option to enable [webhooks](#webhooks). If desired, follow the instructions to enter the required data. Once the configuration is complete, you can complete the required [webhook setup steps](#webhooks).
+
 #### Authorization Data Entry
 
-1. Choose a name for your credentials and enter the **Client ID** and **Client Secret** which can be found in the [Smartcar dashboard](https://dashboard.smartcar.com/team/applications).
+1. Choose a name for your credentials and enter the **Client ID** and **Client Secret** which can be found in the [Smartcar dashboard][smartcar-dashboard].
 1. **Crucially, set the "Redirect URIs"** in the Smartcar settings for your application. You need to add **exactly** the URI your Home Assistant instance uses for OAuth callbacks.
    - Most users will simply use the **My Home Assistant** URI: `https://my.home-assistant.io/redirect/oauth`
      > Note: This is not a placeholder. It is the URI that must be used unless you’ve disabled or removed the `default_config:` line from your configuration and disabled the [My Home Assistant Integration](https://www.home-assistant.io/integrations/my/).
@@ -101,8 +103,51 @@ Follow the instructions to configure the integration.
 
 If successful, the integration will be added, and Home Assistant will create devices and entities for your connected vehicle(s). From here:
 
-- Enable entities you want access after understanding [the impact on rate limits](#rate-limits--polling).
+- Enable entities you want to access after understanding [the impact on rate limits](#rate-limits--polling) if you're using polling.
 - Consider creating a [customized polling setup](#customized-polling) via automations.
+
+### Webhooks
+
+**Important:** In order for webhooks to update entities, your Home Assistant instance must be accessible from the internet, either via Home Assistant Cloud or another method. See the [Remote Access documentation][ha-remote-access] for more information.
+
+These steps are for setting up a webhook in [Smartcar's dashboard][smartcar-dashboard]. Before starting, make sure you have completed all of the steps to [create an active configuration](#configuration-flow) in Home Assistant and have the webhook URL.
+
+The webhooks configuration is broken down into several steps:
+
+1. [Create Webhook](#create-webhook)
+1. [Subscribe Vehicle](#subscribe-vehicle)
+1. [Validate Webhook](#validate-webhook)
+
+#### Create Webhook
+
+1. From the [Smartcar dashboard][smartcar-dashboard], go to _Integrations_ & click on _Create integration_
+1. Select _Webhook_
+1. Choose which triggers to enable, i.e. use _Only show signals included in my plan_ then expand all signals and enable all of them
+1. Click _Next_
+1. Choose what data to include, i.e. use _Only show signals included in my plan_ then expand all signals and enable all of them
+1. Click _Next_
+1. Name the webhook, i.e. _Home Assistant_
+1. Enter the callback URI (which is the URL that is displayed during setup)
+1. Choose a setting for _Vehicle subscription_ that works for your plan (i.e. with the free plan, you'll want to add a vehicle in a later step)
+1. Click _Next_
+1. Review your settings and press _Next_
+1. Press _Add webhook only_ (because verification will fail without a vehicle subscription)
+
+#### Subscribe Vehicle
+
+1. From the [Smartcar dashboard][smartcar-dashboard], go to _Vehicles_
+1. Navigate to your vehicle
+1. Choose _Webhooks_ at the top of the page
+1. Press _Subscribe to webhook_
+1. Select your webhook and press _Subscribe_
+
+#### Validate Webhook
+
+1. From the [Smartcar dashboard][smartcar-dashboard], go to _Integrations_
+1. Navigate to your webhook by clicking on the name of it in the list view
+1. In the ellipsis menu in the top right choose _Verify_
+1. Press _Verify this webhook_
+1. Ensure a popup appears indicating that the webhook was successfully verified
 
 ## Entities
 
@@ -259,6 +304,7 @@ Obtained concurrently with: [`sensor.<make_model>_tire_pressure_back_left`](#sen
 Whether the vehicle [is currently plugged in](https://smartcar.com/docs/api-reference/evs/get-charge-status#param-is-plugged-in).
 
 Enabled by default: :white_check_mark:  
+Deprecated: This is deprecated and will be removed when the v2 API is no longer being used  
 Requires permissions: `read_charge`  
 Obtained concurrently with: [`sensor.<make_model>_charging_status`](#sensormake_model_charging_status), [`switch.<make_model>_charging`](#switchmake_model_charging)
 
@@ -288,6 +334,7 @@ _Note: some models, e.g., VW ID.4 2023+ do not have this functionality._
 
 ## Rate Limits & Polling
 
+- Consider setting up [webhooks](#webhooks). With webhooks enabled, polling will no longer occur avoiding most rate limit issues. Additionally, Smartcar is moving away from [their v2 API](https://smartcar.com/docs/api-reference/v2-overview) and polling may not be the best way to use the service.
 - Smartcar's free developer tier typically has a limit of **500 API calls per vehicle per month**. Exceeding this may incur costs or stop the integration from working.
 - By default, it uses **6 hour polling interval** and only fetches data required for enabled entities.
 - Polling can be [customized as well](#customized-polling).
@@ -336,3 +383,5 @@ Please report any issues you find with this integration by opening an issue on t
 [hacs-open]: https://my.home-assistant.io/redirect/hacs_repository/?owner=tube0013&repository=Smartcar-HA&category=integration
 [releases]: https://github.com/tube0013/Smartcar-HA/releases
 [config-flow-start]: https://my.home-assistant.io/redirect/config_flow_start/?domain=smartcar
+[smartcar-dashboard]: https://dashboard.smartcar.com/team/applications
+[ha-remote-access]: https://www.home-assistant.io/docs/configuration/remote/
