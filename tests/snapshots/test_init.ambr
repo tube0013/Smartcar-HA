@@ -1908,7 +1908,7 @@
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
-    'state': '30',
+    'state': 'unavailable',
   })
 # ---
 # name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_fuel_range]
@@ -1925,7 +1925,7 @@
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
-    'state': '40.5',
+    'state': 'unavailable',
   })
 # ---
 # name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_odometer]

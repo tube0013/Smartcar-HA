@@ -3,117 +3,90 @@
   dict({
     'data': dict({
       'VIWP1AB29P15LA85784N': dict({
-        'battery': dict({
-          'percentRemaining': 0.3,
-          'range': 40.5,
-        }),
-        'battery_nominal_capacity': dict({
-          'availableCapacities': list([
+        'charge-chargelimits': dict({
+          'values': list([
             dict({
-              'capacity': 70.9,
-              'description': None,
+              'condition': None,
+              'limit': 0.8,
+              'type': 'global',
             }),
           ]),
-          'capacity': dict({
-            'nominal': 70.9,
-            'source': 'SMARTCAR',
+        }),
+        'charge-ischarging': dict({
+          'value': False,
+        }),
+        'charge-ischargingcableconnected': dict({
+          'value': True,
+        }),
+        'closure-islocked': dict({
+          'value': False,
+        }),
+        'internalcombustionengine-amountremaining': dict({
+          'value': 53.2,
+        }),
+        'internalcombustionengine-fuellevel': dict({
+          'value': 0.3,
+        }),
+        'internalcombustionengine-oillife': dict({
+          'value': 0.35,
+        }),
+        'internalcombustionengine-range': dict({
+          'value': 40.5,
+        }),
+        'location-preciselocation': dict({
+          'value': dict({
+            'latitude': '**REDACTED**',
+            'longitude': '**REDACTED**',
           }),
-          'url': None,
         }),
-        'charge': dict({
-          'isPluggedIn': True,
-          'state': 'FULLY_CHARGED',
+        'location-preciselocation:data_age': '2019-10-24T00:43:46+00:00',
+        'odometer-traveleddistance': dict({
+          'value': 37829,
         }),
-        'charge_limit': dict({
-          'limit': 0.8,
-        }),
-        'engine_oil': dict({
-          'lifeRemaining': 0.35,
-        }),
-        'fuel': dict({
-          'amountRemaining': 53.2,
-          'percentRemaining': 0.3,
-          'range': 40.5,
-        }),
-        'location': dict({
-          'latitude': '**REDACTED**',
-          'longitude': '**REDACTED**',
-        }),
-        'location:data_age': '2019-10-24T00:43:46+00:00',
-        'odometer': dict({
-          'distance': 37829,
-        }),
-        'odometer:data_age': '2019-10-24T00:43:46+00:00',
-        'odometer:unit_system': 'metric',
-        'security': dict({
-          'chargingPort': list([
-            dict({
-              'status': 'CLOSED',
-              'type': 'chargingPort',
-            }),
+        'odometer-traveleddistance:data_age': '2019-10-24T00:43:46+00:00',
+        'odometer-traveleddistance:unit_system': 'metric',
+        'tractionbattery-nominalcapacity': dict({
+          'availableCapacities': list([
           ]),
-          'doors': list([
+          'capacity': 70.9,
+        }),
+        'tractionbattery-range': dict({
+          'value': 40.5,
+        }),
+        'tractionbattery-stateofcharge': dict({
+          'value': 0.3,
+        }),
+        'v2only-charge': dict({
+          'value': 'FULLY_CHARGED',
+        }),
+        'wheel-tires': dict({
+          'columnCount': 2,
+          'rowCount': 2,
+          'values': list([
             dict({
-              'status': 'CLOSED',
-              'type': 'frontLeft',
+              'column': 1,
+              'row': 0,
+              'tirePressure': 219.3,
             }),
             dict({
-              'status': 'OPEN',
-              'type': 'frontRight',
+              'column': 0,
+              'row': 0,
+              'tirePressure': 219.3,
             }),
             dict({
-              'status': 'CLOSED',
-              'type': 'backRight',
+              'column': 1,
+              'row': 1,
+              'tirePressure': 219.3,
             }),
             dict({
-              'status': 'CLOSED',
-              'type': 'backLeft',
-            }),
-          ]),
-          'isLocked': False,
-          'storage': list([
-            dict({
-              'status': 'UNKNOWN',
-              'type': 'rear',
-            }),
-            dict({
-              'status': 'CLOSED',
-              'type': 'front',
-            }),
-          ]),
-          'sunroof': list([
-            dict({
-              'status': 'CLOSED',
-              'type': 'sunroof',
-            }),
-          ]),
-          'windows': list([
-            dict({
-              'status': 'CLOSED',
-              'type': 'frontLeft',
-            }),
-            dict({
-              'status': 'CLOSED',
-              'type': 'frontRight',
-            }),
-            dict({
-              'status': 'UNKNOWN',
-              'type': 'backRight',
-            }),
-            dict({
-              'status': 'CLOSED',
-              'type': 'backLeft',
+              'column': 0,
+              'row': 1,
+              'tirePressure': 219.3,
             }),
           ]),
         }),
-        'tires_pressure': dict({
-          'backLeft': 219.3,
-          'backRight': 219.3,
-          'frontLeft': 219.3,
-          'frontRight': 219.3,
-        }),
-        'tires_pressure:data_age': '2019-10-24T00:43:46+00:00',
-        'tires_pressure:unit_system': 'metric',
+        'wheel-tires:data_age': '2019-10-24T00:43:46+00:00',
+        'wheel-tires:unit_system': 'metric',
       }),
     }),
     'entry': dict({
@@ -148,61 +121,113 @@
       'unique_id': 'a1d50709-3502-4faa-ba43-a5c7565e6a09',
       'version': 2,
     }),
+    'webhook_url': None,
   })
 # ---
 # name: test_entry_diagnostics[vw_id_4]
   dict({
     'data': dict({
       'VIWP1AB29P15LA85784N': dict({
-        'battery': dict({
-          'percentRemaining': 0.68,
-          'range': 275,
-        }),
-        'battery:data_age': '2025-05-09T15:40:57+00:00',
-        'battery:fetched_at': '2025-05-09T17:27:26.712000+00:00',
-        'battery:unit_system': 'metric',
-        'battery_nominal_capacity': dict({
-          'availableCapacities': list([
+        'charge-chargelimits': dict({
+          'values': list([
             dict({
-              'capacity': 82,
-              'description': None,
+              'condition': None,
+              'limit': 1,
+              'type': 'global',
             }),
           ]),
-          'capacity': dict({
-            'nominal': 82,
-            'source': 'SMARTCAR',
+        }),
+        'charge-chargelimits:data_age': '2025-05-09T15:40:55+00:00',
+        'charge-chargelimits:fetched_at': '2025-05-09T17:27:26.712000+00:00',
+        'charge-ischarging': dict({
+          'value': False,
+        }),
+        'charge-ischarging:data_age': '2025-05-09T15:40:57+00:00',
+        'charge-ischarging:fetched_at': '2025-05-09T17:27:26.712000+00:00',
+        'charge-ischargingcableconnected': dict({
+          'value': False,
+        }),
+        'charge-ischargingcableconnected:data_age': '2025-05-09T15:40:57+00:00',
+        'charge-ischargingcableconnected:fetched_at': '2025-05-09T17:27:26.712000+00:00',
+        'closure-islocked': dict({
+          'value': None,
+        }),
+        'internalcombustionengine-amountremaining': dict({
+          'value': None,
+        }),
+        'internalcombustionengine-fuellevel': dict({
+          'value': None,
+        }),
+        'internalcombustionengine-oillife': dict({
+          'value': None,
+        }),
+        'internalcombustionengine-range': dict({
+          'value': None,
+        }),
+        'location-preciselocation': dict({
+          'value': dict({
+            'latitude': '**REDACTED**',
+            'longitude': '**REDACTED**',
           }),
-          'url': None,
         }),
-        'battery_nominal_capacity:data_age': '2025-05-09T17:27:25.114000+00:00',
-        'battery_nominal_capacity:fetched_at': '2025-05-09T17:27:25.114000+00:00',
-        'charge': dict({
-          'isPluggedIn': False,
-          'state': 'NOT_CHARGING',
+        'location-preciselocation:data_age': '2025-05-09T15:40:52+00:00',
+        'location-preciselocation:fetched_at': '2025-05-09T17:27:25.401000+00:00',
+        'odometer-traveleddistance': dict({
+          'value': 21919,
         }),
-        'charge:data_age': '2025-05-09T15:40:57+00:00',
-        'charge:fetched_at': '2025-05-09T17:27:26.712000+00:00',
-        'charge_limit': dict({
-          'limit': 1,
+        'odometer-traveleddistance:data_age': '2025-05-09T15:40:52+00:00',
+        'odometer-traveleddistance:fetched_at': '2025-05-09T17:27:25.401000+00:00',
+        'odometer-traveleddistance:unit_system': 'metric',
+        'tractionbattery-nominalcapacity': dict({
+          'availableCapacities': list([
+          ]),
+          'capacity': 82,
         }),
-        'charge_limit:data_age': '2025-05-09T15:40:55+00:00',
-        'charge_limit:fetched_at': '2025-05-09T17:27:26.712000+00:00',
-        'engine_oil': None,
-        'fuel': None,
-        'location': dict({
-          'latitude': '**REDACTED**',
-          'longitude': '**REDACTED**',
+        'tractionbattery-nominalcapacity:data_age': '2025-05-09T17:27:25.114000+00:00',
+        'tractionbattery-nominalcapacity:fetched_at': '2025-05-09T17:27:25.114000+00:00',
+        'tractionbattery-range': dict({
+          'value': 275,
         }),
-        'location:data_age': '2025-05-09T15:40:52+00:00',
-        'location:fetched_at': '2025-05-09T17:27:25.401000+00:00',
-        'odometer': dict({
-          'distance': 21919,
+        'tractionbattery-range:data_age': '2025-05-09T15:40:57+00:00',
+        'tractionbattery-range:fetched_at': '2025-05-09T17:27:26.712000+00:00',
+        'tractionbattery-range:unit_system': 'metric',
+        'tractionbattery-stateofcharge': dict({
+          'value': 0.68,
         }),
-        'odometer:data_age': '2025-05-09T15:40:52+00:00',
-        'odometer:fetched_at': '2025-05-09T17:27:25.401000+00:00',
-        'odometer:unit_system': 'metric',
-        'security': None,
-        'tires_pressure': None,
+        'tractionbattery-stateofcharge:data_age': '2025-05-09T15:40:57+00:00',
+        'tractionbattery-stateofcharge:fetched_at': '2025-05-09T17:27:26.712000+00:00',
+        'tractionbattery-stateofcharge:unit_system': 'metric',
+        'v2only-charge': dict({
+          'value': 'NOT_CHARGING',
+        }),
+        'v2only-charge:data_age': '2025-05-09T15:40:57+00:00',
+        'v2only-charge:fetched_at': '2025-05-09T17:27:26.712000+00:00',
+        'wheel-tires': dict({
+          'columnCount': 2,
+          'rowCount': 2,
+          'values': list([
+            dict({
+              'column': 1,
+              'row': 0,
+              'tirePressure': None,
+            }),
+            dict({
+              'column': 0,
+              'row': 0,
+              'tirePressure': None,
+            }),
+            dict({
+              'column': 1,
+              'row': 1,
+              'tirePressure': None,
+            }),
+            dict({
+              'column': 0,
+              'row': 1,
+              'tirePressure': None,
+            }),
+          ]),
+        }),
       }),
     }),
     'entry': dict({
@@ -240,5 +265,6 @@
       'unique_id': 'a1d50709-3502-4faa-ba43-a5c7565e6a09',
       'version': 2,
     }),
+    'webhook_url': None,
   })
 # ---
