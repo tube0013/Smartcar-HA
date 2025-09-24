@@ -49,6 +49,8 @@ ENTITY_CONFIG_MAP = {
     ),
     EntityDescriptionKey.ENGINE_OIL: EntityConfig("/engine/oil", ["read_engine_oil"]),
     EntityDescriptionKey.FUEL: EntityConfig("/fuel", ["read_fuel"]),
+    EntityDescriptionKey.FUEL_PERCENT: EntityConfig("/fuel", ["read_fuel"]),
+    EntityDescriptionKey.FUEL_RANGE: EntityConfig("/fuel", ["read_fuel"]),
     EntityDescriptionKey.LOCATION: EntityConfig("/location", ["read_location"]),
     EntityDescriptionKey.ODOMETER: EntityConfig("/odometer", ["read_odometer"]),
     EntityDescriptionKey.PLUG_STATUS: EntityConfig("/charge", ["read_charge"]),
