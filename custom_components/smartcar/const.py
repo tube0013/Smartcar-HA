@@ -67,6 +67,8 @@ class EntityDescriptionKey(StrEnum):
     CHARGING_STATE = auto()
     ENGINE_OIL = auto()
     FUEL = auto()
+    FUEL_PERCENT = auto()
+    FUEL_RANGE = auto()
     ODOMETER = auto()
     RANGE = auto()
     TIRE_PRESSURE_BACK_LEFT = auto()
