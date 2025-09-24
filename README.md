@@ -140,22 +140,22 @@ Links to relevant API documentation are provided for each entity described below
 
 The GPS [location](https://smartcar.com/docs/api-reference/get-location) of the vehicle.
 
-Enabled by default: :white_check_mark:  
+Enabled by default: :white_check_mark:
 Requires permissions: `read_location`
 
 ### `sensor.<make_model>_battery_capacity`
 
 The [battery capacity](https://smartcar.com/docs/api-reference/get-nominal-capacity) of this vehicle in kWh.
 
-Enabled by default: :x:  
+Enabled by default: :x:
 Requires permissions: `read_battery`
 
 ### `sensor.<make_model>_battery`
 
 The [state of charge](https://smartcar.com/docs/api-reference/evs/get-battery-level#param-percent-remaining) of the vehicle as a percentage.
 
-Enabled by default: :white_check_mark:  
-Requires permissions: `read_battery`  
+Enabled by default: :white_check_mark:
+Requires permissions: `read_battery`
 Obtained concurrently with: [`sensor.<make_model>_range`](#sensormake_model_range)
 
 ### `sensor.<make_model>_charging_status`
@@ -168,15 +168,15 @@ Possible values:
 - `FULLY_CHARGED`
 - `NOT_CHARGING`
 
-Enabled by default: :white_check_mark:  
-Requires permissions: `read_charge`  
+Enabled by default: :white_check_mark:
+Requires permissions: `read_charge`
 Obtained concurrently with: [`binary_sensor.<make_model>_charging_cable_plugged_in`](#binary_sensormake_model_charging_cable_plugged_in), [`switch.<make_model>_charging`](#switchmake_model_charging)
 
 ### `sensor.<make_model>_engine_oil_life`
 
 The [estimated engine oil life](https://smartcar.com/docs/api-reference/get-engine-oil-life) remaining for the vehicle.
 
-Enabled by default: :x:  
+Enabled by default: :x:
 Requires permissions: `read_engine_oil`
 
 ### `sensor.<make_model>_fuel`
@@ -185,8 +185,8 @@ The [amount of fuel](https://smartcar.com/docs/api-reference/get-fuel-tank) rema
 
 **Note:** This value is frequently `null` for many vehicles. Consider using [`sensor.<make_model>_fuel_percent`](#sensormake_model_fuel_percent) or [`sensor.<make_model>_fuel_range`](#sensormake_model_fuel_range) for more reliable fuel information.
 
-Enabled by default: :x:  
-Requires permissions: `read_fuel`  
+Enabled by default: :x:
+Requires permissions: `read_fuel`
 Obtained concurrently with: [`sensor.<make_model>_fuel_percent`](#sensormake_model_fuel_percent), [`sensor.<make_model>_fuel_range`](#sensormake_model_fuel_range)
 
 ### `sensor.<make_model>_fuel_percent`
@@ -195,93 +195,93 @@ The [fuel level as a percentage](https://smartcar.com/docs/api-reference/get-fue
 
 This sensor provides more reliable fuel information than the amount-based sensor, as percentage values are more consistently available from vehicle APIs.
 
-Enabled by default: :x:  
-Requires permissions: `read_fuel`  
+Enabled by default: :x:
+Requires permissions: `read_fuel`
 Obtained concurrently with: [`sensor.<make_model>_fuel`](#sensormake_model_fuel), [`sensor.<make_model>_fuel_range`](#sensormake_model_fuel_range)
 
 ### `sensor.<make_model>_fuel_range`
 
 The [estimated driving range](https://smartcar.com/docs/api-reference/get-fuel-tank#param-range) remaining for the vehicle based on current fuel level.
 
-Enabled by default: :x:  
-Requires permissions: `read_fuel`  
+Enabled by default: :x:
+Requires permissions: `read_fuel`
 Obtained concurrently with: [`sensor.<make_model>_fuel`](#sensormake_model_fuel), [`sensor.<make_model>_fuel_percent`](#sensormake_model_fuel_percent)
 
 ### `sensor.<make_model>_odometer`
 
 The [odometer reading](https://smartcar.com/docs/api-reference/get-odometer) of the vehicle.
 
-Enabled by default: :x:  
+Enabled by default: :x:
 Requires permissions: `read_odometer`
 
 ### `sensor.<make_model>_range`
 
 The [estimated range remaining](https://smartcar.com/docs/api-reference/evs/get-battery-level#param-range) for the vehicle.
 
-Enabled by default: :white_check_mark:  
-Requires permissions: `read_battery`  
+Enabled by default: :white_check_mark:
+Requires permissions: `read_battery`
 Obtained concurrently with: [`sensor.<make_model>_battery`](#sensormake_model_battery)
 
 ### `sensor.<make_model>_tire_pressure_back_left`
 
 The [back left tire pressure](https://smartcar.com/docs/api-reference/get-tire-pressure#param-back-left) of the vehicle.
 
-Enabled by default: :x:  
-Requires permissions: `read_tires`  
+Enabled by default: :x:
+Requires permissions: `read_tires`
 Obtained concurrently with: [`sensor.<make_model>_tire_pressure_back_right`](#sensormake_model_tire_pressure_back_right), [`sensor.<make_model>_tire_pressure_front_left`](#sensormake_model_tire_pressure_front_left), [`sensor.<make_model>_tire_pressure_front_right`](#sensormake_model_tire_pressure_front_right)
 
 ### `sensor.<make_model>_tire_pressure_back_right`
 
 The [back right tire pressure](https://smartcar.com/docs/api-reference/get-tire-pressure#param-back-right) of the vehicle.
 
-Enabled by default: :x:  
-Requires permissions: `read_tires`  
+Enabled by default: :x:
+Requires permissions: `read_tires`
 Obtained concurrently with: [`sensor.<make_model>_tire_pressure_back_left`](#sensormake_model_tire_pressure_back_left), [`sensor.<make_model>_tire_pressure_front_left`](#sensormake_model_tire_pressure_front_left), [`sensor.<make_model>_tire_pressure_front_right`](#sensormake_model_tire_pressure_front_right)
 
 ### `sensor.<make_model>_tire_pressure_front_left`
 
 The [front left tire pressure](https://smartcar.com/docs/api-reference/get-tire-pressure#param-front-left) of the vehicle.
 
-Enabled by default: :x:  
-Requires permissions: `read_tires`  
+Enabled by default: :x:
+Requires permissions: `read_tires`
 Obtained concurrently with: [`sensor.<make_model>_tire_pressure_back_left`](#sensormake_model_tire_pressure_back_left), [`sensor.<make_model>_tire_pressure_back_right`](#sensormake_model_tire_pressure_back_right), [`sensor.<make_model>_tire_pressure_front_right`](#sensormake_model_tire_pressure_front_right)
 
 ### `sensor.<make_model>_tire_pressure_front_right`
 
 The [front right tire pressure](https://smartcar.com/docs/api-reference/get-tire-pressure#param-front-right) of the vehicle.
 
-Enabled by default: :x:  
-Requires permissions: `read_tires`  
+Enabled by default: :x:
+Requires permissions: `read_tires`
 Obtained concurrently with: [`sensor.<make_model>_tire_pressure_back_left`](#sensormake_model_tire_pressure_back_left), [`sensor.<make_model>_tire_pressure_back_right`](#sensormake_model_tire_pressure_back_right), [`sensor.<make_model>_tire_pressure_front_left`](#sensormake_model_tire_pressure_front_left)
 
 ### `binary_sensor.<make_model>_charging_cable_plugged_in`
 
 Whether the vehicle [is currently plugged in](https://smartcar.com/docs/api-reference/evs/get-charge-status#param-is-plugged-in).
 
-Enabled by default: :white_check_mark:  
-Requires permissions: `read_charge`  
+Enabled by default: :white_check_mark:
+Requires permissions: `read_charge`
 Obtained concurrently with: [`sensor.<make_model>_charging_status`](#sensormake_model_charging_status), [`switch.<make_model>_charging`](#switchmake_model_charging)
 
 ### `number.<make_model>_charge_limit`
 
 Change the [charge limit](https://smartcar.com/docs/api-reference/evs/get-charge-limit) by [setting it to a specific value](https://smartcar.com/docs/api-reference/evs/set-charge-limit).
 
-Enabled by default: :x:  
+Enabled by default: :x:
 Requires permissions: `read_charge`, `control_charge`
 
 ### `switch.<make_model>_charging`
 
 Change whether the vehicle is [currently charging](https://smartcar.com/docs/api-reference/evs/get-charge-status#param-state) by [starting or stopping charging](https://smartcar.com/docs/api-reference/evs/control-charge).
 
-Enabled by default: :white_check_mark:  
-Requires permissions: `read_charge`, `control_charge`  
+Enabled by default: :white_check_mark:
+Requires permissions: `read_charge`, `control_charge`
 Obtained concurrently with: [`sensor.<make_model>_charging_status`](#sensormake_model_charging_status), [`binary_sensor.<make_model>_charging_cable_plugged_in`](#binary_sensormake_model_charging_cable_plugged_in)
 
 ### `lock.<make_model>_door_lock`
 
 Change whether the vehicle is [currently locked](https://smartcar.com/docs/api-reference/get-lock-status) by [locking or unlocking](https://smartcar.com/docs/api-reference/control-lock-unlock).
 
-Enabled by default: :white_check_mark:  
+Enabled by default: :white_check_mark:
 Requires permissions: `read_security`, `control_security`
 
 _Note: some models, e.g., VW ID.4 2023+ do not have this functionality._
