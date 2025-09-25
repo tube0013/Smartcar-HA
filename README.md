@@ -181,7 +181,7 @@ Requires permissions: `read_engine_oil`
 
 ### `sensor.<make_model>_fuel`
 
-The [amount of fuel](https://smartcar.com/docs/api-reference/get-fuel-tank) remaining for the vehicle in litres.
+The [volume of fuel](https://smartcar.com/docs/api-reference/get-fuel-tank) remaining for the vehicle.
 
 **Note:** This value is frequently `null` for many vehicles. Consider using [`sensor.<make_model>_fuel_percent`](#sensormake_model_fuel_percent) or [`sensor.<make_model>_fuel_range`](#sensormake_model_fuel_range) for more reliable fuel information.
 
