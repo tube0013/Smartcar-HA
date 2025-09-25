@@ -185,8 +185,8 @@ The [amount of fuel](https://smartcar.com/docs/api-reference/get-fuel-tank) rema
 
 **Note:** This value is frequently `null` for many vehicles. Consider using [`sensor.<make_model>_fuel_percent`](#sensormake_model_fuel_percent) or [`sensor.<make_model>_fuel_range`](#sensormake_model_fuel_range) for more reliable fuel information.
 
-Enabled by default: :x:  
-Requires permissions: `read_fuel`  
+Enabled by default: :x:
+Requires permissions: `read_fuel`
 Obtained concurrently with: [`sensor.<make_model>_fuel_percent`](#sensormake_model_fuel_percent), [`sensor.<make_model>_fuel_range`](#sensormake_model_fuel_range)
 
 ### `sensor.<make_model>_fuel_percent`
@@ -195,16 +195,16 @@ The [fuel level as a percentage](https://smartcar.com/docs/api-reference/get-fue
 
 This sensor provides more reliable fuel information than the amount-based sensor, as percentage values are more consistently available from vehicle APIs.
 
-Enabled by default: :x:  
-Requires permissions: `read_fuel`  
+Enabled by default: :x:
+Requires permissions: `read_fuel`
 Obtained concurrently with: [`sensor.<make_model>_fuel`](#sensormake_model_fuel), [`sensor.<make_model>_fuel_range`](#sensormake_model_fuel_range)
 
 ### `sensor.<make_model>_fuel_range`
 
 The [estimated driving range](https://smartcar.com/docs/api-reference/get-fuel-tank#param-range) remaining for the vehicle based on current fuel level.
 
-Enabled by default: :x:  
-Requires permissions: `read_fuel`  
+Enabled by default: :x:
+Requires permissions: `read_fuel`
 Obtained concurrently with: [`sensor.<make_model>_fuel`](#sensormake_model_fuel), [`sensor.<make_model>_fuel_percent`](#sensormake_model_fuel_percent)
 
 ### `sensor.<make_model>_odometer`
