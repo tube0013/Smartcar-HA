@@ -114,6 +114,8 @@ Several entities are created for for each connected vehicle (subject to vehicle 
 - [`sensor.<make_model>_charging_status`](#sensormake_model_charging_status)
 - [`sensor.<make_model>_engine_oil_life`](#sensormake_model_engine_oil_life)
 - [`sensor.<make_model>_fuel`](#sensormake_model_fuel)
+- [`sensor.<make_model>_fuel_percent`](#sensormake_model_fuel_percent)
+- [`sensor.<make_model>_fuel_range`](#sensormake_model_fuel_range)
 - [`sensor.<make_model>_odometer`](#sensormake_model_odometer)
 - [`sensor.<make_model>_range`](#sensormake_model_range)
 - [`sensor.<make_model>_tire_pressure_back_left`](#sensormake_model_tire_pressure_back_left)
@@ -179,10 +181,31 @@ Requires permissions: `read_engine_oil`
 
 ### `sensor.<make_model>_fuel`
 
-The [amount of fuel](https://smartcar.com/docs/api-reference/get-fuel-tank) remaining for the vehicle.
+The [volume of fuel](https://smartcar.com/docs/api-reference/get-fuel-tank) remaining for the vehicle.
+
+**Note:** This value is frequently `null` for many vehicles. Consider using [`sensor.<make_model>_fuel_percent`](#sensormake_model_fuel_percent) or [`sensor.<make_model>_fuel_range`](#sensormake_model_fuel_range) for more reliable fuel information.
 
 Enabled by default: :x:  
-Requires permissions: `read_fuel`
+Requires permissions: `read_fuel`  
+Obtained concurrently with: [`sensor.<make_model>_fuel_percent`](#sensormake_model_fuel_percent), [`sensor.<make_model>_fuel_range`](#sensormake_model_fuel_range)
+
+### `sensor.<make_model>_fuel_percent`
+
+The [fuel level as a percentage](https://smartcar.com/docs/api-reference/get-fuel-tank#param-percent-remaining) remaining for the vehicle (0-100%).
+
+This sensor provides more reliable fuel information than the amount-based sensor, as percentage values are more consistently available from vehicle APIs.
+
+Enabled by default: :x:  
+Requires permissions: `read_fuel`  
+Obtained concurrently with: [`sensor.<make_model>_fuel`](#sensormake_model_fuel), [`sensor.<make_model>_fuel_range`](#sensormake_model_fuel_range)
+
+### `sensor.<make_model>_fuel_range`
+
+The [estimated driving range](https://smartcar.com/docs/api-reference/get-fuel-tank#param-range) remaining for the vehicle based on current fuel level.
+
+Enabled by default: :x:  
+Requires permissions: `read_fuel`  
+Obtained concurrently with: [`sensor.<make_model>_fuel`](#sensormake_model_fuel), [`sensor.<make_model>_fuel_percent`](#sensormake_model_fuel_percent)
 
 ### `sensor.<make_model>_odometer`
 
@@ -299,6 +322,7 @@ For instance:
 ## Known Issues / Limitations
 
 - **Vehicle Compatibility:** Not all features are supported by all vehicle makes/models/years via the Smartcar API. Entities for unsupported features (e.g., [fuel status](#sensormake_model_fuel) for EVs or [lock control](#lockmake_model_door_lock) for VW ID.4 2023+) may or may still be created, but not function. Check the Smartcar compatibility details for your specific vehicle.
+- **Fuel Data Availability:** The [`sensor.<make_model>_fuel`](#sensormake_model_fuel) (amount in litres) is frequently `null` for many vehicles. However, [`sensor.<make_model>_fuel_percent`](#sensormake_model_fuel_percent) and [`sensor.<make_model>_fuel_range`](#sensormake_model_fuel_range) are typically more reliable and provide comprehensive fuel monitoring even when the amount is unavailable.
 - **API Latency:** There can be significant delays (seconds to minutes) between sending a command (e.g., start charging) and the vehicle executing/reporting the change back through the API. The state in Home Assistant will update after the next successful data poll.
 - **Rate Limits:** Be mindful of the 500 calls/vehicle/month limit on the free tier.
 

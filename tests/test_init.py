@@ -424,6 +424,8 @@ _SNAPSHOT_ORDER = {
             "plug_status",
             "charge_limit",
             "location",
+            "fuel_percent",
+            "fuel_range",
         ]
     )
 }

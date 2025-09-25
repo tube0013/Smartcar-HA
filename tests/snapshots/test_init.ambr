@@ -1709,6 +1709,79 @@
       'unique_id': 'VIWP1AB29P15LA85784N_location',
       'unit_of_measurement': None,
     }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.smartcar_784n_fuel_percent',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': None,
+      'original_icon': 'mdi:gas-station',
+      'original_name': 'Fuel Percent',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_fuel_percent',
+      'unit_of_measurement': '%',
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.smartcar_784n_fuel_range',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.DISTANCE: 'distance'>,
+      'original_icon': 'mdi:map-marker-distance',
+      'original_name': 'Fuel Range',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_fuel_range',
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
   ])
 # ---
 # name: test_standard_setup_with_all_entities[unknown_make][lock.smartcar_784n_door_lock]
@@ -1820,6 +1893,39 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': '53.2',
+  })
+# ---
+# name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_fuel_percent]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'Smartcar 784N Fuel Percent',
+      'icon': 'mdi:gas-station',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.smartcar_784n_fuel_percent',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '30',
+  })
+# ---
+# name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_fuel_range]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'distance',
+      'friendly_name': 'Smartcar 784N Fuel Range',
+      'icon': 'mdi:map-marker-distance',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.smartcar_784n_fuel_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '40.5',
   })
 # ---
 # name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_odometer]
@@ -2581,6 +2687,79 @@
       'unique_id': 'VIWP1AB29P15LA85784N_location',
       'unit_of_measurement': None,
     }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_fuel_percent',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': None,
+      'original_icon': 'mdi:gas-station',
+      'original_name': 'Fuel Percent',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_fuel_percent',
+      'unit_of_measurement': '%',
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_fuel_range',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.DISTANCE: 'distance'>,
+      'original_icon': 'mdi:map-marker-distance',
+      'original_name': 'Fuel Range',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_fuel_range',
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
   ])
 # ---
 # name: test_standard_setup_with_all_entities[vw_id_4][lock.vw_id_4_door_lock]
@@ -2696,6 +2875,39 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_fuel',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_standard_setup_with_all_entities[vw_id_4][sensor.vw_id_4_fuel_percent]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Fuel Percent',
+      'icon': 'mdi:gas-station',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_fuel_percent',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_standard_setup_with_all_entities[vw_id_4][sensor.vw_id_4_fuel_range]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'distance',
+      'friendly_name': 'VW ID.4 Fuel Range',
+      'icon': 'mdi:map-marker-distance',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_fuel_range',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -3454,6 +3666,79 @@
       'unique_id': 'VIWP1AB29P15LA85784N_location',
       'unit_of_measurement': None,
     }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_fuel_percent',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': None,
+      'original_icon': 'mdi:gas-station',
+      'original_name': 'Fuel Percent',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_fuel_percent',
+      'unit_of_measurement': '%',
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_fuel_range',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.DISTANCE: 'distance'>,
+      'original_icon': 'mdi:map-marker-distance',
+      'original_name': 'Fuel Range',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_fuel_range',
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
   ])
 # ---
 # name: test_update_errors[network_error-vw_id_4][lock.vw_id_4_door_lock]
@@ -3561,6 +3846,39 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_fuel',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[network_error-vw_id_4][sensor.vw_id_4_fuel_percent]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Fuel Percent',
+      'icon': 'mdi:gas-station',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_fuel_percent',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[network_error-vw_id_4][sensor.vw_id_4_fuel_range]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'distance',
+      'friendly_name': 'VW ID.4 Fuel Range',
+      'icon': 'mdi:map-marker-distance',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_fuel_range',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -4313,6 +4631,79 @@
       'unique_id': 'VIWP1AB29P15LA85784N_location',
       'unit_of_measurement': None,
     }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_fuel_percent',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': None,
+      'original_icon': 'mdi:gas-station',
+      'original_name': 'Fuel Percent',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_fuel_percent',
+      'unit_of_measurement': '%',
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_fuel_range',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.DISTANCE: 'distance'>,
+      'original_icon': 'mdi:map-marker-distance',
+      'original_name': 'Fuel Range',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_fuel_range',
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
   ])
 # ---
 # name: test_update_errors[network_proxy_response-vw_id_4][lock.vw_id_4_door_lock]
@@ -4420,6 +4811,39 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_fuel',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[network_proxy_response-vw_id_4][sensor.vw_id_4_fuel_percent]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Fuel Percent',
+      'icon': 'mdi:gas-station',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_fuel_percent',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[network_proxy_response-vw_id_4][sensor.vw_id_4_fuel_range]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'distance',
+      'friendly_name': 'VW ID.4 Fuel Range',
+      'icon': 'mdi:map-marker-distance',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_fuel_range',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -5172,6 +5596,79 @@
       'unique_id': 'VIWP1AB29P15LA85784N_location',
       'unit_of_measurement': None,
     }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_fuel_percent',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': None,
+      'original_icon': 'mdi:gas-station',
+      'original_name': 'Fuel Percent',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_fuel_percent',
+      'unit_of_measurement': '%',
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_fuel_range',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.DISTANCE: 'distance'>,
+      'original_icon': 'mdi:map-marker-distance',
+      'original_name': 'Fuel Range',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_fuel_range',
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
   ])
 # ---
 # name: test_update_errors[server_error-vw_id_4][lock.vw_id_4_door_lock]
@@ -5279,6 +5776,39 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_fuel',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[server_error-vw_id_4][sensor.vw_id_4_fuel_percent]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Fuel Percent',
+      'icon': 'mdi:gas-station',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_fuel_percent',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[server_error-vw_id_4][sensor.vw_id_4_fuel_range]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'distance',
+      'friendly_name': 'VW ID.4 Fuel Range',
+      'icon': 'mdi:map-marker-distance',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_fuel_range',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -6031,6 +6561,79 @@
       'unique_id': 'VIWP1AB29P15LA85784N_location',
       'unit_of_measurement': None,
     }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_fuel_percent',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': None,
+      'original_icon': 'mdi:gas-station',
+      'original_name': 'Fuel Percent',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_fuel_percent',
+      'unit_of_measurement': '%',
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_fuel_range',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.DISTANCE: 'distance'>,
+      'original_icon': 'mdi:map-marker-distance',
+      'original_name': 'Fuel Range',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_fuel_range',
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
   ])
 # ---
 # name: test_update_errors[unauthorized-vw_id_4][lock.vw_id_4_door_lock]
@@ -6138,6 +6741,39 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_fuel',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[unauthorized-vw_id_4][sensor.vw_id_4_fuel_percent]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Fuel Percent',
+      'icon': 'mdi:gas-station',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_fuel_percent',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[unauthorized-vw_id_4][sensor.vw_id_4_fuel_range]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'distance',
+      'friendly_name': 'VW ID.4 Fuel Range',
+      'icon': 'mdi:map-marker-distance',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_fuel_range',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,

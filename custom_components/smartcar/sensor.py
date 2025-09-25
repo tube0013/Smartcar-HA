@@ -78,6 +78,27 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         ),
     ),
     SmartcarSensorDescription(
+        key=EntityDescriptionKey.FUEL_PERCENT,
+        name="Fuel Percent",
+        value_key_path="fuel.percentRemaining",
+        value_cast=lambda pct: pct and round(pct * 100),
+        icon="mdi:gas-station",
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=PERCENTAGE,
+    ),
+    SmartcarSensorDescription(
+        key=EntityDescriptionKey.FUEL_RANGE,
+        name="Fuel Range",
+        value_key_path="fuel.range",
+        icon="mdi:map-marker-distance",
+        device_class=SensorDeviceClass.DISTANCE,
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=UnitOfLength.KILOMETERS,
+        imperial_conversion=lambda v: DistanceConverter.convert(
+            v, UnitOfLength.MILES, UnitOfLength.KILOMETERS
+        ),
+    ),
+    SmartcarSensorDescription(
         key=EntityDescriptionKey.ODOMETER,
         name="Odometer",
         value_key_path="odometer.distance",
