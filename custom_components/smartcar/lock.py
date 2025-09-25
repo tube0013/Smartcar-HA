@@ -22,7 +22,7 @@ ENTITY_DESCRIPTIONS: tuple[LockEntityDescription, ...] = (
     SmartcarLockDescription(
         key=EntityDescriptionKey.DOOR_LOCK,
         name="Door Lock",
-        value_key_path="security.isLocked",
+        value_key_path="closure-islocked.value",
     ),
 )
 
@@ -59,8 +59,7 @@ class SmartcarDoorLock(SmartcarEntity[bool, bool], LockEntity):
         **kwargs,  # noqa: ARG002, ANN003
     ) -> None:
         if await self._async_send_command("/security", {"action": "LOCK"}):
-            value = True
-            self._inject_raw_value(value)
+            self._inject_raw_value(value=True)
             self.async_write_ha_state()
 
     async def async_unlock(
@@ -68,6 +67,5 @@ class SmartcarDoorLock(SmartcarEntity[bool, bool], LockEntity):
         **kwargs,  # noqa: ARG002, ANN003
     ) -> None:
         if await self._async_send_command("/security", {"action": "UNLOCK"}):
-            value = False
-            self._inject_raw_value(value)
+            self._inject_raw_value(value=False)
             self.async_write_ha_state()

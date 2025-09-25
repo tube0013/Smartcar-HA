@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 import logging
+from typing import TypedDict
 
 from homeassistant.components.number import (
     NumberEntity,
@@ -27,8 +28,15 @@ ENTITY_DESCRIPTIONS: tuple[NumberEntityDescription, ...] = (
     SmartcarNumberDescription(
         key=EntityDescriptionKey.CHARGE_LIMIT,
         name="Charge Limit",
-        value_key_path="charge_limit.limit",
-        value_cast=lambda pct: pct and round(pct * 100),
+        value_key_path="charge-chargelimits.values",
+        value_cast=lambda values: next(
+            (
+                round(value["limit"] * 100)
+                for value in values or []
+                if value["type"] == "global" and value["condition"] is None
+            ),
+            None,
+        ),
         icon="mdi:battery-charging-80",
         mode=NumberMode.BOX,
         native_min_value=50.0,
@@ -57,7 +65,15 @@ async def async_setup_entry(  # noqa: RUF029
     async_add_entities(entities)
 
 
-class SmartcarChargeLimitNumber(SmartcarEntity[float, float], NumberEntity):
+class _StorageValue(TypedDict):
+    type: str
+    limit: float
+    condition: str | None
+
+
+class SmartcarChargeLimitNumber(
+    SmartcarEntity[float, list[_StorageValue]], NumberEntity
+):
     """Number entity for charge limit."""
 
     _attr_has_entity_name = True
@@ -73,5 +89,16 @@ class SmartcarChargeLimitNumber(SmartcarEntity[float, float], NumberEntity):
         if await self._async_send_command(
             "/charge/limit", {"limit": (raw_value := value / 100.0)}
         ):
-            self._inject_raw_value(raw_value)
+            non_global_or_conditional_limits = [
+                value
+                for value in self._extract_raw_value() or []
+                if value["type"] != "global" or value["condition"] is not None
+            ]
+
+            self._inject_raw_value(
+                [
+                    {"type": "global", "limit": raw_value, "condition": None},
+                    *non_global_or_conditional_limits,
+                ]
+            )
             self.async_write_ha_state()

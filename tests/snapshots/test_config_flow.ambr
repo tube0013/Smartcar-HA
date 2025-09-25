@@ -1,5 +1,5 @@
 # serializer version: 1
-# name: test_full_flow
+# name: test_full_flow[cloud_not_connected]
   list([
     tuple(
       'POST',
@@ -37,5 +37,133 @@
         'authorization': 'Bearer mock-token',
       }),
     ),
+  ])
+# ---
+# name: test_full_flow[cloud_webhooks]
+  list([
+    tuple(
+      'POST',
+      URL('https://auth.smartcar.com/oauth/token'),
+      dict({
+        'client_id': 'mock-id',
+        'client_secret': 'mock-secret',
+        'code': 'abcd',
+        'grant_type': 'authorization_code',
+        'redirect_uri': 'https://example.com/auth/external/callback',
+      }),
+      None,
+    ),
+    tuple(
+      'get',
+      URL('http://test.local/v2.0/vehicles'),
+      None,
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+    tuple(
+      'get',
+      URL('http://test.local/v2.0/vehicles/36ab27d0-fd9d-4455-823a-ce30af709ffc/vin'),
+      None,
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+    tuple(
+      'get',
+      URL('http://test.local/v2.0/vehicles/36ab27d0-fd9d-4455-823a-ce30af709ffc'),
+      None,
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+  ])
+# ---
+# name: test_full_flow[no_webhooks]
+  list([
+    tuple(
+      'POST',
+      URL('https://auth.smartcar.com/oauth/token'),
+      dict({
+        'client_id': 'mock-id',
+        'client_secret': 'mock-secret',
+        'code': 'abcd',
+        'grant_type': 'authorization_code',
+        'redirect_uri': 'https://example.com/auth/external/callback',
+      }),
+      None,
+    ),
+    tuple(
+      'get',
+      URL('http://test.local/v2.0/vehicles'),
+      None,
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+    tuple(
+      'get',
+      URL('http://test.local/v2.0/vehicles/36ab27d0-fd9d-4455-823a-ce30af709ffc/vin'),
+      None,
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+    tuple(
+      'get',
+      URL('http://test.local/v2.0/vehicles/36ab27d0-fd9d-4455-823a-ce30af709ffc'),
+      None,
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+  ])
+# ---
+# name: test_full_flow[webhooks]
+  list([
+    tuple(
+      'POST',
+      URL('https://auth.smartcar.com/oauth/token'),
+      dict({
+        'client_id': 'mock-id',
+        'client_secret': 'mock-secret',
+        'code': 'abcd',
+        'grant_type': 'authorization_code',
+        'redirect_uri': 'https://example.com/auth/external/callback',
+      }),
+      None,
+    ),
+    tuple(
+      'get',
+      URL('http://test.local/v2.0/vehicles'),
+      None,
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+    tuple(
+      'get',
+      URL('http://test.local/v2.0/vehicles/36ab27d0-fd9d-4455-823a-ce30af709ffc/vin'),
+      None,
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+    tuple(
+      'get',
+      URL('http://test.local/v2.0/vehicles/36ab27d0-fd9d-4455-823a-ce30af709ffc'),
+      None,
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+  ])
+# ---
+# name: test_full_flow[webhooks_extraneous_token]
+  list([
+  ])
+# ---
+# name: test_full_flow[webhooks_missing_token]
+  list([
   ])
 # ---

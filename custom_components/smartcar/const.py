@@ -17,6 +17,9 @@ OAUTH2_AUTHORIZE = "https://connect.smartcar.com/oauth/authorize"
 OAUTH2_TOKEN = "https://auth.smartcar.com/oauth/token"  # noqa: S105
 SMARTCAR_MODE = "live"
 
+CONF_APPLICATION_MANAGEMENT_TOKEN = "application_management_token"  # noqa: S105
+CONF_CLOUDHOOK = "cloudhook"
+
 
 class Scope(StrEnum):
     """Scope enumeration class."""
