@@ -239,7 +239,7 @@ async def test_full_flow(
                 return_value="cloud" in setup,
             ),
             patch(
-                "homeassistant.components.cloud.async_create_cloudhook",
+                "homeassistant.components.cloud.async_get_or_create_cloudhook",
                 return_value="cloud_url",
             )
             if "cloud_not_connected" not in setup
@@ -930,7 +930,7 @@ async def test_options_flow(
             return_value="cloud" in setup,
         ),
         patch(
-            "homeassistant.components.cloud.async_create_cloudhook",
+            "homeassistant.components.cloud.async_get_or_create_cloudhook",
             return_value="cloud_url",
         )
         if "cloud_not_connected" not in setup
