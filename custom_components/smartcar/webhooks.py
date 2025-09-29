@@ -25,7 +25,7 @@ _IMPERIAL_MEASUREMENTS = {"miles", "psi", "gallons"}
 
 async def webhook_url_from_id(hass: HomeAssistant, webhook_id: str) -> tuple[str, bool]:
     if cloud.async_active_subscription(hass):
-        webhook_url = await cloud.async_create_cloudhook(hass, webhook_id)
+        webhook_url = await cloud.async_get_or_create_cloudhook(hass, webhook_id)
         cloudhook = True
     else:
         webhook_url = webhook.async_generate_url(hass, webhook_id)
