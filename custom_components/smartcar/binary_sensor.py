@@ -28,7 +28,7 @@ SENSOR_TYPES: tuple[BinarySensorEntityDescription, ...] = (
     SmartcarBinarySensorDescription(
         key=EntityDescriptionKey.PLUG_STATUS,
         name="Charging Cable Plugged In",
-        value_key_path="charge.isPluggedIn",
+        value_key_path="charge-ischargingcableconnected.value",
         device_class=BinarySensorDeviceClass.PLUG,
     ),
 )

@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 import logging
-from typing import Literal
 
 from homeassistant.components.switch import SwitchEntity, SwitchEntityDescription
 from homeassistant.config_entries import ConfigEntry
@@ -23,8 +22,7 @@ ENTITY_DESCRIPTIONS: tuple[SwitchEntityDescription, ...] = (
     SmartcarSwitchDescription(
         key=EntityDescriptionKey.CHARGING,
         name="Charging",
-        value_key_path="charge.state",
-        value_cast=lambda value: value == "CHARGING",
+        value_key_path="charge-ischarging.value",
         icon="mdi:ev-plug-type2",
     ),
 )
@@ -49,9 +47,7 @@ async def async_setup_entry(  # noqa: RUF029
     async_add_entities(entities)
 
 
-class SmartcarChargingSwitch(
-    SmartcarEntity[bool, Literal["CHARGING", "NOT_CHARGING"]], SwitchEntity
-):
+class SmartcarChargingSwitch(SmartcarEntity[bool, bool], SwitchEntity):
     """Switch entity."""
 
     _attr_has_entity_name = True
@@ -65,7 +61,7 @@ class SmartcarChargingSwitch(
         **kwargs,  # noqa: ARG002, ANN003
     ) -> None:
         if await self._async_send_command("/charge", {"action": "START"}):
-            self._inject_raw_value("CHARGING")
+            self._inject_raw_value(value=True)
             self.async_write_ha_state()
 
     async def async_turn_off(
@@ -73,5 +69,5 @@ class SmartcarChargingSwitch(
         **kwargs,  # noqa: ARG002, ANN003
     ) -> None:
         if await self._async_send_command("/charge", {"action": "STOP"}):
-            self._inject_raw_value("NOT_CHARGING")
+            self._inject_raw_value(value=False)
             self.async_write_ha_state()

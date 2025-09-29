@@ -23,7 +23,13 @@ from homeassistant.helpers.typing import StateType
 from homeassistant.util.unit_conversion import DistanceConverter, PressureConverter
 
 from .const import EntityDescriptionKey
-from .coordinator import SmartcarVehicleCoordinator
+from .coordinator import (
+    TIRE_BACK_ROW,
+    TIRE_FRONT_ROW,
+    TIRE_LEFT_COLUMN,
+    TIRE_RIGHT_COLUMN,
+    SmartcarVehicleCoordinator,
+)
 from .entity import SmartcarEntity, SmartcarEntityDescription
 
 _LOGGER = logging.getLogger(__name__)
@@ -38,7 +44,7 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
     SmartcarSensorDescription(
         key=EntityDescriptionKey.BATTERY_CAPACITY,
         name="Battery Capacity",
-        value_key_path="battery_nominal_capacity.capacity.nominal",
+        value_key_path="tractionbattery-nominalcapacity.capacity",
         device_class=SensorDeviceClass.ENERGY_STORAGE,
         state_class=SensorStateClass.MEASUREMENT,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
@@ -46,7 +52,7 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
     SmartcarSensorDescription(
         key=EntityDescriptionKey.BATTERY_LEVEL,
         name="Battery",
-        value_key_path="battery.percentRemaining",
+        value_key_path="tractionbattery-stateofcharge.value",
         value_cast=lambda pct: pct and round(pct * 100),
         device_class=SensorDeviceClass.BATTERY,
         state_class=SensorStateClass.MEASUREMENT,
@@ -55,13 +61,13 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
     SmartcarSensorDescription(
         key=EntityDescriptionKey.CHARGING_STATE,
         name="Charging Status",
-        value_key_path="charge.state",
+        value_key_path="v2only-charge.value",
         icon="mdi:ev-station",
     ),
     SmartcarSensorDescription(
         key=EntityDescriptionKey.ENGINE_OIL,
         name="Engine Oil Life",
-        value_key_path="engine_oil.lifeRemaining",
+        value_key_path="internalcombustionengine-oillife.value",
         icon="mdi:oil-level",
         state_class=SensorStateClass.MEASUREMENT,
         native_unit_of_measurement=PERCENTAGE,
@@ -69,7 +75,7 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
     SmartcarSensorDescription(
         key=EntityDescriptionKey.FUEL,
         name="Fuel",
-        value_key_path="fuel.amountRemaining",
+        value_key_path="internalcombustionengine-amountremaining.value",
         icon="mdi:gas-station",
         state_class=SensorStateClass.MEASUREMENT,
         native_unit_of_measurement=UnitOfVolume.LITERS,
@@ -101,7 +107,7 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
     SmartcarSensorDescription(
         key=EntityDescriptionKey.ODOMETER,
         name="Odometer",
-        value_key_path="odometer.distance",
+        value_key_path="odometer-traveleddistance.value",
         device_class=SensorDeviceClass.DISTANCE,
         state_class=SensorStateClass.TOTAL_INCREASING,
         native_unit_of_measurement=UnitOfLength.KILOMETERS,
@@ -112,7 +118,7 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
     SmartcarSensorDescription(
         key=EntityDescriptionKey.RANGE,
         name="Range",
-        value_key_path="battery.range",
+        value_key_path="tractionbattery-range.value",
         icon="mdi:map-marker-distance",
         device_class=SensorDeviceClass.DISTANCE,
         state_class=SensorStateClass.MEASUREMENT,
@@ -124,7 +130,15 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
     SmartcarSensorDescription(
         key=EntityDescriptionKey.TIRE_PRESSURE_BACK_LEFT,
         name="Tire Pressure Back Left",
-        value_key_path="tires_pressure.backLeft",
+        value_key_path="wheel-tires.values",
+        value_cast=lambda values: next(
+            (
+                value["tirePressure"]
+                for value in values or []
+                if value["row"] == TIRE_BACK_ROW and value["column"] == TIRE_LEFT_COLUMN
+            ),
+            None,
+        ),
         device_class=SensorDeviceClass.PRESSURE,
         state_class=SensorStateClass.MEASUREMENT,
         suggested_display_precision=1,
@@ -136,7 +150,16 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
     SmartcarSensorDescription(
         key=EntityDescriptionKey.TIRE_PRESSURE_BACK_RIGHT,
         name="Tire Pressure Back Right",
-        value_key_path="tires_pressure.backRight",
+        value_key_path="wheel-tires.values",
+        value_cast=lambda values: next(
+            (
+                value["tirePressure"]
+                for value in values or []
+                if value["row"] == TIRE_BACK_ROW
+                and value["column"] == TIRE_RIGHT_COLUMN
+            ),
+            None,
+        ),
         device_class=SensorDeviceClass.PRESSURE,
         state_class=SensorStateClass.MEASUREMENT,
         suggested_display_precision=1,
@@ -148,7 +171,16 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
     SmartcarSensorDescription(
         key=EntityDescriptionKey.TIRE_PRESSURE_FRONT_LEFT,
         name="Tire Pressure Front Left",
-        value_key_path="tires_pressure.frontLeft",
+        value_key_path="wheel-tires.values",
+        value_cast=lambda values: next(
+            (
+                value["tirePressure"]
+                for value in values or []
+                if value["row"] == TIRE_FRONT_ROW
+                and value["column"] == TIRE_LEFT_COLUMN
+            ),
+            None,
+        ),
         device_class=SensorDeviceClass.PRESSURE,
         state_class=SensorStateClass.MEASUREMENT,
         suggested_display_precision=1,
@@ -160,7 +192,16 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
     SmartcarSensorDescription(
         key=EntityDescriptionKey.TIRE_PRESSURE_FRONT_RIGHT,
         name="Tire Pressure Front Right",
-        value_key_path="tires_pressure.frontRight",
+        value_key_path="wheel-tires.values",
+        value_cast=lambda values: next(
+            (
+                value["tirePressure"]
+                for value in values or []
+                if value["row"] == TIRE_FRONT_ROW
+                and value["column"] == TIRE_RIGHT_COLUMN
+            ),
+            None,
+        ),
         device_class=SensorDeviceClass.PRESSURE,
         state_class=SensorStateClass.MEASUREMENT,
         suggested_display_precision=1,

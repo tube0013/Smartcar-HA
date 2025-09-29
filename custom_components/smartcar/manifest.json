@@ -1,12 +1,13 @@
 {
   "domain": "smartcar",
   "name": "Smartcar",
+  "after_dependencies": ["cloud"],
   "codeowners": [
     "@tube0013",
     "@wbyoung"
   ],
   "config_flow": true,
-  "dependencies": ["application_credentials"],
+  "dependencies": ["application_credentials", "webhook"],
   "documentation": "https://github.com/tube0013/Smartcar-HA",
   "homekit": {},
   "iot_class": "cloud_polling",
