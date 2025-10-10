@@ -128,7 +128,7 @@ def _handle_webhook_signals(
     coordinator: SmartcarVehicleCoordinator,
     signals: list[dict],
 ) -> None:
-    with coordinator.create_updated_data() as (add_partial_data, updated_data):
+    with coordinator.create_updated_data() as (add, updated_data):
         data_changed = False
 
         for signal in signals:
@@ -154,6 +154,8 @@ def _handle_webhook_signals(
                 body.pop("unit")
 
             if code in DATAPOINT_CODE_MAP:
+                assert code is not None
+
                 data_age = meta.get("oemUpdatedAt") if not is_error else None
                 fetched_at = meta.get("retrievedAt") if not is_error else None
                 unit = body.pop("unit", None)
@@ -170,7 +172,7 @@ def _handle_webhook_signals(
                 if fetched_at:
                     fetched_at = dt_util.utc_from_timestamp(fetched_at / 1000)
 
-                add_partial_data(
+                add.from_response_body(
                     code,
                     body=body,
                     unit_system=unit_system,

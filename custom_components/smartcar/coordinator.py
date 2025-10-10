@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from collections.abc import Callable, Generator
 from contextlib import contextmanager
 from dataclasses import dataclass
@@ -5,7 +7,8 @@ import datetime as dt
 from datetime import timedelta
 from http import HTTPStatus
 import logging
-from typing import Any, Final, Literal
+import numbers
+from typing import Any
 
 from aiohttp import ClientResponseError
 from homeassistant.config_entries import ConfigEntry
@@ -21,7 +24,7 @@ from homeassistant.util import dt as dt_util
 
 from .auth import AbstractAuth
 from .const import CONF_APPLICATION_MANAGEMENT_TOKEN, DOMAIN, EntityDescriptionKey
-from .util import key_path_get
+from .util import key_path_get, key_path_update
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -44,6 +47,9 @@ class DatapointConfig:
     value_transform_v2: Callable[[Any], Any] = lambda x: {"value": x}
     value_merge_v2: Callable[[dict, dict], dict] = (
         lambda current, update: current | update
+    )
+    is_v2_value: Callable[[Any], bool] = (  # for saved restore-state values
+        lambda _x: False
     )
 
     @property
@@ -70,6 +76,18 @@ def _tire_pressure_merge_v2(current: dict, update: dict) -> dict:
     return update | {"values": values}
 
 
+def _is_v2_value_if_numeric(
+    value: Any,  # noqa: ANN401
+) -> bool:
+    return isinstance(value, numbers.Number)
+
+
+def _is_v2_value_if_string(
+    value: Any,  # noqa: ANN401
+) -> bool:
+    return isinstance(value, str)
+
+
 DATAPOINT_ENTITY_KEY_MAP = {
     EntityDescriptionKey.BATTERY_CAPACITY: DatapointConfig(
         "tractionbattery-nominalcapacity",
@@ -92,6 +110,7 @@ DATAPOINT_ENTITY_KEY_MAP = {
         lambda limit: {
             "values": [{"type": "global", "limit": limit, "condition": None}]
         },
+        is_v2_value=_is_v2_value_if_numeric,  # for saved restore-state values
     ),
     EntityDescriptionKey.CHARGING: DatapointConfig(  # for the switch
         "charge-ischarging",
@@ -99,6 +118,7 @@ DATAPOINT_ENTITY_KEY_MAP = {
         "/charge",
         "state",
         lambda state: {"value": state == "CHARGING" if state is not None else None},
+        is_v2_value=_is_v2_value_if_string,  # for saved restore-state values
     ),
     EntityDescriptionKey.CHARGING_STATE: DatapointConfig(
         None,  # no v3 equivalent
@@ -171,6 +191,7 @@ DATAPOINT_ENTITY_KEY_MAP = {
             "columnCount": 2,
         },
         _tire_pressure_merge_v2,
+        _is_v2_value_if_numeric,  # for saved restore-state values
     ),
     EntityDescriptionKey.TIRE_PRESSURE_BACK_RIGHT: DatapointConfig(
         "wheel-tires",
@@ -189,6 +210,7 @@ DATAPOINT_ENTITY_KEY_MAP = {
             "columnCount": 2,
         },
         _tire_pressure_merge_v2,
+        _is_v2_value_if_numeric,  # for saved restore-state values
     ),
     EntityDescriptionKey.TIRE_PRESSURE_FRONT_LEFT: DatapointConfig(
         "wheel-tires",
@@ -207,6 +229,7 @@ DATAPOINT_ENTITY_KEY_MAP = {
             "columnCount": 2,
         },
         _tire_pressure_merge_v2,
+        _is_v2_value_if_numeric,  # for saved restore-state values
     ),
     EntityDescriptionKey.TIRE_PRESSURE_FRONT_RIGHT: DatapointConfig(
         "wheel-tires",
@@ -225,6 +248,7 @@ DATAPOINT_ENTITY_KEY_MAP = {
             "columnCount": 2,
         },
         _tire_pressure_merge_v2,
+        _is_v2_value_if_numeric,  # for saved restore-state values
     ),
 }
 
@@ -425,7 +449,7 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
             The newly merged data.
         """
 
-        with self.create_updated_data() as (add_partial_data, updated_data):
+        with self.create_updated_data() as (add, updated_data):
             for item in batch_data["responses"]:
                 path = item["path"]
                 code = item["code"]
@@ -447,13 +471,12 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
                 if fetched_at:
                     fetched_at = dt_util.parse_datetime(fetched_at)
 
-                add_partial_data(
+                add.from_response_body_v2(
                     key,
                     body=body,
                     unit_system=unit_system,
                     data_age=data_age,
                     fetched_at=fetched_at,
-                    version="v2",
                 )
 
                 if code not in {200, 404}:
@@ -471,68 +494,140 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
     @contextmanager
     def create_updated_data(
         self,
-    ) -> Generator[tuple[Callable[..., None], dict[str, Any]]]:
+    ) -> Generator[tuple[_DataAdder, dict[str, Any]]]:
         updated_data = dict(self.data or {})
 
-        def add_partial_data(
-            code: str,  # or storage key
-            *,
-            body: dict[str, Any] | None,
-            data_age: dt.datetime,
-            fetched_at: dt.datetime,
-            unit_system: str | None = None,
-            version: Literal["v2", "v3"] = "v3",
-            can_clear_meta: bool = True,
-        ) -> None:
-            storage_key_v2: Final = code  # alias var for clarity
+        yield _DataAdder(updated_data), updated_data
 
-            if version == "v2":
-                datapoints = DATAPOINT_STORAGE_KEY_V2_MAP[storage_key_v2]
-            else:
-                assert version == "v3"
-                datapoints = DATAPOINT_CODE_MAP[code]
 
-            for datapoint in datapoints:
-                storage_key = datapoint.storage_key
+class _DataAdder:
+    def __init__(self, data: dict[str, Any]) -> None:
+        super().__init__()
+        self.data = data
 
-                if version == "v2":
-                    assert storage_key_v2 == datapoint.storage_key_v2
+    def from_response_body(
+        self,
+        code: str,
+        *,
+        body: dict[str, Any] | None,
+        data_age: dt.datetime | None = None,
+        fetched_at: dt.datetime | None = None,
+        unit_system: str | None = None,
+        can_clear_meta: bool = True,
+    ) -> None:
+        for datapoint in DATAPOINT_CODE_MAP[code]:
+            assert code == datapoint.code
 
-                    value = (
-                        None
-                        if body is None
-                        else key_path_get(body, datapoint.value_key_path_v2)
-                        if datapoint.value_key_path_v2
-                        else body
-                    )
+            self.data[datapoint.storage_key] = (
+                ((self.data.get(datapoint.storage_key) or {}) | body)
+                if body is not None
+                else None
+            )
 
-                    updated_data[storage_key] = datapoint.value_merge_v2(
-                        updated_data.get(storage_key) or {},
-                        datapoint.value_transform_v2(value),
-                    )
-                else:
-                    assert version == "v3"
-                    assert code == datapoint.code
+        self._update_meta(
+            DATAPOINT_CODE_MAP[code],
+            data_age=data_age,
+            fetched_at=fetched_at,
+            unit_system=unit_system,
+            can_clear=can_clear_meta,
+        )
 
-                    updated_data[storage_key] = (
-                        ((updated_data.get(storage_key) or {}) | body)
-                        if body is not None
-                        else None
-                    )
+    def from_response_body_v2(
+        self,
+        storage_key_v2: str,
+        *,
+        body: dict[str, Any] | None,
+        data_age: dt.datetime | None = None,
+        fetched_at: dt.datetime | None = None,
+        unit_system: str | None = None,
+        can_clear_meta: bool = True,
+    ) -> None:
+        for datapoint in DATAPOINT_STORAGE_KEY_V2_MAP[storage_key_v2]:
+            assert storage_key_v2 == datapoint.storage_key_v2
 
-                if unit_system:
-                    updated_data[f"{storage_key}:unit_system"] = unit_system
-                elif can_clear_meta:
-                    updated_data.pop(f"{storage_key}:unit_system", None)
+            value = (
+                None
+                if body is None
+                else key_path_get(body, datapoint.value_key_path_v2)
+                if datapoint.value_key_path_v2
+                else body
+            )
 
-                if data_age:
-                    updated_data[f"{storage_key}:data_age"] = data_age
-                elif can_clear_meta:
-                    updated_data.pop(f"{storage_key}:data_age", None)
+            self.data[datapoint.storage_key] = datapoint.value_merge_v2(
+                self.data.get(datapoint.storage_key) or {},
+                datapoint.value_transform_v2(value),
+            )
 
-                if fetched_at:
-                    updated_data[f"{storage_key}:fetched_at"] = fetched_at
-                elif can_clear_meta:
-                    updated_data.pop(f"{storage_key}:fetched_at", None)
+        self._update_meta(
+            DATAPOINT_STORAGE_KEY_V2_MAP[storage_key_v2],
+            data_age=data_age,
+            fetched_at=fetched_at,
+            unit_system=unit_system,
+            can_clear=can_clear_meta,
+        )
 
-        yield add_partial_data, updated_data
+    def from_storage_raw_value(
+        self,
+        entity_description_key: EntityDescriptionKey,
+        value_key_path: str,
+        *,
+        value: Any,  # noqa: ANN401
+        data_age: dt.datetime | None = None,
+        fetched_at: dt.datetime | None = None,
+        unit_system: str | None = None,
+        can_clear_meta: bool = True,
+    ) -> None:
+        datapoint = DATAPOINT_ENTITY_KEY_MAP[entity_description_key]
+
+        # when needed, transform stored v2 raw values by using the
+        # `value_transform_v2`, but since this changes a value into
+        # an object that looks like the v3 body, i.e. it is nested
+        # inside a dict with a `value(s)` key, we need to strip off
+        # the final key from the key path (and ensure it matches
+        # something within the new value as a sanity check).
+        if datapoint.is_v2_value(value):
+            value = datapoint.value_transform_v2(value)
+            storage_key, final_key = value_key_path.rsplit(".", 1)
+            assert final_key in value
+            _LOGGER.debug("merge %s into %s", value, self.data.get(storage_key))
+            self.data[storage_key] = datapoint.value_merge_v2(
+                self.data.get(storage_key) or {},
+                value,
+            )
+        else:
+            key_path_update(self.data, value_key_path, value)
+
+        self._update_meta(
+            (datapoint,),
+            data_age=data_age,
+            fetched_at=fetched_at,
+            unit_system=unit_system,
+            can_clear=can_clear_meta,
+        )
+
+    def _update_meta(
+        self,
+        datapoints: tuple[DatapointConfig, ...],
+        *,
+        data_age: dt.datetime | None,
+        fetched_at: dt.datetime | None,
+        unit_system: str | None,
+        can_clear: bool,
+    ) -> None:
+        for datapoint in datapoints:
+            storage_key = datapoint.storage_key
+
+            if unit_system:
+                self.data[f"{storage_key}:unit_system"] = unit_system
+            elif can_clear:
+                self.data.pop(f"{storage_key}:unit_system", None)
+
+            if data_age:
+                self.data[f"{storage_key}:data_age"] = data_age
+            elif can_clear:
+                self.data.pop(f"{storage_key}:data_age", None)
+
+            if fetched_at:
+                self.data[f"{storage_key}:fetched_at"] = fetched_at
+            elif can_clear:
+                self.data.pop(f"{storage_key}:fetched_at", None)

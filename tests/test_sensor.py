@@ -1,8 +1,10 @@
 """Test sensors."""
 
+from collections.abc import Callable
 from dataclasses import dataclass
 import datetime as dt
 import json
+from operator import itemgetter
 from typing import Any, cast
 from unittest.mock import AsyncMock, Mock, patch
 
@@ -30,6 +32,12 @@ from custom_components.smartcar.const import (
     OAUTH2_TOKEN,
     REQUIRED_SCOPES,
     EntityDescriptionKey,
+)
+from custom_components.smartcar.coordinator import (
+    TIRE_BACK_ROW,
+    TIRE_FRONT_ROW,
+    TIRE_LEFT_COLUMN,
+    TIRE_RIGHT_COLUMN,
 )
 from custom_components.smartcar.entity import SmartcarEntity
 from custom_components.smartcar.sensor import SmartcarSensorDescription
@@ -656,15 +664,41 @@ RESTORE_STATE_PARAMETRIZE_ARGS = [
                 ),
             },
         ),
+        (
+            "sensor.vw_id_4_tire_pressure_front_right",
+            {
+                "raw_value": [
+                    {
+                        "column": TIRE_RIGHT_COLUMN,
+                        "row": TIRE_FRONT_ROW,
+                        "tirePressure": 234,
+                    },
+                ],
+            },
+            "234",
+            {
+                "wheel-tires": {
+                    "values": [
+                        {
+                            "column": TIRE_RIGHT_COLUMN,
+                            "row": TIRE_FRONT_ROW,
+                            "tirePressure": 234,
+                        },
+                    ],
+                },
+            },
+        ),
     ],
 ]
 RESTORE_STATE_PARAMETRIZE_IDS = [
     "value_only",
     "value_and_unit_system",
-    "value_and_timestampes",
+    "value_and_timestamps",
+    "value_complex",
 ]
 
 
+@pytest.mark.usefixtures("enable_all_entities")
 @pytest.mark.parametrize(
     *RESTORE_STATE_PARAMETRIZE_ARGS,
     ids=RESTORE_STATE_PARAMETRIZE_IDS,
@@ -700,6 +734,7 @@ async def test_restore_sensor_save_state(
     assert stored_entity_data == snapshot
 
 
+@pytest.mark.usefixtures("enable_all_entities")
 @pytest.mark.parametrize(
     *RESTORE_STATE_PARAMETRIZE_ARGS,
     ids=RESTORE_STATE_PARAMETRIZE_IDS,
@@ -742,6 +777,126 @@ async def test_restore_state(
     assert state
     assert state.state == sensor_state
     assert coordinator.data == coordinator_data
+
+
+RESTORE_STATE_V2_PARAMETRIZE_ARGS = [
+    (
+        "entities",
+        "expected_coordinator_data",
+        "values_sort_key",
+    ),
+    [
+        (
+            {
+                "sensor.vw_id_4_tire_pressure_front_left": {
+                    "stored_data": {"raw_value": 235},
+                    "expected_state": "235",
+                },
+                "sensor.vw_id_4_tire_pressure_back_left": {
+                    "stored_data": {"raw_value": 234},
+                    "expected_state": "234",
+                },
+                "sensor.vw_id_4_tire_pressure_front_right": {
+                    "stored_data": {"raw_value": 233},
+                    "expected_state": "233",
+                },
+                "sensor.vw_id_4_tire_pressure_back_right": {
+                    "stored_data": {"raw_value": 232},
+                    "expected_state": "232",
+                },
+            },
+            {
+                "wheel-tires": {
+                    "columnCount": 2,
+                    "rowCount": 2,
+                    "values": [
+                        {
+                            "column": TIRE_LEFT_COLUMN,
+                            "row": TIRE_FRONT_ROW,
+                            "tirePressure": 235,
+                        },
+                        {
+                            "column": TIRE_LEFT_COLUMN,
+                            "row": TIRE_BACK_ROW,
+                            "tirePressure": 234,
+                        },
+                        {
+                            "column": TIRE_RIGHT_COLUMN,
+                            "row": TIRE_FRONT_ROW,
+                            "tirePressure": 233,
+                        },
+                        {
+                            "column": TIRE_RIGHT_COLUMN,
+                            "row": TIRE_BACK_ROW,
+                            "tirePressure": 232,
+                        },
+                    ],
+                },
+            },
+            itemgetter("column", "row"),
+        )
+    ],
+]
+
+RESTORE_STATE_V2_PARAMETRIZE_IDS = ["tire_pressures"]
+
+
+@pytest.mark.usefixtures("enable_all_entities")
+@pytest.mark.parametrize(
+    *RESTORE_STATE_V2_PARAMETRIZE_ARGS,
+    ids=RESTORE_STATE_V2_PARAMETRIZE_IDS,
+)
+@pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
+async def test_restore_state_from_v2(
+    hass: HomeAssistant,
+    mock_config_entry: MockConfigEntry,
+    vehicle_attributes: dict,
+    entities: dict,
+    expected_coordinator_data: dict,
+    values_sort_key: Callable[[dict], tuple] | None,
+) -> None:
+    """Test sensor restore state."""
+
+    mock_restore_cache_with_extra_data(
+        hass,
+        tuple(
+            (
+                State(
+                    entity_id,
+                    "does-not-matter-for-this-test",
+                ),
+                entity_config["stored_data"],
+            )
+            for entity_id, entity_config in entities.items()
+        ),
+    )
+
+    mock_config_entry.add_to_hass(hass)
+    hass.config_entries.async_update_entry(
+        mock_config_entry,
+        pref_disable_polling=True,
+    )
+
+    await setup_added_integration(hass, mock_config_entry)
+
+    coordinator = mock_config_entry.runtime_data.coordinators[vehicle_attributes["vin"]]
+
+    coordinator_data = {
+        key: data
+        | (
+            {"values": sorted(data["values"], key=values_sort_key)}
+            if values_sort_key and "values" in data
+            else {}
+        )
+        for key, data in coordinator.data.items()
+    }
+
+    assert coordinator_data == expected_coordinator_data
+
+    for entity_id, entity_config in entities.items():
+        state = hass.states.get(entity_id)
+        assert state
+        assert state.state == entity_config["expected_state"]
 
 
 async def test_async_update_internals(

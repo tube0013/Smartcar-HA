@@ -19,7 +19,7 @@ from homeassistant.util import dt as dt_util
 from . import const as smartcar_const
 from .const import DOMAIN
 from .coordinator import SmartcarVehicleCoordinator
-from .util import key_path_get, key_path_update
+from .util import key_path_get
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -147,23 +147,30 @@ class SmartcarEntity[ValueT, RawValueT](
         self, value: RawValueT, extra_data: dict | None = None
     ) -> None:
         coordinator = self.coordinator
-        if coordinator.data is None:
-            coordinator.data = {}
+        description = self.entity_description
+
         if extra_data is None:
             extra_data = {}
-        data = coordinator.data
-        description = self.entity_description
-        key_path = description.value_key_path.split(".")
-        key_path_update(data, description.value_key_path, value)
 
-        if unit_system := extra_data.get("unit_system"):
-            data[f"{key_path[0]}:unit_system"] = unit_system
+        unit_system = extra_data.get("unit_system")
 
         if data_age := extra_data.get("data_age"):
-            data[f"{key_path[0]}:data_age"] = dt_util.parse_datetime(data_age)
+            data_age = dt_util.parse_datetime(data_age)
 
         if fetched_at := extra_data.get("fetched_at"):
-            data[f"{key_path[0]}:fetched_at"] = dt_util.parse_datetime(fetched_at)
+            fetched_at = dt_util.parse_datetime(fetched_at)
+
+        with coordinator.create_updated_data() as (add, updated_data):
+            add.from_storage_raw_value(
+                description.key,
+                description.value_key_path,
+                value=value,
+                unit_system=unit_system,
+                data_age=data_age,
+                fetched_at=fetched_at,
+                can_clear_meta=False,
+            )
+            coordinator.data = updated_data
 
     async def _async_send_command(
         self,
@@ -231,13 +238,13 @@ class IndirectDescriptor:
 
     def __get__(
         self,
-        entity_desciption: EntityDescription | None,
+        entity_description: EntityDescription | None,
         objtype: type[EntityDescription],
     ) -> bool | Literal[IndirectDescriptorDefaultType._singleton]:
-        if entity_desciption is None:
+        if entity_description is None:
             return IndirectDescriptor.DEFAULT
 
-        return entity_desciption.key in self._collection
+        return entity_description.key in self._collection
 
     def __set__(
         self,
@@ -247,7 +254,7 @@ class IndirectDescriptor:
         # dataclasses will set the value to the default value from the
         # __init__ method they create, so the default value needs to be a
         # unique value that we can allow to be set (by being ignored) here
-        # while rasiging for any other value being set.
+        # while raising for any other value being set.
         if value == IndirectDescriptor.DEFAULT:
             return
         msg = f"readonly; configure via smartcar.const.{self._collection_name}"
