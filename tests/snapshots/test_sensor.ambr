@@ -227,7 +227,7 @@
     'state': '21919',
   })
 # ---
-# name: test_restore_sensor_save_state[vw_id_4-value_and_timestampes]
+# name: test_restore_sensor_save_state[vw_id_4-value_and_timestamps]
   list([
     dict({
       'data_age': '2025-05-29T19:47:32+00:00',
@@ -241,6 +241,19 @@
     dict({
       'raw_value': 45.2,
       'unit_system': 'imperial',
+    }),
+  ])
+# ---
+# name: test_restore_sensor_save_state[vw_id_4-value_complex]
+  list([
+    dict({
+      'raw_value': list([
+        dict({
+          'column': 1,
+          'row': 0,
+          'tirePressure': 234,
+        }),
+      ]),
     }),
   ])
 # ---
