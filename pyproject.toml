@@ -10,6 +10,7 @@ source = [
 exclude_also = [
   "raise NotImplemented\\(\\)",
   "if __name__ == ['\"]__main__[\"']:",
+  "^if TYPE_CHECKING:$",
   ]
 show_missing = true
 
