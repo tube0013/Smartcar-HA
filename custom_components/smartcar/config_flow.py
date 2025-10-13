@@ -94,6 +94,7 @@ class SmartcarOAuth2FlowHandler(AbstractOAuth2FlowHandler, domain=DOMAIN):  # ty
     DOMAIN = DOMAIN
     VERSION = 2
     MINOR_VERSION = 0
+    entry_data: dict[str, Any] | None = None
     scope_data: dict[str, Any] | None = None
 
     @staticmethod
@@ -140,11 +141,11 @@ class SmartcarOAuth2FlowHandler(AbstractOAuth2FlowHandler, domain=DOMAIN):  # ty
     def requested_scopes(self) -> list[Scope]:
         return REQUIRED_SCOPES + self.selected_scopes
 
-    async def async_step_user(
+    async def async_step_webhooks(
         self,
         user_input: dict[str, Any] | None = None,
     ) -> ConfigFlowResult:
-        """Handle a flow initialized by the user.
+        """Handle the webhooks config step.
 
         Returns:
             The config flow result.
@@ -155,14 +156,14 @@ class SmartcarOAuth2FlowHandler(AbstractOAuth2FlowHandler, domain=DOMAIN):  # ty
         if user_input is not None:
             user_input = {**user_input}
             _validate_general_configuration_input(user_input, errors)
-            self.entry_data = {**user_input}
-            self.entry_data.pop(CONF_USE_WEBHOOKS, None)
 
         if user_input is not None and not errors:
+            self.entry_data = {**user_input}
+            self.entry_data.pop(CONF_USE_WEBHOOKS, None)
             return await self.async_step_scopes()
 
         return self.async_show_form(
-            step_id="user",
+            step_id="webhooks",
             data_schema=self.add_suggested_values_to_schema(
                 vol.Schema(GENERAL_CONFIGURATION_SCHEMA),
                 _add_dynamic_values_to_entry_data(self._initial_data())
@@ -189,7 +190,7 @@ class SmartcarOAuth2FlowHandler(AbstractOAuth2FlowHandler, domain=DOMAIN):  # ty
             self.scope_data = user_input
 
             if self.selected_scopes:
-                return await super().async_step_user()
+                return await self.async_step_auth()
             errors["base"] = "no_scopes"
 
         return self.async_show_form(
@@ -210,6 +211,17 @@ class SmartcarOAuth2FlowHandler(AbstractOAuth2FlowHandler, domain=DOMAIN):  # ty
             errors=errors,
             last_step=False,
         )
+
+    async def async_step_auth(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
+        # add in the start of our customized flow if that hasn't been done yet
+        if self.source == SOURCE_REAUTH:
+            if self.scope_data is None:
+                return await self.async_step_scopes()
+        elif self.entry_data is None:
+            return await self.async_step_webhooks()
+        return await super().async_step_auth(user_input)
 
     async def async_step_reauth(
         self,
@@ -233,9 +245,11 @@ class SmartcarOAuth2FlowHandler(AbstractOAuth2FlowHandler, domain=DOMAIN):  # ty
         """
         if user_input is None:
             return self.async_show_form(step_id="reauth_confirm")
-        return await self.async_step_scopes()
+        return await self.async_step_user()
 
     async def async_oauth_create_entry(self, data: dict) -> ConfigFlowResult:
+        assert self.entry_data is not None
+
         session = async_get_clientsession(self.hass)
         token = data[CONF_TOKEN][CONF_ACCESS_TOKEN]
         auth = AccessTokenAuthImpl(session, token, API_HOST)
@@ -337,6 +351,17 @@ class SmartcarOptionsFlow(OptionsFlow):
         Returns:
             The config flow result.
         """
+        return await self.async_step_webhooks(user_input)
+
+    async def async_step_webhooks(
+        self,
+        user_input: dict[str, Any] | None = None,
+    ) -> ConfigFlowResult:
+        """Handle the webhooks config step.
+
+        Returns:
+            The config flow result.
+        """
         entry_data = {**self.config_entry.data}
         errors: dict[str, str] = {}
         description_placeholders: dict[str, str] = {**BASE_DESCRIPTION_PLACEHOLDERS}
@@ -384,7 +409,7 @@ class SmartcarOptionsFlow(OptionsFlow):
             )
 
         return self.async_show_form(
-            step_id="init",
+            step_id="webhooks",
             data_schema=self.add_suggested_values_to_schema(
                 vol.Schema(GENERAL_CONFIGURATION_SCHEMA),
                 _add_dynamic_values_to_entry_data(
