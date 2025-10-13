@@ -252,6 +252,26 @@ async def test_update_with_polling_disabled(
                                 },
                             },
                             {
+                                "code": "charge-chargelimits",
+                                "name": "ChargeLimits",
+                                "group": "Charge",
+                                "body": {
+                                    "values": [
+                                        {
+                                            "type": "GLOBAL",
+                                            "limit": 80,
+                                            "condition": None,
+                                        }
+                                    ],
+                                    "activeLimit": 80,
+                                    "unit": "percent",
+                                },
+                                "meta": {
+                                    "oemUpdatedAt": 1758238232000,
+                                    "retrievedAt": 1758238783086,
+                                },
+                            },
+                            {
                                 "code": "charge-ischarging",
                                 "name": "IsCharging",
                                 "group": "Charge",
