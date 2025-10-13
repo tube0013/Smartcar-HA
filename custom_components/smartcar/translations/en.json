@@ -40,7 +40,7 @@
                 "description": "The Smartcar integration needs to re-authenticate your account",
                 "title": "Authentication expired for {name}"
             },
-            "user": {
+            "webhooks": {
                 "data": {
                     "use_webhooks": "Use webhooks",
                     "application_management_token": "Token: only provide if using webhooks"
@@ -81,7 +81,7 @@
             "extraneous_management_token": "Do not provide application management token unless using webhooks"
         },
         "step": {
-            "init": {
+            "webhooks": {
                 "data": {
                     "use_webhooks": "Use webhooks",
                     "application_management_token": "Token: only provide if using webhooks"

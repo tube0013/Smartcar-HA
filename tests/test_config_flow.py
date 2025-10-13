@@ -55,7 +55,7 @@ REDIRECT_URL = "https://example.com/auth/external/callback"
             {},
             {"use_webhooks": True},
             {
-                "final_step": "user",
+                "final_step": "webhooks",
                 "errors": {
                     "application_management_token": "no_management_token",
                 },
@@ -71,7 +71,7 @@ REDIRECT_URL = "https://example.com/auth/external/callback"
             {},
             {"use_webhooks": False, CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt"},
             {
-                "final_step": "user",
+                "final_step": "webhooks",
                 "errors": {
                     "base": "extraneous_management_token",
                 },
@@ -145,7 +145,7 @@ async def test_full_flow(
 
     if continue_steps:
         assert result["type"] is FlowResultType.FORM
-        assert result["step_id"] == "user"
+        assert result["step_id"] == "webhooks"
         assert not result["last_step"]
 
         result = await hass.config_entries.flow.async_configure(
@@ -153,7 +153,7 @@ async def test_full_flow(
             user_input,
         )
 
-        continue_steps = continue_steps and final_step != "user"
+        continue_steps = continue_steps and final_step != "webhooks"
 
     if continue_steps:
         assert result["type"] is FlowResultType.FORM
@@ -329,7 +329,7 @@ async def test_duplicate_vins_disallowed(
     )
 
     assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "user"
+    assert result["step_id"] == "webhooks"
     assert not result["last_step"]
 
     result = await hass.config_entries.flow.async_configure(
@@ -408,7 +408,7 @@ async def test_no_scopes_entered(
     )
 
     assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "user"
+    assert result["step_id"] == "webhooks"
     assert not result["last_step"]
 
     result = await hass.config_entries.flow.async_configure(
@@ -452,7 +452,7 @@ async def test_token_error(
     )
 
     assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "user"
+    assert result["step_id"] == "webhooks"
     assert not result["last_step"]
 
     result = await hass.config_entries.flow.async_configure(
@@ -559,7 +559,7 @@ async def test_api_error(
     )
 
     assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "user"
+    assert result["step_id"] == "webhooks"
     assert not result["last_step"]
 
     result = await hass.config_entries.flow.async_configure(
@@ -941,7 +941,7 @@ async def test_options_flow(
         )
 
         assert result["type"] is FlowResultType.FORM
-        assert result["step_id"] == "init"
+        assert result["step_id"] == "webhooks"
 
         result = await hass.config_entries.options.async_configure(
             result["flow_id"],
