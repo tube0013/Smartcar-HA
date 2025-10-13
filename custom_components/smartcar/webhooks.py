@@ -22,6 +22,10 @@ _LOGGER = logging.getLogger(__name__)
 # description.
 _IMPERIAL_MEASUREMENTS = {"miles", "psi", "gallons"}
 
+_SIGNAL_BODY_MULTIVALUE_ITEM_KEY_MAP: dict[str | None, str] = {
+    "charge-chargelimits": "limit",
+}
+
 
 async def webhook_url_from_id(hass: HomeAssistant, webhook_id: str) -> tuple[str, bool]:
     if cloud.async_active_subscription(hass):
@@ -150,8 +154,7 @@ def _handle_webhook_signals(
                 body = {"value": None}
 
             if body.get("unit") == "percent":
-                body["value"] /= 100
-                body.pop("unit")
+                _handle_percent_unit_conversion(code, body)
 
             if code in DATAPOINT_CODE_MAP:
                 assert code is not None
@@ -185,6 +188,18 @@ def _handle_webhook_signals(
 
         if data_changed:
             coordinator.async_set_updated_data(updated_data)
+
+
+def _handle_percent_unit_conversion(code: str | None, body: dict[str, Any]) -> None:
+    if "values" in body:
+        item_key = _SIGNAL_BODY_MULTIVALUE_ITEM_KEY_MAP.get(code) or "value"
+        values = body["values"]
+        values = [value | {item_key: value[item_key] / 100} for value in values]
+        body["values"] = values
+        body.pop("unit")
+    else:
+        body["value"] /= 100
+        body.pop("unit")
 
 
 def _handle_webhook_signal_error(

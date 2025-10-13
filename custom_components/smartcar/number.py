@@ -33,7 +33,7 @@ ENTITY_DESCRIPTIONS: tuple[NumberEntityDescription, ...] = (
             (
                 round(value["limit"] * 100)
                 for value in values or []
-                if value["type"] == "global" and value["condition"] is None
+                if value["type"].lower() == "global" and value["condition"] is None
             ),
             None,
         ),

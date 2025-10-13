@@ -1634,6 +1634,8 @@
 # name: test_webhook_update[vehicle_state-vw_id_4][number.vw_id_4_charge_limit]
   StateSnapshot({
     'attributes': ReadOnlyDict({
+      'age': '2025-09-18T23:30:32+00:00',
+      'fetched_at': '2025-09-18T23:39:43.086000+00:00',
       'friendly_name': 'VW ID.4 Charge Limit',
       'icon': 'mdi:battery-charging-80',
       'max': 100.0,
@@ -1647,7 +1649,7 @@
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
-    'state': 'unavailable',
+    'state': '80',
   })
 # ---
 # name: test_webhook_update[vehicle_state-vw_id_4][sensor.vw_id_4_battery]
