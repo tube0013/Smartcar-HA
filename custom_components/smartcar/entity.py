@@ -47,7 +47,7 @@ class SmartcarEntity[ValueT, RawValueT](
 
     @property
     def available(self) -> bool:
-        return super().available and self._extract_value() is not None
+        return super().available and self._extract_raw_value() is not None
 
     @property
     def extra_state_attributes(self) -> dict[str, Any] | None:
