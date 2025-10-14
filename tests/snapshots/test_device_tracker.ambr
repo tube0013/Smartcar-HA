@@ -1,0 +1,11 @@
+# serializer version: 1
+# name: test_restore_device_tracker_save_state[enabled_entities0-vw_id_4-location]
+  list([
+    dict({
+      'raw_value': dict({
+        'latitude': 37.4292,
+        'longitude': 122.1381,
+      }),
+    }),
+  ])
+# ---
