@@ -27,4 +27,8 @@ async def test_entry_diagnostics(
     await setup_integration(hass, mock_config_entry)
     assert await get_diagnostics_for_config_entry(
         hass, hass_client, mock_config_entry
-    ) == snapshot(exclude=props("entry_id", "created_at", "modified_at", "expires_at"))
+    ) == snapshot(
+        exclude=props(
+            "entry_id", "webhook_id", "created_at", "modified_at", "expires_at"
+        )
+    )

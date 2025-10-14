@@ -31,7 +31,11 @@ RESTORE_STATE_PARAMETRIZE_ARGS = [
             "device_tracker.vw_id_4_location",
             {"raw_value": {"latitude": 37.4292, "longitude": 122.1381}},
             "not_home",
-            {"location": {"latitude": 37.4292, "longitude": 122.1381}},
+            {
+                "location-preciselocation": {
+                    "value": {"latitude": 37.4292, "longitude": 122.1381}
+                }
+            },
         ),
     ],
 ]

@@ -1,11 +1,13 @@
 """Test the Smartcar config flow."""
 
+from contextlib import nullcontext
 from http import HTTPStatus
 from typing import Any
 from unittest.mock import AsyncMock, patch
 
 from homeassistant import config_entries
 from homeassistant.config_entries import ConfigEntryState
+from homeassistant.const import CONF_WEBHOOK_ID
 from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResultType
 from homeassistant.helpers import config_entry_oauth2_flow
@@ -16,6 +18,8 @@ from pytest_homeassistant_custom_component.typing import ClientSessionGenerator
 from syrupy.assertion import SnapshotAssertion
 
 from custom_components.smartcar.const import (
+    CONF_APPLICATION_MANAGEMENT_TOKEN,
+    CONF_CLOUDHOOK,
     CONFIGURABLE_SCOPES,
     DEFAULT_NAME,
     DOMAIN,
@@ -30,115 +34,261 @@ REDIRECT_URL = "https://example.com/auth/external/callback"
 
 
 @pytest.mark.usefixtures("current_request_with_host")
+@pytest.mark.parametrize(
+    ("setup", "entry_data", "user_input", "expected_result"),
+    [
+        (set(), {}, {"use_webhooks": False}, {}),
+        (
+            set(),
+            {},
+            {"use_webhooks": True, CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt"},
+            {
+                "data": {
+                    CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt",
+                    CONF_CLOUDHOOK: False,
+                    CONF_WEBHOOK_ID: "mock_webhook_id",
+                }
+            },
+        ),
+        (
+            set(),
+            {},
+            {"use_webhooks": True},
+            {
+                "final_step": "webhooks",
+                "errors": {
+                    "application_management_token": "no_management_token",
+                },
+                "description_placeholders": {
+                    "webhook_url": "webhooks-not-enabled",
+                    "smartcar_url": "https://dashboard.smartcar.com/configuration",
+                    "docs_url": "https://github.com/tube0013/Smartcar-HA/#webhooks",
+                },
+            },
+        ),
+        (
+            set(),
+            {},
+            {"use_webhooks": False, CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt"},
+            {
+                "final_step": "webhooks",
+                "errors": {
+                    "base": "extraneous_management_token",
+                },
+                "description_placeholders": {
+                    "webhook_url": "webhooks-not-enabled",
+                    "smartcar_url": "https://dashboard.smartcar.com/configuration",
+                    "docs_url": "https://github.com/tube0013/Smartcar-HA/#webhooks",
+                },
+            },
+        ),
+        (
+            {"cloud"},
+            {},
+            {"use_webhooks": True, CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt"},
+            {
+                "data": {
+                    CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt",
+                    CONF_CLOUDHOOK: True,
+                    CONF_WEBHOOK_ID: "mock_webhook_id",
+                }
+            },
+        ),
+        (
+            {"cloud", "cloud_not_connected"},
+            {},
+            {"use_webhooks": True, CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt"},
+            {
+                "form_type": FlowResultType.ABORT,
+                "errors": {},
+            },
+        ),
+    ],
+    ids=[
+        "no_webhooks",
+        "webhooks",
+        "webhooks_missing_token",
+        "webhooks_extraneous_token",
+        "cloud_webhooks",
+        "cloud_not_connected",
+    ],
+)
 async def test_full_flow(
     hass: HomeAssistant,
     hass_client_no_auth: ClientSessionGenerator,
     aioclient_mock: AiohttpClientMocker,
+    setup: set[str],
+    entry_data: dict,
+    user_input: dict,
+    expected_result: dict,
     mock_smartcar_auth: AsyncMock,
     snapshot: SnapshotAssertion,
 ):
     """Test full flow."""
 
+    continue_steps = True
+    final_step = expected_result.pop("final_step", None)
+    expected_errors = expected_result.pop("errors", None)
+    expected_placeholders = expected_result.pop("description_placeholders", None)
+    expected_data = expected_result.pop("data", {})
+    expected_form_type = expected_result.pop(
+        "form_type",
+        FlowResultType.FORM
+        if expected_errors is not None
+        else FlowResultType.CREATE_ENTRY,
+    )
+    expected_aioclient_mock_calls = 0
+
     result = await hass.config_entries.flow.async_init(
         DOMAIN, context={"source": config_entries.SOURCE_USER}
     )
 
-    assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "scopes"
-    assert not result["last_step"]
+    if continue_steps:
+        assert result["type"] is FlowResultType.FORM
+        assert result["step_id"] == "webhooks"
+        assert not result["last_step"]
 
-    selected_scopes = ["read_odometer"]
-    requested_scopes = REQUIRED_SCOPES + selected_scopes
-    result = await hass.config_entries.flow.async_configure(
-        result["flow_id"],
-        {k: k in selected_scopes for k in CONFIGURABLE_SCOPES},
-    )
-    state = config_entry_oauth2_flow._encode_jwt(
-        hass,
-        {
-            "flow_id": result["flow_id"],
-            "redirect_uri": REDIRECT_URL,
-        },
-    )
+        result = await hass.config_entries.flow.async_configure(
+            result["flow_id"],
+            user_input,
+        )
 
-    assert result["type"] is FlowResultType.EXTERNAL_STEP
-    assert result["step_id"] == "auth"
-    assert result["url"] == (
-        f"{OAUTH2_AUTHORIZE}?response_type=code&client_id=mock-id"
-        f"&redirect_uri={REDIRECT_URL}"
-        f"&state={state}"
-        "&mode=live"
-        f"&scope={'+'.join(requested_scopes)}"
-    )
+        continue_steps = continue_steps and final_step != "webhooks"
 
-    client = await hass_client_no_auth()
-    resp = await client.get(f"/auth/external/callback?code=abcd&state={state}")
-    assert resp.status == 200
-    assert resp.headers["content-type"] == "text/html; charset=utf-8"
+    if continue_steps:
+        assert result["type"] is FlowResultType.FORM
+        assert result["step_id"] == "scopes"
+        assert not result["last_step"]
 
-    vehicle_id = "36ab27d0-fd9d-4455-823a-ce30af709ffc"
-    vin = "5YJSA1CN5DFP00101"
-    server_access_token = {
-        "refresh_token": "server-refresh-token",
-        "access_token": "server-access-token",
-        "type": "Bearer",
-        "expires_in": 60,
-        "scope": " ".join(requested_scopes),
-    }
+        selected_scopes = ["read_odometer"]
+        requested_scopes = REQUIRED_SCOPES + selected_scopes
+        result = await hass.config_entries.flow.async_configure(
+            result["flow_id"],
+            {k: k in selected_scopes for k in CONFIGURABLE_SCOPES},
+        )
 
-    aioclient_mock.post(
-        OAUTH2_TOKEN,
-        json=server_access_token,
-    )
-    aioclient_mock.get(
-        f"{MOCK_API_ENDPOINT}/v2.0/vehicles",
-        json={"paging": {"count": 25, "offset": 0}, "vehicles": [vehicle_id]},
-    )
-    aioclient_mock.get(
-        f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{vehicle_id}/vin", json={"vin": vin}
-    )
-    aioclient_mock.get(
-        f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{vehicle_id}",
-        json={"id": vehicle_id, "make": "TESLA", "model": "Model S", "year": "2014"},
-    )
+        continue_steps = continue_steps and final_step != "scopes"
 
-    with patch(
-        "custom_components.smartcar.async_setup_entry", return_value=True
-    ) as mock_setup:
-        result = await hass.config_entries.flow.async_configure(result["flow_id"])
+    if continue_steps:
+        state = config_entry_oauth2_flow._encode_jwt(
+            hass,
+            {
+                "flow_id": result["flow_id"],
+                "redirect_uri": REDIRECT_URL,
+            },
+        )
 
-    entries = hass.config_entries.async_entries(DOMAIN)
-    assert len(entries) == 1
-    assert len(mock_setup.mock_calls) == 1
-    assert len(aioclient_mock.mock_calls) == 4  # oauth token & 3 for vehicles & info
-    assert [tuple(mock_call) for mock_call in aioclient_mock.mock_calls] == snapshot
+        assert result["type"] is FlowResultType.EXTERNAL_STEP
+        assert result["step_id"] == "auth"
+        assert result["url"] == (
+            f"{OAUTH2_AUTHORIZE}?response_type=code&client_id=mock-id"
+            f"&redirect_uri={REDIRECT_URL}"
+            f"&state={state}"
+            "&mode=live"
+            f"&scope={'+'.join(requested_scopes)}"
+        )
 
-    config_entry = entries[0]
-    assert config_entry.title == DEFAULT_NAME
-    assert config_entry.unique_id == vehicle_id
+        client = await hass_client_no_auth()
+        resp = await client.get(f"/auth/external/callback?code=abcd&state={state}")
+        assert resp.status == 200
+        assert resp.headers["content-type"] == "text/html; charset=utf-8"
 
-    data = dict(config_entry.data)
-    assert "token" in data
-    del data["token"]["expires_at"]
-    assert dict(config_entry.data) == {
-        "auth_implementation": "smartcar",
-        "token": dict(
-            server_access_token,
-            scopes=requested_scopes,
-        ),
-        "vehicles": {
-            vehicle_id: {
-                "vin": vin,
+        vehicle_id = "36ab27d0-fd9d-4455-823a-ce30af709ffc"
+        vin = "5YJSA1CN5DFP00101"
+        server_access_token = {
+            "refresh_token": "server-refresh-token",
+            "access_token": "server-access-token",
+            "type": "Bearer",
+            "expires_in": 60,
+            "scope": " ".join(requested_scopes),
+        }
+
+        aioclient_mock.post(
+            OAUTH2_TOKEN,
+            json=server_access_token,
+        )
+        aioclient_mock.get(
+            f"{MOCK_API_ENDPOINT}/v2.0/vehicles",
+            json={"paging": {"count": 25, "offset": 0}, "vehicles": [vehicle_id]},
+        )
+        aioclient_mock.get(
+            f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{vehicle_id}/vin", json={"vin": vin}
+        )
+        aioclient_mock.get(
+            f"{MOCK_API_ENDPOINT}/v2.0/vehicles/{vehicle_id}",
+            json={
+                "id": vehicle_id,
                 "make": "TESLA",
                 "model": "Model S",
                 "year": "2014",
-            }
-        },
-    }
+            },
+        )
 
-    assert result["type"] is FlowResultType.CREATE_ENTRY
-    assert result["title"] == DEFAULT_NAME
-    assert result["result"].unique_id == vehicle_id
+        expected_aioclient_mock_calls += 4  # oauth token & 3 for vehicles & info
+
+        with (
+            patch(
+                "custom_components.smartcar.async_setup_entry", return_value=True
+            ) as mock_setup,
+            patch(
+                "homeassistant.components.webhook.async_generate_id",
+                return_value="mock_webhook_id",
+            ),
+            patch(
+                "homeassistant.components.cloud.async_active_subscription",
+                return_value="cloud" in setup,
+            ),
+            patch(
+                "homeassistant.components.cloud.async_get_or_create_cloudhook",
+                return_value="cloud_url",
+            )
+            if "cloud_not_connected" not in setup
+            else nullcontext(),
+        ):
+            result = await hass.config_entries.flow.async_configure(result["flow_id"])
+
+            if expected_errors is None:
+                assert len(mock_setup.mock_calls) == 1
+
+    assert result["type"] is expected_form_type
+    assert len(aioclient_mock.mock_calls) == expected_aioclient_mock_calls
+    assert [tuple(mock_call) for mock_call in aioclient_mock.mock_calls] == snapshot
+
+    if expected_errors is not None:
+        assert result.get("errors", {}) == expected_errors
+        assert result["description_placeholders"] == expected_placeholders
+    else:
+        entries = hass.config_entries.async_entries(DOMAIN)
+        assert len(entries) == 1
+
+        config_entry = entries[0]
+        assert config_entry.title == DEFAULT_NAME
+        assert config_entry.unique_id == vehicle_id
+
+        data = dict(config_entry.data)
+        assert "token" in data
+        del data["token"]["expires_at"]
+        assert dict(config_entry.data) == {
+            "auth_implementation": "smartcar",
+            "token": dict(
+                server_access_token,
+                scopes=requested_scopes,
+            ),
+            "vehicles": {
+                vehicle_id: {
+                    "vin": vin,
+                    "make": "TESLA",
+                    "model": "Model S",
+                    "year": "2014",
+                }
+            },
+            **expected_data,
+        }
+
+        assert result["title"] == DEFAULT_NAME
+        assert result["result"].unique_id == vehicle_id
+
+    await hass.async_block_till_done()
 
 
 @pytest.mark.usefixtures("current_request_with_host")
@@ -176,6 +326,15 @@ async def test_duplicate_vins_disallowed(
     # now start the flow
     result = await hass.config_entries.flow.async_init(
         DOMAIN, context={"source": config_entries.SOURCE_USER}
+    )
+
+    assert result["type"] is FlowResultType.FORM
+    assert result["step_id"] == "webhooks"
+    assert not result["last_step"]
+
+    result = await hass.config_entries.flow.async_configure(
+        result["flow_id"],
+        {"use_webhooks": False},
     )
 
     assert result["type"] is FlowResultType.FORM
@@ -249,6 +408,15 @@ async def test_no_scopes_entered(
     )
 
     assert result["type"] is FlowResultType.FORM
+    assert result["step_id"] == "webhooks"
+    assert not result["last_step"]
+
+    result = await hass.config_entries.flow.async_configure(
+        result["flow_id"],
+        {"use_webhooks": False},
+    )
+
+    assert result["type"] is FlowResultType.FORM
     assert result["step_id"] == "scopes"
 
     result = await hass.config_entries.flow.async_configure(
@@ -281,6 +449,15 @@ async def test_token_error(
 
     result = await hass.config_entries.flow.async_init(
         DOMAIN, context={"source": config_entries.SOURCE_USER}
+    )
+
+    assert result["type"] is FlowResultType.FORM
+    assert result["step_id"] == "webhooks"
+    assert not result["last_step"]
+
+    result = await hass.config_entries.flow.async_configure(
+        result["flow_id"],
+        {"use_webhooks": False},
     )
 
     assert result["type"] is FlowResultType.FORM
@@ -382,6 +559,15 @@ async def test_api_error(
     )
 
     assert result["type"] is FlowResultType.FORM
+    assert result["step_id"] == "webhooks"
+    assert not result["last_step"]
+
+    result = await hass.config_entries.flow.async_configure(
+        result["flow_id"],
+        {"use_webhooks": False},
+    )
+
+    assert result["type"] is FlowResultType.FORM
     assert result["step_id"] == "scopes"
 
     selected_scopes = ["read_odometer"]
@@ -464,29 +650,48 @@ async def test_api_error(
 @pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
 @pytest.mark.parametrize(
     (
+        "entry_data",
         "new_vehicle_id",
-        "expected_abort_reason",
-        "expected_placeholders",
-        "expected_access_token",
-        "expected_setup_calls",
+        "expected_result",
     ),
     [
         (
+            {},
             "a1d50709-3502-4faa-ba43-a5c7565e6a09",
-            "reauth_successful",
-            None,
-            "updated-access-token",
-            1,
+            {
+                "abort_reason": "reauth_successful",
+                "access_token": "updated-access-token",
+                "setup_calls": 1,
+            },
         ),
         (
+            {
+                CONF_WEBHOOK_ID: "original_webhook_id",
+                CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt",
+            },
+            "a1d50709-3502-4faa-ba43-a5c7565e6a09",
+            {
+                "abort_reason": "reauth_successful",
+                "access_token": "updated-access-token",
+                "setup_calls": 1,
+                "entry_data": {
+                    CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt",
+                    CONF_WEBHOOK_ID: "original_webhook_id",
+                },
+            },
+        ),
+        (
+            {},
             "a-different-vehicle-id",
-            "wrong_vehicles",
-            {"vins": "VIWP1AB29P15LA85784N"},
-            "mock-access-token",
-            0,
+            {
+                "abort_reason": "wrong_vehicles",
+                "placeholders": {"vins": "VIWP1AB29P15LA85784N"},
+                "access_token": "mock-access-token",
+                "setup_calls": 0,
+            },
         ),
     ],
-    ids=["reauth_successful", "wrong_vehicles"],
+    ids=["reauth_successful", "reauth_successful_unchanged_webhooks", "wrong_vehicles"],
 )
 async def test_reauth(
     hass: HomeAssistant,
@@ -497,13 +702,23 @@ async def test_reauth(
     aioclient_mock: AiohttpClientMocker,
     mock_smartcar_auth: AsyncMock,
     new_vehicle_id: str,
-    expected_abort_reason: str,
-    expected_placeholders: dict[str, str] | None,
-    expected_access_token: str,
-    expected_setup_calls: int,
+    entry_data: dict,
+    expected_result: dict[str, Any],
 ) -> None:
     """Test the reauthentication flow."""
+    expected_abort_reason = expected_result.get("abort_reason", "reauth_successful")
+    expected_placeholders = expected_result.get("placeholders")
+    expected_access_token = expected_result.get("access_token")
+    expected_setup_calls = expected_result.get("setup_calls", 1)
+    expected_entry_data = expected_result.get("entry_data", {})
+
     mock_config_entry.add_to_hass(hass)
+
+    hass.config_entries.async_update_entry(
+        mock_config_entry,
+        data={**mock_config_entry.data, **entry_data},
+    )
+
     result = await mock_config_entry.start_reauth_flow(hass)
 
     assert result["step_id"] == "reauth_confirm"
@@ -588,6 +803,171 @@ async def test_reauth(
     assert mock_config_entry.unique_id == vehicle_attributes["id"]
     assert "token" in mock_config_entry.data
 
+    # limit scope of comparison for config entry data
+    compare_entry_data = {**mock_config_entry.data}
+    token = compare_entry_data.pop("token")
+    compare_entry_data.pop("auth_implementation", None)
+    compare_entry_data.pop("token", None)
+    compare_entry_data.pop("vehicles", None)
+
     # verify access token is refreshed
-    assert mock_config_entry.data["token"]["access_token"] == expected_access_token
-    assert mock_config_entry.data["token"]["refresh_token"] == "mock-refresh-token"  # noqa: S105
+    assert token["access_token"] == expected_access_token
+    assert token["refresh_token"] == "mock-refresh-token"  # noqa: S105
+    assert compare_entry_data == expected_entry_data
+
+
+@pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
+@pytest.mark.parametrize(
+    ("setup", "entry_data", "user_input", "expected_result"),
+    [
+        (set(), {}, {"use_webhooks": False}, {}),
+        (
+            set(),
+            {},
+            {"use_webhooks": True, CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt"},
+            {
+                "data": {
+                    CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt",
+                    CONF_CLOUDHOOK: False,
+                    CONF_WEBHOOK_ID: "mock_webhook_id",
+                }
+            },
+        ),
+        (
+            set(),
+            {
+                CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt",
+                CONF_CLOUDHOOK: False,
+                CONF_WEBHOOK_ID: "mock_webhook_id",
+            },
+            {"use_webhooks": False},
+            {},
+        ),
+        (
+            set(),
+            {
+                CONF_APPLICATION_MANAGEMENT_TOKEN: "old_mock_amt",
+                CONF_CLOUDHOOK: False,
+                CONF_WEBHOOK_ID: "old_mock_webhook_id",
+            },
+            {"use_webhooks": True, CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt"},
+            {
+                "data": {
+                    CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt",
+                    CONF_CLOUDHOOK: False,
+                    CONF_WEBHOOK_ID: "old_mock_webhook_id",
+                }
+            },
+        ),
+        (
+            {"cloud"},
+            {},
+            {"use_webhooks": True, CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt"},
+            {
+                "data": {
+                    CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt",
+                    CONF_CLOUDHOOK: True,
+                    CONF_WEBHOOK_ID: "mock_webhook_id",
+                }
+            },
+        ),
+        (
+            {"cloud", "cloud_not_connected"},
+            {},
+            {"use_webhooks": True, CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt"},
+            {
+                "form_type": FlowResultType.ABORT,
+                "errors": {},
+            },
+        ),
+    ],
+    ids=[
+        "no_webhooks",
+        "webhooks",
+        "disable_webhooks",
+        "reconfigure_webhooks",
+        "cloud_webhooks",
+        "cloud_not_connected",
+    ],
+)
+async def test_options_flow(
+    hass: HomeAssistant,
+    hass_client_no_auth: ClientSessionGenerator,
+    aioclient_mock: AiohttpClientMocker,
+    mock_config_entry: MockConfigEntry,
+    setup: set[str],
+    entry_data: dict,
+    user_input: dict,
+    expected_result: dict,
+    mock_smartcar_auth: AsyncMock,
+    snapshot: SnapshotAssertion,
+) -> None:
+    """Test options flow."""
+    mock_config_entry.add_to_hass(hass)
+
+    hass.config_entries.async_update_entry(
+        mock_config_entry,
+        data={**mock_config_entry.data, **entry_data},
+    )
+
+    with (
+        patch(
+            "custom_components.smartcar.async_setup_entry",
+            return_value=True,
+        ) as mock_setup_entry,
+    ):
+        await hass.config_entries.async_setup(mock_config_entry.entry_id)
+        await hass.async_block_till_done()
+        assert mock_setup_entry.called
+
+    with (
+        patch(
+            "homeassistant.components.webhook.async_generate_id",
+            return_value="mock_webhook_id",
+        ),
+        patch(
+            "homeassistant.components.cloud.async_active_subscription",
+            return_value="cloud" in setup,
+        ),
+        patch(
+            "homeassistant.components.cloud.async_get_or_create_cloudhook",
+            return_value="cloud_url",
+        )
+        if "cloud_not_connected" not in setup
+        else nullcontext(),
+    ):
+        result = await hass.config_entries.options.async_init(
+            mock_config_entry.entry_id
+        )
+
+        assert result["type"] is FlowResultType.FORM
+        assert result["step_id"] == "webhooks"
+
+        result = await hass.config_entries.options.async_configure(
+            result["flow_id"],
+            user_input=user_input,
+        )
+
+        expected_errors = expected_result.pop("errors", None)
+        expected_placeholders = expected_result.pop("description_placeholders", None)
+        expected_data = expected_result.pop("data", {})
+        expected_form_type = expected_result.pop(
+            "form_type",
+            FlowResultType.FORM if expected_errors else FlowResultType.CREATE_ENTRY,
+        )
+
+        # limit scope of comparison for config entry data
+        compare_entry_data = {**mock_config_entry.data}
+        compare_entry_data.pop("auth_implementation", None)
+        compare_entry_data.pop("token", None)
+        compare_entry_data.pop("vehicles", None)
+
+        if expected_errors is not None:
+            assert result["type"] is expected_form_type
+            assert result.get("errors", {}) == expected_errors
+            assert result["description_placeholders"] == expected_placeholders
+        else:
+            assert result["type"] is expected_form_type
+            assert compare_entry_data == expected_data
+
+        await hass.async_block_till_done()

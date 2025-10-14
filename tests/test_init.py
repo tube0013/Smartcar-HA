@@ -2,7 +2,9 @@
 
 from unittest.mock import AsyncMock, patch
 
+from homeassistant.components import cloud
 from homeassistant.config_entries import ConfigEntryState
+from homeassistant.const import CONF_WEBHOOK_ID
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import device_registry as dr, entity_registry as er
 from homeassistant.setup import async_setup_component
@@ -13,13 +15,15 @@ from syrupy.assertion import SnapshotAssertion
 from syrupy.filters import props
 
 from custom_components.smartcar.const import (
+    CONF_APPLICATION_MANAGEMENT_TOKEN,
+    CONF_CLOUDHOOK,
     DEFAULT_ENABLED_ENTITY_DESCRIPTION_KEYS,
     DOMAIN,
     REQUIRED_SCOPES,
     EntityDescriptionKey,
 )
 
-from . import MOCK_API_ENDPOINT, setup_integration
+from . import MOCK_API_ENDPOINT, setup_added_integration, setup_integration
 
 
 async def test_async_setup(hass: HomeAssistant):
@@ -172,7 +176,7 @@ async def test_limited_scopes(
 @pytest.mark.usefixtures("enable_all_entities")
 @pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
 @pytest.mark.parametrize(
-    "api_respone_type",
+    "api_response_type",
     [
         "server_error",
         "network_error",
@@ -212,6 +216,25 @@ async def test_update_errors(
 
     for entity in entities:
         assert hass.states.get(entity.entity_id) == snapshot(name=entity.entity_id)
+
+
+async def test_update_entry(
+    hass: HomeAssistant,
+    mock_config_entry: MockConfigEntry,
+    vehicle: AsyncMock,
+) -> None:
+    await setup_integration(hass, mock_config_entry)
+
+    with patch(
+        "homeassistant.config_entries.ConfigEntries.async_reload",
+        return_value=True,
+    ) as mock_reload:
+        hass.config_entries.async_update_entry(
+            mock_config_entry,
+            data={"arbitrary-update": "value1"},
+        )
+        await hass.async_block_till_done()
+        assert mock_reload.called
 
 
 @pytest.mark.parametrize(
@@ -402,6 +425,82 @@ async def test_migration(
         assert config_entry.data == snapshot(name="config_entry_data")
 
     assert config_entry.unique_id == expected_unique_id
+
+
+@pytest.mark.usefixtures("current_request_with_host")
+@pytest.mark.parametrize(
+    ("setup", "entry_data", "expected_result"),
+    [
+        (set(), {}, {}),
+        (
+            set(),
+            {
+                CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt",
+                CONF_CLOUDHOOK: False,
+                CONF_WEBHOOK_ID: "mock_webhook_id",
+            },
+            {},
+        ),
+        (
+            {"cloud"},
+            {
+                CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt",
+                CONF_CLOUDHOOK: True,
+                CONF_WEBHOOK_ID: "mock_webhook_id",
+            },
+            {"delete_cloudhook_calls": 1},
+        ),
+        (
+            {"cloud", "cloud_not_connected"},
+            {
+                CONF_APPLICATION_MANAGEMENT_TOKEN: "mock_amt",
+                CONF_CLOUDHOOK: True,
+                CONF_WEBHOOK_ID: "mock_webhook_id",
+            },
+            {"delete_cloudhook_calls": 1},
+        ),
+    ],
+    ids=[
+        "no_webhooks",
+        "webhooks",
+        "cloud_webhooks",
+        "cloud_not_connected",
+    ],
+)
+async def test_remove_entry(
+    hass: HomeAssistant,
+    mock_config_entry: MockConfigEntry,
+    setup: set[str],
+    entry_data: dict,
+    expected_result: dict,
+) -> None:
+    """Test removing the entry."""
+
+    mock_config_entry.add_to_hass(hass)
+    hass.config_entries.async_update_entry(
+        mock_config_entry,
+        data={**mock_config_entry.data, **entry_data},
+    )
+
+    await setup_added_integration(hass, mock_config_entry)
+
+    with (
+        patch(
+            "homeassistant.components.cloud.async_active_subscription",
+            return_value="cloud" in setup,
+        ),
+        patch(
+            "homeassistant.components.cloud.async_delete_cloudhook",
+            side_effect=None
+            if "cloud_not_connected" not in setup
+            else cloud.async_delete_cloudhook,
+        ) as mock_delete_cloudhook,
+    ):
+        assert await hass.config_entries.async_remove(mock_config_entry.entry_id)
+
+    assert len(mock_delete_cloudhook.mock_calls) == expected_result.get(
+        "delete_cloudhook_calls", 0
+    )
 
 
 _SNAPSHOT_ORDER = {
