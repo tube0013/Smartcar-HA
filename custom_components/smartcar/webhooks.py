@@ -57,7 +57,7 @@ async def handle_webhook(
         _LOGGER.warning("Received invalid JSON from Smartcar")
         return web.json_response({})
 
-    _LOGGER.debug("Received JSON from Smartcar: %s", body)
+    _LOGGER.debug("Received JSON from Smartcar: %r", body)
 
     response: dict[str, Any] = {}
     app_token: str = config_entry.data[CONF_APPLICATION_MANAGEMENT_TOKEN]
@@ -68,6 +68,8 @@ async def handle_webhook(
         return web.json_response(
             {"challenge": util.hmac_sha256_hexdigest(app_token, data["challenge"])}
         )
+
+    _LOGGER.debug("Validating signature: %s; app_token: %s", signature, app_token)
 
     # the verify message is not signed, so that's done before this check. all
     # other messages must be signed & validated before we process the data from
