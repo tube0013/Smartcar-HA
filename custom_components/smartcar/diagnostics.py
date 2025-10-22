@@ -13,6 +13,7 @@ from homeassistant.const import (
 )
 from homeassistant.core import HomeAssistant
 
+from .const import CONF_APPLICATION_MANAGEMENT_TOKEN
 from .coordinator import SmartcarVehicleCoordinator
 from .webhooks import webhook_url_from_id
 
@@ -24,6 +25,7 @@ TO_REDACT = {
     CONF_LATITUDE,
     CONF_LONGITUDE,
     CONF_ACCESS_TOKEN,
+    CONF_APPLICATION_MANAGEMENT_TOKEN,
     CONF_REFRESH_TOKEN,
     CONF_VIN,
 }
