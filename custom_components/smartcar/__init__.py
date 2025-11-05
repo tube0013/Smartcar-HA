@@ -83,9 +83,12 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     _LOGGER.debug("Forwarding setup to platforms: %s", PLATFORMS)
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
 
-    await asyncio.gather(
-        *[async_do_first_refresh(coordinator) for coordinator in coordinators.values()]
-    )
+    # Schedule first refresh in the background to avoid blocking startup
+    for coordinator in coordinators.values():
+        coordinator.async_set_updated_data({})
+        hass.async_create_task(
+            coordinator.async_refresh(), eager_start=True
+        )
 
     # log stored scopes once on successful setup
     _LOGGER.info(
@@ -93,13 +96,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     )
 
     return True
-
-
-async def async_do_first_refresh(coordinator: SmartcarVehicleCoordinator) -> None:
-    await coordinator.async_config_entry_first_refresh()
-    _LOGGER.debug(
-        "Coordinator created and initial data fetched for VIN: %s", coordinator.vin
-    )
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
