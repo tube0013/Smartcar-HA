@@ -1,11 +1,12 @@
 import asyncio
-from dataclasses import dataclass
+from functools import partial
 from http import HTTPStatus
 import logging
 
 from aiohttp import ClientResponseError
+from homeassistant.components import cloud, webhook
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import CONF_ACCESS_TOKEN, CONF_TOKEN
+from homeassistant.const import CONF_ACCESS_TOKEN, CONF_TOKEN, CONF_WEBHOOK_ID
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryError
 from homeassistant.helpers import device_registry as dr
@@ -15,22 +16,16 @@ from homeassistant.helpers.config_entry_oauth2_flow import (
     async_get_config_entry_implementation,
 )
 
+from . import util
 from .auth import AbstractAuth
 from .auth_impl import AccessTokenAuthImpl, AsyncConfigEntryAuth
-from .const import API_HOST, DOMAIN, PLATFORMS, Scope
+from .const import API_HOST, CONF_CLOUDHOOK, DOMAIN, PLATFORMS, Scope
 from .coordinator import SmartcarVehicleCoordinator
 from .errors import EmptyVehicleListError, InvalidAuthError, MissingVINError
-from .util import unique_id_from_entry_data
+from .types import SmartcarData
+from .webhooks import handle_webhook, webhook_url_from_id
 
 _LOGGER = logging.getLogger(__name__)
-
-
-@dataclass(frozen=True, kw_only=True)
-class SmartcarData:
-    """The Smartcar coordinator runtime data."""
-
-    auth: AbstractAuth
-    coordinators: dict[str, SmartcarVehicleCoordinator]
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
@@ -83,6 +78,21 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     _LOGGER.debug("Forwarding setup to platforms: %s", PLATFORMS)
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
 
+    if CONF_WEBHOOK_ID in entry.data:
+        _LOGGER.info(
+            "Registering webhook at url: %s",
+            (await webhook_url_from_id(hass, entry.data[CONF_WEBHOOK_ID]))[0],
+        )
+        webhook.async_register(
+            hass,
+            DOMAIN,
+            entry.title,
+            entry.data[CONF_WEBHOOK_ID],
+            partial(handle_webhook, config_entry=entry),
+        )
+    else:
+        _LOGGER.debug("Webhooks are not enabled")
+
     await asyncio.gather(
         *[async_do_first_refresh(coordinator) for coordinator in coordinators.values()]
     )
@@ -91,6 +101,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     _LOGGER.info(
         "Using token with scopes: %s", entry.data.get("token", {}).get("scopes")
     )
+
+    entry.async_on_unload(entry.add_update_listener(async_update_listener))
 
     return True
 
@@ -109,7 +121,31 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         If the unload was successful.
     """
     _LOGGER.info("Unloading Smartcar entry %s", entry.entry_id)
+    if CONF_WEBHOOK_ID in entry.data:
+        webhook.async_unregister(hass, entry.data[CONF_WEBHOOK_ID])
     return bool(await hass.config_entries.async_unload_platforms(entry, PLATFORMS))
+
+
+async def async_remove_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
+    """Cleanup when entry is removed."""
+    if CONF_WEBHOOK_ID in entry.data and (
+        cloud.async_active_subscription(hass) or entry.data.get(CONF_CLOUDHOOK, False)
+    ):
+        try:
+            _LOGGER.debug(
+                "Removing Smartcar cloudhook (%s)", entry.data[CONF_WEBHOOK_ID]
+            )
+            await cloud.async_delete_cloudhook(hass, entry.data[CONF_WEBHOOK_ID])
+        except cloud.CloudNotAvailable:
+            pass
+
+
+async def async_update_listener(
+    hass: HomeAssistant,
+    entry: ConfigEntry,
+) -> None:
+    """Handle options update."""
+    await hass.config_entries.async_reload(entry.entry_id)
 
 
 async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> bool:
@@ -164,7 +200,7 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) ->
 
         hass.config_entries.async_update_entry(
             config_entry,
-            unique_id=unique_id_from_entry_data(new_data),
+            unique_id=util.unique_id_from_entry_data(new_data),
             data=new_data,
             version=2,
             minor_version=0,

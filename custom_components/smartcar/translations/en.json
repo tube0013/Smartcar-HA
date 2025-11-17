@@ -8,6 +8,7 @@
             "already_in_progress": "Configuration flow is already in progress",
             "authorize_url_timeout": "Timeout generating authorize URL.",
             "cannot_connect": "Failed to connect",
+            "cloud_not_connected": "Not connected to Home Assistant Cloud.",
             "duplicate_vehicles": "Vehicles may only be set up once. The following VINs {vins} are already configured.",
             "invalid_access_token": "Invalid access token",
             "missing_configuration": "The component is not configured. Please follow the documentation.",
@@ -23,8 +24,13 @@
             "user_rejected_authorize": "Account linking rejected: {error}",
             "wrong_vehicles": "The vehicles must match the original selections. Choose the vehicles with VIN(s): {vins}."
         },
+        "create_entry": {
+            "default": "To send events to Home Assistant, you will need to set up a [webhook with Smartcar]({smartcar_url}). Use the following URL:\n\n`{webhook_url}`\n\nSee [the documentation]({docs_url}) for further details."
+        },
         "error": {
-            "no_scopes": "At least one scope needs to be selected"
+            "no_scopes": "At least one scope needs to be selected",
+            "no_management_token": "Missing application management token",
+            "extraneous_management_token": "Do not provide application management token unless using webhooks"
         },
         "step": {
             "pick_implementation": {
@@ -33,6 +39,14 @@
             "reauth_confirm": {
                 "description": "The Smartcar integration needs to re-authenticate your account",
                 "title": "Authentication expired for {name}"
+            },
+            "webhooks": {
+                "data": {
+                    "use_webhooks": "Use webhooks",
+                    "application_management_token": "Token: only provide if using webhooks"
+                },
+                "description": "Provide your _Application Management Token_ from your [Smartcar account]({smartcar_url}) to use webhooks.\n\nSee [the documentation]({docs_url}) for further details.",
+                "title": "Smartcar configuration"
             },
             "scopes": {
                 "data": {
@@ -55,6 +69,26 @@
     "exceptions": {
         "batch_update_error": {
             "message": "An error occurred while retrieving vehicle state from the Smartcar API: {error}"
+        }
+    },
+    "options": {
+        "abort": {
+            "cloud_not_connected": "Not connected to Home Assistant Cloud.",
+            "unknown": "Unexpected error"
+        },
+        "error": {
+            "no_management_token": "Missing application management token",
+            "extraneous_management_token": "Do not provide application management token unless using webhooks"
+        },
+        "step": {
+            "webhooks": {
+                "data": {
+                    "use_webhooks": "Use webhooks",
+                    "application_management_token": "Token: only provide if using webhooks"
+                },
+                "description": "Provide your _Application Management Token_ from your [Smartcar account]({smartcar_url}) to use webhooks.\n\nTo send events to Home Assistant, you will need to set up a [webhook with Smartcar]({smartcar_url}). Use the following URL:\n\n`{webhook_url}`\n\nIf the above URL indicates that webhooks are not enabled, revisit this configuration screen after completing the setup to get the URL.\n\nSee [the documentation]({docs_url}) for further details.",
+                "title": "Smartcar configuration"
+            }
         }
     }
 }
