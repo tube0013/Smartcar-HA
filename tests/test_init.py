@@ -218,10 +218,20 @@ async def test_update_errors(
         assert hass.states.get(entity.entity_id) == snapshot(name=entity.entity_id)
 
 
+@pytest.mark.parametrize(
+    ("data_attribute", "expected_reloads"),
+    [
+        ("arbitrary-update", 1),
+        ("token", 0),
+    ],
+    ids=["data-change", "oauth-token-change"],
+)
 async def test_update_entry(
     hass: HomeAssistant,
     mock_config_entry: MockConfigEntry,
     vehicle: AsyncMock,
+    data_attribute: str,
+    expected_reloads: int,
 ) -> None:
     await setup_integration(hass, mock_config_entry)
 
@@ -231,10 +241,10 @@ async def test_update_entry(
     ) as mock_reload:
         hass.config_entries.async_update_entry(
             mock_config_entry,
-            data={"arbitrary-update": "value1"},
+            data={**mock_config_entry.data, data_attribute: "value1"},
         )
         await hass.async_block_till_done()
-        assert mock_reload.called
+        assert mock_reload.call_count == expected_reloads
 
 
 @pytest.mark.parametrize(

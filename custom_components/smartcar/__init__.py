@@ -2,6 +2,7 @@ import asyncio
 from functools import partial
 from http import HTTPStatus
 import logging
+from typing import Any
 
 from aiohttp import ClientResponseError
 from homeassistant.components import cloud, webhook
@@ -102,7 +103,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         "Using token with scopes: %s", entry.data.get("token", {}).get("scopes")
     )
 
-    entry.async_on_unload(entry.add_update_listener(async_update_listener))
+    entry.async_on_unload(
+        entry.add_update_listener(
+            partial(async_update_listener, initial_data=entry.data)
+        )
+    )
 
     return True
 
@@ -143,9 +148,15 @@ async def async_remove_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
 async def async_update_listener(
     hass: HomeAssistant,
     entry: ConfigEntry,
+    initial_data: dict[str, Any],
 ) -> None:
     """Handle options update."""
-    await hass.config_entries.async_reload(entry.entry_id)
+
+    entry_data = {k: v for k, v in entry.data.items() if k != "token"}
+    initial_data = {k: v for k, v in initial_data.items() if k != "token"}
+
+    if entry_data != initial_data:
+        await hass.config_entries.async_reload(entry.entry_id)
 
 
 async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> bool:
