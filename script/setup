@@ -4,17 +4,23 @@ set -e
 
 cd "$(dirname "$0")/.."
 
+PYTHON="python3"
+
+if [ -x "$(command -v python3.13)" ]; then
+  PYTHON="python3.13"
+fi
+
 if [ ! -n "$VIRTUAL_ENV" ]; then
   if [ -x "$(command -v uv)" ]; then
     uv venv venv
   else
-    python3 -m venv venv
+    $PYTHON -m venv venv
   fi
   source venv/bin/activate
 fi
 
 if ! [ -x "$(command -v uv)" ]; then
-  python3 -m pip install uv
+  $PYTHON -m pip install uv
 fi
 
 script/bootstrap
