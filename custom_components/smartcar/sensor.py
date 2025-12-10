@@ -86,7 +86,7 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
     SmartcarSensorDescription(
         key=EntityDescriptionKey.FUEL_PERCENT,
         name="Fuel Percent",
-        value_key_path="fuel.percentRemaining",
+        value_key_path="internalcombustionengine-fuellevel.value",
         value_cast=lambda pct: pct and round(pct * 100),
         icon="mdi:gas-station",
         state_class=SensorStateClass.MEASUREMENT,
@@ -95,7 +95,7 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
     SmartcarSensorDescription(
         key=EntityDescriptionKey.FUEL_RANGE,
         name="Fuel Range",
-        value_key_path="fuel.range",
+        value_key_path="internalcombustionengine-range.value",
         icon="mdi:map-marker-distance",
         device_class=SensorDeviceClass.DISTANCE,
         state_class=SensorStateClass.MEASUREMENT,
