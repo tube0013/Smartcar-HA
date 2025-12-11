@@ -157,7 +157,11 @@ DATAPOINT_ENTITY_KEY_MAP = {
         "range",
     ),
     EntityDescriptionKey.LOCATION: DatapointConfig(
-        "location-preciselocation", ["read_location"], "/location", None
+        "location-preciselocation",
+        ["read_location"],
+        "/location",
+        None,
+        lambda location: location,
     ),
     EntityDescriptionKey.ODOMETER: DatapointConfig(
         "odometer-traveleddistance", ["read_odometer"], "/odometer", "distance"

@@ -26,7 +26,7 @@ ENTITY_DESCRIPTIONS: tuple[TrackerEntityDescription, ...] = (
     SmartcarTrackerDescription(
         key=EntityDescriptionKey.LOCATION,
         name="Location",
-        value_key_path="location-preciselocation.value",
+        value_key_path="location-preciselocation",
         value_cast=lambda location: location or {},
         icon="mdi:car",
     ),
