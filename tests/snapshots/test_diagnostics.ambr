@@ -34,10 +34,8 @@
           'value': 40.5,
         }),
         'location-preciselocation': dict({
-          'value': dict({
-            'latitude': '**REDACTED**',
-            'longitude': '**REDACTED**',
-          }),
+          'latitude': '**REDACTED**',
+          'longitude': '**REDACTED**',
         }),
         'location-preciselocation:data_age': '2019-10-24T00:43:46+00:00',
         'odometer-traveleddistance': dict({
@@ -165,10 +163,8 @@
           'value': None,
         }),
         'location-preciselocation': dict({
-          'value': dict({
-            'latitude': '**REDACTED**',
-            'longitude': '**REDACTED**',
-          }),
+          'latitude': '**REDACTED**',
+          'longitude': '**REDACTED**',
         }),
         'location-preciselocation:data_age': '2025-05-09T15:40:52+00:00',
         'location-preciselocation:fetched_at': '2025-05-09T17:27:25.401000+00:00',
