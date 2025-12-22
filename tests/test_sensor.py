@@ -458,6 +458,96 @@ async def test_update_with_polling_disabled(
             },
         ),
         (
+            json.dumps(
+                {
+                    "eventId": "1821c036-71cb-408f-8dee-2989b9764307",
+                    "eventType": "VEHICLE_ERROR",
+                    "data": {
+                        "user": {"id": "2fbd0033-83e7-43b8-a367-776d6dff1134"},
+                        "vehicle": {
+                            "id": "a1d50709-3502-4faa-ba43-a5c7565e6a09",
+                            "make": "VOLKSWAGEN",
+                            "model": "ID.4",
+                            "year": 2021,
+                        },
+                        "errors": [
+                            {  # error without `signals` key is considered broad
+                                "type": "PERMISSION",
+                                "code": None,
+                                "description": "Your application has insufficient permissions to access the requested resource. Please prompt the user to re-authenticate using Smartcar Connect.",
+                                "docURL": "https://smartcar.com/docs/errors/api-errors/permission-errors#null",
+                                "resolution": {"type": "REAUTHENTICATE"},
+                                "state": "ERROR",
+                            },
+                        ],
+                    },
+                    "meta": {
+                        "deliveryId": "49c3f6bb-63cf-47ce-b320-6e0aaa9a2ca7",
+                        "deliveredAt": 1758224204078,
+                        "deliveryTime": 1758224204078,
+                    },
+                }
+            ),
+            {
+                "sc-signature": "1234",
+            },
+            {
+                "reauth_calls": 1,
+                "log_messages": ["requesting reauth"],
+            },
+        ),
+        (
+            json.dumps(
+                {
+                    "eventId": "1821c036-71cb-408f-8dee-2989b9764307",
+                    "eventType": "VEHICLE_ERROR",
+                    "data": {
+                        "user": {"id": "2fbd0033-83e7-43b8-a367-776d6dff1134"},
+                        "vehicle": {
+                            "id": "a1d50709-3502-4faa-ba43-a5c7565e6a09",
+                            "make": "VOLKSWAGEN",
+                            "model": "ID.4",
+                            "year": 2021,
+                        },
+                        "errors": [
+                            {
+                                "type": "PERMISSION",
+                                "code": None,
+                                "description": "Your application has insufficient permissions to access the requested resource. Please prompt the user to re-authenticate using Smartcar Connect.",
+                                "docURL": "https://smartcar.com/docs/errors/api-errors/permission-errors#null",
+                                "resolution": {"type": "REAUTHENTICATE"},
+                                "state": "ERROR",
+                                "signals": [
+                                    {
+                                        "name": "Permissions",
+                                        "group": "VehicleUserAccount",
+                                        "code": "vehicleuseraccount-permissions",
+                                    },
+                                    {
+                                        "name": "Role",
+                                        "group": "VehicleUserAccount",
+                                        "code": "vehicleuseraccount-role",
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    "meta": {
+                        "deliveryId": "49c3f6bb-63cf-47ce-b320-6e0aaa9a2ca7",
+                        "deliveredAt": 1758224204078,
+                        "deliveryTime": 1758224204078,
+                    },
+                }
+            ),
+            {
+                "sc-signature": "1234",
+            },
+            {
+                "reauth_calls": 0,
+                "log_messages": ["ignoring error"],
+            },
+        ),
+        (
             "invalid-json",
             {
                 "sc-signature": "1234",
@@ -480,6 +570,8 @@ async def test_update_with_polling_disabled(
         "vehicle_state_fuel",
         "vehicle_mismatch",
         "vehicle_error",
+        "broad_auth_error",
+        "irrelevant_auth_error",
         "invalid_json",
         "invalid_signature",
     ],
