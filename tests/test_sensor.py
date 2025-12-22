@@ -432,7 +432,13 @@ async def test_update_with_polling_disabled(
                                 "docURL": "https://smartcar.com/docs/errors/api-errors/permission-errors#null",
                                 "resolution": {"type": "REAUTHENTICATE"},
                                 "state": "ERROR",
-                                "signals": ["Closure.IsLocked"],
+                                "signals": [
+                                    {
+                                        "name": "Closure",
+                                        "group": "IsLocked",
+                                        "code": "closure-islocked",
+                                    }
+                                ],
                             },
                         ],
                     },
