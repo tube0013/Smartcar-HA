@@ -108,7 +108,7 @@ If successful, the integration will be added, and Home Assistant will create dev
 
 ### Webhooks
 
-**Important:** In order for webhooks to update entities, your Home Assistant instance must be accessible from the internet, either via Home Assistant Cloud or another method. See the [Remote Access documentation][ha-remote-access] for more information.
+**Important:** In order for webhooks to update entities, your Home Assistant instance must be accessible from the internet, either via Home Assistant Cloud or another method, and you must provide a valid Home Assistant URL in your [network settings](https://my.home-assistant.io/redirect/network/). See the [Remote Access documentation][ha-remote-access] for more information.
 
 These steps are for setting up a webhook in [Smartcar's dashboard][smartcar-dashboard]. Before starting, make sure you have completed all of the steps to [create an active configuration](#configuration-flow) in Home Assistant and have the webhook URL.
 
