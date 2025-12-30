@@ -2,9 +2,11 @@
 
 from . import bootstrap as bootstrap  # noqa: I001, PLC0414
 
-from collections.abc import Generator
+from collections.abc import Awaitable, Callable, Generator
+import json
 import logging
 import time
+from typing import Any
 from unittest.mock import AsyncMock, Mock, PropertyMock, patch
 
 from aiohttp import ClientSession
@@ -12,7 +14,9 @@ from homeassistant.components.application_credentials import (
     ClientCredential,
     async_import_client_credential,
 )
+from homeassistant.const import CONF_WEBHOOK_ID, CONTENT_TYPE_JSON
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers import device_registry as dr, entity_registry as er
 from homeassistant.helpers.config_entry_oauth2_flow import OAuth2Session
 from homeassistant.setup import async_setup_component
 import pytest
@@ -24,13 +28,21 @@ from pytest_homeassistant_custom_component.test_util.aiohttp import (
     AiohttpClientMocker,
     mock_aiohttp_client,
 )
+from pytest_homeassistant_custom_component.typing import ClientSessionGenerator
+from syrupy.assertion import SnapshotAssertion
 
 from custom_components.smartcar.auth import AbstractAuth
-from custom_components.smartcar.const import DOMAIN, EntityDescriptionKey, Scope
+from custom_components.smartcar.const import (
+    CONF_APPLICATION_MANAGEMENT_TOKEN,
+    DOMAIN,
+    EntityDescriptionKey,
+    Scope,
+)
 
 from . import (
     MOCK_API_ENDPOINT,
     aioclient_mock_append_vehicle_request,
+    setup_added_integration,
     setup_integration,
 )
 
@@ -296,3 +308,97 @@ async def init_integration(
     await setup_integration(hass, mock_config_entry)
 
     return mock_config_entry
+
+
+@pytest.fixture
+def webhook_body(request, vehicle_fixture: str):
+    if isinstance(request.param, str):
+        return json.dumps(
+            dict(
+                load_json_object_fixture(
+                    f"webhooks/{vehicle_fixture}_{request.param}.json", DOMAIN
+                )
+            )
+        )
+    if isinstance(request.param, bytes):
+        return request.param
+    return json.dumps(request.param)
+
+
+@pytest.fixture
+def webhook_scenario(
+    hass: HomeAssistant,
+    hass_client: ClientSessionGenerator,
+    mock_hmac_sha256_hexdigest: Mock,
+    mock_config_entry: MockConfigEntry,
+    aioclient_mock: AiohttpClientMocker,
+    snapshot: SnapshotAssertion,
+    platform: str,
+    vehicle: AsyncMock,
+    vehicle_fixture: str,
+    vehicle_attributes: dict,
+    webhook_body: str,
+    webhook_headers: dict[str, Any],
+    expected: dict[str, Any],
+    device_registry: dr.DeviceRegistry,
+    entity_registry: er.EntityRegistry,
+    caplog: pytest.LogCaptureFixture,
+) -> Callable[[], Awaitable[None]]:
+    async def run_scenario():
+        mock_config_entry.add_to_hass(hass)
+        hass.config_entries.async_update_entry(
+            mock_config_entry,
+            data={
+                **mock_config_entry.data,
+                CONF_WEBHOOK_ID: "smartcar_test",
+                CONF_APPLICATION_MANAGEMENT_TOKEN: "test_amt",
+            },
+        )
+
+        expected_calls = 0
+        expected_response = expected.get("response", {})
+        expected_response_status = expected.get("response_status", 200)
+        expected_reauth_calls = expected.get("reauth_calls", 0)
+        expected_log_messages = expected.get("log_messages", [])
+
+        with patch("custom_components.smartcar.PLATFORMS", [platform]):
+            await setup_added_integration(hass, mock_config_entry)
+
+        # no requests should have been made during setup when webhooks are enabled
+        # because this automatically disables polling.
+        assert aioclient_mock.call_count == expected_calls
+
+        with patch(
+            "homeassistant.config_entries.ConfigEntry.async_start_reauth"
+        ) as mock_start_reauth:
+            client = await hass_client()
+            resp = await client.post(
+                "/api/webhook/smartcar_test",
+                data=webhook_body,
+                headers={
+                    "content-type": CONTENT_TYPE_JSON,
+                    **webhook_headers,
+                },
+            )
+            assert resp.status == expected_response_status
+            assert (
+                await (resp.json() if expected_response_status < 300 else resp.text())
+                == expected_response
+            )
+            await hass.async_block_till_done()
+
+        # still no calls since webhooks will update from the data it received
+        assert aioclient_mock.call_count == expected_calls
+        assert mock_start_reauth.call_count == expected_reauth_calls
+
+        device_id = vehicle["vin"]
+        device = device_registry.async_get_device({(DOMAIN, device_id)})
+        entities = entity_registry.entities.get_entries_for_device_id(device.id)
+
+        for entity in entities:
+            assert hass.states.get(entity.entity_id) == snapshot(name=entity.entity_id)
+
+        for expected_log_message in expected_log_messages:
+            assert expected_log_message in caplog.text
+
+    return run_scenario
