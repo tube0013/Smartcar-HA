@@ -61,7 +61,7 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
     SmartcarSensorDescription(
         key=EntityDescriptionKey.CHARGING_STATE,
         name="Charging Status",
-        value_key_path="v2only-charge.value",
+        value_key_path="charge-detailedchargingstatus.value",
         icon="mdi:ev-station",
     ),
     SmartcarSensorDescription(

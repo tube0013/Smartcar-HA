@@ -12,6 +12,9 @@
             }),
           ]),
         }),
+        'charge-detailedchargingstatus': dict({
+          'value': 'FULLY_CHARGED',
+        }),
         'charge-ischarging': dict({
           'value': False,
         }),
@@ -53,9 +56,6 @@
         }),
         'tractionbattery-stateofcharge': dict({
           'value': 0.3,
-        }),
-        'v2only-charge': dict({
-          'value': 'FULLY_CHARGED',
         }),
         'wheel-tires': dict({
           'columnCount': 2,
@@ -137,6 +137,11 @@
         }),
         'charge-chargelimits:data_age': '2025-05-09T15:40:55+00:00',
         'charge-chargelimits:fetched_at': '2025-05-09T17:27:26.712000+00:00',
+        'charge-detailedchargingstatus': dict({
+          'value': 'NOT_CHARGING',
+        }),
+        'charge-detailedchargingstatus:data_age': '2025-05-09T15:40:57+00:00',
+        'charge-detailedchargingstatus:fetched_at': '2025-05-09T17:27:26.712000+00:00',
         'charge-ischarging': dict({
           'value': False,
         }),
@@ -193,11 +198,6 @@
         'tractionbattery-stateofcharge:data_age': '2025-05-09T15:40:57+00:00',
         'tractionbattery-stateofcharge:fetched_at': '2025-05-09T17:27:26.712000+00:00',
         'tractionbattery-stateofcharge:unit_system': 'metric',
-        'v2only-charge': dict({
-          'value': 'NOT_CHARGING',
-        }),
-        'v2only-charge:data_age': '2025-05-09T15:40:57+00:00',
-        'v2only-charge:fetched_at': '2025-05-09T17:27:26.712000+00:00',
         'wheel-tires': dict({
           'columnCount': 2,
           'rowCount': 2,

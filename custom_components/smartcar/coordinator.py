@@ -54,9 +54,8 @@ class DatapointConfig:
 
     @property
     def storage_key(self) -> str:
-        if self.code:
-            return self.code
-        return f"v2only-{self.storage_key_v2}"
+        assert self.code
+        return self.code
 
     @property
     def storage_key_v2(self) -> str:
@@ -121,7 +120,7 @@ DATAPOINT_ENTITY_KEY_MAP = {
         is_v2_value=_is_v2_value_if_string,  # for saved restore-state values
     ),
     EntityDescriptionKey.CHARGING_STATE: DatapointConfig(
-        None,  # no v3 equivalent
+        "charge-detailedchargingstatus",
         ["read_charge", "control_charge"],
         "/charge",
         "state",
