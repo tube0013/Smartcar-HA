@@ -30,10 +30,10 @@ from custom_components.smartcar.const import (
     EntityDescriptionKey,
 )
 from custom_components.smartcar.coordinator import (
-    TIRE_BACK_ROW,
-    TIRE_FRONT_ROW,
-    TIRE_LEFT_COLUMN,
-    TIRE_RIGHT_COLUMN,
+    VEHICLE_BACK_ROW,
+    VEHICLE_FRONT_ROW,
+    VEHICLE_LEFT_COLUMN,
+    VEHICLE_RIGHT_COLUMN,
 )
 from custom_components.smartcar.entity import SmartcarEntity
 from custom_components.smartcar.sensor import SmartcarSensorDescription
@@ -188,6 +188,13 @@ async def test_update_with_polling_disabled(
             {},
         ),
         (
+            "all",  # JSON fixture
+            {
+                "sc-signature": "1234",
+            },
+            {},
+        ),
+        (
             "mismatch",  # JSON fixture
             {
                 "sc-signature": "1234",
@@ -252,6 +259,7 @@ async def test_update_with_polling_disabled(
         "verify",
         "vehicle_state",
         "vehicle_state_fuel",
+        "vehicle_state_all",
         "vehicle_mismatch",
         "vehicle_error",
         "broad_auth_error",
@@ -262,6 +270,35 @@ async def test_update_with_polling_disabled(
 )
 async def test_webhook_update(webhook_scenario: Callable[[], Awaitable[None]]) -> None:
     await webhook_scenario()
+
+
+@pytest.mark.usefixtures("enable_specified_entities")
+@pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
+@pytest.mark.parametrize(
+    "enabled_entities",
+    [{EntityDescriptionKey.LOW_VOLTAGE_BATTERY_LEVEL}],
+)
+async def test_polling_v3_sensor(
+    hass: HomeAssistant,
+    mock_config_entry: MockConfigEntry,
+    aioclient_mock: AiohttpClientMocker,
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    """Test sensor refresh fails on v3 only items."""
+
+    mock_config_entry.add_to_hass(hass)
+    hass.config_entries.async_update_entry(
+        mock_config_entry,
+        pref_disable_polling=True,
+    )
+
+    await setup_added_integration(hass, mock_config_entry)
+    assert aioclient_mock.call_count == 0
+
+    await async_update_entity(hass, "sensor.vw_id_4_low_voltage_battery")
+
+    assert aioclient_mock.call_count == 0
+    assert "Unsupported update requests for: low_voltage_battery_level" in caplog.text
 
 
 @pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
@@ -457,8 +494,8 @@ RESTORE_STATE_PARAMETRIZE_ARGS = [
             {
                 "raw_value": [
                     {
-                        "column": TIRE_RIGHT_COLUMN,
-                        "row": TIRE_FRONT_ROW,
+                        "column": VEHICLE_RIGHT_COLUMN,
+                        "row": VEHICLE_FRONT_ROW,
                         "tirePressure": 234,
                     },
                 ],
@@ -468,8 +505,8 @@ RESTORE_STATE_PARAMETRIZE_ARGS = [
                 "wheel-tires": {
                     "values": [
                         {
-                            "column": TIRE_RIGHT_COLUMN,
-                            "row": TIRE_FRONT_ROW,
+                            "column": VEHICLE_RIGHT_COLUMN,
+                            "row": VEHICLE_FRONT_ROW,
                             "tirePressure": 234,
                         },
                     ],
@@ -599,23 +636,23 @@ RESTORE_STATE_V2_PARAMETRIZE_ARGS = [
                     "rowCount": 2,
                     "values": [
                         {
-                            "column": TIRE_LEFT_COLUMN,
-                            "row": TIRE_FRONT_ROW,
+                            "column": VEHICLE_LEFT_COLUMN,
+                            "row": VEHICLE_FRONT_ROW,
                             "tirePressure": 235,
                         },
                         {
-                            "column": TIRE_LEFT_COLUMN,
-                            "row": TIRE_BACK_ROW,
+                            "column": VEHICLE_LEFT_COLUMN,
+                            "row": VEHICLE_BACK_ROW,
                             "tirePressure": 234,
                         },
                         {
-                            "column": TIRE_RIGHT_COLUMN,
-                            "row": TIRE_FRONT_ROW,
+                            "column": VEHICLE_RIGHT_COLUMN,
+                            "row": VEHICLE_FRONT_ROW,
                             "tirePressure": 233,
                         },
                         {
-                            "column": TIRE_RIGHT_COLUMN,
-                            "row": TIRE_BACK_ROW,
+                            "column": VEHICLE_RIGHT_COLUMN,
+                            "row": VEHICLE_BACK_ROW,
                             "tirePressure": 232,
                         },
                     ],
