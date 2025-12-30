@@ -1,4 +1,4 @@
-"""Test lock entities."""
+"""Test binary sensors."""
 
 from collections.abc import Awaitable, Callable
 
@@ -19,10 +19,12 @@ import pytest
             },
             {},
         ),
+        ("all", {"sc-signature": "1234"}, {}),
     ],
     indirect=["webhook_body"],
     ids=[
         "vehicle_state",
+        "vehicle_state_all",
     ],
 )
 async def test_webhook_update(webhook_scenario: Callable[[], Awaitable[None]]) -> None:
