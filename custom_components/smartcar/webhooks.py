@@ -120,14 +120,23 @@ def _handle_webhook_errors(
     config_entry = coordinator.config_entry
 
     for error in errors:
+        error_type = error.get("type")
+        resolution = error.get("resolution", {}).get("type")
+        signals = error.get("signals", [])
         if (
-            error.get("type") == "PERMISSION"
-            and error.get("resolution", {}).get("type") == "REAUTHENTICATE"
+            error_type == "PERMISSION"
+            and resolution == "REAUTHENTICATE"
+            and (not signals or any(_is_integrated(s) for s in signals))
         ):
             _LOGGER.info("requesting reauth due to webhook message: %s", error)
             config_entry.async_start_reauth(hass)
         else:
             _LOGGER.debug("ignoring error in webhook: %s", error)
+
+
+def _is_integrated(signal: dict) -> bool:
+    code: str | None = signal.get("code")
+    return code in DATAPOINT_CODE_MAP
 
 
 def _handle_webhook_signals(
@@ -142,7 +151,6 @@ def _handle_webhook_signals(
             status = signal.get("status", {})
             is_error = status.get("value") == "ERROR"
             code: str | None = signal.get("code")
-            is_integrated = code in DATAPOINT_CODE_MAP
             body = copy.deepcopy(signal.get("body", {}))
             meta = signal.get("meta", {})
 
@@ -150,7 +158,7 @@ def _handle_webhook_signals(
                 _handle_webhook_signal_error(
                     name,
                     status.get("error", {}),
-                    level="error" if is_integrated else "debug",
+                    level="error" if _is_integrated(signal) else "debug",
                 )
 
                 body = {"value": None}
