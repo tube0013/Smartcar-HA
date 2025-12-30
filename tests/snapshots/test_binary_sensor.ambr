@@ -1,0 +1,15 @@
+# serializer version: 1
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_charging_cable_plugged_in]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'plug',
+      'friendly_name': 'VW ID.4 Charging Cable Plugged In',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_charging_cable_plugged_in',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---

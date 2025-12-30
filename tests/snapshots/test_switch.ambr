@@ -97,3 +97,17 @@
     ),
   ])
 # ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-switch][switch.vw_id_4_charging]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Charging',
+      'icon': 'mdi:ev-plug-type2',
+    }),
+    'context': <ANY>,
+    'entity_id': 'switch.vw_id_4_charging',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---

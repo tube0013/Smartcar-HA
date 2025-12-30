@@ -1,0 +1,124 @@
+
+{
+    "eventId": "1821c036-71cb-408f-8dee-2989b9764307",
+    "eventType": "VEHICLE_STATE",
+    "data": {
+        "user": {"id": "2fbd0033-83e7-43b8-a367-776d6dff1134"},
+        "vehicle": {
+            "id": "a1d50709-3502-4faa-ba43-a5c7565e6a09",
+            "make": "VOLKSWAGEN",
+            "model": "ID.4",
+            "year": 2021
+        },
+        "signals": [
+            {
+                "code": "connectivitystatus-isonline",
+                "name": "IsOnline",
+                "group": "ConnectivityStatus",
+                "status": {
+                    "value": "ERROR",
+                    "error": {
+                        "type": "COMPATIBILITY",
+                        "code": "VEHICLE_NOT_CAPABLE"
+                    }
+                }
+            },
+            {
+                "code": "odometer-traveleddistance",
+                "name": "TraveledDistance",
+                "group": "Odometer",
+                "body": {"value": 62041, "unit": "km"},
+                "meta": {
+                    "oemUpdatedAt": 1758238176603,
+                    "retrievedAt": 1758238782829
+                }
+            },
+            {
+                "code": "closure-islocked",
+                "name": "IsLocked",
+                "group": "Closure",
+                "status": {
+                    "value": "ERROR",
+                    "error": {"type": "PERMISSION", "code": null}
+                }
+            },
+            {
+                "code": "internalcombustionengine-fuellevel",
+                "name": "FuelLevel",
+                "group": "InternalCombustionEngine",
+                "status": {
+                    "value": "ERROR",
+                    "error": {
+                        "type": "COMPATIBILITY",
+                        "code": "VEHICLE_NOT_CAPABLE"
+                    }
+                }
+            },
+            {
+                "code": "tractionbattery-stateofcharge",
+                "name": "StateOfCharge",
+                "group": "TractionBattery",
+                "body": {"value": 42, "unit": "percent"},
+                "meta": {
+                    "oemUpdatedAt": 1758238233000,
+                    "retrievedAt": 1758238783086
+                }
+            },
+            {
+                "code": "tractionbattery-range",
+                "name": "Range",
+                "group": "TractionBattery",
+                "status": {
+                    "value": "ERROR",
+                    "error": {
+                        "type": "COMPATIBILITY",
+                        "code": "VEHICLE_NOT_CAPABLE"
+                    }
+                }
+            },
+            {
+                "code": "charge-chargelimits",
+                "name": "ChargeLimits",
+                "group": "Charge",
+                "body": {
+                    "values": [
+                        {
+                            "type": "GLOBAL",
+                            "limit": 80,
+                            "condition": null
+                        }
+                    ],
+                    "activeLimit": 80,
+                    "unit": "percent"
+                },
+                "meta": {
+                    "oemUpdatedAt": 1758238232000,
+                    "retrievedAt": 1758238783086
+                }
+            },
+            {
+                "code": "charge-ischarging",
+                "name": "IsCharging",
+                "group": "Charge",
+                "body": {"value": false},
+                "meta": {
+                }
+            }
+        ]
+    },
+    "triggers": [
+        {
+            "type": "SIGNAL_UPDATED",
+            "signal": "Odometer.TraveledDistance"
+        },
+        {
+            "type": "SIGNAL_UPDATED",
+            "signal": "TractionBattery.StateOfCharge"
+        }
+    ],
+    "meta": {
+        "deliveryId": "682541b6-a461-4d69-9e6e-fead3832f5eb",
+        "deliveredAt": 1758238783185,
+        "deliveryTime": 1758238783185
+    }
+}

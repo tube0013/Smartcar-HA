@@ -97,3 +97,17 @@
     ),
   ])
 # ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-lock][lock.vw_id_4_door_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Door Lock',
+      'supported_features': <LockEntityFeature: 0>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'lock.vw_id_4_door_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
