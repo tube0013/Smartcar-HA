@@ -156,6 +156,7 @@ Several entities are created for for each connected vehicle (subject to vehicle 
 - [`device_tracker.<make_model>_location`](#device_trackermake_model_location)
 - [`sensor.<make_model>_battery_capacity`](#sensormake_model_battery_capacity)
 - [`sensor.<make_model>_battery`](#sensormake_model_battery)
+- [`sensor.<make_model>_low_voltage_battery`](#sensormake_model_low_voltage_battery)
 - [`sensor.<make_model>_charging_status`](#sensormake_model_charging_status)
 - [`sensor.<make_model>_engine_oil_life`](#sensormake_model_engine_oil_life)
 - [`sensor.<make_model>_fuel`](#sensormake_model_fuel)
@@ -168,6 +169,23 @@ Several entities are created for for each connected vehicle (subject to vehicle 
 - [`sensor.<make_model>_tire_pressure_front_left`](#sensormake_model_tire_pressure_front_left)
 - [`sensor.<make_model>_tire_pressure_front_right`](#sensormake_model_tire_pressure_front_right)
 - [`binary_sensor.<make_model>_charging_cable_plugged_in`](#binary_sensormake_model_charging_cable_plugged_in)
+- [`binary_sensor.<make_model>_front_trunk`](#binary_sensormake_model_front_trunk)
+- [`binary_sensor.<make_model>_front_trunk_lock`](#binary_sensormake_model_front_trunk_lock)
+- [`binary_sensor.<make_model>_rear_trunk`](#binary_sensormake_model_rear_trunk)
+- [`binary_sensor.<make_model>_rear_trunk_lock`](#binary_sensormake_model_rear_trunk_lock)
+- [`binary_sensor.<make_model>_engine_cover`](#binary_sensormake_model_engine_cover)
+- [`binary_sensor.<make_model>_door_back_left`](#binary_sensormake_model_door_back_left)
+- [`binary_sensor.<make_model>_door_back_left_lock`](#binary_sensormake_model_door_back_left_lock)
+- [`binary_sensor.<make_model>_door_back_right`](#binary_sensormake_model_door_back_right)
+- [`binary_sensor.<make_model>_door_back_right_lock`](#binary_sensormake_model_door_back_right_lock)
+- [`binary_sensor.<make_model>_door_front_left`](#binary_sensormake_model_door_front_left)
+- [`binary_sensor.<make_model>_door_front_left_lock`](#binary_sensormake_model_door_front_left_lock)
+- [`binary_sensor.<make_model>_door_front_right`](#binary_sensormake_model_door_front_right)
+- [`binary_sensor.<make_model>_door_front_right_lock`](#binary_sensormake_model_door_front_right_lock)
+- [`binary_sensor.<make_model>_window_back_left`](#binary_sensormake_model_window_back_left)
+- [`binary_sensor.<make_model>_window_back_right`](#binary_sensormake_model_window_back_right)
+- [`binary_sensor.<make_model>_window_front_left`](#binary_sensormake_model_window_front_left)
+- [`binary_sensor.<make_model>_window_front_right`](#binary_sensormake_model_window_front_right)
 - [`number.<make_model>_charge_limit`](#numbermake_model_charge_limit)
 - [`switch.<make_model>_charging`](#switchmake_model_charging)
 - [`lock.<make_model>_door_lock`](#lockmake_model_door_lock)
@@ -202,6 +220,15 @@ The [state of charge](https://smartcar.com/docs/api-reference/evs/get-battery-le
 Enabled by default: :white_check_mark:  
 Requires permissions: `read_battery`  
 Obtained concurrently with: [`sensor.<make_model>_range`](#sensormake_model_range)
+
+### `sensor.<make_model>_low_voltage_battery`
+
+The [state of charge of the low voltage battery](https://smartcar.com/docs/api-reference/signals/lowvoltagebattery#state-of-charge).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
+
+### `binary_sensor.<make_model>_door_front_right`
 
 ### `sensor.<make_model>_charging_status`
 
@@ -307,6 +334,122 @@ Enabled by default: :white_check_mark:
 Deprecated: This is deprecated and will be removed when the v2 API is no longer being used  
 Requires permissions: `read_charge`  
 Obtained concurrently with: [`sensor.<make_model>_charging_status`](#sensormake_model_charging_status), [`switch.<make_model>_charging`](#switchmake_model_charging)
+
+### `binary_sensor.<make_model>_front_trunk`
+
+Whether the [front trunk is open](https://smartcar.com/docs/api-reference/signals/closure#front-trunk).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
+
+### `binary_sensor.<make_model>_front_trunk_lock`
+
+Whether the [front trunk is locked](https://smartcar.com/docs/api-reference/signals/closure#front-trunk).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
+
+### `binary_sensor.<make_model>_rear_trunk`
+
+Whether the [rear trunk is open](https://smartcar.com/docs/api-reference/signals/closure#rear-trunk).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
+
+### `binary_sensor.<make_model>_rear_trunk_lock`
+
+Whether the [rear trunk is locked](https://smartcar.com/docs/api-reference/signals/closure#rear-trunk).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
+
+### `binary_sensor.<make_model>_engine_cover`
+
+Whether the [engine cover is open](https://smartcar.com/docs/api-reference/signals/closure#engine-cover).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
+
+### `binary_sensor.<make_model>_door_back_left`
+
+Whether the [back left door is open](https://smartcar.com/docs/api-reference/signals/closure#doors).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
+
+### `binary_sensor.<make_model>_door_back_left_lock`
+
+Whether the [back left door is locked](https://smartcar.com/docs/api-reference/signals/closure#doors).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
+
+### `binary_sensor.<make_model>_door_back_right`
+
+Whether the [back right door is open](https://smartcar.com/docs/api-reference/signals/closure#doors).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
+
+### `binary_sensor.<make_model>_door_back_right_lock`
+
+Whether the [back right door is locked](https://smartcar.com/docs/api-reference/signals/closure#doors).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
+
+### `binary_sensor.<make_model>_door_front_left`
+
+Whether the [front left door is open](https://smartcar.com/docs/api-reference/signals/closure#doors).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
+
+### `binary_sensor.<make_model>_door_front_left_lock`
+
+Whether the [front left door is locked](https://smartcar.com/docs/api-reference/signals/closure#doors).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
+
+### `binary_sensor.<make_model>_door_front_right`
+
+Whether the [front right door is open](https://smartcar.com/docs/api-reference/signals/closure#doors).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
+
+### `binary_sensor.<make_model>_door_front_right_lock`
+
+Whether the [front right door is locked](https://smartcar.com/docs/api-reference/signals/closure#doors).
+
+### `binary_sensor.<make_model>_window_back_left`
+
+Whether the [back left window is open](https://smartcar.com/docs/api-reference/signals/closure#windows).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
+
+### `binary_sensor.<make_model>_window_back_right`
+
+Whether the [back right window is open](https://smartcar.com/docs/api-reference/signals/closure#windows).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
+
+### `binary_sensor.<make_model>_window_front_left`
+
+Whether the [front left window is open](https://smartcar.com/docs/api-reference/signals/closure#windows).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
+
+### `binary_sensor.<make_model>_window_front_right`
+
+Whether the [front right window is open](https://smartcar.com/docs/api-reference/signals/closure#windows).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
 
 ### `number.<make_model>_charge_limit`
 

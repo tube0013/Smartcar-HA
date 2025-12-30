@@ -28,10 +28,10 @@ from .util import key_path_get, key_path_update
 
 _LOGGER = logging.getLogger(__name__)
 
-TIRE_FRONT_ROW = 0
-TIRE_BACK_ROW = 1
-TIRE_LEFT_COLUMN = 0
-TIRE_RIGHT_COLUMN = 1
+VEHICLE_FRONT_ROW = 0
+VEHICLE_BACK_ROW = 1
+VEHICLE_LEFT_COLUMN = 0
+VEHICLE_RIGHT_COLUMN = 1
 
 UPDATE_INTERVAL = timedelta(hours=6)
 
@@ -42,7 +42,7 @@ class DatapointConfig:
 
     code: str | None  # none indicates no v3 equivalent
     required_scopes: list[str]
-    endpoint_v2: str  # the read (and batch) endpoint
+    endpoint_v2: str | None  # the read (and batch) endpoint
     value_key_path_v2: str | None
     value_transform_v2: Callable[[Any], Any] = lambda x: {"value": x}
     value_merge_v2: Callable[[dict, dict], dict] = (
@@ -59,7 +59,9 @@ class DatapointConfig:
 
     @property
     def storage_key_v2(self) -> str:
-        return self.endpoint_v2.strip("/").replace("/", "_")
+        endpoint_v2 = self.endpoint_v2
+        assert endpoint_v2 is not None
+        return endpoint_v2.strip("/").replace("/", "_")
 
 
 def _tire_pressure_merge_v2(current: dict, update: dict) -> dict:
@@ -131,11 +133,65 @@ DATAPOINT_ENTITY_KEY_MAP = {
         "/security",
         "isLocked",
     ),
+    EntityDescriptionKey.DOOR_BACK_LEFT_LOCK: DatapointConfig(
+        "closure-doors",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.DOOR_BACK_RIGHT_LOCK: DatapointConfig(
+        "closure-doors",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.DOOR_FRONT_LEFT_LOCK: DatapointConfig(
+        "closure-doors",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.DOOR_FRONT_RIGHT_LOCK: DatapointConfig(
+        "closure-doors",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.DOOR_BACK_LEFT: DatapointConfig(
+        "closure-doors",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.DOOR_BACK_RIGHT: DatapointConfig(
+        "closure-doors",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.DOOR_FRONT_LEFT: DatapointConfig(
+        "closure-doors",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.DOOR_FRONT_RIGHT: DatapointConfig(
+        "closure-doors",
+        [],
+        None,
+        None,
+    ),
     EntityDescriptionKey.ENGINE_OIL: DatapointConfig(
         "internalcombustionengine-oillife",
         ["read_engine_oil"],
         "/engine/oil",
         "lifeRemaining",
+    ),
+    EntityDescriptionKey.ENGINE_COVER: DatapointConfig(
+        "closure-enginecover",
+        [],
+        None,
+        None,
     ),
     EntityDescriptionKey.FUEL: DatapointConfig(
         "internalcombustionengine-amountremaining",
@@ -155,12 +211,30 @@ DATAPOINT_ENTITY_KEY_MAP = {
         "/fuel",
         "range",
     ),
+    EntityDescriptionKey.FRONT_TRUNK: DatapointConfig(
+        "closure-fronttrunk",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.FRONT_TRUNK_LOCK: DatapointConfig(
+        "closure-fronttrunk",
+        [],
+        None,
+        None,
+    ),
     EntityDescriptionKey.LOCATION: DatapointConfig(
         "location-preciselocation",
         ["read_location"],
         "/location",
         None,
         lambda location: location,
+    ),
+    EntityDescriptionKey.LOW_VOLTAGE_BATTERY_LEVEL: DatapointConfig(
+        "lowvoltagebattery-stateofcharge",
+        [],
+        None,
+        None,
     ),
     EntityDescriptionKey.ODOMETER: DatapointConfig(
         "odometer-traveleddistance", ["read_odometer"], "/odometer", "distance"
@@ -186,8 +260,8 @@ DATAPOINT_ENTITY_KEY_MAP = {
             "values": [
                 {
                     "tirePressure": pressure,
-                    "column": TIRE_LEFT_COLUMN,
-                    "row": TIRE_BACK_ROW,
+                    "column": VEHICLE_LEFT_COLUMN,
+                    "row": VEHICLE_BACK_ROW,
                 }
             ],
             "rowCount": 2,
@@ -205,8 +279,8 @@ DATAPOINT_ENTITY_KEY_MAP = {
             "values": [
                 {
                     "tirePressure": pressure,
-                    "column": TIRE_RIGHT_COLUMN,
-                    "row": TIRE_BACK_ROW,
+                    "column": VEHICLE_RIGHT_COLUMN,
+                    "row": VEHICLE_BACK_ROW,
                 }
             ],
             "rowCount": 2,
@@ -224,8 +298,8 @@ DATAPOINT_ENTITY_KEY_MAP = {
             "values": [
                 {
                     "tirePressure": pressure,
-                    "column": TIRE_LEFT_COLUMN,
-                    "row": TIRE_FRONT_ROW,
+                    "column": VEHICLE_LEFT_COLUMN,
+                    "row": VEHICLE_FRONT_ROW,
                 }
             ],
             "rowCount": 2,
@@ -243,8 +317,8 @@ DATAPOINT_ENTITY_KEY_MAP = {
             "values": [
                 {
                     "tirePressure": pressure,
-                    "column": TIRE_RIGHT_COLUMN,
-                    "row": TIRE_FRONT_ROW,
+                    "column": VEHICLE_RIGHT_COLUMN,
+                    "row": VEHICLE_FRONT_ROW,
                 }
             ],
             "rowCount": 2,
@@ -253,16 +327,55 @@ DATAPOINT_ENTITY_KEY_MAP = {
         _tire_pressure_merge_v2,
         _is_v2_value_if_numeric,  # for saved restore-state values
     ),
+    EntityDescriptionKey.WINDOW_BACK_LEFT: DatapointConfig(
+        "closure-windows",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.WINDOW_BACK_RIGHT: DatapointConfig(
+        "closure-windows",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.WINDOW_FRONT_LEFT: DatapointConfig(
+        "closure-windows",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.WINDOW_FRONT_RIGHT: DatapointConfig(
+        "closure-windows",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.REAR_TRUNK: DatapointConfig(
+        "closure-reartrunk",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.REAR_TRUNK_LOCK: DatapointConfig(
+        "closure-reartrunk",
+        [],
+        None,
+        None,
+    ),
 }
 
 DATAPOINT_STORAGE_KEY_V2_MAP = {
     storage_key_v2: tuple(
         datapoint
         for datapoint in DATAPOINT_ENTITY_KEY_MAP.values()
-        if datapoint.storage_key_v2 == storage_key_v2
+        if datapoint.endpoint_v2 is not None
+        and datapoint.storage_key_v2 == storage_key_v2
     )
     for storage_key_v2 in {
-        datapoint.storage_key_v2 for datapoint in DATAPOINT_ENTITY_KEY_MAP.values()
+        datapoint.storage_key_v2
+        for datapoint in DATAPOINT_ENTITY_KEY_MAP.values()
+        if datapoint.endpoint_v2 is not None
     }
 }
 
@@ -368,7 +481,10 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
 
         for entity in entities:
             _, key = entity.unique_id.split("_", 1)
-            if not entity.disabled:
+            config = DATAPOINT_ENTITY_KEY_MAP[key]
+
+            # currently polling is only supported via the v2 api
+            if config.endpoint_v2 and not entity.disabled:
                 self._batch_add(key)
 
     def _batch_process(self) -> list[EntityDescriptionKey]:
@@ -398,9 +514,23 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
         """
 
         batch_requests = self._batch_process()
+
+        if unsupported := {
+            key
+            for key in batch_requests
+            if DATAPOINT_ENTITY_KEY_MAP[key].endpoint_v2 is None
+        }:
+            msg = f"Unsupported update requests for: {', '.join(unsupported)}"
+            raise UpdateFailed(msg)
+
         request_path = f"vehicles/{self.vehicle_id}/batch"
         request_batch_paths = sorted(
-            {DATAPOINT_ENTITY_KEY_MAP[key].endpoint_v2 for key in batch_requests}
+            {
+                v2_endpoint
+                for key in batch_requests
+                if (v2_endpoint := DATAPOINT_ENTITY_KEY_MAP[key].endpoint_v2)
+                is not None
+            }
         )
         request_body = {"requests": [{"path": path} for path in request_batch_paths]}
 
