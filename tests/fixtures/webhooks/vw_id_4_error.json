@@ -1,0 +1,54 @@
+{
+    "eventId": "1821c036-71cb-408f-8dee-2989b9764307",
+    "eventType": "VEHICLE_ERROR",
+    "data": {
+        "user": {"id": "2fbd0033-83e7-43b8-a367-776d6dff1134"},
+        "vehicle": {
+            "id": "a1d50709-3502-4faa-ba43-a5c7565e6a09",
+            "make": "VOLKSWAGEN",
+            "model": "ID.4",
+            "year": 2021
+        },
+        "errors": [
+            {
+                "type": "COMPATIBILITY",
+                "code": "VEHICLE_NOT_CAPABLE",
+                "description": "The vehicle is incapable of performing your request.",
+                "docURL": "https://smartcar.com/docs/errors/api-errors/compatibility-errors#vehicle-not-capable",
+                "resolution": {"type": null},
+                "suggestedUserMessage": "Your car is unable to perform this request.",
+                "state": "ERROR",
+                "signals": [
+                    "VehicleIdentification.Nickname",
+                    "VehicleUserAccount.Role",
+                    "VehicleUserAccount.Permissions",
+                    "ConnectivitySoftware.CurrentFirmwareVersion",
+                    "ConnectivityStatus.IsOnline",
+                    "ConnectivityStatus.IsAsleep",
+                    "ConnectivityStatus.IsDigitalKeyPaired",
+                    "InternalCombustionEngine.FuelLevel"
+                ]
+            },
+            {
+                "type": "PERMISSION",
+                "code": null,
+                "description": "Your application has insufficient permissions to access the requested resource. Please prompt the user to re-authenticate using Smartcar Connect.",
+                "docURL": "https://smartcar.com/docs/errors/api-errors/permission-errors#null",
+                "resolution": {"type": "REAUTHENTICATE"},
+                "state": "ERROR",
+                "signals": [
+                    {
+                        "name": "Closure",
+                        "group": "IsLocked",
+                        "code": "closure-islocked"
+                    }
+                ]
+            }
+        ]
+    },
+    "meta": {
+        "deliveryId": "49c3f6bb-63cf-47ce-b320-6e0aaa9a2ca7",
+        "deliveredAt": 1758224204078,
+        "deliveryTime": 1758224204078
+    }
+}
