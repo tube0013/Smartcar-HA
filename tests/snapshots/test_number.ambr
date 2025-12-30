@@ -63,6 +63,25 @@
   list([
   ])
 # ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-number][number.jaguar_i_pace_charge_limit]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'JAGUAR I-PACE Charge Limit',
+      'icon': 'mdi:battery-charging-80',
+      'max': 100.0,
+      'min': 50.0,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1.0,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.jaguar_i_pace_charge_limit',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-vw_id_4-number][number.vw_id_4_charge_limit]
   StateSnapshot({
     'attributes': ReadOnlyDict({

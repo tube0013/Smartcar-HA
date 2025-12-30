@@ -9,6 +9,26 @@
     }),
   ])
 # ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-device_tracker][device_tracker.jaguar_i_pace_location]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-07T16:55:44+00:00',
+      'fetched_at': '2025-12-08T01:34:14.325000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Location',
+      'gps_accuracy': 0,
+      'icon': 'mdi:car',
+      'latitude': 52.238523055555554,
+      'longitude': 0.15465555555555555,
+      'source_type': <SourceType.GPS: 'gps'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'device_tracker.jaguar_i_pace_location',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'not_home',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-vw_id_4-device_tracker][device_tracker.vw_id_4_location]
   StateSnapshot({
     'attributes': ReadOnlyDict({

@@ -1,4 +1,300 @@
 # serializer version: 1
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_charging_cable_plugged_in]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'plug',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Charging Cable Plugged In',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_charging_cable_plugged_in',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'on',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_door_back_left]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'door',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Door Back Left',
+      'icon': 'mdi:car-door',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_door_back_left',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_door_back_left_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'lock',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Door Back Left Lock',
+      'icon': 'mdi:car-door-lock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_door_back_left_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_door_back_right]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'door',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Door Back Right',
+      'icon': 'mdi:car-door',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_door_back_right',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_door_back_right_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'lock',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Door Back Right Lock',
+      'icon': 'mdi:car-door-lock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_door_back_right_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_door_front_left]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'door',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Door Front Left',
+      'icon': 'mdi:car-door',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_door_front_left',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_door_front_left_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'lock',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Door Front Left Lock',
+      'icon': 'mdi:car-door-lock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_door_front_left_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_door_front_right]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'door',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Door Front Right',
+      'icon': 'mdi:car-door',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_door_front_right',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_door_front_right_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'lock',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Door Front Right Lock',
+      'icon': 'mdi:car-door-lock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_door_front_right_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_engine_cover]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'door',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Engine Cover',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_engine_cover',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_front_trunk]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'door',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Front Trunk',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_front_trunk',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_front_trunk_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'lock',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Front Trunk Lock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_front_trunk_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'on',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_rear_trunk]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'door',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Rear Trunk',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_rear_trunk',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_rear_trunk_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'lock',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Rear Trunk Lock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_rear_trunk_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_window_back_left]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'window',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Window Back Left',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_window_back_left',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_window_back_right]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'window',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Window Back Right',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_window_back_right',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_window_front_left]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'window',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Window Front Left',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_window_front_left',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_window_front_right]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'window',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Window Front Right',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_window_front_right',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_charging_cable_plugged_in]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -7,6 +303,252 @@
     }),
     'context': <ANY>,
     'entity_id': 'binary_sensor.vw_id_4_charging_cable_plugged_in',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_door_back_left]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'door',
+      'friendly_name': 'VW ID.4 Door Back Left',
+      'icon': 'mdi:car-door',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_door_back_left',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_door_back_left_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'lock',
+      'friendly_name': 'VW ID.4 Door Back Left Lock',
+      'icon': 'mdi:car-door-lock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_door_back_left_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_door_back_right]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'door',
+      'friendly_name': 'VW ID.4 Door Back Right',
+      'icon': 'mdi:car-door',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_door_back_right',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_door_back_right_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'lock',
+      'friendly_name': 'VW ID.4 Door Back Right Lock',
+      'icon': 'mdi:car-door-lock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_door_back_right_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_door_front_left]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'door',
+      'friendly_name': 'VW ID.4 Door Front Left',
+      'icon': 'mdi:car-door',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_door_front_left',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_door_front_left_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'lock',
+      'friendly_name': 'VW ID.4 Door Front Left Lock',
+      'icon': 'mdi:car-door-lock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_door_front_left_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_door_front_right]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'door',
+      'friendly_name': 'VW ID.4 Door Front Right',
+      'icon': 'mdi:car-door',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_door_front_right',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_door_front_right_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'lock',
+      'friendly_name': 'VW ID.4 Door Front Right Lock',
+      'icon': 'mdi:car-door-lock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_door_front_right_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_engine_cover]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'door',
+      'friendly_name': 'VW ID.4 Engine Cover',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_engine_cover',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_front_trunk]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'door',
+      'friendly_name': 'VW ID.4 Front Trunk',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_front_trunk',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_front_trunk_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'lock',
+      'friendly_name': 'VW ID.4 Front Trunk Lock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_front_trunk_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_rear_trunk]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'door',
+      'friendly_name': 'VW ID.4 Rear Trunk',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_rear_trunk',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_rear_trunk_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'lock',
+      'friendly_name': 'VW ID.4 Rear Trunk Lock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_rear_trunk_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_window_back_left]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'window',
+      'friendly_name': 'VW ID.4 Window Back Left',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_window_back_left',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_window_back_right]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'window',
+      'friendly_name': 'VW ID.4 Window Back Right',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_window_back_right',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_window_front_left]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'window',
+      'friendly_name': 'VW ID.4 Window Front Left',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_window_front_left',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_window_front_right]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'window',
+      'friendly_name': 'VW ID.4 Window Front Right',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_window_front_right',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,

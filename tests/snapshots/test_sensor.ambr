@@ -563,6 +563,22 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[broad_auth_error-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'battery',
+      'friendly_name': 'VW ID.4 Low Voltage Battery',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_low_voltage_battery',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[broad_auth_error-vw_id_4-sensor][sensor.vw_id_4_odometer]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -765,6 +781,22 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_fuel_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[invalid_json-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'battery',
+      'friendly_name': 'VW ID.4 Low Voltage Battery',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_low_voltage_battery',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -979,6 +1011,22 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[invalid_signature-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'battery',
+      'friendly_name': 'VW ID.4 Low Voltage Battery',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_low_voltage_battery',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[invalid_signature-vw_id_4-sensor][sensor.vw_id_4_odometer]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -1181,6 +1229,22 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_fuel_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[irrelevant_auth_error-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'battery',
+      'friendly_name': 'VW ID.4 Low Voltage Battery',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_low_voltage_battery',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -1395,6 +1459,22 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[vehicle_error-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'battery',
+      'friendly_name': 'VW ID.4 Low Voltage Battery',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_low_voltage_battery',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[vehicle_error-vw_id_4-sensor][sensor.vw_id_4_odometer]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -1597,6 +1677,22 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_fuel_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[vehicle_mismatch-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'battery',
+      'friendly_name': 'VW ID.4 Low Voltage Battery',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_low_voltage_battery',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -1807,6 +1903,22 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_fuel_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[vehicle_state-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'battery',
+      'friendly_name': 'VW ID.4 Low Voltage Battery',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_low_voltage_battery',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -2027,6 +2139,22 @@
     'state': '239',
   })
 # ---
+# name: test_webhook_scenarios[vehicle_state_fuel-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'battery',
+      'friendly_name': 'VW ID.4 Low Voltage Battery',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_low_voltage_battery',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[vehicle_state_fuel-vw_id_4-sensor][sensor.vw_id_4_odometer]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -2235,6 +2363,22 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[verify-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'battery',
+      'friendly_name': 'VW ID.4 Low Voltage Battery',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_low_voltage_battery',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[verify-vw_id_4-sensor][sensor.vw_id_4_odometer]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -2326,6 +2470,242 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_tire_pressure_front_right',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_battery]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'battery',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Battery',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_battery',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '54',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_battery_capacity]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:12.202000+00:00',
+      'device_class': 'energy_storage',
+      'fetched_at': '2025-12-08T01:34:12.202000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Battery Capacity',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_battery_capacity',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '90',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_charging_status]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Charging Status',
+      'icon': 'mdi:ev-station',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_charging_status',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'CHARGING',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_engine_oil_life]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'JAGUAR I-PACE Engine Oil Life',
+      'icon': 'mdi:oil-level',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_engine_oil_life',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_fuel]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'JAGUAR I-PACE Fuel',
+      'icon': 'mdi:gas-station',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfVolume.LITERS: 'L'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_fuel',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_fuel_percent]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'JAGUAR I-PACE Fuel Percent',
+      'icon': 'mdi:gas-station',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_fuel_percent',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_fuel_range]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'distance',
+      'friendly_name': 'JAGUAR I-PACE Fuel Range',
+      'icon': 'mdi:map-marker-distance',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_fuel_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_low_voltage_battery]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'battery',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Low Voltage Battery',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_low_voltage_battery',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '100',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_odometer]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'distance',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Odometer',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_odometer',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '167336',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_range]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'device_class': 'distance',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Range',
+      'icon': 'mdi:map-marker-distance',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '168',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_tire_pressure_back_left]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'pressure',
+      'friendly_name': 'JAGUAR I-PACE Tire Pressure Back Left',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_tire_pressure_back_left',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_tire_pressure_back_right]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'pressure',
+      'friendly_name': 'JAGUAR I-PACE Tire Pressure Back Right',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_tire_pressure_back_right',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_tire_pressure_front_left]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'pressure',
+      'friendly_name': 'JAGUAR I-PACE Tire Pressure Front Left',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_tire_pressure_front_left',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_tire_pressure_front_right]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'pressure',
+      'friendly_name': 'JAGUAR I-PACE Tire Pressure Front Right',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_tire_pressure_front_right',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -2439,6 +2819,22 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_fuel_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'battery',
+      'friendly_name': 'VW ID.4 Low Voltage Battery',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_low_voltage_battery',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
