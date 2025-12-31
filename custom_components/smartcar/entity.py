@@ -146,31 +146,7 @@ class SmartcarEntity[ValueT, RawValueT](
     def _inject_raw_value(
         self, value: RawValueT, extra_data: dict | None = None
     ) -> None:
-        coordinator = self.coordinator
-        description = self.entity_description
-
-        if extra_data is None:
-            extra_data = {}
-
-        unit_system = extra_data.get("unit_system")
-
-        if data_age := extra_data.get("data_age"):
-            data_age = dt_util.parse_datetime(data_age)
-
-        if fetched_at := extra_data.get("fetched_at"):
-            fetched_at = dt_util.parse_datetime(fetched_at)
-
-        with coordinator.create_updated_data() as (add, updated_data):
-            add.from_storage_raw_value(
-                description.key,
-                description.value_key_path,
-                value=value,
-                unit_system=unit_system,
-                data_age=data_age,
-                fetched_at=fetched_at,
-                can_clear_meta=False,
-            )
-            coordinator.data = updated_data
+        inject_raw_value(self.coordinator, self.entity_description, value, extra_data)
 
     async def _async_send_command(
         self,
@@ -181,39 +157,9 @@ class SmartcarEntity[ValueT, RawValueT](
         version: str = "2.0",
         **kwargs,  # noqa: ARG002, ANN003
     ) -> bool:
-        _LOGGER.info("Sending %s request for %s", subpath, self.vin)
-        success = False
-
-        try:
-            resp = await self.coordinator.auth.request(
-                method,
-                f"vehicles/{self.coordinator.vehicle_id}{subpath}",
-                version=version,
-                json=payload,
-            )
-            resp.raise_for_status()
-            success = True
-        except ClientResponseError as err:
-            if err.status == HTTPStatus.UNAUTHORIZED:
-                _LOGGER.warning(
-                    "Auth error %s sending %s request for %s",
-                    err.status,
-                    subpath,
-                    self.vin,
-                )
-                self.coordinator.config_entry.async_start_reauth(self.hass)
-            elif err.status in {
-                ERROR_STATUS_VEHICLE_STATE,
-                ERROR_STATUS_RATE_LIMIT,
-                ERROR_STATUS_BILLING,
-                ERROR_STATUS_COMPATIBILITY,
-                ERROR_STATUS_UPSTREAM,
-            }:
-                pass
-            else:
-                raise
-
-        return success
+        return await async_send_command(
+            self.coordinator, subpath, payload, method=method, version=version
+        )
 
 
 class IndirectDescriptorDefaultType(Enum):
@@ -270,3 +216,76 @@ class SmartcarEntityDescription(EntityDescription):
     entity_registry_enabled_default = IndirectDescriptor(
         "DEFAULT_ENABLED_ENTITY_DESCRIPTION_KEYS"
     )
+
+
+def inject_raw_value[RawValueT](
+    coordinator: SmartcarVehicleCoordinator,
+    description: EntityDescription,
+    value: RawValueT,
+    extra_data: dict | None = None,
+) -> None:
+    if extra_data is None:
+        extra_data = {}
+
+    unit_system = extra_data.get("unit_system")
+
+    if data_age := extra_data.get("data_age"):
+        data_age = dt_util.parse_datetime(data_age)
+
+    if fetched_at := extra_data.get("fetched_at"):
+        fetched_at = dt_util.parse_datetime(fetched_at)
+
+    with coordinator.create_updated_data() as (add, updated_data):
+        add.from_storage_raw_value(
+            description.key,
+            description.value_key_path,
+            value=value,
+            unit_system=unit_system,
+            data_age=data_age,
+            fetched_at=fetched_at,
+            can_clear_meta=False,
+        )
+        coordinator.data = updated_data
+
+
+async def async_send_command(
+    coordinator: SmartcarVehicleCoordinator,
+    subpath: str,
+    payload: dict[str, Any],
+    *,
+    method: str = "post",
+    version: str = "2.0",
+) -> bool:
+    _LOGGER.info("Sending %s request for %s", subpath, coordinator.vin)
+    success = False
+
+    try:
+        resp = await coordinator.auth.request(
+            method,
+            f"vehicles/{coordinator.vehicle_id}{subpath}",
+            version=version,
+            json=payload,
+        )
+        resp.raise_for_status()
+        success = True
+    except ClientResponseError as err:
+        if err.status == HTTPStatus.UNAUTHORIZED:
+            _LOGGER.warning(
+                "Auth error %s sending %s request for %s",
+                err.status,
+                subpath,
+                coordinator.vin,
+            )
+            coordinator.config_entry.async_start_reauth(coordinator.hass)
+        elif err.status in {
+            ERROR_STATUS_VEHICLE_STATE,
+            ERROR_STATUS_RATE_LIMIT,
+            ERROR_STATUS_BILLING,
+            ERROR_STATUS_COMPATIBILITY,
+            ERROR_STATUS_UPSTREAM,
+        }:
+            pass
+        else:
+            raise
+
+    return success
