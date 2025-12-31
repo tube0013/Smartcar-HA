@@ -1,0 +1,61 @@
+# serializer version: 1
+# name: test_door_closure[invalid_config_entry-unknown_make][api-calls]
+  list([
+  ])
+# ---
+# name: test_door_closure[lock_doors-unknown_make][api-calls]
+  list([
+    tuple(
+      'post',
+      URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/security'),
+      dict({
+        'action': 'LOCK',
+      }),
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+  ])
+# ---
+# name: test_door_closure[lock_doors_no_vin-unknown_make][api-calls]
+  list([
+    tuple(
+      'post',
+      URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/security'),
+      dict({
+        'action': 'LOCK',
+      }),
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+  ])
+# ---
+# name: test_door_closure[unlock_doors-unknown_make][api-calls]
+  list([
+    tuple(
+      'post',
+      URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/security'),
+      dict({
+        'action': 'UNLOCK',
+      }),
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+  ])
+# ---
+# name: test_door_closure[unreachable-unknown_make][api-calls]
+  list([
+    tuple(
+      'post',
+      URL('http://test.local/v2.0/vehicles/a1d50709-3502-4faa-ba43-a5c7565e6a09/security'),
+      dict({
+        'action': 'LOCK',
+      }),
+      dict({
+        'authorization': 'Bearer mock-token',
+      }),
+    ),
+  ])
+# ---

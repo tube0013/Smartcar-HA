@@ -1,0 +1,22 @@
+lock_doors:
+  fields:
+    config_entry:
+      required: true
+      selector:
+        config_entry:
+          integration: smartcar
+    vin:
+      required: false
+      selector:
+        text:
+unlock_doors:
+  fields:
+    config_entry:
+      required: true
+      selector:
+        config_entry:
+          integration: smartcar
+    vin:
+      required: false
+      selector:
+        text:

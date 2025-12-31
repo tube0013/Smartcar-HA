@@ -332,6 +332,32 @@ Requires permissions: `read_security`, `control_security`
 
 _Note: some models, e.g., VW ID.4 2023+ do not have this functionality._
 
+## Actions
+
+Smartcar provides the following actions:
+
+- [`smartcar.lock_doors`](#smartcarlock_doors)
+- [`smartcar.unlock_doors`](#smartcarunlock_doors)
+
+
+### `smartcar.lock_doors`
+
+Lock the doors of a vehicle. In most cases, the `lock.lock` action should be used on [`lock.<make_model>_door_lock`](#lockmake_model_door_lock) instead of using this action. It is only is provided for the case that the [`lock.<make_model>_door_lock`](#lockmake_model_door_lock) entity is not available due to unique permissions available for a vehicle in Smartcar. This occurs for a small subset of vehicles when Smartcar will only grant the `control_security` permission, but not the `read_security` permission.
+
+#### Service Data Attributes
+
+* `config_entry`: **required** Config entry to use. Example: `1b4a46c6cba0677bbfb5a8c53e8618b0`.
+- `vin`: The VIN of the vehicle to target. If not provided, the first VIN for the config entry will be assumed.
+
+### `smartcar.unlock_doors`
+
+Lock the doors of a vehicle. In most cases, the `lock.unlock` action should be used on [`lock.<make_model>_door_lock`](#lockmake_model_door_lock) instead of using this action. It is only is provided for the case that the [`lock.<make_model>_door_lock`](#lockmake_model_door_lock) entity is not available due to unique permissions available for a vehicle in Smartcar. This occurs for a small subset of vehicles when Smartcar will only grant the `control_security` permission, but not the `read_security` permission.
+
+#### Service Data Attributes
+
+* `config_entry`: **required** Config entry to use. Example: `1b4a46c6cba0677bbfb5a8c53e8618b0`.
+- `vin`: The VIN of the vehicle to target. If not provided, the first VIN for the config entry will be assumed.
+
 ## Rate Limits & Polling
 
 - Consider setting up [webhooks](#webhooks). With webhooks enabled, polling will no longer occur avoiding most rate limit issues. Additionally, Smartcar is moving away from [their v2 API](https://smartcar.com/docs/api-reference/v2-overview) and polling may not be the best way to use the service.

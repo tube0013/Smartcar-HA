@@ -16,6 +16,7 @@ from homeassistant.helpers.config_entry_oauth2_flow import (
     OAuth2Session,
     async_get_config_entry_implementation,
 )
+from homeassistant.helpers.typing import ConfigType
 
 from . import util
 from .auth import AbstractAuth
@@ -23,10 +24,25 @@ from .auth_impl import AccessTokenAuthImpl, AsyncConfigEntryAuth
 from .const import API_HOST, CONF_CLOUDHOOK, DOMAIN, PLATFORMS, Scope
 from .coordinator import SmartcarVehicleCoordinator
 from .errors import EmptyVehicleListError, InvalidAuthError, MissingVINError
+from .services import async_setup_services
 from .types import SmartcarData
 from .webhooks import handle_webhook, webhook_url_from_id
 
 _LOGGER = logging.getLogger(__name__)
+
+
+async def async_setup(  # noqa: RUF029
+    hass: HomeAssistant,
+    config: ConfigType,  # noqa: ARG001
+) -> bool:
+    """Set up Smartcar services.
+
+    Returns:
+        If the setup was successful.
+    """
+    async_setup_services(hass)
+
+    return True
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:

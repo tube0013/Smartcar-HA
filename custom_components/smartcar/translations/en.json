@@ -90,5 +90,35 @@
                 "title": "Smartcar configuration"
             }
         }
+    },
+    "services": {
+        "lock_doors": {
+            "description": "Lock doors for a vehicle.",
+            "fields": {
+                "config_entry": {
+                    "description": "The config entry to use for this service.",
+                    "name": "Config entry"
+                },
+                "vin": {
+                    "description": "The VIN of the vehicle to target.",
+                    "name": "VIN"
+                }
+            },
+            "name": "Lock doors"
+        },
+        "unlock_doors": {
+            "description": "Unlock doors for a vehicle.",
+            "fields": {
+                "config_entry": {
+                    "description": "The config entry to use for this service.",
+                    "name": "Config entry"
+                },
+                "vin": {
+                    "description": "The VIN of the vehicle to target.",
+                    "name": "VIN"
+                }
+            },
+            "name": "Unlock doors"
+        }
     }
 }
