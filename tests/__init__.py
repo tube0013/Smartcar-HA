@@ -1,3 +1,5 @@
+from . import bootstrap as bootstrap  # noqa: I001, PLC0414
+
 import importlib
 
 from homeassistant.core import HomeAssistant
