@@ -1,5 +1,7 @@
 """Fixtures for testing."""
 
+from . import bootstrap as bootstrap  # noqa: I001, PLC0414
+
 from collections.abc import Generator
 import logging
 import time
