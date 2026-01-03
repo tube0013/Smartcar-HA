@@ -19,6 +19,7 @@ from homeassistant.util import dt as dt_util
 from . import const as smartcar_const
 from .const import DOMAIN
 from .coordinator import SmartcarVehicleCoordinator
+from .types import SmartcarAPIError
 from .util import key_path_get
 
 _LOGGER = logging.getLogger(__name__)
@@ -157,9 +158,12 @@ class SmartcarEntity[ValueT, RawValueT](
         version: str = "2.0",
         **kwargs,  # noqa: ARG002, ANN003
     ) -> bool:
-        return await async_send_command(
-            self.coordinator, subpath, payload, method=method, version=version
-        )
+        try:
+            return await async_send_command(
+                self.coordinator, subpath, payload, method=method, version=version
+            )
+        except SmartcarAPIError:
+            return False
 
 
 class IndirectDescriptorDefaultType(Enum):
@@ -284,7 +288,7 @@ async def async_send_command(
             ERROR_STATUS_COMPATIBILITY,
             ERROR_STATUS_UPSTREAM,
         }:
-            pass
+            raise SmartcarAPIError(err.status, err.message) from err
         else:
             raise
 

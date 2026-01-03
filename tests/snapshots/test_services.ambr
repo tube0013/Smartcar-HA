@@ -3,6 +3,9 @@
   list([
   ])
 # ---
+# name: test_door_closure[invalid_config_entry-unknown_make][error]
+  ServiceValidationError('invalid_config_entry')
+# ---
 # name: test_door_closure[lock_doors-unknown_make][api-calls]
   list([
     tuple(
@@ -58,4 +61,10 @@
       }),
     ),
   ])
+# ---
+# name: test_door_closure[unreachable-unknown_make][error]
+  dict({
+    'code': 409,
+    'reason': '',
+  })
 # ---

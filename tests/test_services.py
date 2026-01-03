@@ -20,6 +20,7 @@ from custom_components.smartcar.services import (
     SERVICE_NAME_LOCK_DOORS,
     SERVICE_NAME_UNLOCK_DOORS,
 )
+from custom_components.smartcar.types import SmartcarAPIError
 
 from . import MOCK_API_ENDPOINT, setup_added_integration
 
@@ -60,6 +61,7 @@ def test_has_services(
             "status": 409,
             "status_slug": "unreachable",
             "expected_state": STATE_UNAVAILABLE,
+            "expected_raises": SmartcarAPIError,
             "expected_api_calls": 1,
         },
         {
@@ -143,3 +145,6 @@ async def test_door_closure(
     assert [tuple(mock_call) for mock_call in aioclient_mock.mock_calls] == snapshot(
         name="api-calls"
     )
+
+    if expected_raises != NO_ERROR:
+        assert raised_error == snapshot(name="error")
