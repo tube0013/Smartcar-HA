@@ -51,15 +51,31 @@
             "scopes": {
                 "data": {
                     "control_charge": "Control charging (start/stop & target charge)",
+                    "control_climate": "Set the status and settings of the vehicle’s climate control system",
+                    "control_navigation": "Send commands to the vehicle’s navigation system",
+                    "control_pin": "Modify a PIN and enable the PIN to Drive feature for the vehicle.",
                     "control_security": "Lock or unlock vehicle",
+                    "control_trunk": "Open a vehicle’s trunk or frunk",
+                    "read_alerts": "Read alerts from the vehicle",
                     "read_battery": "Get EV/PHEV battery level, capacity & current range",
+                    "read_charge_events": "Receive notifications for events associated with charging",
+                    "read_charge_locations": "Access previous charging locations and their associated charging configurations",
+                    "read_charge_records": "Read charge records and associated billing information",
                     "read_charge": "Get details on whether the car is plugged in and charging",
+                    "read_climate": "Read the status and settings of the vehicle’s climate control system",
+                    "read_compass": "Read the compass direction the vehicle is facing",
+                    "read_diagnostics": "Read a vehicle’s system status and/or Diagnostic Trouble Codes",
                     "read_engine_oil": "Get engine oil health",
+                    "read_extended_vehicle_info": "Read vehicle configuration information from a vehicle",
                     "read_fuel": "Get fuel tank level",
                     "read_location": "Get the vehicle's location",
                     "read_odometer": "Get total distance traveled",
                     "read_security": "Get details on whether doors, windows & more are enabled",
-                    "read_tires": "Get tire pressure details"
+                    "read_service_history": "Read a vehicle’s dealer service history",
+                    "read_speedometer": "Read a vehicle’s speed",
+                    "read_thermometer": "Read temperatures from inside and outside the vehicle",
+                    "read_tires": "Get tire pressure details",
+                    "read_user_profile": "Read the information associated with a user’s connected services account profile such as their \"email\": \"and phone number.\""
                 },
                 "description": "Select the permissions you would like to grant",
                 "title": "Permission selection"

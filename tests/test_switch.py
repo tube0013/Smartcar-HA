@@ -1,6 +1,6 @@
 """Test switch entities."""
 
-from collections.abc import Callable
+from collections.abc import Awaitable, Callable
 from unittest.mock import AsyncMock
 
 from aiohttp import ClientResponseError
@@ -11,6 +11,7 @@ from homeassistant.const import (
     SERVICE_TURN_ON,
     STATE_OFF,
     STATE_ON,
+    Platform,
 )
 from homeassistant.core import HomeAssistant, State
 import pytest
@@ -92,6 +93,29 @@ async def test_switch(
 
     assert len(aioclient_mock.mock_calls) == 2
     assert [tuple(mock_call) for mock_call in aioclient_mock.mock_calls[1:]] == snapshot
+
+
+@pytest.mark.usefixtures("enable_all_entities")
+@pytest.mark.parametrize("platform", [Platform.SWITCH])
+@pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
+@pytest.mark.parametrize(
+    ("webhook_body", "webhook_headers", "expected"),
+    [
+        (
+            "multi_state",  # JSON fixture
+            {
+                "sc-signature": "1234",
+            },
+            {},
+        ),
+    ],
+    indirect=["webhook_body"],
+    ids=[
+        "vehicle_state",
+    ],
+)
+async def test_webhook_update(webhook_scenario: Callable[[], Awaitable[None]]) -> None:
+    await webhook_scenario()
 
 
 RESTORE_STATE_V2_PARAMETRIZE_ARGS = [

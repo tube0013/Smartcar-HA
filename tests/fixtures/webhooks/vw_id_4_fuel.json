@@ -1,0 +1,46 @@
+{
+    "eventId": "1821c036-71cb-408f-8dee-2989b9764307",
+    "eventType": "VEHICLE_STATE",
+    "data": {
+        "user": {"id": "2fbd0033-83e7-43b8-a367-776d6dff1134"},
+        "vehicle": {
+            "id": "a1d50709-3502-4faa-ba43-a5c7565e6a09",
+            "make": "BMW",
+            "model": "118i",
+            "year": 2025
+        },
+        "signals": [
+            {
+                "code": "internalcombustionengine-fuellevel",
+                "name": "FuelLevel",
+                "group": "InternalCombustionEngine",
+                "body": {"value": 0.77},
+                "meta": {
+                    "oemUpdatedAt": 1758238233000,
+                    "retrievedAt": 1758238783086
+                }
+            },
+            {
+                "code": "internalcombustionengine-range",
+                "name": "FuelLevel",
+                "group": "InternalCombustionEngine",
+                "body": {"value": 239},
+                "meta": {
+                    "oemUpdatedAt": 1758238233000,
+                    "retrievedAt": 1758238783086
+                }
+            }
+        ]
+    },
+    "triggers": [
+        {
+            "type": "SIGNAL_UPDATED",
+            "signal": "InternalCombustionEngine.FuelLevel"
+        }
+    ],
+    "meta": {
+        "deliveryId": "682541b6-a461-4d69-9e6e-fead3832f5eb",
+        "deliveredAt": 1758238783185,
+        "deliveryTime": 1758238783185
+    }
+}
