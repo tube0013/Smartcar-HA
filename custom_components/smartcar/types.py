@@ -17,3 +17,11 @@ class SmartcarData:
 
     auth: AbstractAuth
     coordinators: dict[str, SmartcarVehicleCoordinator]
+
+
+@dataclass
+class SmartcarAPIError(Exception):
+    """Error representing an issue via the Smartcar API."""
+
+    code: int
+    reason: str
