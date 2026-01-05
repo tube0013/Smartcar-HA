@@ -563,6 +563,20 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_update[broad_auth_error-vw_id_4-sensor][sensor.vw_id_4_gear_state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Gear State',
+      'icon': 'mdi:car-brake-parking',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_gear_state',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_update[broad_auth_error-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -781,6 +795,20 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_fuel_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[invalid_json-vw_id_4-sensor][sensor.vw_id_4_gear_state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Gear State',
+      'icon': 'mdi:car-brake-parking',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_gear_state',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -1011,6 +1039,20 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_update[invalid_signature-vw_id_4-sensor][sensor.vw_id_4_gear_state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Gear State',
+      'icon': 'mdi:car-brake-parking',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_gear_state',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_update[invalid_signature-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -1229,6 +1271,20 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_fuel_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[irrelevant_auth_error-vw_id_4-sensor][sensor.vw_id_4_gear_state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Gear State',
+      'icon': 'mdi:car-brake-parking',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_gear_state',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -1459,6 +1515,20 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_update[vehicle_error-vw_id_4-sensor][sensor.vw_id_4_gear_state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Gear State',
+      'icon': 'mdi:car-brake-parking',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_gear_state',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_update[vehicle_error-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -1677,6 +1747,20 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_fuel_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_mismatch-vw_id_4-sensor][sensor.vw_id_4_gear_state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Gear State',
+      'icon': 'mdi:car-brake-parking',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_gear_state',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -1903,6 +1987,20 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_fuel_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state-vw_id_4-sensor][sensor.vw_id_4_gear_state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Gear State',
+      'icon': 'mdi:car-brake-parking',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_gear_state',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -2141,6 +2239,20 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-sensor][sensor.vw_id_4_gear_state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Gear State',
+      'icon': 'mdi:car-brake-parking',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_gear_state',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'PARK',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -2375,6 +2487,20 @@
     'state': '239',
   })
 # ---
+# name: test_webhook_update[vehicle_state_fuel-vw_id_4-sensor][sensor.vw_id_4_gear_state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Gear State',
+      'icon': 'mdi:car-brake-parking',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_gear_state',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_fuel-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -2593,6 +2719,20 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_fuel_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[verify-vw_id_4-sensor][sensor.vw_id_4_gear_state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Gear State',
+      'icon': 'mdi:car-brake-parking',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_gear_state',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,

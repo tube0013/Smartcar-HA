@@ -5,8 +5,8 @@
     "user": {"id": "2fbd0033-83e7-43b8-a367-776d6dff1134"},
     "vehicle": {
       "id": "a1d50709-3502-4faa-ba43-a5c7565e6a09",
-      "make": "VOLKSWAGEN; mock data via JAGUAR",
-      "model": "ID.4; mock data via I-PACE",
+      "make": "VOLKSWAGEN; mock data via JAGUAR/BYD",
+      "model": "ID.4; mock data via I-PACE/SEAL",
       "year": 2021
     },
     "signals": [
@@ -14,18 +14,6 @@
         "name": "IsOnline",
         "group": "ConnectivityStatus",
         "code": "connectivitystatus-isonline",
-        "status": {
-          "value": "ERROR",
-          "error": {
-            "type": "COMPATIBILITY",
-            "code": "VEHICLE_NOT_CAPABLE"
-          }
-        }
-      },
-      {
-        "name": "IsAsleep",
-        "group": "ConnectivityStatus",
-        "code": "connectivitystatus-isasleep",
         "status": {
           "value": "ERROR",
           "error": {
@@ -493,6 +481,41 @@
             "code": null
           }
         }
+      },
+      {
+        "code": "transmission-gearstate",
+        "name": "GearState",
+        "group": "Transmission",
+        "status": { "value": "SUCCESS" },
+        "body": { "value": "PARK" }
+      },
+      {
+        "code": "closure-sunroof",
+        "name": "Sunroof",
+        "group": "Closure",
+        "status": { "value": "SUCCESS" },
+        "body": { "isOpen": true }
+      },
+      {
+        "code": "connectivitystatus-isasleep",
+        "name": "IsAsleep",
+        "group": "ConnectivityStatus",
+        "status": { "value": "SUCCESS" },
+        "body": { "value": true }
+      },
+      {
+        "code": "surveillance-isenabled",
+        "name": "IsEnabled",
+        "group": "Surveillance",
+        "status": { "value": "SUCCESS" },
+        "body": { "value": true }
+      },
+      {
+        "code": "tractionbattery-isheateractive",
+        "name": "IsHeaterActive",
+        "group": "TractionBattery",
+        "status": { "value": "SUCCESS" },
+        "body": { "value": false }
       }
     ]
   },

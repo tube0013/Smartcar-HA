@@ -1,4 +1,30 @@
 # serializer version: 1
+# name: test_webhook_update[vehicle_state-vw_id_4-binary_sensor][binary_sensor.vw_id_4_asleep]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Asleep',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_asleep',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state-vw_id_4-binary_sensor][binary_sensor.vw_id_4_battery_heater_active]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Battery Heater Active',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_battery_heater_active',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_update[vehicle_state-vw_id_4-binary_sensor][binary_sensor.vw_id_4_charging_cable_plugged_in]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -195,6 +221,33 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_update[vehicle_state-vw_id_4-binary_sensor][binary_sensor.vw_id_4_sunroof]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'door',
+      'friendly_name': 'VW ID.4 Sunroof',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_sunroof',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state-vw_id_4-binary_sensor][binary_sensor.vw_id_4_surveillance_enabled]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Surveillance Enabled',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_surveillance_enabled',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_update[vehicle_state-vw_id_4-binary_sensor][binary_sensor.vw_id_4_window_back_left]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -249,6 +302,32 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_asleep]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Asleep',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_asleep',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'on',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_battery_heater_active]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Battery Heater Active',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_battery_heater_active',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
   })
 # ---
 # name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_charging_cable_plugged_in]
@@ -473,6 +552,33 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_sunroof]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'door',
+      'friendly_name': 'VW ID.4 Sunroof',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_sunroof',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'on',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_surveillance_enabled]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Surveillance Enabled',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_surveillance_enabled',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'on',
   })
 # ---
 # name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_window_back_left]
