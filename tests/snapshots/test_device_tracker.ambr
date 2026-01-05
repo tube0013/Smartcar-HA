@@ -9,6 +9,20 @@
     }),
   ])
 # ---
+# name: test_webhook_update[vehicle_state_all-byd_seal-device_tracker][device_tracker.byd_seal_u_dm_i_location]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'BYD Seal U Dm-i Location',
+      'icon': 'mdi:car',
+    }),
+    'context': <ANY>,
+    'entity_id': 'device_tracker.byd_seal_u_dm_i_location',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-jaguar_ipace-device_tracker][device_tracker.jaguar_i_pace_location]
   StateSnapshot({
     'attributes': ReadOnlyDict({

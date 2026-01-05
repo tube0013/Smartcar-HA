@@ -553,6 +553,11 @@ _SNAPSHOT_ORDER = {
             "rear_trunk",
             "rear_trunk_lock",
             "engine_cover",
+            "gear_state",
+            "sunroof",
+            "asleep",
+            "surveillance_enabled",
+            "battery_heater_active",
         ]
     )
 }

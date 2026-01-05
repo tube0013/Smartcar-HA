@@ -97,6 +97,22 @@
     ),
   ])
 # ---
+# name: test_webhook_update[vehicle_state_all-byd_seal-lock][lock.byd_seal_u_dm_i_door_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-09T00:53:21+00:00',
+      'fetched_at': '2026-01-09T00:53:29.852000+00:00',
+      'friendly_name': 'BYD Seal U Dm-i Door Lock',
+      'supported_features': <LockEntityFeature: 0>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'lock.byd_seal_u_dm_i_door_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'locked',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-jaguar_ipace-lock][lock.jaguar_i_pace_door_lock]
   StateSnapshot({
     'attributes': ReadOnlyDict({

@@ -137,6 +137,12 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         ),
     ),
     SmartcarSensorDescription(
+        key=EntityDescriptionKey.GEAR_STATE,
+        name="Gear State",
+        value_key_path="transmission-gearstate.value",
+        icon="mdi:car-brake-parking",
+    ),
+    SmartcarSensorDescription(
         key=EntityDescriptionKey.TIRE_PRESSURE_BACK_LEFT,
         name="Tire Pressure Back Left",
         value_key_path="wheel-tires.values",
