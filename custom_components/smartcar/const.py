@@ -75,12 +75,14 @@ class EntityDescriptionKey(StrEnum):
     CHARGING = auto()
     BATTERY_CAPACITY = auto()
     BATTERY_LEVEL = auto()
+    BATTERY_HEATER_ACTIVE = auto()
     CHARGING_STATE = auto()
     ENGINE_OIL = auto()
     ENGINE_COVER = auto()
     FUEL = auto()
     FUEL_PERCENT = auto()
     FUEL_RANGE = auto()
+    GEAR_STATE = auto()
     LOW_VOLTAGE_BATTERY_LEVEL = auto()
     ODOMETER = auto()
     RANGE = auto()
@@ -96,6 +98,9 @@ class EntityDescriptionKey(StrEnum):
     FRONT_TRUNK_LOCK = auto()
     REAR_TRUNK = auto()
     REAR_TRUNK_LOCK = auto()
+    SUNROOF = auto()
+    ASLEEP = auto()
+    SURVEILLANCE_ENABLED = auto()
 
 
 DEFAULT_ENABLED_ENTITY_DESCRIPTION_KEYS = {

@@ -39,6 +39,11 @@ SENSOR_TYPES: tuple[BinarySensorEntityDescription, ...] = (
         device_class=BinarySensorDeviceClass.PLUG,
     ),
     SmartcarBinarySensorDescription(
+        key=EntityDescriptionKey.BATTERY_HEATER_ACTIVE,
+        name="Battery Heater Active",
+        value_key_path="tractionbattery-isheateractive.value",
+    ),
+    SmartcarBinarySensorDescription(
         key=EntityDescriptionKey.FRONT_TRUNK,
         name="Front Trunk",
         value_key_path="closure-fronttrunk.isOpen",
@@ -50,6 +55,12 @@ SENSOR_TYPES: tuple[BinarySensorEntityDescription, ...] = (
         value_key_path="closure-fronttrunk.isLocked",
         value_cast=operator.not_,
         device_class=BinarySensorDeviceClass.LOCK,
+    ),
+    SmartcarBinarySensorDescription(
+        key=EntityDescriptionKey.SUNROOF,
+        name="Sunroof",
+        value_key_path="closure-sunroof.isOpen",
+        device_class=BinarySensorDeviceClass.DOOR,
     ),
     SmartcarBinarySensorDescription(
         key=EntityDescriptionKey.DOOR_BACK_LEFT_LOCK,
@@ -257,6 +268,16 @@ SENSOR_TYPES: tuple[BinarySensorEntityDescription, ...] = (
             None,
         ),
         device_class=BinarySensorDeviceClass.WINDOW,
+    ),
+    SmartcarBinarySensorDescription(
+        key=EntityDescriptionKey.ASLEEP,
+        name="Asleep",
+        value_key_path="connectivitystatus-isasleep",
+    ),
+    SmartcarBinarySensorDescription(
+        key=EntityDescriptionKey.SURVEILLANCE_ENABLED,
+        name="Surveillance Enabled",
+        value_key_path="surveillance-isenabled",
     ),
 )
 
