@@ -103,6 +103,12 @@ DATAPOINT_ENTITY_KEY_MAP = {
         "/battery",
         "percentRemaining",
     ),
+    EntityDescriptionKey.BATTERY_HEATER_ACTIVE: DatapointConfig(
+        "tractionbattery-isheateractive",
+        [],
+        None,
+        None,
+    ),
     EntityDescriptionKey.CHARGE_LIMIT: DatapointConfig(
         "charge-chargelimits",
         ["read_charge", "control_charge"],
@@ -223,6 +229,12 @@ DATAPOINT_ENTITY_KEY_MAP = {
         None,
         None,
     ),
+    EntityDescriptionKey.SUNROOF: DatapointConfig(
+        "closure-sunroof",
+        [],
+        None,
+        None,
+    ),
     EntityDescriptionKey.LOCATION: DatapointConfig(
         "location-preciselocation",
         ["read_location"],
@@ -250,6 +262,12 @@ DATAPOINT_ENTITY_KEY_MAP = {
         ["read_battery"],
         "/battery",
         "range",
+    ),
+    EntityDescriptionKey.GEAR_STATE: DatapointConfig(
+        "transmission-gearstate",
+        [],
+        None,
+        None,
     ),
     EntityDescriptionKey.TIRE_PRESSURE_BACK_LEFT: DatapointConfig(
         "wheel-tires",
@@ -359,6 +377,18 @@ DATAPOINT_ENTITY_KEY_MAP = {
     ),
     EntityDescriptionKey.REAR_TRUNK_LOCK: DatapointConfig(
         "closure-reartrunk",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.ASLEEP: DatapointConfig(
+        "connectivitystatus-isasleep",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.SURVEILLANCE_ENABLED: DatapointConfig(
+        "surveillance-isenabled",
         [],
         None,
         None,
