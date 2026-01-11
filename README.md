@@ -108,7 +108,7 @@ If successful, the integration will be added, and Home Assistant will create dev
 
 ### Webhooks
 
-**Important:** In order for webhooks to update entities, your Home Assistant instance must be accessible from the internet, either via Home Assistant Cloud or another method. See the [Remote Access documentation][ha-remote-access] for more information.
+**Important:** In order for webhooks to update entities, your Home Assistant instance must be accessible from the internet, either via Home Assistant Cloud or another method, and you must provide a valid Home Assistant URL in your [network settings](https://my.home-assistant.io/redirect/network/). See the [Remote Access documentation][ha-remote-access] for more information.
 
 **Signal & Sensor Availability:** Please remember that sensor availability is based on which [signals](https://smartcar.com/docs/api-reference/signals/schema) are available, some of which are only available for **[paying Smartcar customers](https://smartcar.com/pricing#pricing)**.
 
