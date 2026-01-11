@@ -97,3 +97,47 @@
     ),
   ])
 # ---
+# name: test_webhook_update[vehicle_state_all-byd_seal-switch][switch.byd_seal_u_dm_i_charging]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'BYD Seal U Dm-i Charging',
+      'icon': 'mdi:ev-plug-type2',
+    }),
+    'context': <ANY>,
+    'entity_id': 'switch.byd_seal_u_dm_i_charging',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-switch][switch.jaguar_i_pace_charging]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2025-12-08T01:34:15+00:00',
+      'fetched_at': '2025-12-08T01:34:24.453000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Charging',
+      'icon': 'mdi:ev-plug-type2',
+    }),
+    'context': <ANY>,
+    'entity_id': 'switch.jaguar_i_pace_charging',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'on',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-switch][switch.vw_id_4_charging]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Charging',
+      'icon': 'mdi:ev-plug-type2',
+    }),
+    'context': <ANY>,
+    'entity_id': 'switch.vw_id_4_charging',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---

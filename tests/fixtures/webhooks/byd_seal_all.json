@@ -1,0 +1,111 @@
+{
+  "eventId": "fc457667-b065-4c8c-8441-4a8fb6f64976",
+  "eventType": "VEHICLE_STATE",
+  "data": {
+    "user": {
+      "id": "da4ef0df-73b9-4ad7-8c59-1b15ff646f0b"
+    },
+    "vehicle": {
+      "id": "b3014ded-85db-4f12-8923-7a231354d8d0",
+      "make": "BYD",
+      "model": "Seal U Dm-i",
+      "year": 2025
+    },
+    "signals": [
+      {
+        "name": "Role",
+        "group": "VehicleUserAccount",
+        "code": "vehicleuseraccount-role",
+        "status": { "value": "ERROR", "error": { "type": "COMPATIBILITY", "code": "VEHICLE_NOT_CAPABLE" } }
+      },
+      {
+        "name": "Permissions",
+        "group": "VehicleUserAccount",
+        "code": "vehicleuseraccount-permissions",
+        "status": { "value": "ERROR", "error": { "type": "COMPATIBILITY", "code": "VEHICLE_NOT_CAPABLE" } }
+      },
+      {
+        "name": "CurrentFirmwareVersion",
+        "group": "ConnectivitySoftware",
+        "code": "connectivitysoftware-currentfirmwareversion",
+        "status": { "value": "ERROR", "error": { "type": "COMPATIBILITY", "code": "VEHICLE_NOT_CAPABLE" } }
+      },
+      {
+        "name": "FuelLevel",
+        "group": "InternalCombustionEngine",
+        "code": "internalcombustionengine-fuellevel",
+        "status": { "value": "ERROR", "error": { "type": "COMPATIBILITY", "code": "VEHICLE_NOT_CAPABLE" } }
+      },
+      {
+        "code": "vehicleidentification-nickname",
+        "name": "Nickname",
+        "group": "VehicleIdentification",
+        "body": { "value": "SEAL U DM-i" },
+        "meta": { "oemUpdatedAt": 1767920001000, "retrievedAt": 1767920009852 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "tractionbattery-stateofcharge",
+        "name": "StateOfCharge",
+        "group": "TractionBattery",
+        "body": { "value": 78, "unit": "percent" },
+        "meta": { "oemUpdatedAt": 1767920001000, "retrievedAt": 1767920009852 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "closure-islocked",
+        "name": "IsLocked",
+        "group": "Closure",
+        "body": { "value": true },
+        "meta": { "oemUpdatedAt": 1767920001000, "retrievedAt": 1767920009852 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "odometer-traveleddistance",
+        "name": "TraveledDistance",
+        "group": "Odometer",
+        "body": { "value": 10321, "unit": "km" },
+        "meta": { "oemUpdatedAt": 1767920001000, "retrievedAt": 1767920009852 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "connectivitystatus-isonline",
+        "name": "IsOnline",
+        "group": "ConnectivityStatus",
+        "body": { "value": true },
+        "meta": { "oemUpdatedAt": 1767920001000, "retrievedAt": 1767920009852 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "connectivitystatus-isasleep",
+        "name": "IsAsleep",
+        "group": "ConnectivityStatus",
+        "body": { "value": false },
+        "meta": { "oemUpdatedAt": 1767920001000, "retrievedAt": 1767920009852 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "connectivitystatus-isdigitalkeypaired",
+        "name": "IsDigitalKeyPaired",
+        "group": "ConnectivityStatus",
+        "body": { "value": false },
+        "meta": { "oemUpdatedAt": 1767920001000, "retrievedAt": 1767920009852 },
+        "status": { "value": "SUCCESS" }
+      }
+    ]
+  },
+  "triggers": [
+    { "type": "SIGNAL_UPDATED", "signal": { "name": "IsAsleep", "code": "connectivitystatus-isasleep", "group": "ConnectivityStatus" } },
+    { "type": "SIGNAL_UPDATED", "signal": { "name": "IsOnline", "code": "connectivitystatus-isonline", "group": "ConnectivityStatus" } },
+    { "type": "SIGNAL_UPDATED", "signal": { "name": "IsLocked", "code": "closure-islocked", "group": "Closure" } }
+  ],
+  "meta": {
+    "deliveryId": "8889e379-2e02-40ae-9667-4c2898c8ab35",
+    "deliveredAt": 1767920009942,
+    "version": "4.0",
+    "webhookId": "1f7ca522-084d-4fdc-9ce4-859c2a6cdfb1",
+    "webhookName": "Home Assistant",
+    "mode": "LIVE",
+    "signalCount": 11
+  }
+}

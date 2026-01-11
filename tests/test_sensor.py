@@ -1,14 +1,13 @@
 """Test sensors."""
 
-from collections.abc import Callable
+from collections.abc import Awaitable, Callable
 from dataclasses import dataclass
 import datetime as dt
-import json
 from operator import itemgetter
 from typing import Any, cast
-from unittest.mock import AsyncMock, Mock, patch
+from unittest.mock import AsyncMock
 
-from homeassistant.const import CONF_WEBHOOK_ID, CONTENT_TYPE_JSON
+from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant, State
 from homeassistant.helpers import device_registry as dr, entity_registry as er
 from homeassistant.helpers.entity_component import async_update_entity
@@ -22,22 +21,19 @@ from pytest_homeassistant_custom_component.common import (
     mock_restore_cache_with_extra_data,
 )
 from pytest_homeassistant_custom_component.test_util.aiohttp import AiohttpClientMocker
-from pytest_homeassistant_custom_component.typing import ClientSessionGenerator
 from syrupy.assertion import SnapshotAssertion
 
 from custom_components.smartcar.const import (
-    CONF_APPLICATION_MANAGEMENT_TOKEN,
     DEFAULT_ENABLED_ENTITY_DESCRIPTION_KEYS,
-    DOMAIN,
     OAUTH2_TOKEN,
     REQUIRED_SCOPES,
     EntityDescriptionKey,
 )
 from custom_components.smartcar.coordinator import (
-    TIRE_BACK_ROW,
-    TIRE_FRONT_ROW,
-    TIRE_LEFT_COLUMN,
-    TIRE_RIGHT_COLUMN,
+    VEHICLE_BACK_ROW,
+    VEHICLE_FRONT_ROW,
+    VEHICLE_LEFT_COLUMN,
+    VEHICLE_RIGHT_COLUMN,
 )
 from custom_components.smartcar.entity import SmartcarEntity
 from custom_components.smartcar.sensor import SmartcarSensorDescription
@@ -159,12 +155,13 @@ async def test_update_with_polling_disabled(
 
 
 @pytest.mark.usefixtures("enable_all_entities")
+@pytest.mark.parametrize("platform", [Platform.SENSOR])
 @pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
 @pytest.mark.parametrize(
     ("webhook_body", "webhook_headers", "expected"),
     [
         (
-            json.dumps({"eventType": "VERIFY", "data": {"challenge": "any-abcd"}}),
+            "verify",  # JSON fixture
             {},
             {
                 "response": {
@@ -173,134 +170,7 @@ async def test_update_with_polling_disabled(
             },
         ),
         (
-            json.dumps(
-                {
-                    "eventId": "1821c036-71cb-408f-8dee-2989b9764307",
-                    "eventType": "VEHICLE_STATE",
-                    "data": {
-                        "user": {"id": "2fbd0033-83e7-43b8-a367-776d6dff1134"},
-                        "vehicle": {
-                            "id": "a1d50709-3502-4faa-ba43-a5c7565e6a09",
-                            "make": "VOLKSWAGEN",
-                            "model": "ID.4",
-                            "year": 2021,
-                        },
-                        "signals": [
-                            {
-                                "code": "connectivitystatus-isonline",
-                                "name": "IsOnline",
-                                "group": "ConnectivityStatus",
-                                "status": {
-                                    "value": "ERROR",
-                                    "error": {
-                                        "type": "COMPATIBILITY",
-                                        "code": "VEHICLE_NOT_CAPABLE",
-                                    },
-                                },
-                            },
-                            {
-                                "code": "odometer-traveleddistance",
-                                "name": "TraveledDistance",
-                                "group": "Odometer",
-                                "body": {"value": 62041, "unit": "km"},
-                                "meta": {
-                                    "oemUpdatedAt": 1758238176603,
-                                    "retrievedAt": 1758238782829,
-                                },
-                            },
-                            {
-                                "code": "closure-islocked",
-                                "name": "IsLocked",
-                                "group": "Closure",
-                                "status": {
-                                    "value": "ERROR",
-                                    "error": {"type": "PERMISSION", "code": None},
-                                },
-                            },
-                            {
-                                "code": "internalcombustionengine-fuellevel",
-                                "name": "FuelLevel",
-                                "group": "InternalCombustionEngine",
-                                "status": {
-                                    "value": "ERROR",
-                                    "error": {
-                                        "type": "COMPATIBILITY",
-                                        "code": "VEHICLE_NOT_CAPABLE",
-                                    },
-                                },
-                            },
-                            {
-                                "code": "tractionbattery-stateofcharge",
-                                "name": "StateOfCharge",
-                                "group": "TractionBattery",
-                                "body": {"value": 42, "unit": "percent"},
-                                "meta": {
-                                    "oemUpdatedAt": 1758238233000,
-                                    "retrievedAt": 1758238783086,
-                                },
-                            },
-                            {
-                                "code": "tractionbattery-range",
-                                "name": "Range",
-                                "group": "TractionBattery",
-                                "status": {
-                                    "value": "ERROR",
-                                    "error": {
-                                        "type": "COMPATIBILITY",
-                                        "code": "VEHICLE_NOT_CAPABLE",
-                                    },
-                                },
-                            },
-                            {
-                                "code": "charge-chargelimits",
-                                "name": "ChargeLimits",
-                                "group": "Charge",
-                                "body": {
-                                    "values": [
-                                        {
-                                            "type": "GLOBAL",
-                                            "limit": 80,
-                                            "condition": None,
-                                        }
-                                    ],
-                                    "activeLimit": 80,
-                                    "unit": "percent",
-                                },
-                                "meta": {
-                                    "oemUpdatedAt": 1758238232000,
-                                    "retrievedAt": 1758238783086,
-                                },
-                            },
-                            {
-                                "code": "charge-ischarging",
-                                "name": "IsCharging",
-                                "group": "Charge",
-                                "body": {"value": False},
-                                "meta": {
-                                    # empty meta just to cover all
-                                    # possibilities, but this will likely never
-                                    # be empty.
-                                },
-                            },
-                        ],
-                    },
-                    "triggers": [
-                        {
-                            "type": "SIGNAL_UPDATED",
-                            "signal": "Odometer.TraveledDistance",
-                        },
-                        {
-                            "type": "SIGNAL_UPDATED",
-                            "signal": "TractionBattery.StateOfCharge",
-                        },
-                    ],
-                    "meta": {
-                        "deliveryId": "682541b6-a461-4d69-9e6e-fead3832f5eb",
-                        "deliveredAt": 1758238783185,
-                        "deliveryTime": 1758238783185,
-                    },
-                }
-            ),
+            "all",  # JSON fixture
             {
                 "sc-signature": "1234",
             },
@@ -311,76 +181,14 @@ async def test_update_with_polling_disabled(
             },
         ),
         (
-            json.dumps(
-                {
-                    "eventId": "1821c036-71cb-408f-8dee-2989b9764307",
-                    "eventType": "VEHICLE_STATE",
-                    "data": {
-                        "user": {"id": "2fbd0033-83e7-43b8-a367-776d6dff1134"},
-                        "vehicle": {
-                            "id": "a1d50709-3502-4faa-ba43-a5c7565e6a09",
-                            "make": "BMW",
-                            "model": "118i",
-                            "year": 2025,
-                        },
-                        "signals": [
-                            {
-                                "code": "internalcombustionengine-fuellevel",
-                                "name": "FuelLevel",
-                                "group": "InternalCombustionEngine",
-                                "body": {"value": 0.77},
-                                "meta": {
-                                    "oemUpdatedAt": 1758238233000,
-                                    "retrievedAt": 1758238783086,
-                                },
-                            },
-                            {
-                                "code": "internalcombustionengine-range",
-                                "name": "FuelLevel",
-                                "group": "InternalCombustionEngine",
-                                "body": {"value": 239},
-                                "meta": {
-                                    "oemUpdatedAt": 1758238233000,
-                                    "retrievedAt": 1758238783086,
-                                },
-                            },
-                        ],
-                    },
-                    "triggers": [
-                        {
-                            "type": "SIGNAL_UPDATED",
-                            "signal": "InternalCombustionEngine.FuelLevel",
-                        },
-                    ],
-                    "meta": {
-                        "deliveryId": "682541b6-a461-4d69-9e6e-fead3832f5eb",
-                        "deliveredAt": 1758238783185,
-                        "deliveryTime": 1758238783185,
-                    },
-                }
-            ),
+            "fuel",  # JSON fixture
             {
                 "sc-signature": "1234",
             },
             {},
         ),
         (
-            json.dumps(
-                {
-                    "eventId": "1821c036-71cb-408f-8dee-2989b9764307",
-                    "eventType": "VEHICLE_STATE",
-                    "data": {
-                        "user": {"id": "2fbd0033-83e7-43b8-a367-776d6dff1134"},
-                        "vehicle": {
-                            "id": "70076e4a-d774-464c-8241-60de654ccb24",
-                            "make": "Hyundai",
-                            "model": "IONIQ 5",
-                            "year": 2023,
-                        },
-                        "signals": [],
-                    },
-                }
-            ),
+            "mismatch",  # JSON fixture
             {
                 "sc-signature": "1234",
             },
@@ -393,62 +201,7 @@ async def test_update_with_polling_disabled(
             },
         ),
         (
-            json.dumps(
-                {
-                    "eventId": "1821c036-71cb-408f-8dee-2989b9764307",
-                    "eventType": "VEHICLE_ERROR",
-                    "data": {
-                        "user": {"id": "2fbd0033-83e7-43b8-a367-776d6dff1134"},
-                        "vehicle": {
-                            "id": "a1d50709-3502-4faa-ba43-a5c7565e6a09",
-                            "make": "VOLKSWAGEN",
-                            "model": "ID.4",
-                            "year": 2021,
-                        },
-                        "errors": [
-                            {
-                                "type": "COMPATIBILITY",
-                                "code": "VEHICLE_NOT_CAPABLE",
-                                "description": "The vehicle is incapable of performing your request.",
-                                "docURL": "https://smartcar.com/docs/errors/api-errors/compatibility-errors#vehicle-not-capable",
-                                "resolution": {"type": None},
-                                "suggestedUserMessage": "Your car is unable to perform this request.",
-                                "state": "ERROR",
-                                "signals": [
-                                    "VehicleIdentification.Nickname",
-                                    "VehicleUserAccount.Role",
-                                    "VehicleUserAccount.Permissions",
-                                    "ConnectivitySoftware.CurrentFirmwareVersion",
-                                    "ConnectivityStatus.IsOnline",
-                                    "ConnectivityStatus.IsAsleep",
-                                    "ConnectivityStatus.IsDigitalKeyPaired",
-                                    "InternalCombustionEngine.FuelLevel",
-                                ],
-                            },
-                            {
-                                "type": "PERMISSION",
-                                "code": None,
-                                "description": "Your application has insufficient permissions to access the requested resource. Please prompt the user to re-authenticate using Smartcar Connect.",
-                                "docURL": "https://smartcar.com/docs/errors/api-errors/permission-errors#null",
-                                "resolution": {"type": "REAUTHENTICATE"},
-                                "state": "ERROR",
-                                "signals": [
-                                    {
-                                        "name": "Closure",
-                                        "group": "IsLocked",
-                                        "code": "closure-islocked",
-                                    }
-                                ],
-                            },
-                        ],
-                    },
-                    "meta": {
-                        "deliveryId": "49c3f6bb-63cf-47ce-b320-6e0aaa9a2ca7",
-                        "deliveredAt": 1758224204078,
-                        "deliveryTime": 1758224204078,
-                    },
-                }
-            ),
+            "error",  # JSON fixture
             {
                 "sc-signature": "1234",
             },
@@ -458,36 +211,7 @@ async def test_update_with_polling_disabled(
             },
         ),
         (
-            json.dumps(
-                {
-                    "eventId": "1821c036-71cb-408f-8dee-2989b9764307",
-                    "eventType": "VEHICLE_ERROR",
-                    "data": {
-                        "user": {"id": "2fbd0033-83e7-43b8-a367-776d6dff1134"},
-                        "vehicle": {
-                            "id": "a1d50709-3502-4faa-ba43-a5c7565e6a09",
-                            "make": "VOLKSWAGEN",
-                            "model": "ID.4",
-                            "year": 2021,
-                        },
-                        "errors": [
-                            {  # error without `signals` key is considered broad
-                                "type": "PERMISSION",
-                                "code": None,
-                                "description": "Your application has insufficient permissions to access the requested resource. Please prompt the user to re-authenticate using Smartcar Connect.",
-                                "docURL": "https://smartcar.com/docs/errors/api-errors/permission-errors#null",
-                                "resolution": {"type": "REAUTHENTICATE"},
-                                "state": "ERROR",
-                            },
-                        ],
-                    },
-                    "meta": {
-                        "deliveryId": "49c3f6bb-63cf-47ce-b320-6e0aaa9a2ca7",
-                        "deliveredAt": 1758224204078,
-                        "deliveryTime": 1758224204078,
-                    },
-                }
-            ),
+            "broad_auth_error",
             {
                 "sc-signature": "1234",
             },
@@ -497,48 +221,7 @@ async def test_update_with_polling_disabled(
             },
         ),
         (
-            json.dumps(
-                {
-                    "eventId": "1821c036-71cb-408f-8dee-2989b9764307",
-                    "eventType": "VEHICLE_ERROR",
-                    "data": {
-                        "user": {"id": "2fbd0033-83e7-43b8-a367-776d6dff1134"},
-                        "vehicle": {
-                            "id": "a1d50709-3502-4faa-ba43-a5c7565e6a09",
-                            "make": "VOLKSWAGEN",
-                            "model": "ID.4",
-                            "year": 2021,
-                        },
-                        "errors": [
-                            {
-                                "type": "PERMISSION",
-                                "code": None,
-                                "description": "Your application has insufficient permissions to access the requested resource. Please prompt the user to re-authenticate using Smartcar Connect.",
-                                "docURL": "https://smartcar.com/docs/errors/api-errors/permission-errors#null",
-                                "resolution": {"type": "REAUTHENTICATE"},
-                                "state": "ERROR",
-                                "signals": [
-                                    {
-                                        "name": "Permissions",
-                                        "group": "VehicleUserAccount",
-                                        "code": "vehicleuseraccount-permissions",
-                                    },
-                                    {
-                                        "name": "Role",
-                                        "group": "VehicleUserAccount",
-                                        "code": "vehicleuseraccount-role",
-                                    },
-                                ],
-                            },
-                        ],
-                    },
-                    "meta": {
-                        "deliveryId": "49c3f6bb-63cf-47ce-b320-6e0aaa9a2ca7",
-                        "deliveredAt": 1758224204078,
-                        "deliveryTime": 1758224204078,
-                    },
-                }
-            ),
+            "irrelevant_auth_error",
             {
                 "sc-signature": "1234",
             },
@@ -548,14 +231,14 @@ async def test_update_with_polling_disabled(
             },
         ),
         (
-            "invalid-json",
+            b"invalid-json",
             {
                 "sc-signature": "1234",
             },
             {"log_messages": ["invalid JSON"]},
         ),
         (
-            json.dumps({}),
+            {},
             {"sc-signature": "invalid-4321"},
             {
                 "response_status": 404,
@@ -564,6 +247,7 @@ async def test_update_with_polling_disabled(
             },
         ),
     ],
+    indirect=["webhook_body"],
     ids=[
         "verify",
         "vehicle_state",
@@ -576,77 +260,52 @@ async def test_update_with_polling_disabled(
         "invalid_signature",
     ],
 )
-async def test_webhook_update(
+async def test_webhook_scenarios(
+    webhook_scenario: Callable[[], Awaitable[None]],
+) -> None:
+    await webhook_scenario()
+
+
+@pytest.mark.usefixtures("enable_all_entities")
+@pytest.mark.parametrize("platform", [Platform.SENSOR])
+@pytest.mark.parametrize("vehicle_fixture", ["vw_id_4", "jaguar_ipace", "byd_seal"])
+@pytest.mark.parametrize(
+    ("webhook_body", "webhook_headers", "expected"),
+    [("all", {"sc-signature": "1234"}, {})],  # JSON fixture
+    indirect=["webhook_body"],
+    ids=["vehicle_state_all"],
+)
+async def test_webhook_update(webhook_scenario: Callable[[], Awaitable[None]]) -> None:
+    await webhook_scenario()
+
+
+@pytest.mark.usefixtures("enable_specified_entities")
+@pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
+@pytest.mark.parametrize(
+    "enabled_entities",
+    [{EntityDescriptionKey.LOW_VOLTAGE_BATTERY_LEVEL}],
+)
+async def test_polling_v3_sensor(
     hass: HomeAssistant,
-    hass_client: ClientSessionGenerator,
-    mock_hmac_sha256_hexdigest: Mock,
     mock_config_entry: MockConfigEntry,
     aioclient_mock: AiohttpClientMocker,
-    snapshot: SnapshotAssertion,
-    vehicle: AsyncMock,
-    vehicle_fixture: str,
-    vehicle_attributes: dict,
-    webhook_body: str,
-    webhook_headers: dict[str, Any],
-    expected: dict[str, Any],
-    device_registry: dr.DeviceRegistry,
-    entity_registry: er.EntityRegistry,
     caplog: pytest.LogCaptureFixture,
 ) -> None:
+    """Test sensor refresh fails on v3 only items."""
+
     mock_config_entry.add_to_hass(hass)
     hass.config_entries.async_update_entry(
         mock_config_entry,
-        data={
-            **mock_config_entry.data,
-            CONF_WEBHOOK_ID: "smartcar_test",
-            CONF_APPLICATION_MANAGEMENT_TOKEN: "test_amt",
-        },
+        pref_disable_polling=True,
     )
 
-    expected_calls = 0
-    expected_response = expected.get("response", {})
-    expected_response_status = expected.get("response_status", 200)
-    expected_reauth_calls = expected.get("reauth_calls", 0)
-    expected_log_messages = expected.get("log_messages", [])
-
     await setup_added_integration(hass, mock_config_entry)
+    assert aioclient_mock.call_count == 0
 
-    # no requests should have been made during setup when webhooks are enabled
-    # because this automatically disables polling.
-    assert aioclient_mock.call_count == expected_calls
+    await async_update_entity(hass, "sensor.vw_id_4_low_voltage_battery")
 
-    with patch(
-        "homeassistant.config_entries.ConfigEntry.async_start_reauth"
-    ) as mock_start_reauth:
-        client = await hass_client()
-        resp = await client.post(
-            "/api/webhook/smartcar_test",
-            data=webhook_body,
-            headers={
-                "content-type": CONTENT_TYPE_JSON,
-                **webhook_headers,
-            },
-        )
-        assert resp.status == expected_response_status
-        assert (
-            await (resp.json() if expected_response_status < 300 else resp.text())
-            == expected_response
-        )
-        await hass.async_block_till_done()
-
-    # still no calls since webhooks will update from the data it received
-    assert aioclient_mock.call_count == expected_calls
-    assert mock_start_reauth.call_count == expected_reauth_calls
-
-    device_id = vehicle["vin"]
-    device = device_registry.async_get_device({(DOMAIN, device_id)})
-    entities = entity_registry.entities.get_entries_for_device_id(device.id)
-
-    for entity in entities:
-        assert hass.states.get(entity.entity_id) == snapshot(name=entity.entity_id)
-
-    for expected_log_message in expected_log_messages:
-        assert expected_log_message in caplog.text
+    assert aioclient_mock.call_count == 0
+    assert "Unsupported update requests for: low_voltage_battery_level" in caplog.text
 
 
 @pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
@@ -842,8 +501,8 @@ RESTORE_STATE_PARAMETRIZE_ARGS = [
             {
                 "raw_value": [
                     {
-                        "column": TIRE_RIGHT_COLUMN,
-                        "row": TIRE_FRONT_ROW,
+                        "column": VEHICLE_RIGHT_COLUMN,
+                        "row": VEHICLE_FRONT_ROW,
                         "tirePressure": 234,
                     },
                 ],
@@ -853,8 +512,8 @@ RESTORE_STATE_PARAMETRIZE_ARGS = [
                 "wheel-tires": {
                     "values": [
                         {
-                            "column": TIRE_RIGHT_COLUMN,
-                            "row": TIRE_FRONT_ROW,
+                            "column": VEHICLE_RIGHT_COLUMN,
+                            "row": VEHICLE_FRONT_ROW,
                             "tirePressure": 234,
                         },
                     ],
@@ -984,23 +643,23 @@ RESTORE_STATE_V2_PARAMETRIZE_ARGS = [
                     "rowCount": 2,
                     "values": [
                         {
-                            "column": TIRE_LEFT_COLUMN,
-                            "row": TIRE_FRONT_ROW,
+                            "column": VEHICLE_LEFT_COLUMN,
+                            "row": VEHICLE_FRONT_ROW,
                             "tirePressure": 235,
                         },
                         {
-                            "column": TIRE_LEFT_COLUMN,
-                            "row": TIRE_BACK_ROW,
+                            "column": VEHICLE_LEFT_COLUMN,
+                            "row": VEHICLE_BACK_ROW,
                             "tirePressure": 234,
                         },
                         {
-                            "column": TIRE_RIGHT_COLUMN,
-                            "row": TIRE_FRONT_ROW,
+                            "column": VEHICLE_RIGHT_COLUMN,
+                            "row": VEHICLE_FRONT_ROW,
                             "tirePressure": 233,
                         },
                         {
-                            "column": TIRE_RIGHT_COLUMN,
-                            "row": TIRE_BACK_ROW,
+                            "column": VEHICLE_RIGHT_COLUMN,
+                            "row": VEHICLE_BACK_ROW,
                             "tirePressure": 232,
                         },
                     ],

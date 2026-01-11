@@ -1,6 +1,6 @@
 """Test number entities."""
 
-from collections.abc import Callable
+from collections.abc import Awaitable, Callable
 from unittest.mock import AsyncMock
 
 from aiohttp import ClientResponseError
@@ -9,7 +9,7 @@ from homeassistant.components.number import (
     DOMAIN as NUMBER_DOMAIN,
     SERVICE_SET_VALUE,
 )
-from homeassistant.const import ATTR_ENTITY_ID
+from homeassistant.const import ATTR_ENTITY_ID, Platform
 from homeassistant.core import HomeAssistant, State
 from homeassistant.exceptions import ServiceValidationError
 from homeassistant.helpers import device_registry as dr, entity_registry as er
@@ -97,6 +97,19 @@ async def test_charging_limit(
 
     assert len(aioclient_mock.mock_calls) == 1 + api_calls
     assert [tuple(mock_call) for mock_call in aioclient_mock.mock_calls[1:]] == snapshot
+
+
+@pytest.mark.usefixtures("enable_all_entities")
+@pytest.mark.parametrize("platform", [Platform.NUMBER])
+@pytest.mark.parametrize("vehicle_fixture", ["vw_id_4", "jaguar_ipace", "byd_seal"])
+@pytest.mark.parametrize(
+    ("webhook_body", "webhook_headers", "expected"),
+    [("all", {"sc-signature": "1234"}, {})],  # JSON fixture
+    indirect=["webhook_body"],
+    ids=["vehicle_state_all"],
+)
+async def test_webhook_update(webhook_scenario: Callable[[], Awaitable[None]]) -> None:
+    await webhook_scenario()
 
 
 RESTORE_STATE_V2_PARAMETRIZE_ARGS = [

@@ -24,10 +24,10 @@ from homeassistant.util.unit_conversion import DistanceConverter, PressureConver
 
 from .const import EntityDescriptionKey
 from .coordinator import (
-    TIRE_BACK_ROW,
-    TIRE_FRONT_ROW,
-    TIRE_LEFT_COLUMN,
-    TIRE_RIGHT_COLUMN,
+    VEHICLE_BACK_ROW,
+    VEHICLE_FRONT_ROW,
+    VEHICLE_LEFT_COLUMN,
+    VEHICLE_RIGHT_COLUMN,
     SmartcarVehicleCoordinator,
 )
 from .entity import SmartcarEntity, SmartcarEntityDescription
@@ -53,6 +53,15 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         key=EntityDescriptionKey.BATTERY_LEVEL,
         name="Battery",
         value_key_path="tractionbattery-stateofcharge.value",
+        value_cast=lambda pct: pct and round(pct * 100),
+        device_class=SensorDeviceClass.BATTERY,
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=PERCENTAGE,
+    ),
+    SmartcarSensorDescription(
+        key=EntityDescriptionKey.LOW_VOLTAGE_BATTERY_LEVEL,
+        name="Low Voltage Battery",
+        value_key_path="lowvoltagebattery-stateofcharge.value",
         value_cast=lambda pct: pct and round(pct * 100),
         device_class=SensorDeviceClass.BATTERY,
         state_class=SensorStateClass.MEASUREMENT,
@@ -128,6 +137,12 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         ),
     ),
     SmartcarSensorDescription(
+        key=EntityDescriptionKey.GEAR_STATE,
+        name="Gear State",
+        value_key_path="transmission-gearstate.value",
+        icon="mdi:car-brake-parking",
+    ),
+    SmartcarSensorDescription(
         key=EntityDescriptionKey.TIRE_PRESSURE_BACK_LEFT,
         name="Tire Pressure Back Left",
         value_key_path="wheel-tires.values",
@@ -135,7 +150,8 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
             (
                 value["tirePressure"]
                 for value in values or []
-                if value["row"] == TIRE_BACK_ROW and value["column"] == TIRE_LEFT_COLUMN
+                if value["row"] == VEHICLE_BACK_ROW
+                and value["column"] == VEHICLE_LEFT_COLUMN
             ),
             None,
         ),
@@ -155,8 +171,8 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
             (
                 value["tirePressure"]
                 for value in values or []
-                if value["row"] == TIRE_BACK_ROW
-                and value["column"] == TIRE_RIGHT_COLUMN
+                if value["row"] == VEHICLE_BACK_ROW
+                and value["column"] == VEHICLE_RIGHT_COLUMN
             ),
             None,
         ),
@@ -176,8 +192,8 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
             (
                 value["tirePressure"]
                 for value in values or []
-                if value["row"] == TIRE_FRONT_ROW
-                and value["column"] == TIRE_LEFT_COLUMN
+                if value["row"] == VEHICLE_FRONT_ROW
+                and value["column"] == VEHICLE_LEFT_COLUMN
             ),
             None,
         ),
@@ -197,8 +213,8 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
             (
                 value["tirePressure"]
                 for value in values or []
-                if value["row"] == TIRE_FRONT_ROW
-                and value["column"] == TIRE_RIGHT_COLUMN
+                if value["row"] == VEHICLE_FRONT_ROW
+                and value["column"] == VEHICLE_RIGHT_COLUMN
             ),
             None,
         ),

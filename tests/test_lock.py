@@ -1,10 +1,11 @@
 """Test lock entities."""
 
+from collections.abc import Awaitable, Callable
 from unittest.mock import AsyncMock
 
 from aiohttp import ClientResponseError
 from homeassistant.components.lock import DOMAIN as LOCK_DOMAIN, LockState
-from homeassistant.const import ATTR_ENTITY_ID, SERVICE_LOCK, SERVICE_UNLOCK
+from homeassistant.const import ATTR_ENTITY_ID, SERVICE_LOCK, SERVICE_UNLOCK, Platform
 from homeassistant.core import HomeAssistant
 import pytest
 from pytest_homeassistant_custom_component.common import MockConfigEntry
@@ -82,3 +83,16 @@ async def test_lock(
 
     assert len(aioclient_mock.mock_calls) == 2
     assert [tuple(mock_call) for mock_call in aioclient_mock.mock_calls[1:]] == snapshot
+
+
+@pytest.mark.usefixtures("enable_all_entities")
+@pytest.mark.parametrize("platform", [Platform.LOCK])
+@pytest.mark.parametrize("vehicle_fixture", ["vw_id_4", "jaguar_ipace", "byd_seal"])
+@pytest.mark.parametrize(
+    ("webhook_body", "webhook_headers", "expected"),
+    [("all", {"sc-signature": "1234"}, {})],  # JSON fixture
+    indirect=["webhook_body"],
+    ids=["vehicle_state_all"],
+)
+async def test_webhook_update(webhook_scenario: Callable[[], Awaitable[None]]) -> None:
+    await webhook_scenario()
