@@ -10,7 +10,7 @@ Connect your compatible vehicle to Home Assistant using the [Smartcar API](https
 
 This integration provides various sensors and controls for vehicles linked through the Smartcar platform, allowing you to monitor and interact with your car directly within Home Assistant.
 
-**Note:** This integration relies on the Smartcar service. Availability of specific features depends on your vehicle's make, model, year, your Smartcar account plan (especially API rate limits), and the permissions granted during authentication.
+**Note:** This integration relies on the Smartcar service. Availability of specific features depends on your vehicle's make, model, year, your Smartcar account plan (especially signal/sensor availability and API rate limits), and the permissions granted during authentication.
 
 <img src="images/device_page.png" alt="Example Device Page Screenshot" width="600"/>
 
@@ -109,6 +109,8 @@ If successful, the integration will be added, and Home Assistant will create dev
 ### Webhooks
 
 **Important:** In order for webhooks to update entities, your Home Assistant instance must be accessible from the internet, either via Home Assistant Cloud or another method. See the [Remote Access documentation][ha-remote-access] for more information.
+
+**Signal & Sensor Availability:** Please remember that sensor availability is based on which [signals](https://smartcar.com/docs/api-reference/signals/schema) are available, some of which are only available for **[paying Smartcar customers](https://smartcar.com/pricing#pricing)**.
 
 These steps are for setting up a webhook in [Smartcar's dashboard][smartcar-dashboard]. Before starting, make sure you have completed all of the steps to [create an active configuration](#configuration-flow) in Home Assistant and have the webhook URL.
 
