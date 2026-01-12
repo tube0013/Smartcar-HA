@@ -381,6 +381,12 @@ DATAPOINT_ENTITY_KEY_MAP = {
         None,
         None,
     ),
+    EntityDescriptionKey.ONLINE: DatapointConfig(
+        "connectivitystatus-isonline",
+        [],
+        None,
+        None,
+    ),
     EntityDescriptionKey.ASLEEP: DatapointConfig(
         "connectivitystatus-isasleep",
         [],

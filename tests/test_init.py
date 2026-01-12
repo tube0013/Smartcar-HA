@@ -555,6 +555,7 @@ _SNAPSHOT_ORDER = {
             "engine_cover",
             "gear_state",
             "sunroof",
+            "online",
             "asleep",
             "surveillance_enabled",
             "battery_heater_active",

@@ -191,6 +191,7 @@ Several entities are created for for each connected vehicle (subject to vehicle 
 - [`binary_sensor.<make_model>_window_back_right`](#binary_sensormake_model_window_back_right)
 - [`binary_sensor.<make_model>_window_front_left`](#binary_sensormake_model_window_front_left)
 - [`binary_sensor.<make_model>_window_front_right`](#binary_sensormake_model_window_front_right)
+- [`binary_sensor.<make_model>_online`](#binary_sensormake_model_online)
 - [`binary_sensor.<make_model>_asleep`](#binary_sensormake_model_asleep)
 - [`binary_sensor.<make_model>_surveillance_enabled`](#binary_sensormake_model_surveillance_enabled)
 - [`number.<make_model>_charge_limit`](#numbermake_model_charge_limit)
@@ -484,6 +485,13 @@ Webhooks only: :link: _currently only available via webhooks_
 ### `binary_sensor.<make_model>_window_front_right`
 
 Whether the [front right window is open](https://smartcar.com/docs/api-reference/signals/closure#windows).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
+
+### `binary_sensor.<make_model>_online`
+
+Whether the vehicle is [online](https://smartcar.com/docs/api-reference/signals/connectivitystatus#is-online).
 
 Enabled by default: :x:  
 Webhooks only: :link: _currently only available via webhooks_  

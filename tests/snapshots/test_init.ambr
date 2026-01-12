@@ -1271,6 +1271,19 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_standard_setup_with_all_entities[unknown_make][binary_sensor.smartcar_784n_online]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'Smartcar 784N Online',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.smartcar_784n_online',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_standard_setup_with_all_entities[unknown_make][binary_sensor.smartcar_784n_rear_trunk]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -2755,6 +2768,39 @@
       'disabled_by': None,
       'domain': 'binary_sensor',
       'entity_category': None,
+      'entity_id': 'binary_sensor.smartcar_784n_online',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': None,
+      'original_icon': None,
+      'original_name': 'Online',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_online',
+      'unit_of_measurement': None,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'binary_sensor',
+      'entity_category': None,
       'entity_id': 'binary_sensor.smartcar_784n_asleep',
       'has_entity_name': True,
       'hidden_by': None,
@@ -3332,6 +3378,19 @@
     }),
     'context': <ANY>,
     'entity_id': 'binary_sensor.vw_id_4_front_trunk_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_standard_setup_with_all_entities[vw_id_4][binary_sensor.vw_id_4_online]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Online',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_online',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -4823,6 +4882,39 @@
       'disabled_by': None,
       'domain': 'binary_sensor',
       'entity_category': None,
+      'entity_id': 'binary_sensor.vw_id_4_online',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': None,
+      'original_icon': None,
+      'original_name': 'Online',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_online',
+      'unit_of_measurement': None,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'binary_sensor',
+      'entity_category': None,
       'entity_id': 'binary_sensor.vw_id_4_asleep',
       'has_entity_name': True,
       'hidden_by': None,
@@ -5407,6 +5499,19 @@
     }),
     'context': <ANY>,
     'entity_id': 'binary_sensor.vw_id_4_front_trunk_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[network_error-vw_id_4][binary_sensor.vw_id_4_online]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Online',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_online',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -6892,6 +6997,39 @@
       'disabled_by': None,
       'domain': 'binary_sensor',
       'entity_category': None,
+      'entity_id': 'binary_sensor.vw_id_4_online',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': None,
+      'original_icon': None,
+      'original_name': 'Online',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_online',
+      'unit_of_measurement': None,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'binary_sensor',
+      'entity_category': None,
       'entity_id': 'binary_sensor.vw_id_4_asleep',
       'has_entity_name': True,
       'hidden_by': None,
@@ -7462,6 +7600,19 @@
     }),
     'context': <ANY>,
     'entity_id': 'binary_sensor.vw_id_4_front_trunk_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[network_proxy_response-vw_id_4][binary_sensor.vw_id_4_online]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Online',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_online',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -8947,6 +9098,39 @@
       'disabled_by': None,
       'domain': 'binary_sensor',
       'entity_category': None,
+      'entity_id': 'binary_sensor.vw_id_4_online',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': None,
+      'original_icon': None,
+      'original_name': 'Online',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_online',
+      'unit_of_measurement': None,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'binary_sensor',
+      'entity_category': None,
       'entity_id': 'binary_sensor.vw_id_4_asleep',
       'has_entity_name': True,
       'hidden_by': None,
@@ -9517,6 +9701,19 @@
     }),
     'context': <ANY>,
     'entity_id': 'binary_sensor.vw_id_4_front_trunk_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[server_error-vw_id_4][binary_sensor.vw_id_4_online]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Online',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_online',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -11002,6 +11199,39 @@
       'disabled_by': None,
       'domain': 'binary_sensor',
       'entity_category': None,
+      'entity_id': 'binary_sensor.vw_id_4_online',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': None,
+      'original_icon': None,
+      'original_name': 'Online',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_online',
+      'unit_of_measurement': None,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'binary_sensor',
+      'entity_category': None,
       'entity_id': 'binary_sensor.vw_id_4_asleep',
       'has_entity_name': True,
       'hidden_by': None,
@@ -11572,6 +11802,19 @@
     }),
     'context': <ANY>,
     'entity_id': 'binary_sensor.vw_id_4_front_trunk_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[unauthorized-vw_id_4][binary_sensor.vw_id_4_online]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Online',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_online',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -13043,6 +13286,39 @@
       'supported_features': 0,
       'translation_key': None,
       'unique_id': 'VIWP1AB29P15LA85784N_sunroof',
+      'unit_of_measurement': None,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'binary_sensor',
+      'entity_category': None,
+      'entity_id': 'binary_sensor.vw_id_4_online',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': None,
+      'original_icon': None,
+      'original_name': 'Online',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_online',
       'unit_of_measurement': None,
     }),
     EntityRegistryEntrySnapshot({
