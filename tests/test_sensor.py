@@ -308,6 +308,35 @@ async def test_polling_v3_sensor(
     assert "Unsupported update requests for: low_voltage_battery_level" in caplog.text
 
 
+@pytest.mark.usefixtures("enable_specified_entities")
+@pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
+@pytest.mark.parametrize(
+    "enabled_entities",
+    [
+        {
+            EntityDescriptionKey.BATTERY_LEVEL,
+            EntityDescriptionKey.LOW_VOLTAGE_BATTERY_LEVEL,
+        }
+    ],
+)
+async def test_polling_v3_sensor_retains_healthy_coordinator(
+    hass: HomeAssistant,
+    mock_config_entry: MockConfigEntry,
+    aioclient_mock: AiohttpClientMocker,
+    vehicle: AsyncMock,
+    caplog: pytest.LogCaptureFixture,
+    snapshot: SnapshotAssertion,
+) -> None:
+    """Test sensor refresh on v3 only item does not make others unavailable."""
+
+    mock_config_entry.add_to_hass(hass)
+    await setup_added_integration(hass, mock_config_entry)
+    assert hass.states.get("sensor.vw_id_4_battery").state != "unavailable"
+    await async_update_entity(hass, "sensor.vw_id_4_low_voltage_battery")
+    assert hass.states.get("sensor.vw_id_4_battery").state != "unavailable"
+    assert "Unsupported update requests for: low_voltage_battery_level" in caplog.text
+
+
 @pytest.mark.parametrize("vehicle_fixture", ["vw_id_4"])
 @pytest.mark.parametrize("enabled_scopes", [[*REQUIRED_SCOPES, "read_battery"]])
 @pytest.mark.parametrize(
@@ -750,6 +779,7 @@ async def test_async_update_internals(
 
     coordinator = MockCoordinator()
     description = MockEntityDescription()
+    description.key = EntityDescriptionKey.BATTERY_LEVEL
     entity = SmartcarEntity[float, float](cast("Any", coordinator), description)
     entity.registry_entry = MockRegistryEntry()
 
