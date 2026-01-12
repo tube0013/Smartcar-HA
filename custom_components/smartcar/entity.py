@@ -18,7 +18,7 @@ from homeassistant.util import dt as dt_util
 
 from . import const as smartcar_const
 from .const import DOMAIN
-from .coordinator import SmartcarVehicleCoordinator
+from .coordinator import DATAPOINT_ENTITY_KEY_MAP, SmartcarVehicleCoordinator
 from .types import SmartcarAPIError
 from .util import key_path_get
 
@@ -69,6 +69,10 @@ class SmartcarEntity[ValueT, RawValueT](
     async def async_update(self) -> None:
         if not self.enabled:
             return
+
+        if DATAPOINT_ENTITY_KEY_MAP[self.entity_description.key].endpoint_v2 is None:
+            msg = f"Unsupported update requests for: {self.entity_description.key}"
+            raise NotImplementedError(msg)
 
         self.coordinator.batch_sensor(self)
 

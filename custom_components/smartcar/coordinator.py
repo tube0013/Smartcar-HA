@@ -557,13 +557,9 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
 
         batch_requests = self._batch_process()
 
-        if unsupported := {
-            key
-            for key in batch_requests
-            if DATAPOINT_ENTITY_KEY_MAP[key].endpoint_v2 is None
-        }:
-            msg = f"Unsupported update requests for: {', '.join(unsupported)}"
-            raise UpdateFailed(msg)
+        assert not any(
+            DATAPOINT_ENTITY_KEY_MAP[key].endpoint_v2 is None for key in batch_requests
+        )
 
         request_path = f"vehicles/{self.vehicle_id}/batch"
         request_batch_paths = sorted(
