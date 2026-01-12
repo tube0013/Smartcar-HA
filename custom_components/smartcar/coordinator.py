@@ -393,6 +393,12 @@ DATAPOINT_ENTITY_KEY_MAP = {
         None,
         None,
     ),
+    EntityDescriptionKey.DIGITAL_KEY_PAIRED: DatapointConfig(
+        "connectivitystatus-isdigitalkeypaired",
+        [],
+        None,
+        None,
+    ),
     EntityDescriptionKey.SURVEILLANCE_ENABLED: DatapointConfig(
         "surveillance-isenabled",
         [],

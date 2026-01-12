@@ -557,6 +557,7 @@ _SNAPSHOT_ORDER = {
             "sunroof",
             "online",
             "asleep",
+            "digital_key_paired",
             "surveillance_enabled",
             "battery_heater_active",
         ]

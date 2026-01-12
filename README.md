@@ -193,6 +193,7 @@ Several entities are created for for each connected vehicle (subject to vehicle 
 - [`binary_sensor.<make_model>_window_front_right`](#binary_sensormake_model_window_front_right)
 - [`binary_sensor.<make_model>_online`](#binary_sensormake_model_online)
 - [`binary_sensor.<make_model>_asleep`](#binary_sensormake_model_asleep)
+- [`binary_sensor.<make_model>_digital_key_paired`](#binary_sensormake_model_digital_key_paired)
 - [`binary_sensor.<make_model>_surveillance_enabled`](#binary_sensormake_model_surveillance_enabled)
 - [`number.<make_model>_charge_limit`](#numbermake_model_charge_limit)
 - [`switch.<make_model>_charging`](#switchmake_model_charging)
@@ -499,6 +500,13 @@ Webhooks only: :link: _currently only available via webhooks_
 ### `binary_sensor.<make_model>_asleep`
 
 Whether the vehicle is [asleep](https://smartcar.com/docs/api-reference/signals/connectivitystatus#is-asleep).
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_  
+
+### `binary_sensor.<make_model>_digital_key_paired`
+
+Whether the vehicle is [has a digital key that has been successfully paired](https://smartcar.com/docs/api-reference/signals/connectivitystatus#is-digital-key-paired).
 
 Enabled by default: :x:  
 Webhooks only: :link: _currently only available via webhooks_  

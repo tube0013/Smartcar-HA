@@ -101,6 +101,7 @@ class EntityDescriptionKey(StrEnum):
     SUNROOF = auto()
     ONLINE = auto()
     ASLEEP = auto()
+    DIGITAL_KEY_PAIRED = auto()
     SURVEILLANCE_ENABLED = auto()
 
 

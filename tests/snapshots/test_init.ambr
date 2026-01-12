@@ -1109,6 +1109,19 @@
     'state': 'on',
   })
 # ---
+# name: test_standard_setup_with_all_entities[unknown_make][binary_sensor.smartcar_784n_digital_key_paired]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'Smartcar 784N Digital Key Paired',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.smartcar_784n_digital_key_paired',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_standard_setup_with_all_entities[unknown_make][binary_sensor.smartcar_784n_door_back_left]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -2834,6 +2847,39 @@
       'disabled_by': None,
       'domain': 'binary_sensor',
       'entity_category': None,
+      'entity_id': 'binary_sensor.smartcar_784n_digital_key_paired',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': None,
+      'original_icon': None,
+      'original_name': 'Digital Key Paired',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_digital_key_paired',
+      'unit_of_measurement': None,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'binary_sensor',
+      'entity_category': None,
       'entity_id': 'binary_sensor.smartcar_784n_surveillance_enabled',
       'has_entity_name': True,
       'hidden_by': None,
@@ -3220,6 +3266,19 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'off',
+  })
+# ---
+# name: test_standard_setup_with_all_entities[vw_id_4][binary_sensor.vw_id_4_digital_key_paired]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Digital Key Paired',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_digital_key_paired',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
   })
 # ---
 # name: test_standard_setup_with_all_entities[vw_id_4][binary_sensor.vw_id_4_door_back_left]
@@ -4948,6 +5007,39 @@
       'disabled_by': None,
       'domain': 'binary_sensor',
       'entity_category': None,
+      'entity_id': 'binary_sensor.vw_id_4_digital_key_paired',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': None,
+      'original_icon': None,
+      'original_name': 'Digital Key Paired',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_digital_key_paired',
+      'unit_of_measurement': None,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'binary_sensor',
+      'entity_category': None,
       'entity_id': 'binary_sensor.vw_id_4_surveillance_enabled',
       'has_entity_name': True,
       'hidden_by': None,
@@ -5337,6 +5429,19 @@
     }),
     'context': <ANY>,
     'entity_id': 'binary_sensor.vw_id_4_charging_cable_plugged_in',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[network_error-vw_id_4][binary_sensor.vw_id_4_digital_key_paired]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Digital Key Paired',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_digital_key_paired',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -7063,6 +7168,39 @@
       'disabled_by': None,
       'domain': 'binary_sensor',
       'entity_category': None,
+      'entity_id': 'binary_sensor.vw_id_4_digital_key_paired',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': None,
+      'original_icon': None,
+      'original_name': 'Digital Key Paired',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_digital_key_paired',
+      'unit_of_measurement': None,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'binary_sensor',
+      'entity_category': None,
       'entity_id': 'binary_sensor.vw_id_4_surveillance_enabled',
       'has_entity_name': True,
       'hidden_by': None,
@@ -7438,6 +7576,19 @@
     }),
     'context': <ANY>,
     'entity_id': 'binary_sensor.vw_id_4_charging_cable_plugged_in',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[network_proxy_response-vw_id_4][binary_sensor.vw_id_4_digital_key_paired]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Digital Key Paired',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_digital_key_paired',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -9164,6 +9315,39 @@
       'disabled_by': None,
       'domain': 'binary_sensor',
       'entity_category': None,
+      'entity_id': 'binary_sensor.vw_id_4_digital_key_paired',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': None,
+      'original_icon': None,
+      'original_name': 'Digital Key Paired',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_digital_key_paired',
+      'unit_of_measurement': None,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'binary_sensor',
+      'entity_category': None,
       'entity_id': 'binary_sensor.vw_id_4_surveillance_enabled',
       'has_entity_name': True,
       'hidden_by': None,
@@ -9539,6 +9723,19 @@
     }),
     'context': <ANY>,
     'entity_id': 'binary_sensor.vw_id_4_charging_cable_plugged_in',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[server_error-vw_id_4][binary_sensor.vw_id_4_digital_key_paired]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Digital Key Paired',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_digital_key_paired',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -11265,6 +11462,39 @@
       'disabled_by': None,
       'domain': 'binary_sensor',
       'entity_category': None,
+      'entity_id': 'binary_sensor.vw_id_4_digital_key_paired',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': None,
+      'original_icon': None,
+      'original_name': 'Digital Key Paired',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_digital_key_paired',
+      'unit_of_measurement': None,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'binary_sensor',
+      'entity_category': None,
       'entity_id': 'binary_sensor.vw_id_4_surveillance_enabled',
       'has_entity_name': True,
       'hidden_by': None,
@@ -11640,6 +11870,19 @@
     }),
     'context': <ANY>,
     'entity_id': 'binary_sensor.vw_id_4_charging_cable_plugged_in',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[unauthorized-vw_id_4][binary_sensor.vw_id_4_digital_key_paired]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Digital Key Paired',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_digital_key_paired',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -13352,6 +13595,39 @@
       'supported_features': 0,
       'translation_key': None,
       'unique_id': 'VIWP1AB29P15LA85784N_asleep',
+      'unit_of_measurement': None,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'binary_sensor',
+      'entity_category': None,
+      'entity_id': 'binary_sensor.vw_id_4_digital_key_paired',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': None,
+      'original_icon': None,
+      'original_name': 'Digital Key Paired',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_digital_key_paired',
       'unit_of_measurement': None,
     }),
     EntityRegistryEntrySnapshot({

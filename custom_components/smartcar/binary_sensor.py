@@ -280,6 +280,11 @@ SENSOR_TYPES: tuple[BinarySensorEntityDescription, ...] = (
         value_key_path="connectivitystatus-isasleep",
     ),
     SmartcarBinarySensorDescription(
+        key=EntityDescriptionKey.DIGITAL_KEY_PAIRED,
+        name="Digital Key Paired",
+        value_key_path="connectivitystatus-isdigitalkeypaired",
+    ),
+    SmartcarBinarySensorDescription(
         key=EntityDescriptionKey.SURVEILLANCE_ENABLED,
         name="Surveillance Enabled",
         value_key_path="surveillance-isenabled",
