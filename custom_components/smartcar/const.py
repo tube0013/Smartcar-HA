@@ -99,7 +99,9 @@ class EntityDescriptionKey(StrEnum):
     REAR_TRUNK = auto()
     REAR_TRUNK_LOCK = auto()
     SUNROOF = auto()
+    ONLINE = auto()
     ASLEEP = auto()
+    DIGITAL_KEY_PAIRED = auto()
     SURVEILLANCE_ENABLED = auto()
 
 

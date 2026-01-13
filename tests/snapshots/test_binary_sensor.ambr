@@ -41,6 +41,21 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_update[vehicle_state_all-byd_seal-binary_sensor][binary_sensor.byd_seal_u_dm_i_digital_key_paired]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-09T00:53:21+00:00',
+      'fetched_at': '2026-01-09T00:53:29.852000+00:00',
+      'friendly_name': 'BYD Seal U Dm-i Digital Key Paired',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.byd_seal_u_dm_i_digital_key_paired',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'on',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-byd_seal-binary_sensor][binary_sensor.byd_seal_u_dm_i_door_back_left]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -203,6 +218,21 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_update[vehicle_state_all-byd_seal-binary_sensor][binary_sensor.byd_seal_u_dm_i_online]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-09T00:53:21+00:00',
+      'fetched_at': '2026-01-09T00:53:29.852000+00:00',
+      'friendly_name': 'BYD Seal U Dm-i Online',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.byd_seal_u_dm_i_online',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'on',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-byd_seal-binary_sensor][binary_sensor.byd_seal_u_dm_i_rear_trunk]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -354,6 +384,19 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'on',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_digital_key_paired]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'JAGUAR I-PACE Digital Key Paired',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_digital_key_paired',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
   })
 # ---
 # name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_door_back_left]
@@ -540,6 +583,19 @@
     'state': 'on',
   })
 # ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_online]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'JAGUAR I-PACE Online',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_online',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'on',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_rear_trunk]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -697,6 +753,19 @@
     }),
     'context': <ANY>,
     'entity_id': 'binary_sensor.vw_id_4_charging_cable_plugged_in',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_digital_key_paired]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Digital Key Paired',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_digital_key_paired',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -863,6 +932,19 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_online]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Online',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_online',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'on',
   })
 # ---
 # name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_rear_trunk]
