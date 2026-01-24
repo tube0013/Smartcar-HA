@@ -103,6 +103,12 @@ class EntityDescriptionKey(StrEnum):
     ASLEEP = auto()
     DIGITAL_KEY_PAIRED = auto()
     SURVEILLANCE_ENABLED = auto()
+    CHARGE_VOLTAGE = auto()
+    CHARGE_AMPERAGE = auto()
+    CHARGE_WATTAGE = auto()
+    CHARGE_ENERGY_ADDED = auto()
+    CHARGE_TIME_TO_COMPLETE = auto()
+    CHARGE_RATE = auto()
 
 
 DEFAULT_ENABLED_ENTITY_DESCRIPTION_KEYS = {

@@ -12,9 +12,14 @@ from homeassistant.components.sensor import (
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (
     PERCENTAGE,
+    UnitOfElectricCurrent,
+    UnitOfElectricPotential,
     UnitOfEnergy,
     UnitOfLength,
+    UnitOfPower,
     UnitOfPressure,
+    UnitOfSpeed,
+    UnitOfTime,
     UnitOfVolume,
 )
 from homeassistant.core import HomeAssistant
@@ -224,6 +229,58 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         native_unit_of_measurement=UnitOfPressure.KPA,
         imperial_conversion=lambda v: PressureConverter.convert(
             v, UnitOfPressure.PSI, UnitOfPressure.KPA
+        ),
+    ),
+    SmartcarSensorDescription(
+        key=EntityDescriptionKey.CHARGE_VOLTAGE,
+        name="Charging Voltage",
+        value_key_path="charge-voltage.value",
+        device_class=SensorDeviceClass.VOLTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=UnitOfElectricPotential.VOLT,
+    ),
+    SmartcarSensorDescription(
+        key=EntityDescriptionKey.CHARGE_AMPERAGE,
+        name="Charging Current",
+        value_key_path="charge-amperage.value",
+        device_class=SensorDeviceClass.CURRENT,
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=UnitOfElectricCurrent.AMPERE,
+    ),
+    SmartcarSensorDescription(
+        key=EntityDescriptionKey.CHARGE_WATTAGE,
+        name="Charging Power",
+        value_key_path="charge-wattage.value",
+        value_cast=lambda w: w and round(w / 1000, 2),
+        device_class=SensorDeviceClass.POWER,
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=UnitOfPower.KILO_WATT,
+    ),
+    SmartcarSensorDescription(
+        key=EntityDescriptionKey.CHARGE_ENERGY_ADDED,
+        name="Charging Energy Added",
+        value_key_path="charge-energyadded.value",
+        device_class=SensorDeviceClass.ENERGY,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+    ),
+    SmartcarSensorDescription(
+        key=EntityDescriptionKey.CHARGE_TIME_TO_COMPLETE,
+        name="Charging Time Remaining",
+        value_key_path="charge-timetocomplete.value",
+        device_class=SensorDeviceClass.DURATION,
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=UnitOfTime.MINUTES,
+    ),
+    SmartcarSensorDescription(
+        key=EntityDescriptionKey.CHARGE_RATE,
+        name="Charging Rate",
+        value_key_path="charge-chargerate.value",
+        icon="mdi:speedometer",
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=UnitOfSpeed.KILOMETERS_PER_HOUR,
+        imperial_conversion=lambda v: DistanceConverter.convert(
+            v, UnitOfLength.MILES, UnitOfLength.KILOMETERS
         ),
     ),
 )

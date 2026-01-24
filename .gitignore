@@ -2,3 +2,5 @@
 .coverage
 venv
 **.pyc
+.python-version
+.claude
