@@ -441,6 +441,24 @@ DATAPOINT_ENTITY_KEY_MAP = {
         None,
         None,
     ),
+    EntityDescriptionKey.CHARGE_AMPERAGE_MAX: DatapointConfig(
+        "charge-amperagemax",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.CHARGE_FAST_CHARGER_PRESENT: DatapointConfig(
+        "charge-isfastchargerpresent",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.FIRMWARE_VERSION: DatapointConfig(
+        "connectivitysoftware-currentfirmwareversion",
+        [],
+        None,
+        None,
+    ),
 }
 
 DATAPOINT_STORAGE_KEY_V2_MAP = {

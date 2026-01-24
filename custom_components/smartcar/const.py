@@ -109,6 +109,9 @@ class EntityDescriptionKey(StrEnum):
     CHARGE_ENERGY_ADDED = auto()
     CHARGE_TIME_TO_COMPLETE = auto()
     CHARGE_RATE = auto()
+    CHARGE_AMPERAGE_MAX = auto()
+    CHARGE_FAST_CHARGER_PRESENT = auto()
+    FIRMWARE_VERSION = auto()
 
 
 DEFAULT_ENABLED_ENTITY_DESCRIPTION_KEYS = {

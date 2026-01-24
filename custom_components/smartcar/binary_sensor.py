@@ -289,6 +289,12 @@ SENSOR_TYPES: tuple[BinarySensorEntityDescription, ...] = (
         name="Surveillance Enabled",
         value_key_path="surveillance-isenabled",
     ),
+    SmartcarBinarySensorDescription(
+        key=EntityDescriptionKey.CHARGE_FAST_CHARGER_PRESENT,
+        name="Fast Charger Connected",
+        value_key_path="charge-isfastchargerpresent.value",
+        device_class=BinarySensorDeviceClass.PLUG,
+    ),
 )
 
 

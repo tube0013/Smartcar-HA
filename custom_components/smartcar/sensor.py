@@ -283,6 +283,20 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
             v, UnitOfLength.MILES, UnitOfLength.KILOMETERS
         ),
     ),
+    SmartcarSensorDescription(
+        key=EntityDescriptionKey.CHARGE_AMPERAGE_MAX,
+        name="Charging Current Max",
+        value_key_path="charge-amperagemax.value",
+        device_class=SensorDeviceClass.CURRENT,
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=UnitOfElectricCurrent.AMPERE,
+    ),
+    SmartcarSensorDescription(
+        key=EntityDescriptionKey.FIRMWARE_VERSION,
+        name="Firmware Version",
+        value_key_path="connectivitysoftware-currentfirmwareversion.value",
+        icon="mdi:chip",
+    ),
 )
 
 
