@@ -174,6 +174,14 @@ Several entities are created for for each connected vehicle (subject to vehicle 
 - [`sensor.<make_model>_tire_pressure_back_right`](#sensormake_model_tire_pressure_back_right)
 - [`sensor.<make_model>_tire_pressure_front_left`](#sensormake_model_tire_pressure_front_left)
 - [`sensor.<make_model>_tire_pressure_front_right`](#sensormake_model_tire_pressure_front_right)
+- [`sensor.<make_model>_charging_voltage`](#sensormake_model_charging_voltage)
+- [`sensor.<make_model>_charging_current`](#sensormake_model_charging_current)
+- [`sensor.<make_model>_charging_power`](#sensormake_model_charging_power)
+- [`sensor.<make_model>_charging_energy_added`](#sensormake_model_charging_energy_added)
+- [`sensor.<make_model>_charging_time_remaining`](#sensormake_model_charging_time_remaining)
+- [`sensor.<make_model>_charging_rate`](#sensormake_model_charging_rate)
+- [`sensor.<make_model>_charging_current_max`](#sensormake_model_charging_current_max)
+- [`sensor.<make_model>_firmware_version`](#sensormake_model_firmware_version)
 - [`binary_sensor.<make_model>_charging_cable_plugged_in`](#binary_sensormake_model_charging_cable_plugged_in)
 - [`binary_sensor.<make_model>_battery_heater_active`](#binary_sensormake_model_battery_heater_active)
 - [`binary_sensor.<make_model>_front_trunk`](#binary_sensormake_model_front_trunk)
@@ -198,6 +206,7 @@ Several entities are created for for each connected vehicle (subject to vehicle 
 - [`binary_sensor.<make_model>_asleep`](#binary_sensormake_model_asleep)
 - [`binary_sensor.<make_model>_digital_key_paired`](#binary_sensormake_model_digital_key_paired)
 - [`binary_sensor.<make_model>_surveillance_enabled`](#binary_sensormake_model_surveillance_enabled)
+- [`binary_sensor.<make_model>_fast_charger_connected`](#binary_sensormake_model_fast_charger_connected)
 - [`number.<make_model>_charge_limit`](#numbermake_model_charge_limit)
 - [`switch.<make_model>_charging`](#switchmake_model_charging)
 - [`lock.<make_model>_door_lock`](#lockmake_model_door_lock)
@@ -350,9 +359,65 @@ Obtained concurrently with: [`sensor.<make_model>_tire_pressure_back_left`](#sen
 
 The [front right tire pressure](https://smartcar.com/docs/api-reference/get-tire-pressure#param-front-right) of the vehicle.
 
-Enabled by default: :x:  
-Requires permissions: `read_tires`  
+Enabled by default: :x:
+Requires permissions: `read_tires`
 Obtained concurrently with: [`sensor.<make_model>_tire_pressure_back_left`](#sensormake_model_tire_pressure_back_left), [`sensor.<make_model>_tire_pressure_back_right`](#sensormake_model_tire_pressure_back_right), [`sensor.<make_model>_tire_pressure_front_left`](#sensormake_model_tire_pressure_front_left)
+
+### `sensor.<make_model>_charging_voltage`
+
+The [current voltage](https://smartcar.com/docs/api-reference/signals/charge#voltage) supplied during charging in volts.
+
+Enabled by default: :x:
+Webhooks only: :link: _currently only available via webhooks_
+
+### `sensor.<make_model>_charging_current`
+
+The [current amperage](https://smartcar.com/docs/api-reference/signals/charge#amperage) flowing to the vehicle during charging in amps.
+
+Enabled by default: :x:
+Webhooks only: :link: _currently only available via webhooks_
+
+### `sensor.<make_model>_charging_power`
+
+The [current power delivery rate](https://smartcar.com/docs/api-reference/signals/charge#wattage) during charging in kilowatts.
+
+Enabled by default: :x:
+Webhooks only: :link: _currently only available via webhooks_
+
+### `sensor.<make_model>_charging_energy_added`
+
+The [cumulative energy delivered](https://smartcar.com/docs/api-reference/signals/charge#energy-added) during the current or recent charging session in kWh.
+
+Enabled by default: :x:
+Webhooks only: :link: _currently only available via webhooks_
+
+### `sensor.<make_model>_charging_time_remaining`
+
+The [estimated time remaining](https://smartcar.com/docs/api-reference/signals/charge#time-to-complete) until the vehicle reaches its charge limit in minutes.
+
+Enabled by default: :x:
+Webhooks only: :link: _currently only available via webhooks_
+
+### `sensor.<make_model>_charging_rate`
+
+The [rate at which range is being added](https://smartcar.com/docs/api-reference/signals/charge#charge-rate) during active charging in km/h.
+
+Enabled by default: :x:
+Webhooks only: :link: _currently only available via webhooks_
+
+### `sensor.<make_model>_charging_current_max`
+
+The [maximum available amperage](https://smartcar.com/docs/api-reference/signals/charge#amperage-max) for charging the vehicle in amps.
+
+Enabled by default: :x:
+Webhooks only: :link: _currently only available via webhooks_
+
+### `sensor.<make_model>_firmware_version`
+
+The [current firmware version](https://smartcar.com/docs/api-reference/signals/connectivitysoftware#current-firmware-version) installed on the vehicle.
+
+Enabled by default: :x:
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_charging_cable_plugged_in`
 
@@ -518,8 +583,15 @@ Webhooks only: :link: _currently only available via webhooks_
 
 Whether the vehicle's [surveillance system is enabled](https://smartcar.com/docs/api-reference/signals/surveillance#is-enabled).
 
-Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Enabled by default: :x:
+Webhooks only: :link: _currently only available via webhooks_
+
+### `binary_sensor.<make_model>_fast_charger_connected`
+
+Whether a [DC fast charger is connected](https://smartcar.com/docs/api-reference/signals/charge#is-fast-charger-present) to the vehicle.
+
+Enabled by default: :x:
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `number.<make_model>_charge_limit`
 
