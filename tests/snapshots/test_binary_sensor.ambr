@@ -190,6 +190,20 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_update[vehicle_state_all-byd_seal-binary_sensor][binary_sensor.byd_seal_u_dm_i_fast_charger_connected]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'plug',
+      'friendly_name': 'BYD Seal U Dm-i Fast Charger Connected',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.byd_seal_u_dm_i_fast_charger_connected',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-byd_seal-binary_sensor][binary_sensor.byd_seal_u_dm_i_front_trunk]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -551,6 +565,20 @@
     'state': 'off',
   })
 # ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_fast_charger_connected]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'plug',
+      'friendly_name': 'JAGUAR I-PACE Fast Charger Connected',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.jaguar_i_pace_fast_charger_connected',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-jaguar_ipace-binary_sensor][binary_sensor.jaguar_i_pace_front_trunk]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -900,6 +928,20 @@
     }),
     'context': <ANY>,
     'entity_id': 'binary_sensor.vw_id_4_engine_cover',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_fast_charger_connected]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'plug',
+      'friendly_name': 'VW ID.4 Fast Charger Connected',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.vw_id_4_fast_charger_connected',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,

@@ -560,6 +560,15 @@ _SNAPSHOT_ORDER = {
             "digital_key_paired",
             "surveillance_enabled",
             "battery_heater_active",
+            "charge_voltage",
+            "charge_amperage",
+            "charge_wattage",
+            "charge_energy_added",
+            "charge_time_to_complete",
+            "charge_rate",
+            "charge_amperage_max",
+            "charge_fast_charger_present",
+            "firmware_version",
         ]
     )
 }
