@@ -16,20 +16,28 @@ SmartCar availability varies by region. Check whether your car brand is supporte
 Available sensors (data signals) depend on the brand, model, year, and region of your vehicle. See this [compatible vehicles table](https://smartcar.com/product/compatible-vehicles) to confirm what data and commands are supported for your vehicle.
  
 ### Is your Home Assistant server publicly accessible?
-For webhooks to work, SmartCar servers must be able to reach your Home Assistant server via a **public**, **secure** (https) url. You will need a valid SSL certificate for your HA domain name. There are [separate guides](https://www.home-assistant.io/docs/configuration/remote/) on how to do this. Make sure you have configured a valid **Home Assistant URL** in your [HA network settings](https://my.home-assistant.io/redirect/network/). Test to see if this is accessible from the public internet using a tool like [httpstatus.io](https://httpstatus.io/): you should get a **200 OK** response. For the OAuth setup flow to complete successfully, you must also have [my.home-assistant.io](https://my.home-assistant.io/) URL redirects configured correctly, as described in the installation guide.
+For webhooks to work, SmartCar servers must be able to reach your Home Assistant server via a **public**, **secure** (https) url. You will need a valid SSL certificate for your HA domain name. There are [separate guides](https://www.home-assistant.io/docs/configuration/remote/) on how to do this. 
+Make sure you have configured a valid **Home Assistant URL** in your [HA network settings](https://my.home-assistant.io/redirect/network/). 
+Test to see if this is accessible from the public internet using a tool like [httpstatus.io](https://httpstatus.io/): you should get a **200 OK** response. 
+For the OAuth setup flow to complete successfully, you must also have [my.home-assistant.io](https://my.home-assistant.io/) URL redirects configured correctly, as described in the installation guide.
  
 ### Can you update sensors through polling?
 SmartCar favours webhooks instead of polling for vehicle updates. Webhooks really are more efficient, faster and unlimited. But polling is perfect for the initial setup and troubleshooting. Check if you can update the values of some sensors using the `homeassistant.update_entity` function. You can use this in a [HA automation](https://github.com/tube0013/Smartcar-HA/blob/main/examples/poll-smartcar-simple.yaml) or head over to [Developer Tools - Actions](https://my.home-assistant.io/redirect/developer_services/) and run this action manually:
- 
+
+```
  - action: homeassistant.update_entity
    data:
      entity_id:
       - sensor.<make_model>_odometer
       - device_tracker.<make_model>_location
-This request can take a very long time to receive a response from your car, between 20 seconds to a couple of minutes. If you open the sensor you've just updated in HA, you will see that there are additional attibutes for it which will include: `Age` – the date and time at which the data was recorded by the vehicle `Fetched at` – the date and time at which Smartcar fetched the data These values do not necessarily update each time you make a request. They only update when Smartcar changes them (i.e. when it reaches out to your car brand's server, it'll update the `fetched_at` value) **Remember:** you have a very limited number of poll requests and you could run out very quickly in testing.
+```
+This request can take a very long time to receive a response from your car, between 20 seconds to a couple of minutes. If you open the sensor you've just updated in HA, you will see that there are additional attibutes for it which will include: `Age` – the date and time at which the data was recorded by the vehicle `Fetched at` – the date and time at which Smartcar fetched the data These values do not necessarily update each time you make a request. They only update when Smartcar changes them (i.e. when it reaches out to your car brand's server, it'll update the `fetched_at` value). 
+**Remember:** you have a very limited number of poll requests and you could run out very quickly in testing.
  
 ### Is the SmartCar-HA integration configured correctly for webhooks?
-If your Home Assistant _network_ configuration is correct (see above), the [SmartCar-HA integration](https://my.home-assistant.io/redirect/integration/?domain=smartcar) will provide you a webhook URL that looks like this: `https://your-home-assistant.example.com/api/webhook/xxxxxxxxxxxxxxxxxxxxxx` Test this url with [httpstatus.io](https://httpstatus.io/): a status **405 Method not allowed** response is expected and confirms the endpoint is reachable. While you're here, double check that this URL from your HA integration settings exactly matches the `Vehicle data callback URI` in your SmartCar dashboard -> Integrations settings. Also check that the Token configured in the SmartCar-HA integration is the **Application Management Token**, found at SmartCar Dashboard -> Configuration -> API Keys. It should look like this:
+If your Home Assistant _network_ configuration is correct (see above), the [SmartCar-HA integration](https://my.home-assistant.io/redirect/integration/?domain=smartcar) will provide you a webhook URL that looks like this: 
+`https://your-home-assistant.example.com/api/webhook/xxxxxxxxxxxxxxxxxxxxxx`
+Test this url with [httpstatus.io](https://httpstatus.io/): a status **405 Method not allowed** response is expected and confirms the endpoint is reachable. While you're here, double check that this URL from your HA integration settings exactly matches the `Vehicle data callback URI` in your SmartCar dashboard -> Integrations settings. Also check that the Token configured in the SmartCar-HA integration is the **Application Management Token**, found at SmartCar Dashboard -> Configuration -> API Keys. It should look like this:
 
 ![webhook](images/FAQ1.png)
 
