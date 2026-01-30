@@ -7,7 +7,7 @@ Before diving into deeper troubleshooting, it’s worth checking a few common Sm
 * [SmartCar Brands Status](https://brandreliability.smartcar.com/) – Known issues affecting specific car brands
 * [Brand Data Frequency](https://smartcar.com/docs/help/frequencies) – How frequently are updates expected for each brand
 * [Brand data reliability](https://smartcar.com/docs/help/reliability-and-freshness) – How reliable each brand is for data and commands
-* [my.smartcar.com](https://my.smartcar.com/) – a useful app to check that you have the required permission (scopes) enabled for your vehicle and your integration ((you'll need to re-authenticate your vehicle))
+* [my.smartcar.com](https://my.smartcar.com/) – a useful app to check that you have the required permission (scopes) enabled for your vehicle and your integration (you'll need to re-authenticate your vehicle)
  
 ### Is your car brand supported in your region?
 SmartCar availability varies by region. Check whether your car brand is supported where you live on [smartcar.com/global](https://smartcar.com/global)
