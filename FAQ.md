@@ -81,9 +81,11 @@ Download the Diagnostics file from your car in Home Assistant and attach it or p
  
 ![help](images/FAQ4.png)
 
-It would be extremely helpful if you would enable debugging and capture a few webhook payloads in the logs. To enable debugging, go to the [integration settings page](https://my.home-assistant.io/redirect/integration/?domain=smartcar), click the three dots in the top right corner and select **Enable debug logging**. Then just wait for a while, take your car for a quick drive, so that you get at least one webhook payload (you can check if a webhook payload was sent in the SmartCar dashboard logs). When you **Disable debug logging** you will be prompted to download a log file (this is best done on a computer, not a phone).
+It would be extremely helpful if you would enable debugging and capture a few webhook payloads in the logs. To enable debugging, go to the [integration settings page](https://my.home-assistant.io/redirect/integration/?domain=smartcar), click the three dots in the top right corner and select **Enable debug logging**. Then just wait for a while, take your car for a quick drive, so that you get at least one webhook payload (you can check if a webhook payload was sent in the SmartCar dashboard logs). 
+When you **Disable debug logging** you will be prompted to download a log file (this is best done on a computer, not a phone).
  
 ![log](images/FAQ5.png)
+
 In that log file you will find a line that starts with `DEBUG (MainThread) [custom_components.smartcar.webhooks] Received JSON from Smartcar:` followed by the **raw webhook payload** enclosed in single quotes (`'...'`) The JSON should start with a `{` and end with an `}`
  
 ### Posting logs and data
