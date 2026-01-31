@@ -31,7 +31,7 @@ SmartCar favours webhooks instead of polling for vehicle updates. Webhooks reall
       - sensor.<make_model>_odometer
       - device_tracker.<make_model>_location
 ```
-This request can take a very long time to receive a response from your car, between 20 seconds to a couple of minutes. If you open the sensor you've just updated in HA, you will see that there are additional attibutes for it which will include: `Age` – the date and time at which the data was recorded by the vehicle `Fetched at` – the date and time at which Smartcar fetched the data These values do not necessarily update each time you make a request. They only update when Smartcar changes them (i.e. when it reaches out to your car brand's server, it'll update the `fetched_at` value). 
+This request can take a very long time to receive a response from your car, between 20 seconds to a couple of minutes. If you open the sensor you've just updated in HA, you will see that there are additional attributes for it which will include: `Age` – the date and time at which the data was recorded by the vehicle `Fetched at` – the date and time at which Smartcar fetched the data These values do not necessarily update each time you make a request. They only update when Smartcar changes them (i.e. when it reaches out to your car brand's server, it'll update the `fetched_at` value). 
 **Remember:** you have a very limited number of poll requests and you could run out very quickly in testing.
  
 ### Is the SmartCar-HA integration configured correctly for webhooks?
