@@ -43,6 +43,26 @@
     'state': 'not_home',
   })
 # ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-device_tracker][device_tracker.polestar_polestar_2_location]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-31T09:47:44+00:00',
+      'fetched_at': '2026-02-01T09:25:42.671000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Location',
+      'gps_accuracy': 0,
+      'icon': 'mdi:car',
+      'latitude': 61.11111111111111,
+      'longitude': 23.33333333333333,
+      'source_type': <SourceType.GPS: 'gps'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'device_tracker.polestar_polestar_2_location',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'not_home',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-vw_id_4-device_tracker][device_tracker.vw_id_4_location]
   StateSnapshot({
     'attributes': ReadOnlyDict({

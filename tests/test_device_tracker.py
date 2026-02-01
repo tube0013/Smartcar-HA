@@ -24,7 +24,7 @@ from . import setup_added_integration, setup_integration
 
 @pytest.mark.usefixtures("enable_all_entities")
 @pytest.mark.parametrize("platform", [Platform.DEVICE_TRACKER])
-@pytest.mark.parametrize("vehicle_fixture", ["vw_id_4", "jaguar_ipace", "byd_seal"])
+@pytest.mark.parametrize("vehicle_fixture", ["vw_id_4", "jaguar_ipace", "byd_seal", "polestar_2"])
 @pytest.mark.parametrize(
     ("webhook_body", "webhook_headers", "expected"),
     [("all", {"sc-signature": "1234"}, {})],  # JSON fixture

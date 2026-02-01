@@ -747,6 +747,397 @@
     'state': 'off',
   })
 # ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_asleep]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-02-01T09:03:40+00:00',
+      'fetched_at': '2026-02-01T09:25:42.645000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Asleep',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_asleep',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'on',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_battery_heater_active]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'POLESTAR Polestar 2 Battery Heater Active',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_battery_heater_active',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_charging_cable_plugged_in]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-02-01T09:25:33+00:00',
+      'device_class': 'plug',
+      'fetched_at': '2026-02-01T09:25:43.244000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Charging Cable Plugged In',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_charging_cable_plugged_in',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'on',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_digital_key_paired]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'POLESTAR Polestar 2 Digital Key Paired',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_digital_key_paired',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_door_back_left]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-31T22:09:52+00:00',
+      'device_class': 'door',
+      'fetched_at': '2026-02-01T09:25:42.652000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Door Back Left',
+      'icon': 'mdi:car-door',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_door_back_left',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_door_back_left_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-31T22:09:52+00:00',
+      'device_class': 'lock',
+      'fetched_at': '2026-02-01T09:25:42.652000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Door Back Left Lock',
+      'icon': 'mdi:car-door-lock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_door_back_left_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_door_back_right]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-31T22:09:52+00:00',
+      'device_class': 'door',
+      'fetched_at': '2026-02-01T09:25:42.652000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Door Back Right',
+      'icon': 'mdi:car-door',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_door_back_right',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_door_back_right_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-31T22:09:52+00:00',
+      'device_class': 'lock',
+      'fetched_at': '2026-02-01T09:25:42.652000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Door Back Right Lock',
+      'icon': 'mdi:car-door-lock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_door_back_right_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_door_front_left]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-31T22:09:52+00:00',
+      'device_class': 'door',
+      'fetched_at': '2026-02-01T09:25:42.652000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Door Front Left',
+      'icon': 'mdi:car-door',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_door_front_left',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_door_front_left_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-31T22:09:52+00:00',
+      'device_class': 'lock',
+      'fetched_at': '2026-02-01T09:25:42.652000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Door Front Left Lock',
+      'icon': 'mdi:car-door-lock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_door_front_left_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_door_front_right]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-31T22:09:52+00:00',
+      'device_class': 'door',
+      'fetched_at': '2026-02-01T09:25:42.652000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Door Front Right',
+      'icon': 'mdi:car-door',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_door_front_right',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_door_front_right_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-31T22:09:52+00:00',
+      'device_class': 'lock',
+      'fetched_at': '2026-02-01T09:25:42.652000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Door Front Right Lock',
+      'icon': 'mdi:car-door-lock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_door_front_right_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_engine_cover]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'door',
+      'friendly_name': 'POLESTAR Polestar 2 Engine Cover',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_engine_cover',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_fast_charger_connected]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-02-01T09:25:33+00:00',
+      'device_class': 'plug',
+      'fetched_at': '2026-02-01T09:25:43.244000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Fast Charger Connected',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_fast_charger_connected',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_front_trunk]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-31T22:09:52+00:00',
+      'device_class': 'door',
+      'fetched_at': '2026-02-01T09:25:42.652000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Front Trunk',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_front_trunk',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_front_trunk_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'lock',
+      'friendly_name': 'POLESTAR Polestar 2 Front Trunk Lock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_front_trunk_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_online]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-02-01T09:03:40+00:00',
+      'fetched_at': '2026-02-01T09:25:42.645000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Online',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_online',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'on',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_rear_trunk]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-31T22:09:52+00:00',
+      'device_class': 'door',
+      'fetched_at': '2026-02-01T09:25:42.652000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Rear Trunk',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_rear_trunk',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_rear_trunk_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-31T22:09:52+00:00',
+      'device_class': 'lock',
+      'fetched_at': '2026-02-01T09:25:42.652000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Rear Trunk Lock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_rear_trunk_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_sunroof]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'door',
+      'friendly_name': 'POLESTAR Polestar 2 Sunroof',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_sunroof',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_surveillance_enabled]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'POLESTAR Polestar 2 Surveillance Enabled',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_surveillance_enabled',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_window_back_left]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-31T22:09:52+00:00',
+      'device_class': 'window',
+      'fetched_at': '2026-02-01T09:25:42.652000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Window Back Left',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_window_back_left',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_window_back_right]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-31T22:09:52+00:00',
+      'device_class': 'window',
+      'fetched_at': '2026-02-01T09:25:42.652000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Window Back Right',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_window_back_right',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_window_front_left]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-31T22:09:52+00:00',
+      'device_class': 'window',
+      'fetched_at': '2026-02-01T09:25:42.652000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Window Front Left',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_window_front_left',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-binary_sensor][binary_sensor.polestar_polestar_2_window_front_right]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-31T22:09:52+00:00',
+      'device_class': 'window',
+      'fetched_at': '2026-02-01T09:25:42.652000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Window Front Right',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.polestar_polestar_2_window_front_right',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-vw_id_4-binary_sensor][binary_sensor.vw_id_4_asleep]
   StateSnapshot({
     'attributes': ReadOnlyDict({

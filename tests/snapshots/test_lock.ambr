@@ -129,6 +129,22 @@
     'state': 'locked',
   })
 # ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-lock][lock.polestar_polestar_2_door_lock]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-31T22:09:52+00:00',
+      'fetched_at': '2026-02-01T09:25:42.652000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Door Lock',
+      'supported_features': <LockEntityFeature: 0>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'lock.polestar_polestar_2_door_lock',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'locked',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-vw_id_4-lock][lock.vw_id_4_door_lock]
   StateSnapshot({
     'attributes': ReadOnlyDict({

@@ -1,0 +1,352 @@
+{
+  "eventId": "2b65f4e6-0356-440e-a87f-eed19cffda9a",
+  "eventType": "VEHICLE_STATE",
+  "data": {
+    "user": { "id": "9c9cde56-3333-5555-6666-7e50207e6e64" },
+    "vehicle": {
+      "id": "875d9333-bbbb-4444-aaaa-17be22ebe970",
+      "make": "POLESTAR",
+      "model": "Polestar 2",
+      "year": 2024
+    },
+    "signals": [
+      {
+        "code": "closure-islocked",
+        "name": "IsLocked",
+        "group": "Closure",
+        "body": { "value": true },
+        "meta": { "oemUpdatedAt": 1769897392000, "retrievedAt": 1769937942652 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "closure-doors",
+        "name": "Doors",
+        "group": "Closure",
+        "body": {
+          "values": [
+            { "row": 0, "column": 0, "isOpen": false, "isLocked": true },
+            { "row": 0, "column": 1, "isOpen": false, "isLocked": true },
+            { "row": 1, "column": 0, "isOpen": false, "isLocked": true },
+            { "row": 1, "column": 1, "isOpen": false, "isLocked": true }
+          ],
+          "rowCount": 2,
+          "columnCount": 2
+        },
+        "meta": { "oemUpdatedAt": 1769897392000, "retrievedAt": 1769937942652 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "closure-fronttrunk",
+        "name": "FrontTrunk",
+        "group": "Closure",
+        "body": { "isLocked": null, "isOpen": false },
+        "meta": { "oemUpdatedAt": 1769897392000, "retrievedAt": 1769937942652 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "closure-reartrunk",
+        "name": "RearTrunk",
+        "group": "Closure",
+        "body": { "isOpen": false, "isLocked": true },
+        "meta": { "oemUpdatedAt": 1769897392000, "retrievedAt": 1769937942652 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "closure-windows",
+        "name": "Windows",
+        "group": "Closure",
+        "body": {
+          "values": [
+            { "row": 0, "column": 0, "isOpen": false },
+            { "row": 0, "column": 1, "isOpen": false },
+            { "row": 1, "column": 0, "isOpen": false },
+            { "row": 1, "column": 1, "isOpen": false }
+          ],
+          "rowCount": 2,
+          "columnCount": 2
+        },
+        "meta": { "oemUpdatedAt": 1769897392000, "retrievedAt": 1769937942652 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "closure-sunroof",
+        "name": "Sunroof",
+        "group": "Closure",
+        "body": { "isOpen": null },
+        "meta": { "oemUpdatedAt": 1769897392000, "retrievedAt": 1769937942652 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "vehicleidentification-exteriorcolor",
+        "name": "ExteriorColor",
+        "group": "VehicleIdentification",
+        "body": { "value": "Space" },
+        "meta": { "oemUpdatedAt": 0, "retrievedAt": 0 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "vehicleidentification-packages",
+        "name": "Packages",
+        "group": "VehicleIdentification",
+        "body": { "values": ["Performance", "Pilot", "Plus"] },
+        "meta": { "oemUpdatedAt": 1769937943305, "retrievedAt": 1769937943305 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "vehicleidentification-vin",
+        "name": "VIN",
+        "group": "VehicleIdentification",
+        "body": { "value": "YSAAAAAAAAAAAAAAA" },
+        "meta": { "oemUpdatedAt": 0, "retrievedAt": 0 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "charge-timetocomplete",
+        "name": "TimeToComplete",
+        "group": "Charge",
+        "body": { "value": 15 },
+        "meta": { "oemUpdatedAt": 1769937933000, "retrievedAt": 1769937943244 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "charge-ischargingcableconnected",
+        "name": "IsChargingCableConnected",
+        "group": "Charge",
+        "body": { "value": true },
+        "meta": { "oemUpdatedAt": 1769937933000, "retrievedAt": 1769937943244 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "charge-detailedchargingstatus",
+        "name": "DetailedChargingStatus",
+        "group": "Charge",
+        "body": { "value": "CHARGING" },
+        "meta": { "oemUpdatedAt": 1769937933000, "retrievedAt": 1769937943244 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "charge-ischarging",
+        "name": "IsCharging",
+        "group": "Charge",
+        "body": { "value": true },
+        "meta": { "oemUpdatedAt": 1769937933000, "retrievedAt": 1769937943244 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "charge-isfastchargerpresent",
+        "name": "IsFastChargerPresent",
+        "group": "Charge",
+        "body": { "value": false },
+        "meta": { "oemUpdatedAt": 1769937933000, "retrievedAt": 1769937943244 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "charge-wattage",
+        "name": "Wattage",
+        "group": "Charge",
+        "body": { "value": 4683, "unit": "watts" },
+        "meta": { "oemUpdatedAt": 1769937933000, "retrievedAt": 1769937943244 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "charge-amperage",
+        "name": "Amperage",
+        "group": "Charge",
+        "body": { "value": 7, "unit": "ampere" },
+        "meta": { "oemUpdatedAt": 1769937933000, "retrievedAt": 1769937943244 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "charge-voltage",
+        "name": "Voltage",
+        "group": "Charge",
+        "body": { "value": 223, "unit": "volts" },
+        "meta": { "oemUpdatedAt": 1769937933000, "retrievedAt": 1769937943244 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "charge-amperagemax",
+        "name": "AmperageMax",
+        "group": "Charge",
+        "body": { "value": 18, "unit": "ampere" },
+        "meta": { "oemUpdatedAt": 1769347049684, "retrievedAt": 1769937943252 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "charge-chargelimits",
+        "name": "ChargeLimits",
+        "group": "Charge",
+        "body": { "values": [], "activeLimit": 90, "unit": "percent" },
+        "meta": { "oemUpdatedAt": 1769888339310, "retrievedAt": 1769937943146 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "name": "ChargeTimers",
+        "group": "Charge",
+        "code": "charge-chargetimers",
+        "status": {
+          "value": "ERROR",
+          "error": { "type": "SERVER", "code": "INTERNAL" }
+        }
+      },
+      {
+        "code": "tractionbattery-stateofcharge",
+        "name": "StateOfCharge",
+        "group": "TractionBattery",
+        "body": { "value": 89, "unit": "percent" },
+        "meta": { "oemUpdatedAt": 1769937933000, "retrievedAt": 1769937943244 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "tractionbattery-range",
+        "name": "Range",
+        "group": "TractionBattery",
+        "body": {
+          "value": 290,
+          "type": "DEFAULT",
+          "additionalValues": [],
+          "unit": "km"
+        },
+        "meta": { "oemUpdatedAt": 1769937933000, "retrievedAt": 1769937943244 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "tractionbattery-nominalcapacity",
+        "name": "NominalCapacity",
+        "group": "TractionBattery",
+        "body": {
+          "capacity": 82,
+          "source": "SMARTCAR",
+          "availableCapacities": [
+            {
+              "capacity": 82,
+              "description": "Polestar vehicle - no description"
+            }
+          ],
+          "unit": "kWh"
+        },
+        "meta": { "oemUpdatedAt": 0, "retrievedAt": 0 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "connectivitysoftware-currentfirmwareversion",
+        "name": "CurrentFirmwareVersion",
+        "group": "ConnectivitySoftware",
+        "body": { "value": "4.2.13" },
+        "meta": { "oemUpdatedAt": 1769937942839, "retrievedAt": 1769937942839 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "connectivitystatus-isonline",
+        "name": "IsOnline",
+        "group": "ConnectivityStatus",
+        "body": { "value": true },
+        "meta": { "oemUpdatedAt": 1769936620000, "retrievedAt": 1769937942645 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "connectivitystatus-isasleep",
+        "name": "IsAsleep",
+        "group": "ConnectivityStatus",
+        "body": { "value": false },
+        "meta": { "oemUpdatedAt": 1769936620000, "retrievedAt": 1769937942645 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "location-preciselocation",
+        "name": "PreciseLocation",
+        "group": "Location",
+        "body": {
+          "latitude": 61.11111111111111,
+          "longitude": 23.33333333333333,
+          "locationType": "LAST_PARKED"
+        },
+        "meta": { "oemUpdatedAt": 1769852864000, "retrievedAt": 1769937942671 },
+        "status": { "value": "SUCCESS" }
+      },
+      {
+        "code": "odometer-traveleddistance",
+        "name": "TraveledDistance",
+        "group": "Odometer",
+        "body": { "value": 42506.3, "unit": "km" },
+        "meta": { "oemUpdatedAt": 1769852860000, "retrievedAt": 1769937942628 },
+        "status": { "value": "SUCCESS" }
+      }
+    ]
+  },
+  "triggers": [
+    {
+      "type": "SIGNAL_UPDATED",
+      "signal": {
+        "name": "Amperage",
+        "code": "charge-amperage",
+        "group": "Charge"
+      }
+    },
+    {
+      "type": "SIGNAL_UPDATED",
+      "signal": {
+        "name": "DetailedChargingStatus",
+        "code": "charge-detailedchargingstatus",
+        "group": "Charge"
+      }
+    },
+    {
+      "type": "SIGNAL_UPDATED",
+      "signal": {
+        "name": "IsCharging",
+        "code": "charge-ischarging",
+        "group": "Charge"
+      }
+    },
+    {
+      "type": "SIGNAL_UPDATED",
+      "signal": {
+        "name": "TimeToComplete",
+        "code": "charge-timetocomplete",
+        "group": "Charge"
+      }
+    },
+    {
+      "type": "SIGNAL_UPDATED",
+      "signal": {
+        "name": "Voltage",
+        "code": "charge-voltage",
+        "group": "Charge"
+      }
+    },
+    {
+      "type": "SIGNAL_UPDATED",
+      "signal": {
+        "name": "Wattage",
+        "code": "charge-wattage",
+        "group": "Charge"
+      }
+    },
+    {
+      "type": "SIGNAL_UPDATED",
+      "signal": {
+        "name": "Range",
+        "code": "tractionbattery-range",
+        "group": "TractionBattery"
+      }
+    },
+    {
+      "type": "SIGNAL_UPDATED",
+      "signal": {
+        "name": "StateOfCharge",
+        "code": "tractionbattery-stateofcharge",
+        "group": "TractionBattery"
+      }
+    }
+  ],
+  "meta": {
+    "deliveryId": "23db56ff-a58b-4c0d-990b-91846fd3a451",
+    "deliveredAt": 1769937943464,
+    "version": "4.0",
+    "webhookId": "7ff798f5-bbce-4300-a1f4-d553d0fb23b0",
+    "webhookName": "Home Assistant",
+    "mode": "LIVE",
+    "signalCount": 30
+  }
+}
