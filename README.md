@@ -151,6 +151,9 @@ The webhooks configuration is broken down into several steps:
 1. Press _Verify this webhook_
 1. Ensure a popup appears indicating that the webhook was successfully verified
 
+## FAQ's and troubleshooting
+See here [FAQ](FAQ.md)
+
 ## Entities
 
 Several entities are created for for each connected vehicle (subject to vehicle compatibility and granted permissions) across the _device tracker_, _sensor_, _binary sensor_, _number_, _switch_, and _lock_ platforms:
