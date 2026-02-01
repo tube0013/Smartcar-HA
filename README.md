@@ -177,9 +177,7 @@ Several entities are created for for each connected vehicle (subject to vehicle 
 - [`sensor.<make_model>_charging_voltage`](#sensormake_model_charging_voltage)
 - [`sensor.<make_model>_charging_current`](#sensormake_model_charging_current)
 - [`sensor.<make_model>_charging_power`](#sensormake_model_charging_power)
-- [`sensor.<make_model>_charging_energy_added`](#sensormake_model_charging_energy_added)
 - [`sensor.<make_model>_charging_time_remaining`](#sensormake_model_charging_time_remaining)
-- [`sensor.<make_model>_charging_rate`](#sensormake_model_charging_rate)
 - [`sensor.<make_model>_charging_current_max`](#sensormake_model_charging_current_max)
 - [`sensor.<make_model>_firmware_version`](#sensormake_model_firmware_version)
 - [`binary_sensor.<make_model>_charging_cable_plugged_in`](#binary_sensormake_model_charging_cable_plugged_in)
@@ -384,23 +382,9 @@ The [current power delivery rate](https://smartcar.com/docs/api-reference/signal
 Enabled by default: :x:
 Webhooks only: :link: _currently only available via webhooks_
 
-### `sensor.<make_model>_charging_energy_added`
-
-The [cumulative energy delivered](https://smartcar.com/docs/api-reference/signals/charge#energy-added) during the current or recent charging session in kWh.
-
-Enabled by default: :x:
-Webhooks only: :link: _currently only available via webhooks_
-
 ### `sensor.<make_model>_charging_time_remaining`
 
 The [estimated time remaining](https://smartcar.com/docs/api-reference/signals/charge#time-to-complete) until the vehicle reaches its charge limit in minutes.
-
-Enabled by default: :x:
-Webhooks only: :link: _currently only available via webhooks_
-
-### `sensor.<make_model>_charging_rate`
-
-The [rate at which range is being added](https://smartcar.com/docs/api-reference/signals/charge#charge-rate) during active charging in km/h.
 
 Enabled by default: :x:
 Webhooks only: :link: _currently only available via webhooks_

@@ -516,22 +516,6 @@
     'state': 'unavailable',
   })
 # ---
-# name: test_webhook_scenarios[broad_auth_error-vw_id_4-sensor][sensor.vw_id_4_charging_energy_added]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'device_class': 'energy',
-      'friendly_name': 'VW ID.4 Charging Energy Added',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_energy_added',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
 # name: test_webhook_scenarios[broad_auth_error-vw_id_4-sensor][sensor.vw_id_4_charging_power]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -542,22 +526,6 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_power',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
-# name: test_webhook_scenarios[broad_auth_error-vw_id_4-sensor][sensor.vw_id_4_charging_rate]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'friendly_name': 'VW ID.4 Charging Rate',
-      'icon': 'mdi:speedometer',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_rate',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -880,22 +848,6 @@
     'state': 'unavailable',
   })
 # ---
-# name: test_webhook_scenarios[invalid_json-vw_id_4-sensor][sensor.vw_id_4_charging_energy_added]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'device_class': 'energy',
-      'friendly_name': 'VW ID.4 Charging Energy Added',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_energy_added',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
 # name: test_webhook_scenarios[invalid_json-vw_id_4-sensor][sensor.vw_id_4_charging_power]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -906,22 +858,6 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_power',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
-# name: test_webhook_scenarios[invalid_json-vw_id_4-sensor][sensor.vw_id_4_charging_rate]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'friendly_name': 'VW ID.4 Charging Rate',
-      'icon': 'mdi:speedometer',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_rate',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -1244,22 +1180,6 @@
     'state': 'unavailable',
   })
 # ---
-# name: test_webhook_scenarios[invalid_signature-vw_id_4-sensor][sensor.vw_id_4_charging_energy_added]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'device_class': 'energy',
-      'friendly_name': 'VW ID.4 Charging Energy Added',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_energy_added',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
 # name: test_webhook_scenarios[invalid_signature-vw_id_4-sensor][sensor.vw_id_4_charging_power]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -1270,22 +1190,6 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_power',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
-# name: test_webhook_scenarios[invalid_signature-vw_id_4-sensor][sensor.vw_id_4_charging_rate]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'friendly_name': 'VW ID.4 Charging Rate',
-      'icon': 'mdi:speedometer',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_rate',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -1608,22 +1512,6 @@
     'state': 'unavailable',
   })
 # ---
-# name: test_webhook_scenarios[irrelevant_auth_error-vw_id_4-sensor][sensor.vw_id_4_charging_energy_added]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'device_class': 'energy',
-      'friendly_name': 'VW ID.4 Charging Energy Added',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_energy_added',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
 # name: test_webhook_scenarios[irrelevant_auth_error-vw_id_4-sensor][sensor.vw_id_4_charging_power]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -1634,22 +1522,6 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_power',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
-# name: test_webhook_scenarios[irrelevant_auth_error-vw_id_4-sensor][sensor.vw_id_4_charging_rate]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'friendly_name': 'VW ID.4 Charging Rate',
-      'icon': 'mdi:speedometer',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_rate',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -1972,22 +1844,6 @@
     'state': 'unavailable',
   })
 # ---
-# name: test_webhook_scenarios[vehicle_error-vw_id_4-sensor][sensor.vw_id_4_charging_energy_added]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'device_class': 'energy',
-      'friendly_name': 'VW ID.4 Charging Energy Added',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_energy_added',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
 # name: test_webhook_scenarios[vehicle_error-vw_id_4-sensor][sensor.vw_id_4_charging_power]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -1998,22 +1854,6 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_power',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
-# name: test_webhook_scenarios[vehicle_error-vw_id_4-sensor][sensor.vw_id_4_charging_rate]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'friendly_name': 'VW ID.4 Charging Rate',
-      'icon': 'mdi:speedometer',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_rate',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -2336,22 +2176,6 @@
     'state': 'unavailable',
   })
 # ---
-# name: test_webhook_scenarios[vehicle_mismatch-vw_id_4-sensor][sensor.vw_id_4_charging_energy_added]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'device_class': 'energy',
-      'friendly_name': 'VW ID.4 Charging Energy Added',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_energy_added',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
 # name: test_webhook_scenarios[vehicle_mismatch-vw_id_4-sensor][sensor.vw_id_4_charging_power]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -2362,22 +2186,6 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_power',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
-# name: test_webhook_scenarios[vehicle_mismatch-vw_id_4-sensor][sensor.vw_id_4_charging_rate]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'friendly_name': 'VW ID.4 Charging Rate',
-      'icon': 'mdi:speedometer',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_rate',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -2702,22 +2510,6 @@
     'state': 'unavailable',
   })
 # ---
-# name: test_webhook_scenarios[vehicle_state-vw_id_4-sensor][sensor.vw_id_4_charging_energy_added]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'device_class': 'energy',
-      'friendly_name': 'VW ID.4 Charging Energy Added',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_energy_added',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
 # name: test_webhook_scenarios[vehicle_state-vw_id_4-sensor][sensor.vw_id_4_charging_power]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -2728,22 +2520,6 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_power',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
-# name: test_webhook_scenarios[vehicle_state-vw_id_4-sensor][sensor.vw_id_4_charging_rate]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'friendly_name': 'VW ID.4 Charging Rate',
-      'icon': 'mdi:speedometer',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_rate',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -3068,22 +2844,6 @@
     'state': 'unavailable',
   })
 # ---
-# name: test_webhook_scenarios[vehicle_state_fuel-vw_id_4-sensor][sensor.vw_id_4_charging_energy_added]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'device_class': 'energy',
-      'friendly_name': 'VW ID.4 Charging Energy Added',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_energy_added',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
 # name: test_webhook_scenarios[vehicle_state_fuel-vw_id_4-sensor][sensor.vw_id_4_charging_power]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -3094,22 +2854,6 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_power',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
-# name: test_webhook_scenarios[vehicle_state_fuel-vw_id_4-sensor][sensor.vw_id_4_charging_rate]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'friendly_name': 'VW ID.4 Charging Rate',
-      'icon': 'mdi:speedometer',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_rate',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -3436,22 +3180,6 @@
     'state': 'unavailable',
   })
 # ---
-# name: test_webhook_scenarios[verify-vw_id_4-sensor][sensor.vw_id_4_charging_energy_added]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'device_class': 'energy',
-      'friendly_name': 'VW ID.4 Charging Energy Added',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_energy_added',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
 # name: test_webhook_scenarios[verify-vw_id_4-sensor][sensor.vw_id_4_charging_power]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -3462,22 +3190,6 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_power',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
-# name: test_webhook_scenarios[verify-vw_id_4-sensor][sensor.vw_id_4_charging_rate]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'friendly_name': 'VW ID.4 Charging Rate',
-      'icon': 'mdi:speedometer',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_rate',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -3802,22 +3514,6 @@
     'state': 'unavailable',
   })
 # ---
-# name: test_webhook_update[vehicle_state_all-byd_seal-sensor][sensor.byd_seal_u_dm_i_charging_energy_added]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'device_class': 'energy',
-      'friendly_name': 'BYD Seal U Dm-i Charging Energy Added',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.byd_seal_u_dm_i_charging_energy_added',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
 # name: test_webhook_update[vehicle_state_all-byd_seal-sensor][sensor.byd_seal_u_dm_i_charging_power]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -3828,22 +3524,6 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.byd_seal_u_dm_i_charging_power',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
-# name: test_webhook_update[vehicle_state_all-byd_seal-sensor][sensor.byd_seal_u_dm_i_charging_rate]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'friendly_name': 'BYD Seal U Dm-i Charging Rate',
-      'icon': 'mdi:speedometer',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.byd_seal_u_dm_i_charging_rate',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -4172,22 +3852,6 @@
     'state': 'unavailable',
   })
 # ---
-# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_charging_energy_added]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'device_class': 'energy',
-      'friendly_name': 'JAGUAR I-PACE Charging Energy Added',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.jaguar_i_pace_charging_energy_added',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
 # name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_charging_power]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -4198,22 +3862,6 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.jaguar_i_pace_charging_power',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
-# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_charging_rate]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'friendly_name': 'JAGUAR I-PACE Charging Rate',
-      'icon': 'mdi:speedometer',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.jaguar_i_pace_charging_rate',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -4550,22 +4198,6 @@
     'state': '18',
   })
 # ---
-# name: test_webhook_update[vehicle_state_all-polestar_2-sensor][sensor.polestar_polestar_2_charging_energy_added]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'device_class': 'energy',
-      'friendly_name': 'POLESTAR Polestar 2 Charging Energy Added',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.polestar_polestar_2_charging_energy_added',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
 # name: test_webhook_update[vehicle_state_all-polestar_2-sensor][sensor.polestar_polestar_2_charging_power]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -4582,22 +4214,6 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': '4.68',
-  })
-# ---
-# name: test_webhook_update[vehicle_state_all-polestar_2-sensor][sensor.polestar_polestar_2_charging_rate]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'friendly_name': 'POLESTAR Polestar 2 Charging Rate',
-      'icon': 'mdi:speedometer',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.polestar_polestar_2_charging_rate',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
   })
 # ---
 # name: test_webhook_update[vehicle_state_all-polestar_2-sensor][sensor.polestar_polestar_2_charging_status]
@@ -4930,22 +4546,6 @@
     'state': 'unavailable',
   })
 # ---
-# name: test_webhook_update[vehicle_state_all-vw_id_4-sensor][sensor.vw_id_4_charging_energy_added]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'device_class': 'energy',
-      'friendly_name': 'VW ID.4 Charging Energy Added',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_energy_added',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
 # name: test_webhook_update[vehicle_state_all-vw_id_4-sensor][sensor.vw_id_4_charging_power]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -4956,22 +4556,6 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_power',
-    'last_changed': <ANY>,
-    'last_reported': <ANY>,
-    'last_updated': <ANY>,
-    'state': 'unavailable',
-  })
-# ---
-# name: test_webhook_update[vehicle_state_all-vw_id_4-sensor][sensor.vw_id_4_charging_rate]
-  StateSnapshot({
-    'attributes': ReadOnlyDict({
-      'friendly_name': 'VW ID.4 Charging Rate',
-      'icon': 'mdi:speedometer',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
-    }),
-    'context': <ANY>,
-    'entity_id': 'sensor.vw_id_4_charging_rate',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,

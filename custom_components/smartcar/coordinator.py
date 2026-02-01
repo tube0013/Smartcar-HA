@@ -423,20 +423,8 @@ DATAPOINT_ENTITY_KEY_MAP = {
         None,
         None,
     ),
-    EntityDescriptionKey.CHARGE_ENERGY_ADDED: DatapointConfig(
-        "charge-energyadded",
-        [],
-        None,
-        None,
-    ),
     EntityDescriptionKey.CHARGE_TIME_TO_COMPLETE: DatapointConfig(
         "charge-timetocomplete",
-        [],
-        None,
-        None,
-    ),
-    EntityDescriptionKey.CHARGE_RATE: DatapointConfig(
-        "charge-chargerate",
         [],
         None,
         None,
