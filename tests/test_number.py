@@ -101,7 +101,9 @@ async def test_charging_limit(
 
 @pytest.mark.usefixtures("enable_all_entities")
 @pytest.mark.parametrize("platform", [Platform.NUMBER])
-@pytest.mark.parametrize("vehicle_fixture", ["vw_id_4", "jaguar_ipace", "byd_seal", "polestar_2"])
+@pytest.mark.parametrize(
+    "vehicle_fixture", ["vw_id_4", "jaguar_ipace", "byd_seal", "polestar_2"]
+)
 @pytest.mark.parametrize(
     ("webhook_body", "webhook_headers", "expected"),
     [("all", {"sc-signature": "1234"}, {})],  # JSON fixture

@@ -18,7 +18,6 @@ from homeassistant.const import (
     UnitOfLength,
     UnitOfPower,
     UnitOfPressure,
-    UnitOfSpeed,
     UnitOfTime,
     UnitOfVolume,
 )
