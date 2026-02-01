@@ -18,6 +18,7 @@ from homeassistant.const import (
     UnitOfLength,
     UnitOfPower,
     UnitOfPressure,
+    UnitOfSpeed,
     UnitOfTime,
     UnitOfVolume,
 )
@@ -76,6 +77,36 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
         name="Charging Status",
         value_key_path="charge-detailedchargingstatus.value",
         icon="mdi:ev-station",
+    ),
+    SmartcarSensorDescription(
+        key=EntityDescriptionKey.CHARGE_CHARGERATE,
+        name="Charge Rate",
+        value_key_path="charge-chargerate.value",
+        device_class=SensorDeviceClass.SPEED,
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=UnitOfSpeed.KILOMETERS_PER_HOUR,
+        icon="mdi:speedometer",
+        imperial_conversion=lambda v: DistanceConverter.convert(
+            v, UnitOfSpeed.MILES_PER_HOUR, UnitOfSpeed.KILOMETERS_PER_HOUR
+        ),
+    ),
+    SmartcarSensorDescription(
+        key=EntityDescriptionKey.CHARGE_ENERGYADDED,
+        name="Energy Added",
+        value_key_path="charge-energyadded.value",
+        device_class=SensorDeviceClass.ENERGY_STORAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        icon="mdi:lightning-bolt",
+    ),
+    SmartcarSensorDescription(
+        key=EntityDescriptionKey.CHARGE_TIMETOCOMPLETE,
+        name="Time to Complete",
+        value_key_path="charge-timetocomplete.value",
+        device_class=SensorDeviceClass.DURATION,
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=UnitOfTime.MINUTES,
+        icon="mdi:timer",
     ),
     SmartcarSensorDescription(
         key=EntityDescriptionKey.ENGINE_OIL,

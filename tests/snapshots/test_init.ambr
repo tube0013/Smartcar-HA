@@ -1594,6 +1594,120 @@
       'disabled_by': None,
       'domain': 'sensor',
       'entity_category': None,
+      'entity_id': 'sensor.smartcar_784n_charge_rate',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.SPEED: 'speed'>,
+      'original_icon': 'mdi:speedometer',
+      'original_name': 'Charge Rate',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_charge_chargerate',
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.smartcar_784n_energy_added',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.ENERGY_STORAGE: 'energy_storage'>,
+      'original_icon': 'mdi:lightning-bolt',
+      'original_name': 'Energy Added',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_charge_energyadded',
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.smartcar_784n_time_to_complete',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.DURATION: 'duration'>,
+      'original_icon': 'mdi:timer',
+      'original_name': 'Time to Complete',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_charge_timetocomplete',
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
       'entity_id': 'sensor.smartcar_784n_engine_oil_life',
       'has_entity_name': True,
       'hidden_by': None,
@@ -3271,6 +3385,23 @@
     'state': '70.9',
   })
 # ---
+# name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'Smartcar 784N Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.smartcar_784n_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_charging_current]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -3359,6 +3490,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.smartcar_784n_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'Smartcar 784N Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.smartcar_784n_energy_added',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -3506,6 +3654,23 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': '40.5',
+  })
+# ---
+# name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'Smartcar 784N Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.smartcar_784n_time_to_complete',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
   })
 # ---
 # name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_tire_pressure_back_left]
@@ -4103,6 +4268,120 @@
       'translation_key': None,
       'unique_id': 'VIWP1AB29P15LA85784N_charging_state',
       'unit_of_measurement': None,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_charge_rate',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.SPEED: 'speed'>,
+      'original_icon': 'mdi:speedometer',
+      'original_name': 'Charge Rate',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_charge_chargerate',
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_energy_added',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.ENERGY_STORAGE: 'energy_storage'>,
+      'original_icon': 'mdi:lightning-bolt',
+      'original_name': 'Energy Added',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_charge_energyadded',
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_time_to_complete',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.DURATION: 'duration'>,
+      'original_icon': 'mdi:timer',
+      'original_name': 'Time to Complete',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_charge_timetocomplete',
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
     }),
     EntityRegistryEntrySnapshot({
       'aliases': set({
@@ -5801,6 +6080,23 @@
     'state': '82',
   })
 # ---
+# name: test_standard_setup_with_all_entities[vw_id_4][sensor.vw_id_4_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'VW ID.4 Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_standard_setup_with_all_entities[vw_id_4][sensor.vw_id_4_charging_current]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -5891,6 +6187,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_standard_setup_with_all_entities[vw_id_4][sensor.vw_id_4_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'VW ID.4 Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_energy_added',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -6041,6 +6354,23 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': '275',
+  })
+# ---
+# name: test_standard_setup_with_all_entities[vw_id_4][sensor.vw_id_4_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'VW ID.4 Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_time_to_complete',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
   })
 # ---
 # name: test_standard_setup_with_all_entities[vw_id_4][sensor.vw_id_4_tire_pressure_back_left]
@@ -6628,6 +6958,120 @@
       'translation_key': None,
       'unique_id': 'VIWP1AB29P15LA85784N_charging_state',
       'unit_of_measurement': None,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_charge_rate',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.SPEED: 'speed'>,
+      'original_icon': 'mdi:speedometer',
+      'original_name': 'Charge Rate',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_charge_chargerate',
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_energy_added',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.ENERGY_STORAGE: 'energy_storage'>,
+      'original_icon': 'mdi:lightning-bolt',
+      'original_name': 'Energy Added',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_charge_energyadded',
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_time_to_complete',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.DURATION: 'duration'>,
+      'original_icon': 'mdi:timer',
+      'original_name': 'Time to Complete',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_charge_timetocomplete',
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
     }),
     EntityRegistryEntrySnapshot({
       'aliases': set({
@@ -8320,6 +8764,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_update_errors[network_error-vw_id_4][sensor.vw_id_4_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'VW ID.4 Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_update_errors[network_error-vw_id_4][sensor.vw_id_4_charging_current]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -8408,6 +8869,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[network_error-vw_id_4][sensor.vw_id_4_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'VW ID.4 Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_energy_added',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -8550,6 +9028,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[network_error-vw_id_4][sensor.vw_id_4_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'VW ID.4 Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_time_to_complete',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -9139,6 +9634,120 @@
       'translation_key': None,
       'unique_id': 'VIWP1AB29P15LA85784N_charging_state',
       'unit_of_measurement': None,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_charge_rate',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.SPEED: 'speed'>,
+      'original_icon': 'mdi:speedometer',
+      'original_name': 'Charge Rate',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_charge_chargerate',
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_energy_added',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.ENERGY_STORAGE: 'energy_storage'>,
+      'original_icon': 'mdi:lightning-bolt',
+      'original_name': 'Energy Added',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_charge_energyadded',
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_time_to_complete',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.DURATION: 'duration'>,
+      'original_icon': 'mdi:timer',
+      'original_name': 'Time to Complete',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_charge_timetocomplete',
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
     }),
     EntityRegistryEntrySnapshot({
       'aliases': set({
@@ -10831,6 +11440,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_update_errors[network_proxy_response-vw_id_4][sensor.vw_id_4_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'VW ID.4 Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_update_errors[network_proxy_response-vw_id_4][sensor.vw_id_4_charging_current]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -10919,6 +11545,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[network_proxy_response-vw_id_4][sensor.vw_id_4_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'VW ID.4 Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_energy_added',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -11061,6 +11704,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[network_proxy_response-vw_id_4][sensor.vw_id_4_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'VW ID.4 Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_time_to_complete',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -11650,6 +12310,120 @@
       'translation_key': None,
       'unique_id': 'VIWP1AB29P15LA85784N_charging_state',
       'unit_of_measurement': None,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_charge_rate',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.SPEED: 'speed'>,
+      'original_icon': 'mdi:speedometer',
+      'original_name': 'Charge Rate',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_charge_chargerate',
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_energy_added',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.ENERGY_STORAGE: 'energy_storage'>,
+      'original_icon': 'mdi:lightning-bolt',
+      'original_name': 'Energy Added',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_charge_energyadded',
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_time_to_complete',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.DURATION: 'duration'>,
+      'original_icon': 'mdi:timer',
+      'original_name': 'Time to Complete',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_charge_timetocomplete',
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
     }),
     EntityRegistryEntrySnapshot({
       'aliases': set({
@@ -13342,6 +14116,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_update_errors[server_error-vw_id_4][sensor.vw_id_4_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'VW ID.4 Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_update_errors[server_error-vw_id_4][sensor.vw_id_4_charging_current]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -13430,6 +14221,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[server_error-vw_id_4][sensor.vw_id_4_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'VW ID.4 Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_energy_added',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -13572,6 +14380,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[server_error-vw_id_4][sensor.vw_id_4_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'VW ID.4 Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_time_to_complete',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -14161,6 +14986,120 @@
       'translation_key': None,
       'unique_id': 'VIWP1AB29P15LA85784N_charging_state',
       'unit_of_measurement': None,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_charge_rate',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.SPEED: 'speed'>,
+      'original_icon': 'mdi:speedometer',
+      'original_name': 'Charge Rate',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_charge_chargerate',
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_energy_added',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.ENERGY_STORAGE: 'energy_storage'>,
+      'original_icon': 'mdi:lightning-bolt',
+      'original_name': 'Energy Added',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_charge_energyadded',
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': dict({
+        'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      }),
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': None,
+      'entity_id': 'sensor.vw_id_4_time_to_complete',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+        'sensor': dict({
+          'suggested_display_precision': 2,
+        }),
+      }),
+      'original_device_class': <SensorDeviceClass.DURATION: 'duration'>,
+      'original_icon': 'mdi:timer',
+      'original_name': 'Time to Complete',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_charge_timetocomplete',
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
     }),
     EntityRegistryEntrySnapshot({
       'aliases': set({
@@ -15853,6 +16792,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_update_errors[unauthorized-vw_id_4][sensor.vw_id_4_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'VW ID.4 Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_update_errors[unauthorized-vw_id_4][sensor.vw_id_4_charging_current]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -15941,6 +16897,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[unauthorized-vw_id_4][sensor.vw_id_4_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'VW ID.4 Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_energy_added',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -16083,6 +17056,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[unauthorized-vw_id_4][sensor.vw_id_4_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'VW ID.4 Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_time_to_complete',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
