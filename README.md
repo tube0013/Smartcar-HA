@@ -75,7 +75,6 @@ Initially, you will have the option to enable [webhooks](#webhooks). If desired,
    - Add **only** the correct URI for your setup.
 1. Continue to the next step.
 1. Select the **Permissions** you want Home Assistant to be able to access. To enable all entities in this integration, select all relevant permissions:
-
    - Get total distance traveled
    - Get the vehicle's location
    - Get EV/PHEV battery level, capacity & current range
@@ -152,6 +151,7 @@ The webhooks configuration is broken down into several steps:
 1. Ensure a popup appears indicating that the webhook was successfully verified
 
 ## FAQ's and troubleshooting
+
 See here [FAQ](FAQ.md)
 
 ## Entities
@@ -245,7 +245,7 @@ Obtained concurrently with: [`sensor.<make_model>_range`](#sensormake_model_rang
 The [state of charge of the low voltage battery](https://smartcar.com/docs/api-reference/signals/lowvoltagebattery#state-of-charge).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_door_front_right`
 
@@ -313,11 +313,9 @@ Enabled by default: :white_check_mark:
 Requires permissions: `read_battery`  
 Obtained concurrently with: [`sensor.<make_model>_battery`](#sensormake_model_battery)
 
-
 ### `sensor.<make_model>_gear_state`
 
 The [gear state](https://smartcar.com/docs/api-reference/signals/transmission#gear-state) for the vehicle.
-
 
 Possible values:
 
@@ -327,7 +325,7 @@ Possible values:
 - `NEUTRAL`
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `sensor.<make_model>_tire_pressure_back_left`
 
@@ -417,98 +415,98 @@ Obtained concurrently with: [`sensor.<make_model>_charging_status`](#sensormake_
 Whether the vehicle is [battery heater is active](https://smartcar.com/docs/api-reference/signals/tractionbattery#is-heater-active).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_front_trunk`
 
 Whether the [front trunk is open](https://smartcar.com/docs/api-reference/signals/closure#front-trunk).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_front_trunk_lock`
 
 Whether the [front trunk is locked](https://smartcar.com/docs/api-reference/signals/closure#front-trunk).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_rear_trunk`
 
 Whether the [rear trunk is open](https://smartcar.com/docs/api-reference/signals/closure#rear-trunk).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_rear_trunk_lock`
 
 Whether the [rear trunk is locked](https://smartcar.com/docs/api-reference/signals/closure#rear-trunk).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_sunroof`
 
 Whether the [sunroof is open](https://smartcar.com/docs/api-reference/signals/closure#sunroof).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_engine_cover`
 
 Whether the [engine cover is open](https://smartcar.com/docs/api-reference/signals/closure#engine-cover).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_door_back_left`
 
 Whether the [back left door is open](https://smartcar.com/docs/api-reference/signals/closure#doors).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_door_back_left_lock`
 
 Whether the [back left door is locked](https://smartcar.com/docs/api-reference/signals/closure#doors).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_door_back_right`
 
 Whether the [back right door is open](https://smartcar.com/docs/api-reference/signals/closure#doors).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_door_back_right_lock`
 
 Whether the [back right door is locked](https://smartcar.com/docs/api-reference/signals/closure#doors).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_door_front_left`
 
 Whether the [front left door is open](https://smartcar.com/docs/api-reference/signals/closure#doors).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_door_front_left_lock`
 
 Whether the [front left door is locked](https://smartcar.com/docs/api-reference/signals/closure#doors).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_door_front_right`
 
 Whether the [front right door is open](https://smartcar.com/docs/api-reference/signals/closure#doors).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_door_front_right_lock`
 
@@ -519,49 +517,49 @@ Whether the [front right door is locked](https://smartcar.com/docs/api-reference
 Whether the [back left window is open](https://smartcar.com/docs/api-reference/signals/closure#windows).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_window_back_right`
 
 Whether the [back right window is open](https://smartcar.com/docs/api-reference/signals/closure#windows).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_window_front_left`
 
 Whether the [front left window is open](https://smartcar.com/docs/api-reference/signals/closure#windows).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_window_front_right`
 
 Whether the [front right window is open](https://smartcar.com/docs/api-reference/signals/closure#windows).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_online`
 
 Whether the vehicle is [online](https://smartcar.com/docs/api-reference/signals/connectivitystatus#is-online).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_asleep`
 
 Whether the vehicle is [asleep](https://smartcar.com/docs/api-reference/signals/connectivitystatus#is-asleep).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_digital_key_paired`
 
 Whether the vehicle is [has a digital key that has been successfully paired](https://smartcar.com/docs/api-reference/signals/connectivitystatus#is-digital-key-paired).
 
 Enabled by default: :x:  
-Webhooks only: :link: _currently only available via webhooks_  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `binary_sensor.<make_model>_surveillance_enabled`
 
@@ -608,14 +606,13 @@ Smartcar provides the following actions:
 - [`smartcar.lock_doors`](#smartcarlock_doors)
 - [`smartcar.unlock_doors`](#smartcarunlock_doors)
 
-
 ### `smartcar.lock_doors`
 
 Lock the doors of a vehicle. In most cases, the `lock.lock` action should be used on [`lock.<make_model>_door_lock`](#lockmake_model_door_lock) instead of using this action. It is only is provided for the case that the [`lock.<make_model>_door_lock`](#lockmake_model_door_lock) entity is not available due to unique permissions available for a vehicle in Smartcar. This occurs for a small subset of vehicles when Smartcar will only grant the `control_security` permission, but not the `read_security` permission.
 
 #### Service Data Attributes
 
-* `config_entry`: **required** Config entry to use. Example: `1b4a46c6cba0677bbfb5a8c53e8618b0`.
+- `config_entry`: **required** Config entry to use. Example: `1b4a46c6cba0677bbfb5a8c53e8618b0`.
 - `vin`: The VIN of the vehicle to target. If not provided, the first VIN for the config entry will be assumed.
 
 ### `smartcar.unlock_doors`
@@ -624,7 +621,7 @@ Lock the doors of a vehicle. In most cases, the `lock.unlock` action should be u
 
 #### Service Data Attributes
 
-* `config_entry`: **required** Config entry to use. Example: `1b4a46c6cba0677bbfb5a8c53e8618b0`.
+- `config_entry`: **required** Config entry to use. Example: `1b4a46c6cba0677bbfb5a8c53e8618b0`.
 - `vin`: The VIN of the vehicle to target. If not provided, the first VIN for the config entry will be assumed.
 
 ## Rate Limits & Polling
