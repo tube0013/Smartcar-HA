@@ -22,7 +22,7 @@ Test to see if this is accessible from the public internet using a tool like [ht
 For the OAuth setup flow to complete successfully, you must also have [my.home-assistant.io](https://my.home-assistant.io/) URL redirects configured correctly, as described in the installation guide.
  
 ### Can you update sensors through polling?
-SmartCar favours webhooks instead of polling for vehicle updates. Webhooks really are more efficient, faster and unlimited. But polling is perfect for the initial setup and troubleshooting. Check if you can update the values of some sensors using the `homeassistant.update_entity` function. You can use this in a [HA automation](https://github.com/tube0013/Smartcar-HA/blob/main/examples/poll-smartcar-simple.yaml) or head over to [Developer Tools - Actions](https://my.home-assistant.io/redirect/developer_services/) and run this action manually:
+SmartCar favours webhooks instead of polling for vehicle updates. Webhooks really are more efficient, faster and unlimited. But polling is perfect for the initial setup and troubleshooting. Check if you can update the values of some sensors using the `homeassistant.update_entity` function. You can use this in a [HA automation](https://github.com/wbyoung/smartcar/blob/main/examples/poll-smartcar-simple.yaml) or head over to [Developer Tools - Actions](https://my.home-assistant.io/redirect/developer_services/) and run this action manually:
 
 ```
  - action: homeassistant.update_entity
@@ -43,9 +43,9 @@ Test this url with [httpstatus.io](https://httpstatus.io/): a status **405 Metho
 
  
 ### Is your webhook configured correctly in the SmartCar dashboard?
-The **free tier** currently only provides access to about 9 useful Trigger signals and 9 Data signals (subject to change). To access more, you’ll need to upgrade your SmartCar subscription plan. Is your car [subscribed](https://github.com/tube0013/Smartcar-HA#subscribe-vehicle) to the webhook?
+The **free tier** currently only provides access to about 9 useful Trigger signals and 9 Data signals (subject to change). To access more, you’ll need to upgrade your SmartCar subscription plan. Is your car [subscribed](https://github.com/wbyoung/smartcar#subscribe-vehicle) to the webhook?
  
-**Important:** disable the `VehicleUserAccount` triggers and data signals in your webhook config. These have been [identified](https://github.com/tube0013/Smartcar-HA/issues/51#issuecomment-3682790541) as a cause of repeated `REAUTHENTICATE` errors.
+**Important:** disable the `VehicleUserAccount` triggers and data signals in your webhook config. These have been [identified](https://github.com/wbyoung/smartcar/issues/51#issuecomment-3682790541) as a cause of repeated `REAUTHENTICATE` errors.
 
 ![disable_webhook](images/FAQ2.png)
 

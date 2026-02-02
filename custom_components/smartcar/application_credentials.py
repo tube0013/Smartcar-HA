@@ -28,7 +28,7 @@ async def async_get_description_placeholders(  # noqa: RUF029
         ha_host = hass.config.external_url or "https://YOUR_DOMAIN:PORT"
         redirect_url = f"{ha_host}{AUTH_CALLBACK_PATH}"
     return {
-        "more_info_url": "https://github.com/tube0013/Smartcar-HA?tab=readme-ov-file#configuration",
+        "more_info_url": "https://github.com/wbyoung/smartcar?tab=readme-ov-file#configuration",
         "oauth_creds_url": "https://dashboard.smartcar.com/team/applications",
         "redirect_url": redirect_url,
     }

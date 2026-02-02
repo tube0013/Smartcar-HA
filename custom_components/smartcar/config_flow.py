@@ -54,7 +54,7 @@ GENERAL_CONFIGURATION_SCHEMA = {
 BASE_DESCRIPTION_PLACEHOLDERS = {
     "webhook_url": "webhooks-not-enabled",
     "smartcar_url": "https://dashboard.smartcar.com/configuration",
-    "docs_url": "https://github.com/tube0013/Smartcar-HA/#webhooks",
+    "docs_url": "https://github.com/wbyoung/smartcar/#webhooks",
 }
 
 

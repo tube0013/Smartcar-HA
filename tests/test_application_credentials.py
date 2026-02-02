@@ -27,7 +27,7 @@ async def test_description_placeholders(
     hass.config.external_url = external_url
     placeholders = await async_get_description_placeholders(hass)
     assert placeholders == {
-        "more_info_url": "https://github.com/tube0013/Smartcar-HA?tab=readme-ov-file#configuration",
+        "more_info_url": "https://github.com/wbyoung/smartcar?tab=readme-ov-file#configuration",
         "oauth_creds_url": "https://dashboard.smartcar.com/team/applications",
         "redirect_url": expected_redirect_uri,
     }

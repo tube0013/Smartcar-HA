@@ -11,7 +11,7 @@ body:
         [feature request][fr] template.
 
 
-        [fr]: /tube0013/Smartcar-HA/issues/new?template=feature_request.yml
+        [fr]: /wbyoung/smartcar/issues/new?template=feature_request.yml
   - type: checkboxes
     attributes:
       label: Requirements
@@ -24,7 +24,7 @@ body:
             README.
 
 
-            [known]: /tube0013/Smartcar-HA?tab=readme-ov-file#known-issues--limitations
+            [known]: /wbyoung/smartcar?tab=readme-ov-file#known-issues--limitations
           required: true
         - label: >
             I have verified that my car is [compatible with Smartcar][compat]

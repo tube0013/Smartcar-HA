@@ -1,10 +1,10 @@
 # Smartcar Integration for Home Assistant
 
 [![HACS](https://img.shields.io/badge/default-grey?logo=homeassistantcommunitystore&logoColor=white)][hacs-repo]
-[![HACS installs](https://img.shields.io/github/downloads/tube0013/Smartcar-HA/latest/total?label=installs&color=blue)][hacs-repo]
-[![Version](https://img.shields.io/github/v/release/tube0013/Smartcar-HA)][releases]
-![Downloads](https://img.shields.io/github/downloads/tube0013/Smartcar-HA/total)
-![Build](https://img.shields.io/github/actions/workflow/status/tube0013/Smartcar-HA/pytest.yml)
+[![HACS installs](https://img.shields.io/github/downloads/wbyoung/smartcar/latest/total?label=installs&color=blue)][hacs-repo]
+[![Version](https://img.shields.io/github/v/release/wbyoung/smartcar)][releases]
+![Downloads](https://img.shields.io/github/downloads/wbyoung/smartcar/total)
+![Build](https://img.shields.io/github/actions/workflow/status/wbyoung/smartcar/pytest.yml)
 
 Connect your compatible vehicle to Home Assistant using the [Smartcar API](https://smartcar.com/).
 
@@ -670,13 +670,13 @@ For instance:
 
 ## Support / Issues
 
-Please report any issues you find with this integration by opening an issue on the [GitHub Issues page](https://github.com/tube0013/Smartcar-HA/issues).
+Please report any issues you find with this integration by opening an issue on the [GitHub Issues page](https://github.com/wbyoung/smartcar/issues).
 
 [hacs]: https://hacs.xyz/
 [hacs-repo]: https://github.com/hacs/integration
 [hacs-badge]: https://my.home-assistant.io/badges/hacs_repository.svg
 [hacs-open]: https://my.home-assistant.io/redirect/hacs_repository/?owner=tube0013&repository=Smartcar-HA&category=integration
-[releases]: https://github.com/tube0013/Smartcar-HA/releases
+[releases]: https://github.com/wbyoung/smartcar/releases
 [config-flow-start]: https://my.home-assistant.io/redirect/config_flow_start/?domain=smartcar
 [smartcar-dashboard]: https://dashboard.smartcar.com/team/applications
 [ha-remote-access]: https://www.home-assistant.io/docs/configuration/remote/
