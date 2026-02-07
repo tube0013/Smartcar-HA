@@ -9,6 +9,7 @@ Before diving into deeper troubleshooting, it’s worth checking a few common Sm
 - [Brand Data Frequency](https://smartcar.com/docs/help/frequencies) – How frequently are updates expected for each brand
 - [Brand Data Reliability](https://smartcar.com/docs/help/reliability-and-freshness) – How reliable each brand is for data and commands
 - [my.smartcar.com](https://my.smartcar.com/) – a useful app to check that you have the required permission (scopes) enabled for your vehicle and your integration (you'll need to re-authenticate your vehicle)
+- [Known Issues and Limitations](/wbyoung/smartcar?tab=readme-ov-file#known-issues--limitations) - In case you missed this section in the README, it is worth reviewing.
 
 ### Is your car brand supported in your region?
 

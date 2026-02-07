@@ -664,6 +664,7 @@ For instance:
 - **Fuel Data Availability:** The [`sensor.<make_model>_fuel`](#sensormake_model_fuel) (amount in litres) is frequently `null` for many vehicles. However, [`sensor.<make_model>_fuel_percent`](#sensormake_model_fuel_percent) and [`sensor.<make_model>_fuel_range`](#sensormake_model_fuel_range) are typically more reliable and provide comprehensive fuel monitoring even when the amount is unavailable.
 - **API Latency:** There can be significant delays (seconds to minutes) between sending a command (e.g., start charging) and the vehicle executing/reporting the change back through the API. The state in Home Assistant will update after the next successful data poll.
 - **Rate Limits:** Be mindful of the 500 calls/vehicle/month limit on the free tier.
+- **FAQ:** In case ou haven't found the [FAQ](FAQ.md) yet, it is a great resource for troubleshooting and discovering if you're running up against an issue with this integration vs. a limitation in Smartcar's platform.
 
 ## Support / Issues
 
