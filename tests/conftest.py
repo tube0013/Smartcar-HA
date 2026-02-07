@@ -355,8 +355,8 @@ def webhook_scenario(
         )
 
         expected_calls = 0
-        expected_response = expected.get("response", {})
-        expected_response_status = expected.get("response_status", 200)
+        expected_response = expected.get("response", "")
+        expected_response_status = expected.get("response_status", 204)
         expected_reauth_calls = expected.get("reauth_calls", 0)
         expected_log_messages = expected.get("log_messages", [])
 
@@ -381,7 +381,11 @@ def webhook_scenario(
             )
             assert resp.status == expected_response_status
             assert (
-                await (resp.json() if expected_response_status < 300 else resp.text())
+                await (
+                    resp.json()
+                    if resp.content_type == "application/json"
+                    else resp.text()
+                )
                 == expected_response
             )
             await hass.async_block_till_done()

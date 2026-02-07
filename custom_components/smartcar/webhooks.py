@@ -1,5 +1,6 @@
 import copy
 import hmac
+from http import HTTPStatus
 import json
 import logging
 from typing import Any, Literal
@@ -55,11 +56,18 @@ async def handle_webhook(
         message = json.loads(body)
     except ValueError:
         _LOGGER.warning("Received invalid JSON from Smartcar")
-        return web.json_response({})
+        return web.json_response(
+            {
+                "error": {
+                    "code": "invalid_json",
+                    "message": "invalid JSON body",
+                }
+            },
+            status=HTTPStatus.BAD_REQUEST,
+        )
 
     _LOGGER.debug("Received JSON from Smartcar: %r", body)
 
-    response: dict[str, Any] = {}
     app_token: str = config_entry.data[CONF_APPLICATION_MANAGEMENT_TOKEN]
     signature = request.headers.get("SC-Signature")
     data = message.get("data", {})
@@ -76,7 +84,15 @@ async def handle_webhook(
     # them.
     if not hmac.compare_digest(util.hmac_sha256_hexdigest(app_token, body), signature):
         _LOGGER.error("ignoring message with invalid signature")
-        return web.Response(status=404)
+        return web.json_response(
+            {
+                "error": {
+                    "code": "invalid_signature",
+                    "message": "invalid signature on request body",
+                }
+            },
+            status=HTTPStatus.UNAUTHORIZED,
+        )
 
     errors = data.get("errors", [])
     signals = data.get("signals", [])
@@ -104,12 +120,20 @@ async def handle_webhook(
             vehicle_id,
             vehicle_vin or "unknown",
         )
-        return web.Response(status=404)
+        return web.json_response(
+            {
+                "error": {
+                    "code": "unknown_vehicle",
+                    "message": "unknown vehicle included",
+                }
+            },
+            status=HTTPStatus.CONFLICT,
+        )
 
     _handle_webhook_errors(coordinator, errors)
     _handle_webhook_signals(coordinator, signals)
 
-    return web.json_response(response)
+    return web.Response(status=HTTPStatus.NO_CONTENT)
 
 
 def _handle_webhook_errors(
