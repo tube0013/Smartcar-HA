@@ -4,11 +4,12 @@ Before diving into deeper troubleshooting, it’s worth checking a few common Sm
 
 ### Pre-flight check list:
 
-- [SmartCar status](https://status.smartcar.com/) – Current platform status and known incidents
+- [SmartCar Status](https://status.smartcar.com/) – Current platform status and known incidents
 - [SmartCar Brands Status](https://brandreliability.smartcar.com/) – Known issues affecting specific car brands
 - [Brand Data Frequency](https://smartcar.com/docs/help/frequencies) – How frequently are updates expected for each brand
-- [Brand data reliability](https://smartcar.com/docs/help/reliability-and-freshness) – How reliable each brand is for data and commands
+- [Brand Data Reliability](https://smartcar.com/docs/help/reliability-and-freshness) – How reliable each brand is for data and commands
 - [my.smartcar.com](https://my.smartcar.com/) – a useful app to check that you have the required permission (scopes) enabled for your vehicle and your integration (you'll need to re-authenticate your vehicle)
+- [Known Issues and Limitations](/wbyoung/smartcar?tab=readme-ov-file#known-issues--limitations) - In case you missed this section in the README, it is worth reviewing.
 
 ### Is your car brand supported in your region?
 
@@ -27,7 +28,7 @@ For the OAuth setup flow to complete successfully, you must also have [my.home-a
 
 ### Can you update sensors through polling?
 
-SmartCar favours webhooks instead of polling for vehicle updates. Webhooks really are more efficient, faster and unlimited. But polling is perfect for the initial setup and troubleshooting. Check if you can update the values of some sensors using the `homeassistant.update_entity` function. You can use this in a [HA automation](https://github.com/wbyoung/smartcar/blob/main/examples/poll-smartcar-simple.yaml) or head over to [Developer Tools - Actions](https://my.home-assistant.io/redirect/developer_services/) and run this action manually:
+SmartCar favours webhooks instead of polling for vehicle updates. Webhooks really are more efficient, faster and unlimited. But polling is perfect for the initial setup and troubleshooting. Check if you can update the values of some sensors using the `homeassistant.update_entity` function. You can use this in a [HA automation](examples/poll-smartcar-simple.yaml) or head over to [Developer Tools - Actions](https://my.home-assistant.io/redirect/developer_services/) and run this action manually:
 
 ```
  - action: homeassistant.update_entity
@@ -50,9 +51,9 @@ Test this url with [httpstatus.io](https://httpstatus.io/): a status **405 Metho
 
 ### Is your webhook configured correctly in the SmartCar dashboard?
 
-The **free tier** currently only provides access to about 9 useful Trigger signals and 9 Data signals (subject to change). To access more, you’ll need to upgrade your SmartCar subscription plan. Is your car [subscribed](https://github.com/wbyoung/smartcar#subscribe-vehicle) to the webhook?
+The **free tier** currently only provides access to about 9 useful Trigger signals and 9 Data signals (subject to change). To access more, you’ll need to upgrade your SmartCar subscription plan. Is your car [subscribed](README.md#subscribe-vehicle) to the webhook?
 
-**Important:** disable the `VehicleUserAccount` triggers and data signals in your webhook config. These have been [identified](https://github.com/wbyoung/smartcar/issues/51#issuecomment-3682790541) as a cause of repeated `REAUTHENTICATE` errors.
+**Important:** disable the `VehicleUserAccount` triggers and data signals in your webhook config. These have been [identified](README.md/issues/51#issuecomment-3682790541) as a cause of repeated `REAUTHENTICATE` errors.
 
 ![disable_webhook](images/FAQ2.png)
 

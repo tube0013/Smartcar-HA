@@ -20,19 +20,11 @@ body:
           required: true
         - label: >
             I read the [_Known Issues and Limitations_][known] section in the
-            README.
+            README and the [FAQ][faq].
 
 
             [known]: /wbyoung/smartcar?tab=readme-ov-file#known-issues--limitations
-          required: true
-        - label: >
-            I have verified that my car is [compatible with Smartcar][compat]
-            and the API is [supported in my country][global].
-
-
-            [compat]: https://smartcar.com/product/compatible-vehicles
-
-            [global]: https://smartcar.com/global
+            [faq]: /wbyoung/smartcar/blob/main/FAQ.md
           required: true
         - label: >
             I did a search to see if there is a similar issue or if a pull
