@@ -164,9 +164,10 @@ async def test_update_with_polling_disabled(
             "verify",  # JSON fixture
             {},
             {
+                "response_status": 200,
                 "response": {
                     "challenge": "1234",  # from mock_hmac_sha256_hexdigest
-                }
+                },
             },
         ),
         (
@@ -193,8 +194,13 @@ async def test_update_with_polling_disabled(
                 "sc-signature": "1234",
             },
             {
-                "response_status": 404,
-                "response": "",
+                "response_status": 409,
+                "response": {
+                    "error": {
+                        "code": "unknown_vehicle",
+                        "message": "unknown vehicle included",
+                    }
+                },
                 "log_messages": [
                     "unknown vehicle with id: 70076e4a-d774-464c-8241-60de654ccb24, vin: unknown"
                 ],
@@ -235,14 +241,25 @@ async def test_update_with_polling_disabled(
             {
                 "sc-signature": "1234",
             },
-            {"log_messages": ["invalid JSON"]},
+            {
+                "response_status": 400,
+                "response": {
+                    "error": {"code": "invalid_json", "message": "invalid JSON body"}
+                },
+                "log_messages": ["invalid JSON"],
+            },
         ),
         (
             {},
             {"sc-signature": "invalid-4321"},
             {
-                "response_status": 404,
-                "response": "",
+                "response_status": 401,
+                "response": {
+                    "error": {
+                        "code": "invalid_signature",
+                        "message": "invalid signature on request body",
+                    }
+                },
                 "log_messages": ["invalid signature"],
             },
         ),
