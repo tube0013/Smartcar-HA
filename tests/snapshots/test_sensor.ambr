@@ -484,6 +484,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[broad_auth_error-vw_id_4-sensor][sensor.vw_id_4_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'VW ID.4 Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[broad_auth_error-vw_id_4-sensor][sensor.vw_id_4_charging_current]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -572,6 +589,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[broad_auth_error-vw_id_4-sensor][sensor.vw_id_4_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'VW ID.4 Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_energy_added',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -720,6 +754,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[broad_auth_error-vw_id_4-sensor][sensor.vw_id_4_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'VW ID.4 Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_time_to_complete',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[broad_auth_error-vw_id_4-sensor][sensor.vw_id_4_tire_pressure_back_left]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -816,6 +867,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[invalid_json-vw_id_4-sensor][sensor.vw_id_4_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'VW ID.4 Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[invalid_json-vw_id_4-sensor][sensor.vw_id_4_charging_current]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -904,6 +972,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[invalid_json-vw_id_4-sensor][sensor.vw_id_4_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'VW ID.4 Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_energy_added',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -1052,6 +1137,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[invalid_json-vw_id_4-sensor][sensor.vw_id_4_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'VW ID.4 Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_time_to_complete',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[invalid_json-vw_id_4-sensor][sensor.vw_id_4_tire_pressure_back_left]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -1148,6 +1250,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[invalid_signature-vw_id_4-sensor][sensor.vw_id_4_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'VW ID.4 Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[invalid_signature-vw_id_4-sensor][sensor.vw_id_4_charging_current]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -1236,6 +1355,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[invalid_signature-vw_id_4-sensor][sensor.vw_id_4_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'VW ID.4 Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_energy_added',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -1384,6 +1520,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[invalid_signature-vw_id_4-sensor][sensor.vw_id_4_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'VW ID.4 Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_time_to_complete',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[invalid_signature-vw_id_4-sensor][sensor.vw_id_4_tire_pressure_back_left]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -1480,6 +1633,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[irrelevant_auth_error-vw_id_4-sensor][sensor.vw_id_4_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'VW ID.4 Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[irrelevant_auth_error-vw_id_4-sensor][sensor.vw_id_4_charging_current]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -1568,6 +1738,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[irrelevant_auth_error-vw_id_4-sensor][sensor.vw_id_4_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'VW ID.4 Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_energy_added',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -1716,6 +1903,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[irrelevant_auth_error-vw_id_4-sensor][sensor.vw_id_4_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'VW ID.4 Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_time_to_complete',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[irrelevant_auth_error-vw_id_4-sensor][sensor.vw_id_4_tire_pressure_back_left]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -1812,6 +2016,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[vehicle_error-vw_id_4-sensor][sensor.vw_id_4_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'VW ID.4 Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[vehicle_error-vw_id_4-sensor][sensor.vw_id_4_charging_current]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -1900,6 +2121,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[vehicle_error-vw_id_4-sensor][sensor.vw_id_4_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'VW ID.4 Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_energy_added',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -2048,6 +2286,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[vehicle_error-vw_id_4-sensor][sensor.vw_id_4_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'VW ID.4 Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_time_to_complete',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[vehicle_error-vw_id_4-sensor][sensor.vw_id_4_tire_pressure_back_left]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -2144,6 +2399,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[vehicle_mismatch-vw_id_4-sensor][sensor.vw_id_4_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'VW ID.4 Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[vehicle_mismatch-vw_id_4-sensor][sensor.vw_id_4_charging_current]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -2232,6 +2504,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[vehicle_mismatch-vw_id_4-sensor][sensor.vw_id_4_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'VW ID.4 Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_energy_added',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -2380,6 +2669,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[vehicle_mismatch-vw_id_4-sensor][sensor.vw_id_4_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'VW ID.4 Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_time_to_complete',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[vehicle_mismatch-vw_id_4-sensor][sensor.vw_id_4_tire_pressure_back_left]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -2478,6 +2784,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[vehicle_state-vw_id_4-sensor][sensor.vw_id_4_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'VW ID.4 Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[vehicle_state-vw_id_4-sensor][sensor.vw_id_4_charging_current]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -2566,6 +2889,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[vehicle_state-vw_id_4-sensor][sensor.vw_id_4_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'VW ID.4 Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_energy_added',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -2716,6 +3056,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[vehicle_state-vw_id_4-sensor][sensor.vw_id_4_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'VW ID.4 Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_time_to_complete',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[vehicle_state-vw_id_4-sensor][sensor.vw_id_4_tire_pressure_back_left]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -2812,6 +3169,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[vehicle_state_fuel-vw_id_4-sensor][sensor.vw_id_4_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'VW ID.4 Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[vehicle_state_fuel-vw_id_4-sensor][sensor.vw_id_4_charging_current]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -2900,6 +3274,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[vehicle_state_fuel-vw_id_4-sensor][sensor.vw_id_4_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'VW ID.4 Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_energy_added',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -3052,6 +3443,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[vehicle_state_fuel-vw_id_4-sensor][sensor.vw_id_4_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'VW ID.4 Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_time_to_complete',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[vehicle_state_fuel-vw_id_4-sensor][sensor.vw_id_4_tire_pressure_back_left]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -3148,6 +3556,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[verify-vw_id_4-sensor][sensor.vw_id_4_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'VW ID.4 Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[verify-vw_id_4-sensor][sensor.vw_id_4_charging_current]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -3236,6 +3661,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[verify-vw_id_4-sensor][sensor.vw_id_4_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'VW ID.4 Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_energy_added',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -3384,6 +3826,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[verify-vw_id_4-sensor][sensor.vw_id_4_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'VW ID.4 Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_time_to_complete',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[verify-vw_id_4-sensor][sensor.vw_id_4_tire_pressure_back_left]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -3482,6 +3941,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_update[vehicle_state_all-byd_seal-sensor][sensor.byd_seal_u_dm_i_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'BYD Seal U Dm-i Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.byd_seal_u_dm_i_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-byd_seal-sensor][sensor.byd_seal_u_dm_i_charging_current]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -3570,6 +4046,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.byd_seal_u_dm_i_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-byd_seal-sensor][sensor.byd_seal_u_dm_i_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'BYD Seal U Dm-i Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.byd_seal_u_dm_i_energy_added',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -3720,6 +4213,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_update[vehicle_state_all-byd_seal-sensor][sensor.byd_seal_u_dm_i_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'BYD Seal U Dm-i Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.byd_seal_u_dm_i_time_to_complete',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-byd_seal-sensor][sensor.byd_seal_u_dm_i_tire_pressure_back_left]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -3820,6 +4330,23 @@
     'state': '90',
   })
 # ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'JAGUAR I-PACE Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_charging_current]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -3910,6 +4437,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.jaguar_i_pace_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'JAGUAR I-PACE Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_energy_added',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -4064,6 +4608,23 @@
     'state': '168',
   })
 # ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'JAGUAR I-PACE Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_time_to_complete',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_tire_pressure_back_left]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -4128,6 +4689,419 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_battery]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-11T21:56:47+00:00',
+      'device_class': 'battery',
+      'fetched_at': '2026-01-11T21:56:55.889000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Battery',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_battery',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '100',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_battery_capacity]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-11T21:56:35.748000+00:00',
+      'device_class': 'energy_storage',
+      'fetched_at': '2026-01-11T21:56:35.748000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Battery Capacity',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_battery_capacity',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '90',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-11T21:56:47+00:00',
+      'device_class': 'speed',
+      'fetched_at': '2026-01-11T21:56:55.889000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '15',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_charging_current]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'current',
+      'friendly_name': 'JAGUAR I-PACE Charging Current',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfElectricCurrent.AMPERE: 'A'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_charging_current',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_charging_current_max]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'current',
+      'friendly_name': 'JAGUAR I-PACE Charging Current Max',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfElectricCurrent.AMPERE: 'A'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_charging_current_max',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_charging_power]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'power',
+      'friendly_name': 'JAGUAR I-PACE Charging Power',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPower.KILO_WATT: 'kW'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_charging_power',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_charging_status]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-11T21:56:47+00:00',
+      'fetched_at': '2026-01-11T21:56:55.889000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Charging Status',
+      'icon': 'mdi:ev-station',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_charging_status',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'FULLY_CHARGED',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_charging_time_remaining]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-11T21:56:47+00:00',
+      'device_class': 'duration',
+      'fetched_at': '2026-01-11T21:56:55.889000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Charging Time Remaining',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_charging_time_remaining',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '14',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_charging_voltage]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'voltage',
+      'friendly_name': 'JAGUAR I-PACE Charging Voltage',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfElectricPotential.VOLT: 'V'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-11T21:56:47+00:00',
+      'device_class': 'energy_storage',
+      'fetched_at': '2026-01-11T21:56:55.889000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_energy_added',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_engine_oil_life]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'JAGUAR I-PACE Engine Oil Life',
+      'icon': 'mdi:oil-level',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_engine_oil_life',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_firmware_version]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-11T21:56:47+00:00',
+      'fetched_at': '2026-01-11T21:56:55.889000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Firmware Version',
+      'icon': 'mdi:chip',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_firmware_version',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'L8B2-70712-AAE',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_fuel]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'JAGUAR I-PACE Fuel',
+      'icon': 'mdi:gas-station',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfVolume.LITERS: 'L'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_fuel',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_fuel_percent]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'JAGUAR I-PACE Fuel Percent',
+      'icon': 'mdi:gas-station',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_fuel_percent',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_fuel_range]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'distance',
+      'friendly_name': 'JAGUAR I-PACE Fuel Range',
+      'icon': 'mdi:map-marker-distance',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_fuel_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_gear_state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'JAGUAR I-PACE Gear State',
+      'icon': 'mdi:car-brake-parking',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_gear_state',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_low_voltage_battery]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-11T21:56:47+00:00',
+      'device_class': 'battery',
+      'fetched_at': '2026-01-11T21:56:55.889000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Low Voltage Battery',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_low_voltage_battery',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '82',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_odometer]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-11T21:56:47+00:00',
+      'device_class': 'distance',
+      'fetched_at': '2026-01-11T21:56:55.889000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Odometer',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_odometer',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '53168',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_range]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-11T21:56:47+00:00',
+      'device_class': 'distance',
+      'fetched_at': '2026-01-11T21:56:55.889000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Range',
+      'icon': 'mdi:map-marker-distance',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '358',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-11T21:56:47+00:00',
+      'device_class': 'duration',
+      'fetched_at': '2026-01-11T21:56:55.889000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_time_to_complete',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '14',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_tire_pressure_back_left]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-11T21:56:47+00:00',
+      'device_class': 'pressure',
+      'fetched_at': '2026-01-11T21:56:55.889000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Tire Pressure Back Left',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_tire_pressure_back_left',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '258',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_tire_pressure_back_right]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-11T21:56:47+00:00',
+      'device_class': 'pressure',
+      'fetched_at': '2026-01-11T21:56:55.889000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Tire Pressure Back Right',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_tire_pressure_back_right',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '258',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_tire_pressure_front_left]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-11T21:56:47+00:00',
+      'device_class': 'pressure',
+      'fetched_at': '2026-01-11T21:56:55.889000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Tire Pressure Front Left',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_tire_pressure_front_left',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '258',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_tire_pressure_front_right]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-01-11T21:56:47+00:00',
+      'device_class': 'pressure',
+      'fetched_at': '2026-01-11T21:56:55.889000+00:00',
+      'friendly_name': 'JAGUAR I-PACE Tire Pressure Front Right',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_tire_pressure_front_right',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '699.9',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-polestar_2-sensor][sensor.polestar_polestar_2_battery]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -4160,6 +5134,23 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': '82',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-sensor][sensor.polestar_polestar_2_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'POLESTAR Polestar 2 Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.polestar_polestar_2_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
   })
 # ---
 # name: test_webhook_update[vehicle_state_all-polestar_2-sensor][sensor.polestar_polestar_2_charging_current]
@@ -4266,6 +5257,23 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': '223',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-sensor][sensor.polestar_polestar_2_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'POLESTAR Polestar 2 Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.polestar_polestar_2_energy_added',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
   })
 # ---
 # name: test_webhook_update[vehicle_state_all-polestar_2-sensor][sensor.polestar_polestar_2_engine_oil_life]
@@ -4416,6 +5424,25 @@
     'state': '290',
   })
 # ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-sensor][sensor.polestar_polestar_2_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'age': '2026-02-01T09:25:33+00:00',
+      'device_class': 'duration',
+      'fetched_at': '2026-02-01T09:25:43.244000+00:00',
+      'friendly_name': 'POLESTAR Polestar 2 Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.polestar_polestar_2_time_to_complete',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '15',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-polestar_2-sensor][sensor.polestar_polestar_2_tire_pressure_back_left]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -4514,6 +5541,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-sensor][sensor.vw_id_4_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'VW ID.4 Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-vw_id_4-sensor][sensor.vw_id_4_charging_current]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -4602,6 +5646,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-sensor][sensor.vw_id_4_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'VW ID.4 Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_energy_added',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,
@@ -4746,6 +5807,23 @@
     }),
     'context': <ANY>,
     'entity_id': 'sensor.vw_id_4_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-sensor][sensor.vw_id_4_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'VW ID.4 Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_time_to_complete',
     'last_changed': <ANY>,
     'last_reported': <ANY>,
     'last_updated': <ANY>,

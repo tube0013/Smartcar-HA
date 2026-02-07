@@ -103,6 +103,24 @@ DATAPOINT_ENTITY_KEY_MAP = {
         "/battery",
         "percentRemaining",
     ),
+    EntityDescriptionKey.CHARGE_CHARGERATE: DatapointConfig(
+        "charge-chargerate",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.CHARGE_ENERGYADDED: DatapointConfig(
+        "charge-energyadded",
+        [],
+        None,
+        None,
+    ),
+    EntityDescriptionKey.CHARGE_TIMETOCOMPLETE: DatapointConfig(
+        "charge-timetocomplete",
+        [],
+        None,
+        None,
+    ),
     EntityDescriptionKey.BATTERY_HEATER_ACTIVE: DatapointConfig(
         "tractionbattery-isheateractive",
         [],

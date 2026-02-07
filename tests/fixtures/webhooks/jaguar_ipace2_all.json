@@ -1,0 +1,1221 @@
+{
+  "eventId": "XXXX",
+  "eventType": "VEHICLE_STATE",
+  "data": {
+    "user": {
+      "id": "XXXXXX"
+    },
+    "vehicle": {
+      "id": "27192cce-8920-4ba9-b6c6-4f280a86fe39",
+      "make": "JAGUAR",
+      "model": "I-PACE",
+      "year": 2021
+    },
+    "signals": [
+      {
+        "name": "Tailgate",
+        "group": "Closure",
+        "code": "closure-tailgate",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "code": "closure-islocked",
+        "name": "IsLocked",
+        "group": "Closure",
+        "body": {
+          "value": true
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "code": "closure-doors",
+        "name": "Doors",
+        "group": "Closure",
+        "body": {
+          "values": [
+            {
+              "row": 0,
+              "column": 0,
+              "isOpen": false,
+              "isLocked": true
+            },
+            {
+              "row": 0,
+              "column": 1,
+              "isOpen": false,
+              "isLocked": true
+            },
+            {
+              "row": 1,
+              "column": 0,
+              "isOpen": false,
+              "isLocked": true
+            },
+            {
+              "row": 1,
+              "column": 1,
+              "isOpen": false,
+              "isLocked": true
+            }
+          ],
+          "rowCount": 2,
+          "columnCount": 2
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "code": "closure-windows",
+        "name": "Windows",
+        "group": "Closure",
+        "body": {
+          "values": [
+            {
+              "row": 0,
+              "column": 0,
+              "isOpen": false
+            },
+            {
+              "row": 0,
+              "column": 1,
+              "isOpen": false
+            },
+            {
+              "row": 1,
+              "column": 0,
+              "isOpen": false
+            },
+            {
+              "row": 1,
+              "column": 1,
+              "isOpen": false
+            }
+          ],
+          "rowCount": 2,
+          "columnCount": 2
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "code": "closure-sunroof",
+        "name": "Sunroof",
+        "group": "Closure",
+        "body": {
+          "isOpen": false
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "code": "closure-enginecover",
+        "name": "EngineCover",
+        "group": "Closure",
+        "body": {
+          "isOpen": false
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "code": "closure-reartrunk",
+        "name": "RearTrunk",
+        "group": "Closure",
+        "body": {
+          "isOpen": false,
+          "isLocked": true
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "code": "closure-fronttrunk",
+        "name": "FrontTrunk",
+        "group": "Closure",
+        "body": {
+          "isOpen": false,
+          "isLocked": false
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "name": "IsAtHome",
+        "group": "Location",
+        "code": "location-isathome",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "code": "location-preciselocation",
+        "name": "PreciseLocation",
+        "group": "Location",
+        "body": {
+          "latitude": 52.238523055555554,
+          "longitude": 0.15465555555555555,
+          "heading": 132
+        },
+        "meta": {
+          "oemUpdatedAt": 1768147275000,
+          "retrievedAt": 1768168605817
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "name": "DriveMode",
+        "group": "Transmission",
+        "code": "transmission-drivemode",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "GearState",
+        "group": "Transmission",
+        "code": "transmission-gearstate",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "Nickname",
+        "group": "VehicleIdentification",
+        "code": "vehicleidentification-nickname",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "Role",
+        "group": "VehicleUserAccount",
+        "code": "vehicleuseraccount-role",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "Permissions",
+        "group": "VehicleUserAccount",
+        "code": "vehicleuseraccount-permissions",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "IsOnline",
+        "group": "ConnectivityStatus",
+        "code": "connectivitystatus-isonline",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "IsAsleep",
+        "group": "ConnectivityStatus",
+        "code": "connectivitystatus-isasleep",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "IsDigitalKeyPaired",
+        "group": "ConnectivityStatus",
+        "code": "connectivitystatus-isdigitalkeypaired",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "ChargingConnectorType",
+        "group": "Charge",
+        "code": "charge-chargingconnectortype",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "Voltage",
+        "group": "Charge",
+        "code": "charge-voltage",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "ChargerPhases",
+        "group": "Charge",
+        "code": "charge-chargerphases",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "Amperage",
+        "group": "Charge",
+        "code": "charge-amperage",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "Wattage",
+        "group": "Charge",
+        "code": "charge-wattage",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "IsChargingPortFlapOpen",
+        "group": "Charge",
+        "code": "charge-ischargingportflapopen",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "IsChargingCableLatched",
+        "group": "Charge",
+        "code": "charge-ischargingcablelatched",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "ChargePortStatusColor",
+        "group": "Charge",
+        "code": "charge-chargeportstatuscolor",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "IsFastChargerPresent",
+        "group": "Charge",
+        "code": "charge-isfastchargerpresent",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "FastChargerType",
+        "group": "Charge",
+        "code": "charge-fastchargertype",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "ChargeRecords",
+        "group": "Charge",
+        "code": "charge-chargerecords",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "ChargeTimers",
+        "group": "Charge",
+        "code": "charge-chargetimers",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "AmperageRequested",
+        "group": "Charge",
+        "code": "charge-amperagerequested",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "AmperageMax",
+        "group": "Charge",
+        "code": "charge-amperagemax",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "code": "charge-ischargingcableconnected",
+        "name": "IsChargingCableConnected",
+        "group": "Charge",
+        "body": {
+          "value": true
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "code": "charge-detailedchargingstatus",
+        "name": "DetailedChargingStatus",
+        "group": "Charge",
+        "body": {
+          "value": "FULLY_CHARGED"
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "code": "charge-ischarging",
+        "name": "IsCharging",
+        "group": "Charge",
+        "body": {
+          "value": false
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "code": "charge-timetocomplete",
+        "name": "TimeToComplete",
+        "group": "Charge",
+        "body": {
+          "value": 14
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "code": "charge-chargerate",
+        "name": "ChargeRate",
+        "group": "Charge",
+        "body": {
+          "value": 15,
+          "unit": "km/h"
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "code": "charge-chargelimits",
+        "name": "ChargeLimits",
+        "group": "Charge",
+        "body": {
+          "values": [],
+          "activeLimit": 100,
+          "unit": "percent"
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "code": "charge-energyadded",
+        "name": "EnergyAdded",
+        "group": "Charge",
+        "body": {
+          "value": 0,
+          "unit": "kWh"
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "name": "OilLife",
+        "group": "InternalCombustionEngine",
+        "code": "internalcombustionengine-oillife",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "Range",
+        "group": "InternalCombustionEngine",
+        "code": "internalcombustionengine-range",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "FuelLevel",
+        "group": "InternalCombustionEngine",
+        "code": "internalcombustionengine-fuellevel",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "AmountRemaining",
+        "group": "InternalCombustionEngine",
+        "code": "internalcombustionengine-amountremaining",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "Status",
+        "group": "LowVoltageBattery",
+        "code": "lowvoltagebattery-status",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "code": "lowvoltagebattery-stateofcharge",
+        "name": "StateOfCharge",
+        "group": "LowVoltageBattery",
+        "body": {
+          "value": 82,
+          "unit": "percent"
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "name": "IsHeaterActive",
+        "group": "TractionBattery",
+        "code": "tractionbattery-isheateractive",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "MaxRangeChargeCounter",
+        "group": "TractionBattery",
+        "code": "tractionbattery-maxrangechargecounter",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "code": "tractionbattery-stateofcharge",
+        "name": "StateOfCharge",
+        "group": "TractionBattery",
+        "body": {
+          "value": 100,
+          "unit": "percent"
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "code": "tractionbattery-range",
+        "name": "Range",
+        "group": "TractionBattery",
+        "body": {
+          "value": 358,
+          "additionalValues": [],
+          "unit": "km"
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "code": "tractionbattery-nominalcapacity",
+        "name": "NominalCapacity",
+        "group": "TractionBattery",
+        "body": {
+          "capacity": 90,
+          "source": "USER_SELECTED",
+          "availableCapacities": [
+            {
+              "capacity": 90,
+              "description": "BEV:EV320 AWD"
+            },
+            {
+              "capacity": 90,
+              "description": "BEV:EV400 AWD"
+            }
+          ],
+          "unit": "kWh"
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168595748,
+          "retrievedAt": 1768168595748
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "name": "CurrentSpeed",
+        "group": "Motion",
+        "code": "motion-currentspeed",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "Records",
+        "group": "Service",
+        "code": "service-records",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "IsInService",
+        "group": "Service",
+        "code": "service-isinservice",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "ActiveSafety",
+        "group": "Diagnostics",
+        "code": "diagnostics-activesafety",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "DriverAssistance",
+        "group": "Diagnostics",
+        "code": "diagnostics-driverassistance",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "Emissions",
+        "group": "Diagnostics",
+        "code": "diagnostics-emissions",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "Lighting",
+        "group": "Diagnostics",
+        "code": "diagnostics-lighting",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "OilPressure",
+        "group": "Diagnostics",
+        "code": "diagnostics-oilpressure",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "OilTemperature",
+        "group": "Diagnostics",
+        "code": "diagnostics-oiltemperature",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "TirePressureMonitoring",
+        "group": "Diagnostics",
+        "code": "diagnostics-tirepressuremonitoring",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "Transmission",
+        "group": "Diagnostics",
+        "code": "diagnostics-transmission",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "WaterInFuel",
+        "group": "Diagnostics",
+        "code": "diagnostics-waterinfuel",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "name": "Airbag",
+        "group": "Diagnostics",
+        "code": "diagnostics-airbag",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      },
+      {
+        "name": "BrakeFluid",
+        "group": "Diagnostics",
+        "code": "diagnostics-brakefluid",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      },
+      {
+        "name": "OilLife",
+        "group": "Diagnostics",
+        "code": "diagnostics-oillife",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      },
+      {
+        "name": "WasherFluid",
+        "group": "Diagnostics",
+        "code": "diagnostics-washerfluid",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      },
+      {
+        "name": "Telematics",
+        "group": "Diagnostics",
+        "code": "diagnostics-telematics",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      },
+      {
+        "name": "TirePressure",
+        "group": "Diagnostics",
+        "code": "diagnostics-tirepressure",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      },
+      {
+        "name": "IsEnabled",
+        "group": "Surveillance",
+        "code": "surveillance-isenabled",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "COMPATIBILITY",
+            "code": "VEHICLE_NOT_CAPABLE"
+          }
+        }
+      },
+      {
+        "code": "odometer-traveleddistance",
+        "name": "TraveledDistance",
+        "group": "Odometer",
+        "body": {
+          "value": 53168,
+          "unit": "km"
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "code": "wheel-tires",
+        "name": "Tires",
+        "group": "Wheel",
+        "body": {
+          "values": [
+            {
+              "row": 0,
+              "column": 1,
+              "tirePressure": 699.9
+            },
+            {
+              "row": 0,
+              "column": 0,
+              "tirePressure": 258
+            },
+            {
+              "row": 1,
+              "column": 1,
+              "tirePressure": 258
+            },
+            {
+              "row": 1,
+              "column": 0,
+              "tirePressure": 258
+            }
+          ],
+          "rowCount": 2,
+          "columnCount": 2,
+          "unit": "bar"
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "code": "connectivitysoftware-currentfirmwareversion",
+        "name": "CurrentFirmwareVersion",
+        "group": "ConnectivitySoftware",
+        "body": {
+          "value": "L8B2-70712-AAE"
+        },
+        "meta": {
+          "oemUpdatedAt": 1768168607000,
+          "retrievedAt": 1768168615889
+        },
+        "status": {
+          "value": "SUCCESS"
+        }
+      },
+      {
+        "name": "ABS",
+        "group": "Diagnostics",
+        "code": "diagnostics-abs",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      },
+      {
+        "name": "DTCCount",
+        "group": "Diagnostics",
+        "code": "diagnostics-dtccount",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      },
+      {
+        "name": "DTCList",
+        "group": "Diagnostics",
+        "code": "diagnostics-dtclist",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      },
+      {
+        "name": "EVBatteryConditioning",
+        "group": "Diagnostics",
+        "code": "diagnostics-evbatteryconditioning",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      },
+      {
+        "name": "EVCharging",
+        "group": "Diagnostics",
+        "code": "diagnostics-evcharging",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      },
+      {
+        "name": "EVDriveUnit",
+        "group": "Diagnostics",
+        "code": "diagnostics-evdriveunit",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      },
+      {
+        "name": "EVHVBattery",
+        "group": "Diagnostics",
+        "code": "diagnostics-evhvbattery",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      },
+      {
+        "name": "MIL",
+        "group": "Diagnostics",
+        "code": "diagnostics-mil",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      },
+      {
+        "name": "CabinTargetTemperature",
+        "group": "HVAC",
+        "code": "hvac-cabintargettemperature",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      },
+      {
+        "name": "IsCabinHVACActive",
+        "group": "HVAC",
+        "code": "hvac-iscabinhvacactive",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      },
+      {
+        "name": "IsFrontDefrosterActive",
+        "group": "HVAC",
+        "code": "hvac-isfrontdefrosteractive",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      },
+      {
+        "name": "IsRearDefrosterActive",
+        "group": "HVAC",
+        "code": "hvac-isreardefrosteractive",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      },
+      {
+        "name": "IsSteeringHeaterActive",
+        "group": "HVAC",
+        "code": "hvac-issteeringheateractive",
+        "status": {
+          "value": "ERROR",
+          "error": {
+            "type": "PERMISSION",
+            "code": null
+          }
+        }
+      }
+    ]
+  },
+  "triggers": [
+    {
+      "type": "SIGNAL_UPDATED",
+      "signal": {
+        "name": "EnergyAdded",
+        "code": "charge-energyadded",
+        "group": "Charge"
+      }
+    }
+  ],
+  "meta": {
+    "deliveryId": "XXXXX",
+    "deliveredAt": 1768168616650,
+    "version": "4.0",
+    "webhookId": "XXXXXXX",
+    "webhookName": "XXXXXXX",
+    "mode": "LIVE",
+    "signalCount": 85
+  }
+}

@@ -286,7 +286,8 @@ async def test_webhook_scenarios(
 @pytest.mark.usefixtures("enable_all_entities")
 @pytest.mark.parametrize("platform", [Platform.SENSOR])
 @pytest.mark.parametrize(
-    "vehicle_fixture", ["vw_id_4", "jaguar_ipace", "byd_seal", "polestar_2"]
+    "vehicle_fixture",
+    ["vw_id_4", "jaguar_ipace", "jaguar_ipace2", "byd_seal", "polestar_2"],
 )
 @pytest.mark.parametrize(
     ("webhook_body", "webhook_headers", "expected"),
