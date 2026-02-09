@@ -30,6 +30,7 @@ from pytest_homeassistant_custom_component.test_util.aiohttp import (
 )
 from pytest_homeassistant_custom_component.typing import ClientSessionGenerator
 from syrupy.assertion import SnapshotAssertion
+from .syrupy import SmartcarSnapshotExtension
 
 from custom_components.smartcar.auth import AbstractAuth
 from custom_components.smartcar.const import (
@@ -85,6 +86,12 @@ def pytest_configure(config) -> None:
 def auto_enable_custom_integrations(enable_custom_integrations):
     """Enable custom integrations."""
     return
+
+
+@pytest.fixture
+def snapshot(snapshot: SnapshotAssertion) -> SnapshotAssertion:
+    """Return snapshot assertion fixture with the Home Assistant extension."""
+    return snapshot.use_extension(SmartcarSnapshotExtension)
 
 
 @pytest.fixture
