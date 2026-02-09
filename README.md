@@ -5,6 +5,7 @@
 [![Version](https://img.shields.io/github/v/release/wbyoung/smartcar)][releases]
 ![Downloads](https://img.shields.io/github/downloads/wbyoung/smartcar/total)
 ![Build](https://img.shields.io/github/actions/workflow/status/wbyoung/smartcar/pytest.yml)
+[![Github Sponsors](https://img.shields.io/badge/GitHub%20Sponsors-grey?&logo=GitHub-Sponsors&logoColor=EA4AAA)][gh-sponsors]
 
 Connect your compatible vehicle to Home Assistant using the [Smartcar API](https://smartcar.com/).
 
@@ -678,3 +679,4 @@ Please report any issues you find with this integration by opening an issue on t
 [config-flow-start]: https://my.home-assistant.io/redirect/config_flow_start/?domain=smartcar
 [smartcar-dashboard]: https://dashboard.smartcar.com/team/applications
 [ha-remote-access]: https://www.home-assistant.io/docs/configuration/remote/
+[gh-sponsors]: https://github.com/sponsors/wbyoung
