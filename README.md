@@ -162,6 +162,9 @@ Several entities are created for for each connected vehicle (subject to vehicle 
 - [`device_tracker.<make_model>_location`](#device_trackermake_model_location)
 - [`sensor.<make_model>_battery_capacity`](#sensormake_model_battery_capacity)
 - [`sensor.<make_model>_battery`](#sensormake_model_battery)
+- [`sensor.<make_model>_charge_rate`](#numbermake_model_charge_rate)
+- [`sensor.<make_model>_energy_added`](#numbermake_model_energy_added)
+- [`sensor.<make_model>_time_to_complete`](#numbermake_model_time_to_complete)
 - [`sensor.<make_model>_low_voltage_battery`](#sensormake_model_low_voltage_battery)
 - [`sensor.<make_model>_charging_status`](#sensormake_model_charging_status)
 - [`sensor.<make_model>_engine_oil_life`](#sensormake_model_engine_oil_life)
@@ -240,6 +243,27 @@ The [state of charge](https://smartcar.com/docs/api-reference/evs/get-battery-le
 Enabled by default: :white_check_mark:  
 Requires permissions: `read_battery`  
 Obtained concurrently with: [`sensor.<make_model>_range`](#sensormake_model_range)
+
+### `sensor.<make_model>_charge_rate`
+
+The [charge rate](https://smartcar.com/docs/api-reference/signals/charge#charge-rate) of the vehicle.
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_
+
+### `sensor.<make_model>_energy_added`
+
+The [amount of energy added](https://smartcar.com/docs/api-reference/signals/charge#energy-added) in the current or most recent charging session.
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_
+
+### `sensor.<make_model>_time_to_complete`
+
+The [estimated time remaining](https://smartcar.com/docs/api-reference/signals/charge#time-to-complete) until charging is complete.
+
+Enabled by default: :x:  
+Webhooks only: :link: _currently only available via webhooks_
 
 ### `sensor.<make_model>_low_voltage_battery`
 
