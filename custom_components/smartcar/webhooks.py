@@ -94,6 +94,25 @@ async def handle_webhook(
             status=HTTPStatus.UNAUTHORIZED,
         )
 
+    # respond to test mode payloads to aid with setup
+    if message.get("meta", {}).get("mode") == "TEST":
+        vehicle = data.get("vehicle", {})
+        vehicle_id = vehicle.get("id")
+        _LOGGER.debug(
+            "mode=TEST; no action taken for vehicle with id: %s",
+            vehicle_id,
+        )
+        return web.json_response(
+            {
+                "status": {
+                    "code": "acknowledged",
+                    "message": "no action taken; (mode=TEST)",
+                },
+                "vehicle": vehicle,
+            },
+            status=HTTPStatus.ACCEPTED,
+        )
+
     errors = data.get("errors", [])
     signals = data.get("signals", [])
     vehicle = data.get("vehicle", {})

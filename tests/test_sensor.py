@@ -217,6 +217,32 @@ async def test_update_with_polling_disabled(
             },
         ),
         (
+            "test_mode",  # JSON fixture
+            {
+                "sc-signature": "1234",
+            },
+            {
+                "response_status": 202,
+                "response": {
+                    "status": {
+                        "code": "acknowledged",
+                        "message": "no action taken; (mode=TEST)",
+                    },
+                    "vehicle": {
+                        "id": "a1d50709-3502-4faa-ba43-a5c7565e6a09",
+                        "make": "BMW",
+                        "model": "118i",
+                        "year": 2025,
+                    },
+                },
+                "log_messages": [
+                    "Validating signature",
+                    "mode=TEST; no action taken",
+                    "vehicle with id: a1d50709-3502-4faa-ba43-a5c7565e6a09",
+                ],
+            },
+        ),
+        (
             "broad_auth_error",
             {
                 "sc-signature": "1234",
@@ -271,6 +297,7 @@ async def test_update_with_polling_disabled(
         "vehicle_state_fuel",
         "vehicle_mismatch",
         "vehicle_error",
+        "test_mode",
         "broad_auth_error",
         "irrelevant_auth_error",
         "invalid_json",

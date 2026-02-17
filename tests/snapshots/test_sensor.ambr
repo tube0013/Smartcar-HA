@@ -1984,6 +1984,389 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_battery]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'battery',
+      'friendly_name': 'VW ID.4 Battery',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_battery',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_battery_capacity]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'VW ID.4 Battery Capacity',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_battery_capacity',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_charge_rate]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'speed',
+      'friendly_name': 'VW ID.4 Charge Rate',
+      'icon': 'mdi:speedometer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charge_rate',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_charging_current]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'current',
+      'friendly_name': 'VW ID.4 Charging Current',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfElectricCurrent.AMPERE: 'A'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charging_current',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_charging_current_max]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'current',
+      'friendly_name': 'VW ID.4 Charging Current Max',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfElectricCurrent.AMPERE: 'A'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charging_current_max',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_charging_power]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'power',
+      'friendly_name': 'VW ID.4 Charging Power',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPower.KILO_WATT: 'kW'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charging_power',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_charging_status]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Charging Status',
+      'icon': 'mdi:ev-station',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charging_status',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_charging_time_remaining]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'VW ID.4 Charging Time Remaining',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charging_time_remaining',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_charging_voltage]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'voltage',
+      'friendly_name': 'VW ID.4 Charging Voltage',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfElectricPotential.VOLT: 'V'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_charging_voltage',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_energy_added]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy_storage',
+      'friendly_name': 'VW ID.4 Energy Added',
+      'icon': 'mdi:lightning-bolt',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_energy_added',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_engine_oil_life]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Engine Oil Life',
+      'icon': 'mdi:oil-level',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_engine_oil_life',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_firmware_version]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Firmware Version',
+      'icon': 'mdi:chip',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_firmware_version',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_fuel]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Fuel',
+      'icon': 'mdi:gas-station',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfVolume.LITERS: 'L'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_fuel',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_fuel_percent]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Fuel Percent',
+      'icon': 'mdi:gas-station',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_fuel_percent',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_fuel_range]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'distance',
+      'friendly_name': 'VW ID.4 Fuel Range',
+      'icon': 'mdi:map-marker-distance',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_fuel_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_gear_state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'VW ID.4 Gear State',
+      'icon': 'mdi:car-brake-parking',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_gear_state',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'battery',
+      'friendly_name': 'VW ID.4 Low Voltage Battery',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_low_voltage_battery',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_odometer]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'distance',
+      'friendly_name': 'VW ID.4 Odometer',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_odometer',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_range]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'distance',
+      'friendly_name': 'VW ID.4 Range',
+      'icon': 'mdi:map-marker-distance',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_range',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_time_to_complete]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'duration',
+      'friendly_name': 'VW ID.4 Time to Complete',
+      'icon': 'mdi:timer',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTime.MINUTES: 'min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_time_to_complete',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_tire_pressure_back_left]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'pressure',
+      'friendly_name': 'VW ID.4 Tire Pressure Back Left',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_tire_pressure_back_left',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_tire_pressure_back_right]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'pressure',
+      'friendly_name': 'VW ID.4 Tire Pressure Back Right',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_tire_pressure_back_right',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_tire_pressure_front_left]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'pressure',
+      'friendly_name': 'VW ID.4 Tire Pressure Front Left',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_tire_pressure_front_left',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_tire_pressure_front_right]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'pressure',
+      'friendly_name': 'VW ID.4 Tire Pressure Front Right',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPressure.KPA: 'kPa'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_tire_pressure_front_right',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unavailable',
+  })
+# ---
 # name: test_webhook_scenarios[vehicle_error-vw_id_4-sensor][sensor.vw_id_4_battery]
   StateSnapshot({
     'attributes': ReadOnlyDict({
