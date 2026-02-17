@@ -3,22 +3,17 @@ tag-template: "v$RESOLVED_VERSION"
 change-template: "- #$NUMBER $TITLE @$AUTHOR"
 sort-direction: "ascending"
 categories:
-  - title: "⚠️ Breaking changes"
+  - title: ":danger: Breaking changes"
     label: "breaking change"
-  - title: "💡 Features"
-    label: ":bulb: feature"
-  - title: "✨ Code enhancements"
-    label: ":sparkles: enhancement"
-  - title: "💡 New Custom Cards"
-    label: ":bulb: custom feature"
-  - title: "✨ Custom Card enhancements"
-    label: ":sparkles: custom enhancement"
-  - title: "🐛 Bug Fixes"
-    label: ":bug: bug"
-  - title: "💬 Translations"
-    label: ":speech_balloon: translation"
-  - title: "📝 Documentation"
-    label: ":memo: documentation"
+  - title: ":bulb: Features"
+    label: "enhancement"
+  - title: ":bug: Bug Fixes"
+    label: "bug"
+  - title: ":pencil2: Documentation"
+    label: "documentation"
+  - title: ":toolbox: Chore"
+    label: "chore"
+    collapse-after: 3
 version-resolver:
   major:
     labels:
@@ -42,9 +37,9 @@ exclude-contributors:
   - "github-actions"
 
 autolabeler:
-  - label: ":bug: bug"
+  - label: "bug"
     branch:
-      - "/fix/.+/"
-  - label: ":bulb: feature"
+      - "/fix(?:-|\/).+/"
+  - label: "enhancement"
     branch:
-      - "/feature/.+/"
+      - "/(feature|add)(?:-|\/).+/"
