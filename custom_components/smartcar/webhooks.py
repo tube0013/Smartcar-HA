@@ -1,9 +1,11 @@
+from collections.abc import Callable
 import copy
+from functools import wraps
 import hmac
 from http import HTTPStatus
 import json
 import logging
-from typing import Any, Literal
+from typing import Any, Literal, cast
 
 from aiohttp import web
 from homeassistant.components import cloud, webhook
@@ -39,6 +41,30 @@ async def webhook_url_from_id(hass: HomeAssistant, webhook_id: str) -> tuple[str
     return webhook_url, cloudhook
 
 
+def update_meta_coordinator_data[F: Callable[..., Any], ReturnT](fn: F) -> F:
+    @wraps(fn)
+    async def wrapper(*args, **kwargs) -> ReturnT:  # noqa: ANN002, ANN003
+        response = await fn(*args, **kwargs)
+        config_entry = kwargs["config_entry"]
+        status = response.status
+        data = response.text or (response.body and response.body.decode("utf-8"))
+        meta_coordinator = config_entry.runtime_data.meta_coordinator
+        meta_coordinator.async_set_updated_data(
+            {
+                **meta_coordinator.data,
+                "last_webhook_received_at": dt_util.utcnow(),
+                "last_webhook_response": {
+                    "status": status,
+                    **({"data": data} if data else {}),
+                },
+            }
+        )
+        return cast("ReturnT", response)
+
+    return cast("F", wrapper)
+
+
+@update_meta_coordinator_data
 async def handle_webhook(
     hass: HomeAssistant,  # noqa: ARG001
     webhook_id: str,  # noqa: ARG001

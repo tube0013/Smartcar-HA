@@ -5,6 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
+
 from .auth import AbstractAuth
 
 if TYPE_CHECKING:
@@ -17,6 +19,7 @@ class SmartcarData:
 
     auth: AbstractAuth
     coordinators: dict[str, SmartcarVehicleCoordinator]
+    meta_coordinator: DataUpdateCoordinator
 
 
 @dataclass

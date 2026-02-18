@@ -226,6 +226,13 @@ class SmartcarEntityDescription(EntityDescription):
     )
 
 
+class SmartcarMetaEntityDescription(EntityDescription):
+    """Class describing Smartcar meta sensor entities."""
+
+    value_fn: Callable[[dict[str, Any]], str | int | float | dt.datetime | None]
+    attr_fn: Callable[[dict[str, Any]], dict[str, Any]] = lambda _: {}
+
+
 def inject_raw_value[RawValueT](
     coordinator: SmartcarVehicleCoordinator,
     description: EntityDescription,

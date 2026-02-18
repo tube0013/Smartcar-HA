@@ -113,6 +113,7 @@ class EntityDescriptionKey(StrEnum):
     CHARGE_AMPERAGE_MAX = auto()
     CHARGE_FAST_CHARGER_PRESENT = auto()
     FIRMWARE_VERSION = auto()
+    LAST_WEBHOOK_RECEIVED = auto()
 
 
 DEFAULT_ENABLED_ENTITY_DESCRIPTION_KEYS = {

@@ -17,6 +17,7 @@ from homeassistant.helpers.config_entry_oauth2_flow import (
     async_get_config_entry_implementation,
 )
 from homeassistant.helpers.typing import ConfigType
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 from . import util
 from .auth import AbstractAuth
@@ -59,7 +60,15 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     oauth_session = OAuth2Session(hass, entry, implementation)
     auth = AsyncConfigEntryAuth(websession, oauth_session, API_HOST)
     coordinators: dict[str, SmartcarVehicleCoordinator] = {}
-    entry.runtime_data = SmartcarData(auth=auth, coordinators=coordinators)
+    meta_coordinator = DataUpdateCoordinator(
+        hass, _LOGGER, name=f"{DOMAIN}_meta", config_entry=entry
+    )
+    meta_coordinator.async_set_updated_data({})
+    entry.runtime_data = SmartcarData(
+        auth=auth,
+        coordinators=coordinators,
+        meta_coordinator=meta_coordinator,
+    )
     device_registry = dr.async_get(hass)
     other_vins = vehicle_vins_in_use(hass, entry)
 

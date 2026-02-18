@@ -705,6 +705,22 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[broad_auth_error-vw_id_4-sensor][sensor.vw_id_4_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'VW ID.4 Last Webhook Received',
+      'icon': 'mdi:clock',
+      'response_status': 204,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2026-02-17T16:21:32+00:00',
+  })
+# ---
 # name: test_webhook_scenarios[broad_auth_error-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -1086,6 +1102,23 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[invalid_json-vw_id_4-sensor][sensor.vw_id_4_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'VW ID.4 Last Webhook Received',
+      'icon': 'mdi:clock',
+      'response_data': '{"error": {"code": "invalid_json", "message": "invalid JSON body"}}',
+      'response_status': 400,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2026-02-17T16:21:32+00:00',
   })
 # ---
 # name: test_webhook_scenarios[invalid_json-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
@@ -1471,6 +1504,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[invalid_signature-vw_id_4-sensor][sensor.vw_id_4_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'VW ID.4 Last Webhook Received',
+      'icon': 'mdi:clock',
+      'response_data': '{"error": {"code": "invalid_signature", "message": "invalid signature on request body"}}',
+      'response_status': 401,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2026-02-17T16:21:32+00:00',
+  })
+# ---
 # name: test_webhook_scenarios[invalid_signature-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -1852,6 +1902,22 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[irrelevant_auth_error-vw_id_4-sensor][sensor.vw_id_4_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'VW ID.4 Last Webhook Received',
+      'icon': 'mdi:clock',
+      'response_status': 204,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2026-02-17T16:21:32+00:00',
   })
 # ---
 # name: test_webhook_scenarios[irrelevant_auth_error-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
@@ -2237,6 +2303,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'VW ID.4 Last Webhook Received',
+      'icon': 'mdi:clock',
+      'response_data': '{"status": {"code": "acknowledged", "message": "no action taken; (mode=TEST)"}, "vehicle": {"id": "a1d50709-3502-4faa-ba43-a5c7565e6a09", "make": "BMW", "model": "118i", "year": 2025}}',
+      'response_status': 202,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2026-02-17T16:21:32+00:00',
+  })
+# ---
 # name: test_webhook_scenarios[test_mode-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -2618,6 +2701,22 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[vehicle_error-vw_id_4-sensor][sensor.vw_id_4_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'VW ID.4 Last Webhook Received',
+      'icon': 'mdi:clock',
+      'response_status': 204,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2026-02-17T16:21:32+00:00',
   })
 # ---
 # name: test_webhook_scenarios[vehicle_error-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
@@ -3003,6 +3102,23 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[vehicle_mismatch-vw_id_4-sensor][sensor.vw_id_4_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'VW ID.4 Last Webhook Received',
+      'icon': 'mdi:clock',
+      'response_data': '{"error": {"code": "unknown_vehicle", "message": "unknown vehicle included"}}',
+      'response_status': 409,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2026-02-17T16:21:32+00:00',
+  })
+# ---
 # name: test_webhook_scenarios[vehicle_mismatch-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -3386,6 +3502,22 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[vehicle_state-vw_id_4-sensor][sensor.vw_id_4_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'VW ID.4 Last Webhook Received',
+      'icon': 'mdi:clock',
+      'response_status': 204,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2026-02-17T16:21:32+00:00',
   })
 # ---
 # name: test_webhook_scenarios[vehicle_state-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
@@ -3777,6 +3909,22 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_scenarios[vehicle_state_fuel-vw_id_4-sensor][sensor.vw_id_4_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'VW ID.4 Last Webhook Received',
+      'icon': 'mdi:clock',
+      'response_status': 204,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2026-02-17T16:21:32+00:00',
+  })
+# ---
 # name: test_webhook_scenarios[vehicle_state_fuel-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -4158,6 +4306,23 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_scenarios[verify-vw_id_4-sensor][sensor.vw_id_4_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'VW ID.4 Last Webhook Received',
+      'icon': 'mdi:clock',
+      'response_data': '{"challenge": "1234"}',
+      'response_status': 200,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2026-02-17T16:21:32+00:00',
   })
 # ---
 # name: test_webhook_scenarios[verify-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
@@ -4543,6 +4708,22 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-byd_seal-sensor][sensor.byd_seal_u_dm_i_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'BYD Seal U Dm-i Last Webhook Received',
+      'icon': 'mdi:clock',
+      'response_status': 204,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.byd_seal_u_dm_i_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2026-02-17T16:21:32+00:00',
   })
 # ---
 # name: test_webhook_update[vehicle_state_all-byd_seal-sensor][sensor.byd_seal_u_dm_i_low_voltage_battery]
@@ -4934,6 +5115,22 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'JAGUAR I-PACE Last Webhook Received',
+      'icon': 'mdi:clock',
+      'response_status': 204,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2026-02-17T16:21:32+00:00',
   })
 # ---
 # name: test_webhook_update[vehicle_state_all-jaguar_ipace-sensor][sensor.jaguar_i_pace_low_voltage_battery]
@@ -5337,6 +5534,22 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'JAGUAR I-PACE Last Webhook Received',
+      'icon': 'mdi:clock',
+      'response_status': 204,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.jaguar_i_pace_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2026-02-17T16:21:32+00:00',
   })
 # ---
 # name: test_webhook_update[vehicle_state_all-jaguar_ipace2-sensor][sensor.jaguar_i_pace_low_voltage_battery]
@@ -5754,6 +5967,22 @@
     'state': 'unavailable',
   })
 # ---
+# name: test_webhook_update[vehicle_state_all-polestar_2-sensor][sensor.polestar_polestar_2_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'POLESTAR Polestar 2 Last Webhook Received',
+      'icon': 'mdi:clock',
+      'response_status': 204,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.polestar_polestar_2_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2026-02-17T16:21:32+00:00',
+  })
+# ---
 # name: test_webhook_update[vehicle_state_all-polestar_2-sensor][sensor.polestar_polestar_2_low_voltage_battery]
   StateSnapshot({
     'attributes': ReadOnlyDict({
@@ -6143,6 +6372,22 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'unavailable',
+  })
+# ---
+# name: test_webhook_update[vehicle_state_all-vw_id_4-sensor][sensor.vw_id_4_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'VW ID.4 Last Webhook Received',
+      'icon': 'mdi:clock',
+      'response_status': 204,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2026-02-17T16:21:32+00:00',
   })
 # ---
 # name: test_webhook_update[vehicle_state_all-vw_id_4-sensor][sensor.vw_id_4_low_voltage_battery]
