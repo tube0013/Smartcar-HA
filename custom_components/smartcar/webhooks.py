@@ -46,6 +46,7 @@ def update_meta_coordinator_data[F: Callable[..., Any], ReturnT](fn: F) -> F:
     async def wrapper(*args, **kwargs) -> ReturnT:  # noqa: ANN002, ANN003
         response = await fn(*args, **kwargs)
         config_entry = kwargs["config_entry"]
+        request = args[2]
         status = response.status
         data = response.text or (response.body and response.body.decode("utf-8"))
         meta_coordinator = config_entry.runtime_data.meta_coordinator
@@ -57,6 +58,7 @@ def update_meta_coordinator_data[F: Callable[..., Any], ReturnT](fn: F) -> F:
                     "status": status,
                     **({"data": data} if data else {}),
                 },
+                "last_webhook_request": await request.text(),
             }
         )
         return cast("ReturnT", response)

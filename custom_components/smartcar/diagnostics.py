@@ -36,6 +36,7 @@ async def async_get_config_entry_diagnostics(
     entry: ConfigEntry,
 ) -> dict[str, Any]:
     """Return diagnostics for a config entry."""
+    meta_coordinator = entry.runtime_data.meta_coordinator
     coordinators: dict[str, SmartcarVehicleCoordinator] = (
         entry.runtime_data.coordinators
     )
@@ -54,6 +55,7 @@ async def async_get_config_entry_diagnostics(
                     coordinator_name: coordinator.data
                     for coordinator_name, coordinator in coordinators.items()
                 },
+                "metadata": meta_coordinator.data,
             },
             TO_REDACT,
         ),
