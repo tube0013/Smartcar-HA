@@ -1,7 +1,9 @@
 from dataclasses import dataclass
+import datetime as dt
 from datetime import date, datetime
 from decimal import Decimal
 import logging
+from typing import Any
 
 from homeassistant.components.sensor import (
     SensorDeviceClass,
@@ -12,6 +14,7 @@ from homeassistant.components.sensor import (
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (
     PERCENTAGE,
+    EntityCategory,
     UnitOfElectricCurrent,
     UnitOfElectricPotential,
     UnitOfEnergy,
@@ -23,11 +26,16 @@ from homeassistant.const import (
     UnitOfVolume,
 )
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.typing import StateType
+from homeassistant.helpers.update_coordinator import (
+    CoordinatorEntity,
+    DataUpdateCoordinator,
+)
 from homeassistant.util.unit_conversion import DistanceConverter, PressureConverter
 
-from .const import EntityDescriptionKey
+from .const import DOMAIN, EntityDescriptionKey
 from .coordinator import (
     VEHICLE_BACK_ROW,
     VEHICLE_FRONT_ROW,
@@ -35,7 +43,11 @@ from .coordinator import (
     VEHICLE_RIGHT_COLUMN,
     SmartcarVehicleCoordinator,
 )
-from .entity import SmartcarEntity, SmartcarEntityDescription
+from .entity import (
+    SmartcarEntity,
+    SmartcarEntityDescription,
+    SmartcarMetaEntityDescription,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -43,6 +55,13 @@ _LOGGER = logging.getLogger(__name__)
 @dataclass(frozen=True, kw_only=True)
 class SmartcarSensorDescription(SensorEntityDescription, SmartcarEntityDescription):
     """Class describing Smartcar sensor entities."""
+
+
+@dataclass(frozen=True, kw_only=True)
+class SmartcarMetaSensorDescription(
+    SensorEntityDescription, SmartcarMetaEntityDescription
+):
+    """Class describing Smartcar meta sensor entities."""
 
 
 SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
@@ -310,6 +329,23 @@ SENSOR_TYPES: tuple[SmartcarSensorDescription, ...] = (
     ),
 )
 
+META_SENSOR_TYPES: tuple[SmartcarMetaSensorDescription, ...] = (
+    SmartcarMetaSensorDescription(
+        key=EntityDescriptionKey.LAST_WEBHOOK_RECEIVED,
+        name="Last Webhook Received",
+        device_class=SensorDeviceClass.TIMESTAMP,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        value_fn=lambda data: data.get("last_webhook_received_at"),
+        attr_fn=lambda data: (
+            {
+                f"response_{key}": value
+                for key, value in data.get("last_webhook_response", {}).items()
+            }
+        ),
+        icon="mdi:clock",
+    ),
+)
+
 
 async def async_setup_entry(  # noqa: RUF029
     hass: HomeAssistant,  # noqa: ARG001
@@ -320,12 +356,21 @@ async def async_setup_entry(  # noqa: RUF029
     coordinators: dict[str, SmartcarVehicleCoordinator] = (
         entry.runtime_data.coordinators
     )
+    meta_coordinator = entry.runtime_data.meta_coordinator
     _LOGGER.debug("Setting up sensors for VINs: %s", list(coordinators.keys()))
     entities = [
         SmartcarSensor(coordinator, description)
         for coordinator in coordinators.values()
         for description in SENSOR_TYPES
         if coordinator.is_scope_enabled(description.key, verbose=True)
+    ] + [
+        SmartcarMetaSensor(
+            meta_coordinator,
+            description,
+            {"identifiers": {(DOMAIN, vehicle_coordinator.vin)}},
+        )
+        for vehicle_coordinator in coordinators.values()
+        for description in META_SENSOR_TYPES
     ]
     _LOGGER.info("Adding %s Smartcar sensor entities", len(entities))
     async_add_entities(entities)
@@ -341,3 +386,35 @@ class SmartcarSensor[ValueT, RawValueT](
     @property
     def native_value(self) -> StateType | date | datetime | Decimal:
         return self._extract_value()
+
+
+class SmartcarMetaSensor(CoordinatorEntity[DataUpdateCoordinator], SensorEntity):
+    """Meta sensor entity."""
+
+    _attr_has_entity_name = True
+    entity_description: SmartcarMetaEntityDescription
+
+    def __init__(
+        self,
+        coordinator: DataUpdateCoordinator,
+        description: SmartcarMetaEntityDescription,
+        device_info: DeviceInfo,
+    ) -> None:
+        """Initialize."""
+        super().__init__(coordinator)
+
+        (_, vin) = next(iter(device_info["identifiers"]))
+
+        self.entity_description = description
+        self._attr_unique_id = f"{vin}_{description.key}"
+        self._attr_device_info = device_info
+
+    @property
+    def native_value(self) -> str | int | float | dt.datetime | None:
+        """Return the state."""
+        return self.entity_description.value_fn(self.coordinator.data)
+
+    @property
+    def extra_state_attributes(self) -> dict[str, Any]:
+        """Return the state attributes."""
+        return self.entity_description.attr_fn(self.coordinator.data)

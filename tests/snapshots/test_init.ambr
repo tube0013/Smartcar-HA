@@ -143,6 +143,39 @@
       'unique_id': 'VIWP1AB29P15LA85784N_range',
       'unit_of_measurement': <UnitOfLength.KILOMETERS: 'km'>,
     }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': <EntityCategory.DIAGNOSTIC: 'diagnostic'>,
+      'entity_id': 'sensor.vw_id_4_last_webhook_received',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': <SensorDeviceClass.TIMESTAMP: 'timestamp'>,
+      'original_icon': 'mdi:clock',
+      'original_name': 'Last Webhook Received',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_last_webhook_received',
+      'unit_of_measurement': None,
+    }),
   ])
 # ---
 # name: test_limited_scopes[enabled_entities0-enabled_scopes0-vw_id_4][sensor.vw_id_4_battery]
@@ -179,6 +212,21 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': '82',
+  })
+# ---
+# name: test_limited_scopes[enabled_entities0-enabled_scopes0-vw_id_4][sensor.vw_id_4_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'VW ID.4 Last Webhook Received',
+      'icon': 'mdi:clock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unknown',
   })
 # ---
 # name: test_limited_scopes[enabled_entities0-enabled_scopes0-vw_id_4][sensor.vw_id_4_range]
@@ -600,6 +648,39 @@
       'unique_id': 'VIWP1AB29P15LA85784N_location',
       'unit_of_measurement': None,
     }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': <EntityCategory.DIAGNOSTIC: 'diagnostic'>,
+      'entity_id': 'sensor.smartcar_784n_last_webhook_received',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': <SensorDeviceClass.TIMESTAMP: 'timestamp'>,
+      'original_icon': 'mdi:clock',
+      'original_name': 'Last Webhook Received',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_last_webhook_received',
+      'unit_of_measurement': None,
+    }),
   ])
 # ---
 # name: test_standard_setup[unknown_make][lock.smartcar_784n_door_lock]
@@ -644,6 +725,21 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'FULLY_CHARGED',
+  })
+# ---
+# name: test_standard_setup[unknown_make][sensor.smartcar_784n_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'Smartcar 784N Last Webhook Received',
+      'icon': 'mdi:clock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.smartcar_784n_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unknown',
   })
 # ---
 # name: test_standard_setup[unknown_make][sensor.smartcar_784n_range]
@@ -984,6 +1080,39 @@
       'unique_id': 'VIWP1AB29P15LA85784N_location',
       'unit_of_measurement': None,
     }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': <EntityCategory.DIAGNOSTIC: 'diagnostic'>,
+      'entity_id': 'sensor.vw_id_4_last_webhook_received',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': <SensorDeviceClass.TIMESTAMP: 'timestamp'>,
+      'original_icon': 'mdi:clock',
+      'original_name': 'Last Webhook Received',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_last_webhook_received',
+      'unit_of_measurement': None,
+    }),
   ])
 # ---
 # name: test_standard_setup[vw_id_4][lock.vw_id_4_door_lock]
@@ -1032,6 +1161,21 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'NOT_CHARGING',
+  })
+# ---
+# name: test_standard_setup[vw_id_4][sensor.vw_id_4_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'VW ID.4 Last Webhook Received',
+      'icon': 'mdi:clock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unknown',
   })
 # ---
 # name: test_standard_setup[vw_id_4][sensor.vw_id_4_range]
@@ -3318,6 +3462,39 @@
       'unique_id': 'VIWP1AB29P15LA85784N_firmware_version',
       'unit_of_measurement': None,
     }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': <EntityCategory.DIAGNOSTIC: 'diagnostic'>,
+      'entity_id': 'sensor.smartcar_784n_last_webhook_received',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': <SensorDeviceClass.TIMESTAMP: 'timestamp'>,
+      'original_icon': 'mdi:clock',
+      'original_name': 'Last Webhook Received',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_last_webhook_received',
+      'unit_of_measurement': None,
+    }),
   ])
 # ---
 # name: test_standard_setup_with_all_entities[unknown_make][lock.smartcar_784n_door_lock]
@@ -3604,6 +3781,21 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'unavailable',
+  })
+# ---
+# name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'Smartcar 784N Last Webhook Received',
+      'icon': 'mdi:clock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.smartcar_784n_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unknown',
   })
 # ---
 # name: test_standard_setup_with_all_entities[unknown_make][sensor.smartcar_784n_low_voltage_battery]
@@ -6007,6 +6199,39 @@
       'unique_id': 'VIWP1AB29P15LA85784N_firmware_version',
       'unit_of_measurement': None,
     }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': <EntityCategory.DIAGNOSTIC: 'diagnostic'>,
+      'entity_id': 'sensor.vw_id_4_last_webhook_received',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': <SensorDeviceClass.TIMESTAMP: 'timestamp'>,
+      'original_icon': 'mdi:clock',
+      'original_name': 'Last Webhook Received',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_last_webhook_received',
+      'unit_of_measurement': None,
+    }),
   ])
 # ---
 # name: test_standard_setup_with_all_entities[vw_id_4][lock.vw_id_4_door_lock]
@@ -6301,6 +6526,21 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'unavailable',
+  })
+# ---
+# name: test_standard_setup_with_all_entities[vw_id_4][sensor.vw_id_4_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'VW ID.4 Last Webhook Received',
+      'icon': 'mdi:clock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unknown',
   })
 # ---
 # name: test_standard_setup_with_all_entities[vw_id_4][sensor.vw_id_4_low_voltage_battery]
@@ -8697,6 +8937,39 @@
       'unique_id': 'VIWP1AB29P15LA85784N_firmware_version',
       'unit_of_measurement': None,
     }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': <EntityCategory.DIAGNOSTIC: 'diagnostic'>,
+      'entity_id': 'sensor.vw_id_4_last_webhook_received',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': <SensorDeviceClass.TIMESTAMP: 'timestamp'>,
+      'original_icon': 'mdi:clock',
+      'original_name': 'Last Webhook Received',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_last_webhook_received',
+      'unit_of_measurement': None,
+    }),
   ])
 # ---
 # name: test_update_errors[network_error-vw_id_4][lock.vw_id_4_door_lock]
@@ -8983,6 +9256,21 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[network_error-vw_id_4][sensor.vw_id_4_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'VW ID.4 Last Webhook Received',
+      'icon': 'mdi:clock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unknown',
   })
 # ---
 # name: test_update_errors[network_error-vw_id_4][sensor.vw_id_4_low_voltage_battery]
@@ -11373,6 +11661,39 @@
       'unique_id': 'VIWP1AB29P15LA85784N_firmware_version',
       'unit_of_measurement': None,
     }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': <EntityCategory.DIAGNOSTIC: 'diagnostic'>,
+      'entity_id': 'sensor.vw_id_4_last_webhook_received',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': <SensorDeviceClass.TIMESTAMP: 'timestamp'>,
+      'original_icon': 'mdi:clock',
+      'original_name': 'Last Webhook Received',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_last_webhook_received',
+      'unit_of_measurement': None,
+    }),
   ])
 # ---
 # name: test_update_errors[network_proxy_response-vw_id_4][lock.vw_id_4_door_lock]
@@ -11659,6 +11980,21 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[network_proxy_response-vw_id_4][sensor.vw_id_4_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'VW ID.4 Last Webhook Received',
+      'icon': 'mdi:clock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unknown',
   })
 # ---
 # name: test_update_errors[network_proxy_response-vw_id_4][sensor.vw_id_4_low_voltage_battery]
@@ -14049,6 +14385,39 @@
       'unique_id': 'VIWP1AB29P15LA85784N_firmware_version',
       'unit_of_measurement': None,
     }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': <EntityCategory.DIAGNOSTIC: 'diagnostic'>,
+      'entity_id': 'sensor.vw_id_4_last_webhook_received',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': <SensorDeviceClass.TIMESTAMP: 'timestamp'>,
+      'original_icon': 'mdi:clock',
+      'original_name': 'Last Webhook Received',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_last_webhook_received',
+      'unit_of_measurement': None,
+    }),
   ])
 # ---
 # name: test_update_errors[server_error-vw_id_4][lock.vw_id_4_door_lock]
@@ -14335,6 +14704,21 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[server_error-vw_id_4][sensor.vw_id_4_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'VW ID.4 Last Webhook Received',
+      'icon': 'mdi:clock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unknown',
   })
 # ---
 # name: test_update_errors[server_error-vw_id_4][sensor.vw_id_4_low_voltage_battery]
@@ -16725,6 +17109,39 @@
       'unique_id': 'VIWP1AB29P15LA85784N_firmware_version',
       'unit_of_measurement': None,
     }),
+    EntityRegistryEntrySnapshot({
+      'aliases': set({
+      }),
+      'area_id': None,
+      'capabilities': None,
+      'config_entry_id': <ANY>,
+      'config_subentry_id': <ANY>,
+      'device_class': None,
+      'device_id': <ANY>,
+      'disabled_by': None,
+      'domain': 'sensor',
+      'entity_category': <EntityCategory.DIAGNOSTIC: 'diagnostic'>,
+      'entity_id': 'sensor.vw_id_4_last_webhook_received',
+      'has_entity_name': True,
+      'hidden_by': None,
+      'icon': None,
+      'id': <ANY>,
+      'labels': set({
+      }),
+      'name': None,
+      'options': dict({
+      }),
+      'original_device_class': <SensorDeviceClass.TIMESTAMP: 'timestamp'>,
+      'original_icon': 'mdi:clock',
+      'original_name': 'Last Webhook Received',
+      'platform': 'smartcar',
+      'previous_unique_id': None,
+      'suggested_object_id': None,
+      'supported_features': 0,
+      'translation_key': None,
+      'unique_id': 'VIWP1AB29P15LA85784N_last_webhook_received',
+      'unit_of_measurement': None,
+    }),
   ])
 # ---
 # name: test_update_errors[unauthorized-vw_id_4][lock.vw_id_4_door_lock]
@@ -17011,6 +17428,21 @@
     'last_reported': <ANY>,
     'last_updated': <ANY>,
     'state': 'unavailable',
+  })
+# ---
+# name: test_update_errors[unauthorized-vw_id_4][sensor.vw_id_4_last_webhook_received]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'timestamp',
+      'friendly_name': 'VW ID.4 Last Webhook Received',
+      'icon': 'mdi:clock',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.vw_id_4_last_webhook_received',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'unknown',
   })
 # ---
 # name: test_update_errors[unauthorized-vw_id_4][sensor.vw_id_4_low_voltage_battery]

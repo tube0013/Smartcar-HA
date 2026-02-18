@@ -2,6 +2,8 @@
 
 from . import bootstrap as bootstrap  # noqa: I001, PLC0414
 
+from freezegun.api import FrozenDateTimeFactory
+
 from collections.abc import Awaitable, Callable, Generator
 import json
 import logging
@@ -31,6 +33,7 @@ from pytest_homeassistant_custom_component.test_util.aiohttp import (
 from pytest_homeassistant_custom_component.typing import ClientSessionGenerator
 from syrupy.assertion import SnapshotAssertion
 from .syrupy import SmartcarSnapshotExtension
+from . import MOCK_UTC_NOW
 
 from custom_components.smartcar.auth import AbstractAuth
 from custom_components.smartcar.const import (
@@ -92,6 +95,15 @@ def auto_enable_custom_integrations(enable_custom_integrations):
 def snapshot(snapshot: SnapshotAssertion) -> SnapshotAssertion:
     """Return snapshot assertion fixture with the Home Assistant extension."""
     return snapshot.use_extension(SmartcarSnapshotExtension)
+
+
+@pytest.fixture
+def mock_now(
+    hass: HomeAssistant,
+    freezer: FrozenDateTimeFactory,
+):
+    """Return a mock now & utcnow datetime."""
+    freezer.move_to(MOCK_UTC_NOW)
 
 
 @pytest.fixture
@@ -346,6 +358,7 @@ def webhook_scenario(
     webhook_body: str,
     webhook_headers: dict[str, Any],
     expected: dict[str, Any],
+    mock_now: Any,
     device_registry: dr.DeviceRegistry,
     entity_registry: er.EntityRegistry,
     caplog: pytest.LogCaptureFixture,

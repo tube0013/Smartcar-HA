@@ -222,6 +222,10 @@ All entities have the following attributes:
 
 Links to relevant API documentation are provided for each entity described below as well as the [permissions each entity requires](https://smartcar.com/docs/api-reference/permissions). When the required permissions are [not requested during setup](#authorization-data-entry), those entities will not be created.
 
+In addition to the above, there is a sensor to aid in setting up the integration:
+
+- [`sensor.<make_model>_last_webhook_received`](#sensormake_model_last_webhook_received)
+
 ### `device_tracker.<make_model>_location`
 
 The GPS [location](https://smartcar.com/docs/api-reference/get-location) of the vehicle.
@@ -623,6 +627,17 @@ Enabled by default: :white_check_mark:
 Requires permissions: `read_security`, `control_security`
 
 _Note: some models, e.g., VW ID.4 2023+ do not have this functionality._
+
+### `sensor.<make_model>_last_webhook_received`
+
+The time the last webhook was received. This is set even when a received webhook is not valid (i.e. an unauthenticated request or for an unknown vehicle).
+
+Enabled by default: :white_check_mark:
+
+#### Attributes
+
+- `response_status`: The status code used to respond to the webhook.
+- `response_data`: The data sent in the response (when available).
 
 ## Actions
 

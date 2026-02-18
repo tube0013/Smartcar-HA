@@ -570,6 +570,7 @@ _SNAPSHOT_ORDER = {
             "charge_amperage_max",
             "charge_fast_charger_present",
             "firmware_version",
+            "last_webhook_received",
         ]
     )
 }

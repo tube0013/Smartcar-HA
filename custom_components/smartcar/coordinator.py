@@ -583,6 +583,8 @@ class SmartcarVehicleCoordinator(DataUpdateCoordinator):
 
         for entity in entities:
             _, key = entity.unique_id.split("_", 1)
+            if key not in DATAPOINT_ENTITY_KEY_MAP:
+                continue
             config = DATAPOINT_ENTITY_KEY_MAP[key]
 
             # currently polling is only supported via the v2 api

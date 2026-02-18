@@ -2,6 +2,7 @@ from . import bootstrap as bootstrap  # noqa: I001, PLC0414
 
 import importlib
 
+import datetime as dt
 from homeassistant.core import HomeAssistant
 from pytest_homeassistant_custom_component.common import (
     MockConfigEntry,
@@ -12,6 +13,7 @@ from pytest_homeassistant_custom_component.test_util.aiohttp import AiohttpClien
 from custom_components.smartcar.const import DOMAIN
 
 MOCK_API_ENDPOINT = "http://test.local"
+MOCK_UTC_NOW = dt.datetime(2026, 2, 17, 16, 21, 32, 3842, tzinfo=dt.UTC)
 
 
 async def setup_integration(hass: HomeAssistant, config_entry: MockConfigEntry) -> None:
