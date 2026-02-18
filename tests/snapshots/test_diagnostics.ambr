@@ -119,6 +119,8 @@
       'unique_id': 'a1d50709-3502-4faa-ba43-a5c7565e6a09',
       'version': 2,
     }),
+    'metadata': dict({
+    }),
     'webhook_url': None,
   })
 # ---
@@ -260,6 +262,8 @@
       'title': 'Mock Title',
       'unique_id': 'a1d50709-3502-4faa-ba43-a5c7565e6a09',
       'version': 2,
+    }),
+    'metadata': dict({
     }),
     'webhook_url': None,
   })
