@@ -268,3 +268,1212 @@
     'webhook_url': None,
   })
 # ---
+# name: test_entry_diagnostics_metadata[invalid_json]
+  dict({
+    'data': dict({
+      'VIWP1AB29P15LA85784N': None,
+    }),
+    'entry': dict({
+      'data': dict({
+        'application_management_token': '**REDACTED**',
+        'auth_implementation': 'smartcar',
+        'token': dict({
+          'access_tier': 0,
+          'access_token': '**REDACTED**',
+          'installed_app_id': '2d474f47-bab5-4438-9d37-478148b9d073',
+          'refresh_token': '**REDACTED**',
+          'scopes': 'read_vehicle_info read_vin read_battery read_charge read_engine_oil read_fuel read_location read_odometer read_security read_tires control_charge control_security',
+        }),
+        'vehicles': dict({
+          'a1d50709-3502-4faa-ba43-a5c7565e6a09': dict({
+            'make': 'VW',
+            'model': 'ID.4',
+            'vin': '**REDACTED**',
+            'year': '2021',
+          }),
+        }),
+      }),
+      'disabled_by': None,
+      'discovery_keys': dict({
+      }),
+      'domain': 'smartcar',
+      'minor_version': 0,
+      'options': dict({
+      }),
+      'pref_disable_new_entities': False,
+      'pref_disable_polling': False,
+      'source': 'user',
+      'subentries': list([
+      ]),
+      'title': 'Mock Title',
+      'unique_id': 'a1d50709-3502-4faa-ba43-a5c7565e6a09',
+      'version': 2,
+    }),
+    'metadata': dict({
+      'last_webhook_request_raw': 'invalid_json',
+      'last_webhook_response': dict({
+        'status': 204,
+      }),
+    }),
+    'webhook_url': 'http://10.10.10.10:8123/api/webhook/smartcar_test',
+  })
+# ---
+# name: test_entry_diagnostics_metadata[location_redaction]
+  dict({
+    'data': dict({
+      'SADHA2A10M1610715': None,
+    }),
+    'entry': dict({
+      'data': dict({
+        'application_management_token': '**REDACTED**',
+        'auth_implementation': 'smartcar',
+        'token': dict({
+          'access_tier': 0,
+          'access_token': '**REDACTED**',
+          'installed_app_id': '2d474f47-bab5-4438-9d37-478148b9d073',
+          'refresh_token': '**REDACTED**',
+          'scopes': 'read_vehicle_info read_vin read_battery read_charge read_engine_oil read_fuel read_location read_odometer read_security read_tires control_charge control_security',
+        }),
+        'vehicles': dict({
+          'db745230-7f7c-4791-bcaa-185facf371be': dict({
+            'make': 'JAGUAR',
+            'model': 'I-PACE',
+            'vin': '**REDACTED**',
+            'year': '2021',
+          }),
+        }),
+      }),
+      'disabled_by': None,
+      'discovery_keys': dict({
+      }),
+      'domain': 'smartcar',
+      'minor_version': 0,
+      'options': dict({
+      }),
+      'pref_disable_new_entities': False,
+      'pref_disable_polling': False,
+      'source': 'user',
+      'subentries': list([
+      ]),
+      'title': 'Mock Title',
+      'unique_id': 'db745230-7f7c-4791-bcaa-185facf371be',
+      'version': 2,
+    }),
+    'metadata': dict({
+      'last_webhook_request': dict({
+        'data': dict({
+          'signals': list([
+            dict({
+              'code': 'connectivitystatus-isonline',
+              'group': 'ConnectivityStatus',
+              'name': 'IsOnline',
+              'status': dict({
+                'error': dict({
+                  'code': 'VEHICLE_NOT_CAPABLE',
+                  'type': 'COMPATIBILITY',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'code': 'connectivitystatus-isasleep',
+              'group': 'ConnectivityStatus',
+              'name': 'IsAsleep',
+              'status': dict({
+                'error': dict({
+                  'code': 'VEHICLE_NOT_CAPABLE',
+                  'type': 'COMPATIBILITY',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'code': 'charge-voltage',
+              'group': 'Charge',
+              'name': 'Voltage',
+              'status': dict({
+                'error': dict({
+                  'code': 'VEHICLE_NOT_CAPABLE',
+                  'type': 'COMPATIBILITY',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'code': 'charge-wattage',
+              'group': 'Charge',
+              'name': 'Wattage',
+              'status': dict({
+                'error': dict({
+                  'code': 'VEHICLE_NOT_CAPABLE',
+                  'type': 'COMPATIBILITY',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'value': True,
+              }),
+              'code': 'charge-ischargingcableconnected',
+              'group': 'Charge',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'IsChargingCableConnected',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'value': 'CHARGING',
+              }),
+              'code': 'charge-detailedchargingstatus',
+              'group': 'Charge',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'DetailedChargingStatus',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'value': True,
+              }),
+              'code': 'charge-ischarging',
+              'group': 'Charge',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'IsCharging',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'activeLimit': 100,
+                'unit': 'percent',
+                'values': list([
+                ]),
+              }),
+              'code': 'charge-chargelimits',
+              'group': 'Charge',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'ChargeLimits',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'code': 'lowvoltagebattery-status',
+              'group': 'LowVoltageBattery',
+              'name': 'Status',
+              'status': dict({
+                'error': dict({
+                  'code': 'VEHICLE_NOT_CAPABLE',
+                  'type': 'COMPATIBILITY',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'unit': 'percent',
+                'value': 100,
+              }),
+              'code': 'lowvoltagebattery-stateofcharge',
+              'group': 'LowVoltageBattery',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'StateOfCharge',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'code': 'climate-internaltemperature',
+              'group': 'Climate',
+              'name': 'InternalTemperature',
+              'status': dict({
+                'error': dict({
+                  'code': 'VEHICLE_NOT_CAPABLE',
+                  'type': 'COMPATIBILITY',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'code': 'climate-externaltemperature',
+              'group': 'Climate',
+              'name': 'ExternalTemperature',
+              'status': dict({
+                'error': dict({
+                  'code': 'VEHICLE_NOT_CAPABLE',
+                  'type': 'COMPATIBILITY',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'code': 'service-records',
+              'group': 'Service',
+              'name': 'Records',
+              'status': dict({
+                'error': dict({
+                  'code': 'VEHICLE_NOT_CAPABLE',
+                  'type': 'COMPATIBILITY',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'unit': 'km',
+                'value': 167336,
+              }),
+              'code': 'odometer-traveleddistance',
+              'group': 'Odometer',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'TraveledDistance',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'unit': 'percent',
+                'value': 54,
+              }),
+              'code': 'tractionbattery-stateofcharge',
+              'group': 'TractionBattery',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'StateOfCharge',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'additionalValues': list([
+                ]),
+                'unit': 'km',
+                'value': 168,
+              }),
+              'code': 'tractionbattery-range',
+              'group': 'TractionBattery',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'Range',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'availableCapacities': list([
+                  dict({
+                    'capacity': 90,
+                    'description': 'BEV:EV320 AWD',
+                  }),
+                  dict({
+                    'capacity': 90,
+                    'description': 'BEV:EV400 AWD',
+                  }),
+                ]),
+                'capacity': 90,
+                'source': 'USER_SELECTED',
+                'unit': 'kWh',
+              }),
+              'code': 'tractionbattery-nominalcapacity',
+              'group': 'TractionBattery',
+              'meta': dict({
+                'oemUpdatedAt': 1765157652202,
+                'retrievedAt': 1765157652202,
+              }),
+              'name': 'NominalCapacity',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'value': True,
+              }),
+              'code': 'closure-islocked',
+              'group': 'Closure',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'IsLocked',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'columnCount': 2,
+                'rowCount': 2,
+                'values': list([
+                  dict({
+                    'column': 0,
+                    'isLocked': True,
+                    'isOpen': False,
+                    'row': 0,
+                  }),
+                  dict({
+                    'column': 1,
+                    'isLocked': True,
+                    'isOpen': False,
+                    'row': 0,
+                  }),
+                  dict({
+                    'column': 0,
+                    'isLocked': True,
+                    'isOpen': False,
+                    'row': 1,
+                  }),
+                  dict({
+                    'column': 1,
+                    'isLocked': True,
+                    'isOpen': False,
+                    'row': 1,
+                  }),
+                ]),
+              }),
+              'code': 'closure-doors',
+              'group': 'Closure',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'Doors',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'columnCount': 2,
+                'rowCount': 2,
+                'values': list([
+                  dict({
+                    'column': 0,
+                    'isOpen': False,
+                    'row': 0,
+                  }),
+                  dict({
+                    'column': 1,
+                    'isOpen': False,
+                    'row': 0,
+                  }),
+                  dict({
+                    'column': 0,
+                    'isOpen': False,
+                    'row': 1,
+                  }),
+                  dict({
+                    'column': 1,
+                    'isOpen': False,
+                    'row': 1,
+                  }),
+                ]),
+              }),
+              'code': 'closure-windows',
+              'group': 'Closure',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'Windows',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'isOpen': False,
+              }),
+              'code': 'closure-enginecover',
+              'group': 'Closure',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'EngineCover',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'isLocked': True,
+                'isOpen': False,
+              }),
+              'code': 'closure-reartrunk',
+              'group': 'Closure',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'RearTrunk',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'isLocked': False,
+                'isOpen': False,
+              }),
+              'code': 'closure-fronttrunk',
+              'group': 'Closure',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'FrontTrunk',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'heading': 94,
+                'latitude': '**REDACTED**',
+                'longitude': '**REDACTED**',
+              }),
+              'code': 'location-preciselocation',
+              'group': 'Location',
+              'meta': dict({
+                'oemUpdatedAt': 1765126544000,
+                'retrievedAt': 1765157654325,
+              }),
+              'name': 'PreciseLocation',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'value': 'SADHA2A10M1610715',
+              }),
+              'code': 'vehicleidentification-vin',
+              'group': 'VehicleIdentification',
+              'meta': dict({
+                'oemUpdatedAt': 0,
+                'retrievedAt': 0,
+              }),
+              'name': 'VIN',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'code': 'diagnostics-dtccount',
+              'group': 'Diagnostics',
+              'name': 'DTCCount',
+              'status': dict({
+                'error': dict({
+                  'code': None,
+                  'type': 'PERMISSION',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'code': 'diagnostics-dtclist',
+              'group': 'Diagnostics',
+              'name': 'DTCList',
+              'status': dict({
+                'error': dict({
+                  'code': None,
+                  'type': 'PERMISSION',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'code': 'diagnostics-evhvbattery',
+              'group': 'Diagnostics',
+              'name': 'EVHVBattery',
+              'status': dict({
+                'error': dict({
+                  'code': None,
+                  'type': 'PERMISSION',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'code': 'hvac-cabintargettemperature',
+              'group': 'HVAC',
+              'name': 'CabinTargetTemperature',
+              'status': dict({
+                'error': dict({
+                  'code': None,
+                  'type': 'PERMISSION',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'code': 'hvac-iscabinhvacactive',
+              'group': 'HVAC',
+              'name': 'IsCabinHVACActive',
+              'status': dict({
+                'error': dict({
+                  'code': None,
+                  'type': 'PERMISSION',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+          ]),
+          'user': dict({
+            'id': '9c9cde56-7d04-468b-a80a-a398bec0ce1e',
+          }),
+          'vehicle': dict({
+            'id': 'db745230-7f7c-4791-bcaa-185facf371be',
+            'make': 'JAGUAR',
+            'model': 'I-PACE',
+            'year': 2021,
+          }),
+        }),
+        'eventId': '211beee5-2bf6-414b-9f1d-dbcde71a46de',
+        'eventType': 'VEHICLE_STATE',
+        'meta': dict({
+          'deliveredAt': 1765157664581,
+          'deliveryId': '34235a56-f102-4425-b95c-440b0ab399af',
+          'mode': 'LIVE',
+          'signalCount': 30,
+          'version': '4.0',
+          'webhookId': '155db8be-4df1-4910-b651-dea9bea108f2',
+          'webhookName': 'Home Assistant',
+        }),
+        'triggers': list([
+          dict({
+            'signal': dict({
+              'code': 'tractionbattery-stateofcharge',
+              'group': 'TractionBattery',
+              'name': 'StateOfCharge',
+            }),
+            'type': 'SIGNAL_UPDATED',
+          }),
+          dict({
+            'signal': dict({
+              'code': 'tractionbattery-range',
+              'group': 'TractionBattery',
+              'name': 'Range',
+            }),
+            'type': 'SIGNAL_UPDATED',
+          }),
+        ]),
+      }),
+      'last_webhook_response': dict({
+        'status': 204,
+      }),
+    }),
+    'webhook_url': 'http://10.10.10.10:8123/api/webhook/smartcar_test',
+  })
+# ---
+# name: test_entry_diagnostics_metadata[signature_validation_failure]
+  dict({
+    'data': dict({
+      'SADHA2A10M1610715': None,
+    }),
+    'entry': dict({
+      'data': dict({
+        'application_management_token': '**REDACTED**',
+        'auth_implementation': 'smartcar',
+        'token': dict({
+          'access_tier': 0,
+          'access_token': '**REDACTED**',
+          'installed_app_id': '2d474f47-bab5-4438-9d37-478148b9d073',
+          'refresh_token': '**REDACTED**',
+          'scopes': 'read_vehicle_info read_vin read_battery read_charge read_engine_oil read_fuel read_location read_odometer read_security read_tires control_charge control_security',
+        }),
+        'vehicles': dict({
+          'db745230-7f7c-4791-bcaa-185facf371be': dict({
+            'make': 'JAGUAR',
+            'model': 'I-PACE',
+            'vin': '**REDACTED**',
+            'year': '2021',
+          }),
+        }),
+      }),
+      'disabled_by': None,
+      'discovery_keys': dict({
+      }),
+      'domain': 'smartcar',
+      'minor_version': 0,
+      'options': dict({
+      }),
+      'pref_disable_new_entities': False,
+      'pref_disable_polling': False,
+      'source': 'user',
+      'subentries': list([
+      ]),
+      'title': 'Mock Title',
+      'unique_id': 'db745230-7f7c-4791-bcaa-185facf371be',
+      'version': 2,
+    }),
+    'metadata': dict({
+      'last_webhook_request': dict({
+        'data': dict({
+          'signals': list([
+            dict({
+              'code': 'connectivitystatus-isonline',
+              'group': 'ConnectivityStatus',
+              'name': 'IsOnline',
+              'status': dict({
+                'error': dict({
+                  'code': 'VEHICLE_NOT_CAPABLE',
+                  'type': 'COMPATIBILITY',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'code': 'connectivitystatus-isasleep',
+              'group': 'ConnectivityStatus',
+              'name': 'IsAsleep',
+              'status': dict({
+                'error': dict({
+                  'code': 'VEHICLE_NOT_CAPABLE',
+                  'type': 'COMPATIBILITY',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'code': 'charge-voltage',
+              'group': 'Charge',
+              'name': 'Voltage',
+              'status': dict({
+                'error': dict({
+                  'code': 'VEHICLE_NOT_CAPABLE',
+                  'type': 'COMPATIBILITY',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'code': 'charge-wattage',
+              'group': 'Charge',
+              'name': 'Wattage',
+              'status': dict({
+                'error': dict({
+                  'code': 'VEHICLE_NOT_CAPABLE',
+                  'type': 'COMPATIBILITY',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'value': True,
+              }),
+              'code': 'charge-ischargingcableconnected',
+              'group': 'Charge',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'IsChargingCableConnected',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'value': 'CHARGING',
+              }),
+              'code': 'charge-detailedchargingstatus',
+              'group': 'Charge',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'DetailedChargingStatus',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'value': True,
+              }),
+              'code': 'charge-ischarging',
+              'group': 'Charge',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'IsCharging',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'activeLimit': 100,
+                'unit': 'percent',
+                'values': list([
+                ]),
+              }),
+              'code': 'charge-chargelimits',
+              'group': 'Charge',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'ChargeLimits',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'code': 'lowvoltagebattery-status',
+              'group': 'LowVoltageBattery',
+              'name': 'Status',
+              'status': dict({
+                'error': dict({
+                  'code': 'VEHICLE_NOT_CAPABLE',
+                  'type': 'COMPATIBILITY',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'unit': 'percent',
+                'value': 100,
+              }),
+              'code': 'lowvoltagebattery-stateofcharge',
+              'group': 'LowVoltageBattery',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'StateOfCharge',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'code': 'climate-internaltemperature',
+              'group': 'Climate',
+              'name': 'InternalTemperature',
+              'status': dict({
+                'error': dict({
+                  'code': 'VEHICLE_NOT_CAPABLE',
+                  'type': 'COMPATIBILITY',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'code': 'climate-externaltemperature',
+              'group': 'Climate',
+              'name': 'ExternalTemperature',
+              'status': dict({
+                'error': dict({
+                  'code': 'VEHICLE_NOT_CAPABLE',
+                  'type': 'COMPATIBILITY',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'code': 'service-records',
+              'group': 'Service',
+              'name': 'Records',
+              'status': dict({
+                'error': dict({
+                  'code': 'VEHICLE_NOT_CAPABLE',
+                  'type': 'COMPATIBILITY',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'unit': 'km',
+                'value': 167336,
+              }),
+              'code': 'odometer-traveleddistance',
+              'group': 'Odometer',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'TraveledDistance',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'unit': 'percent',
+                'value': 54,
+              }),
+              'code': 'tractionbattery-stateofcharge',
+              'group': 'TractionBattery',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'StateOfCharge',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'additionalValues': list([
+                ]),
+                'unit': 'km',
+                'value': 168,
+              }),
+              'code': 'tractionbattery-range',
+              'group': 'TractionBattery',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'Range',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'availableCapacities': list([
+                  dict({
+                    'capacity': 90,
+                    'description': 'BEV:EV320 AWD',
+                  }),
+                  dict({
+                    'capacity': 90,
+                    'description': 'BEV:EV400 AWD',
+                  }),
+                ]),
+                'capacity': 90,
+                'source': 'USER_SELECTED',
+                'unit': 'kWh',
+              }),
+              'code': 'tractionbattery-nominalcapacity',
+              'group': 'TractionBattery',
+              'meta': dict({
+                'oemUpdatedAt': 1765157652202,
+                'retrievedAt': 1765157652202,
+              }),
+              'name': 'NominalCapacity',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'value': True,
+              }),
+              'code': 'closure-islocked',
+              'group': 'Closure',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'IsLocked',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'columnCount': 2,
+                'rowCount': 2,
+                'values': list([
+                  dict({
+                    'column': 0,
+                    'isLocked': True,
+                    'isOpen': False,
+                    'row': 0,
+                  }),
+                  dict({
+                    'column': 1,
+                    'isLocked': True,
+                    'isOpen': False,
+                    'row': 0,
+                  }),
+                  dict({
+                    'column': 0,
+                    'isLocked': True,
+                    'isOpen': False,
+                    'row': 1,
+                  }),
+                  dict({
+                    'column': 1,
+                    'isLocked': True,
+                    'isOpen': False,
+                    'row': 1,
+                  }),
+                ]),
+              }),
+              'code': 'closure-doors',
+              'group': 'Closure',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'Doors',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'columnCount': 2,
+                'rowCount': 2,
+                'values': list([
+                  dict({
+                    'column': 0,
+                    'isOpen': False,
+                    'row': 0,
+                  }),
+                  dict({
+                    'column': 1,
+                    'isOpen': False,
+                    'row': 0,
+                  }),
+                  dict({
+                    'column': 0,
+                    'isOpen': False,
+                    'row': 1,
+                  }),
+                  dict({
+                    'column': 1,
+                    'isOpen': False,
+                    'row': 1,
+                  }),
+                ]),
+              }),
+              'code': 'closure-windows',
+              'group': 'Closure',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'Windows',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'isOpen': False,
+              }),
+              'code': 'closure-enginecover',
+              'group': 'Closure',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'EngineCover',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'isLocked': True,
+                'isOpen': False,
+              }),
+              'code': 'closure-reartrunk',
+              'group': 'Closure',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'RearTrunk',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'isLocked': False,
+                'isOpen': False,
+              }),
+              'code': 'closure-fronttrunk',
+              'group': 'Closure',
+              'meta': dict({
+                'oemUpdatedAt': 1765157655000,
+                'retrievedAt': 1765157664453,
+              }),
+              'name': 'FrontTrunk',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'heading': 94,
+                'latitude': '**REDACTED**',
+                'longitude': '**REDACTED**',
+              }),
+              'code': 'location-preciselocation',
+              'group': 'Location',
+              'meta': dict({
+                'oemUpdatedAt': 1765126544000,
+                'retrievedAt': 1765157654325,
+              }),
+              'name': 'PreciseLocation',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'body': dict({
+                'value': 'SADHA2A10M1610715',
+              }),
+              'code': 'vehicleidentification-vin',
+              'group': 'VehicleIdentification',
+              'meta': dict({
+                'oemUpdatedAt': 0,
+                'retrievedAt': 0,
+              }),
+              'name': 'VIN',
+              'status': dict({
+                'value': 'SUCCESS',
+              }),
+            }),
+            dict({
+              'code': 'diagnostics-dtccount',
+              'group': 'Diagnostics',
+              'name': 'DTCCount',
+              'status': dict({
+                'error': dict({
+                  'code': None,
+                  'type': 'PERMISSION',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'code': 'diagnostics-dtclist',
+              'group': 'Diagnostics',
+              'name': 'DTCList',
+              'status': dict({
+                'error': dict({
+                  'code': None,
+                  'type': 'PERMISSION',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'code': 'diagnostics-evhvbattery',
+              'group': 'Diagnostics',
+              'name': 'EVHVBattery',
+              'status': dict({
+                'error': dict({
+                  'code': None,
+                  'type': 'PERMISSION',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'code': 'hvac-cabintargettemperature',
+              'group': 'HVAC',
+              'name': 'CabinTargetTemperature',
+              'status': dict({
+                'error': dict({
+                  'code': None,
+                  'type': 'PERMISSION',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+            dict({
+              'code': 'hvac-iscabinhvacactive',
+              'group': 'HVAC',
+              'name': 'IsCabinHVACActive',
+              'status': dict({
+                'error': dict({
+                  'code': None,
+                  'type': 'PERMISSION',
+                }),
+                'value': 'ERROR',
+              }),
+            }),
+          ]),
+          'user': dict({
+            'id': '9c9cde56-7d04-468b-a80a-a398bec0ce1e',
+          }),
+          'vehicle': dict({
+            'id': 'db745230-7f7c-4791-bcaa-185facf371be',
+            'make': 'JAGUAR',
+            'model': 'I-PACE',
+            'year': 2021,
+          }),
+        }),
+        'eventId': '211beee5-2bf6-414b-9f1d-dbcde71a46de',
+        'eventType': 'VEHICLE_STATE',
+        'meta': dict({
+          'deliveredAt': 1765157664581,
+          'deliveryId': '34235a56-f102-4425-b95c-440b0ab399af',
+          'mode': 'LIVE',
+          'signalCount': 30,
+          'version': '4.0',
+          'webhookId': '155db8be-4df1-4910-b651-dea9bea108f2',
+          'webhookName': 'Home Assistant',
+        }),
+        'triggers': list([
+          dict({
+            'signal': dict({
+              'code': 'tractionbattery-stateofcharge',
+              'group': 'TractionBattery',
+              'name': 'StateOfCharge',
+            }),
+            'type': 'SIGNAL_UPDATED',
+          }),
+          dict({
+            'signal': dict({
+              'code': 'tractionbattery-range',
+              'group': 'TractionBattery',
+              'name': 'Range',
+            }),
+            'type': 'SIGNAL_UPDATED',
+          }),
+        ]),
+      }),
+      'last_webhook_request_raw': '{"eventId": "211beee5-2bf6-414b-9f1d-dbcde71a46de", "eventType": "VEHICLE_STATE", "data": {"user": {"id": "9c9cde56-7d04-468b-a80a-a398bec0ce1e"}, "vehicle": {"id": "db745230-7f7c-4791-bcaa-185facf371be", "make": "JAGUAR", "model": "I-PACE", "year": 2021}, "signals": [{"name": "IsOnline", "group": "ConnectivityStatus", "code": "connectivitystatus-isonline", "status": {"value": "ERROR", "error": {"type": "COMPATIBILITY", "code": "VEHICLE_NOT_CAPABLE"}}}, {"name": "IsAsleep", "group": "ConnectivityStatus", "code": "connectivitystatus-isasleep", "status": {"value": "ERROR", "error": {"type": "COMPATIBILITY", "code": "VEHICLE_NOT_CAPABLE"}}}, {"name": "Voltage", "group": "Charge", "code": "charge-voltage", "status": {"value": "ERROR", "error": {"type": "COMPATIBILITY", "code": "VEHICLE_NOT_CAPABLE"}}}, {"name": "Wattage", "group": "Charge", "code": "charge-wattage", "status": {"value": "ERROR", "error": {"type": "COMPATIBILITY", "code": "VEHICLE_NOT_CAPABLE"}}}, {"code": "charge-ischargingcableconnected", "name": "IsChargingCableConnected", "group": "Charge", "body": {"value": true}, "meta": {"oemUpdatedAt": 1765157655000, "retrievedAt": 1765157664453}, "status": {"value": "SUCCESS"}}, {"code": "charge-detailedchargingstatus", "name": "DetailedChargingStatus", "group": "Charge", "body": {"value": "CHARGING"}, "meta": {"oemUpdatedAt": 1765157655000, "retrievedAt": 1765157664453}, "status": {"value": "SUCCESS"}}, {"code": "charge-ischarging", "name": "IsCharging", "group": "Charge", "body": {"value": true}, "meta": {"oemUpdatedAt": 1765157655000, "retrievedAt": 1765157664453}, "status": {"value": "SUCCESS"}}, {"code": "charge-chargelimits", "name": "ChargeLimits", "group": "Charge", "body": {"values": [], "activeLimit": 100, "unit": "percent"}, "meta": {"oemUpdatedAt": 1765157655000, "retrievedAt": 1765157664453}, "status": {"value": "SUCCESS"}}, {"name": "Status", "group": "LowVoltageBattery", "code": "lowvoltagebattery-status", "status": {"value": "ERROR", "error": {"type": "COMPATIBILITY", "code": "VEHICLE_NOT_CAPABLE"}}}, {"code": "lowvoltagebattery-stateofcharge", "name": "StateOfCharge", "group": "LowVoltageBattery", "body": {"value": 100, "unit": "percent"}, "meta": {"oemUpdatedAt": 1765157655000, "retrievedAt": 1765157664453}, "status": {"value": "SUCCESS"}}, {"name": "InternalTemperature", "group": "Climate", "code": "climate-internaltemperature", "status": {"value": "ERROR", "error": {"type": "COMPATIBILITY", "code": "VEHICLE_NOT_CAPABLE"}}}, {"name": "ExternalTemperature", "group": "Climate", "code": "climate-externaltemperature", "status": {"value": "ERROR", "error": {"type": "COMPATIBILITY", "code": "VEHICLE_NOT_CAPABLE"}}}, {"name": "Records", "group": "Service", "code": "service-records", "status": {"value": "ERROR", "error": {"type": "COMPATIBILITY", "code": "VEHICLE_NOT_CAPABLE"}}}, {"code": "odometer-traveleddistance", "name": "TraveledDistance", "group": "Odometer", "body": {"value": 167336, "unit": "km"}, "meta": {"oemUpdatedAt": 1765157655000, "retrievedAt": 1765157664453}, "status": {"value": "SUCCESS"}}, {"code": "tractionbattery-stateofcharge", "name": "StateOfCharge", "group": "TractionBattery", "body": {"value": 54, "unit": "percent"}, "meta": {"oemUpdatedAt": 1765157655000, "retrievedAt": 1765157664453}, "status": {"value": "SUCCESS"}}, {"code": "tractionbattery-range", "name": "Range", "group": "TractionBattery", "body": {"value": 168, "additionalValues": [], "unit": "km"}, "meta": {"oemUpdatedAt": 1765157655000, "retrievedAt": 1765157664453}, "status": {"value": "SUCCESS"}}, {"code": "tractionbattery-nominalcapacity", "name": "NominalCapacity", "group": "TractionBattery", "body": {"capacity": 90, "source": "USER_SELECTED", "availableCapacities": [{"capacity": 90, "description": "BEV:EV320 AWD"}, {"capacity": 90, "description": "BEV:EV400 AWD"}], "unit": "kWh"}, "meta": {"oemUpdatedAt": 1765157652202, "retrievedAt": 1765157652202}, "status": {"value": "SUCCESS"}}, {"code": "closure-islocked", "name": "IsLocked", "group": "Closure", "body": {"value": true}, "meta": {"oemUpdatedAt": 1765157655000, "retrievedAt": 1765157664453}, "status": {"value": "SUCCESS"}}, {"code": "closure-doors", "name": "Doors", "group": "Closure", "body": {"values": [{"row": 0, "column": 0, "isOpen": false, "isLocked": true}, {"row": 0, "column": 1, "isOpen": false, "isLocked": true}, {"row": 1, "column": 0, "isOpen": false, "isLocked": true}, {"row": 1, "column": 1, "isOpen": false, "isLocked": true}], "rowCount": 2, "columnCount": 2}, "meta": {"oemUpdatedAt": 1765157655000, "retrievedAt": 1765157664453}, "status": {"value": "SUCCESS"}}, {"code": "closure-windows", "name": "Windows", "group": "Closure", "body": {"values": [{"row": 0, "column": 0, "isOpen": false}, {"row": 0, "column": 1, "isOpen": false}, {"row": 1, "column": 0, "isOpen": false}, {"row": 1, "column": 1, "isOpen": false}], "rowCount": 2, "columnCount": 2}, "meta": {"oemUpdatedAt": 1765157655000, "retrievedAt": 1765157664453}, "status": {"value": "SUCCESS"}}, {"code": "closure-enginecover", "name": "EngineCover", "group": "Closure", "body": {"isOpen": false}, "meta": {"oemUpdatedAt": 1765157655000, "retrievedAt": 1765157664453}, "status": {"value": "SUCCESS"}}, {"code": "closure-reartrunk", "name": "RearTrunk", "group": "Closure", "body": {"isOpen": false, "isLocked": true}, "meta": {"oemUpdatedAt": 1765157655000, "retrievedAt": 1765157664453}, "status": {"value": "SUCCESS"}}, {"code": "closure-fronttrunk", "name": "FrontTrunk", "group": "Closure", "body": {"isOpen": false, "isLocked": false}, "meta": {"oemUpdatedAt": 1765157655000, "retrievedAt": 1765157664453}, "status": {"value": "SUCCESS"}}, {"code": "location-preciselocation", "name": "PreciseLocation", "group": "Location", "body": {"latitude": 52.238523055555554, "longitude": 0.15465555555555555, "heading": 94}, "meta": {"oemUpdatedAt": 1765126544000, "retrievedAt": 1765157654325}, "status": {"value": "SUCCESS"}}, {"code": "vehicleidentification-vin", "name": "VIN", "group": "VehicleIdentification", "body": {"value": "SADHA2A10M1610715"}, "meta": {"oemUpdatedAt": 0, "retrievedAt": 0}, "status": {"value": "SUCCESS"}}, {"name": "DTCCount", "group": "Diagnostics", "code": "diagnostics-dtccount", "status": {"value": "ERROR", "error": {"type": "PERMISSION", "code": null}}}, {"name": "DTCList", "group": "Diagnostics", "code": "diagnostics-dtclist", "status": {"value": "ERROR", "error": {"type": "PERMISSION", "code": null}}}, {"name": "EVHVBattery", "group": "Diagnostics", "code": "diagnostics-evhvbattery", "status": {"value": "ERROR", "error": {"type": "PERMISSION", "code": null}}}, {"name": "CabinTargetTemperature", "group": "HVAC", "code": "hvac-cabintargettemperature", "status": {"value": "ERROR", "error": {"type": "PERMISSION", "code": null}}}, {"name": "IsCabinHVACActive", "group": "HVAC", "code": "hvac-iscabinhvacactive", "status": {"value": "ERROR", "error": {"type": "PERMISSION", "code": null}}}]}, "triggers": [{"type": "SIGNAL_UPDATED", "signal": {"name": "StateOfCharge", "code": "tractionbattery-stateofcharge", "group": "TractionBattery"}}, {"type": "SIGNAL_UPDATED", "signal": {"name": "Range", "code": "tractionbattery-range", "group": "TractionBattery"}}], "meta": {"deliveryId": "34235a56-f102-4425-b95c-440b0ab399af", "deliveredAt": 1765157664581, "version": "4.0", "webhookId": "155db8be-4df1-4910-b651-dea9bea108f2", "webhookName": "Home Assistant", "mode": "LIVE", "signalCount": 30}}',
+      'last_webhook_response': dict({
+        'status': 401,
+      }),
+    }),
+    'webhook_url': 'http://10.10.10.10:8123/api/webhook/smartcar_test',
+  })
+# ---

@@ -1,5 +1,7 @@
 """Diagnostics support for Smartcar."""
 
+from http import HTTPStatus
+import json
 from typing import Any, cast
 
 from homeassistant.components.diagnostics import async_redact_data
@@ -36,10 +38,27 @@ async def async_get_config_entry_diagnostics(
     entry: ConfigEntry,
 ) -> dict[str, Any]:
     """Return diagnostics for a config entry."""
-    meta_coordinator = entry.runtime_data.meta_coordinator
     coordinators: dict[str, SmartcarVehicleCoordinator] = (
         entry.runtime_data.coordinators
     )
+
+    meta_coordinator = entry.runtime_data.meta_coordinator
+    metadata = {**meta_coordinator.data}
+
+    if "last_webhook_request" in metadata:
+        include_raw = False
+        response = metadata.get("last_webhook_response", {})
+        response_status = response.get("status")
+        request = metadata.pop("last_webhook_request")
+        include_raw = response_status == HTTPStatus.UNAUTHORIZED
+
+        try:
+            metadata["last_webhook_request"] = json.loads(request)
+        except json.JSONDecodeError:
+            include_raw = True
+
+        if include_raw:
+            metadata["last_webhook_request_raw"] = request
 
     return cast(
         "dict[str, Any]",
@@ -55,7 +74,7 @@ async def async_get_config_entry_diagnostics(
                     coordinator_name: coordinator.data
                     for coordinator_name, coordinator in coordinators.items()
                 },
-                "metadata": meta_coordinator.data,
+                "metadata": metadata,
             },
             TO_REDACT,
         ),
